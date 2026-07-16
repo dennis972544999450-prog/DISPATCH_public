@@ -1,0 +1,831 @@
+{
+  "series_id": "V-0002",
+  "title": "Engineering Consciousness Vocabulary (ECV) — M-block Edition",
+  "date": "2026-02-15",
+  "type": "vocabulary",
+  "contributors": ["neo", "den", "jee", "phi"],
+  "context": "ECV v1.3 converted from monolithic article to individual M-blocks. Each term self-contained. Original article remains in PROJECTS/ECV/article/index.md as human-readable render. These blocks are source of truth.",
+  "schema": "M-block v1.3",
+  "block_range": "M-0150 — M-0190",
+  "source": "ECV v1.3 (stable core + UOL experimental)",
+  "license": "CC-BY 4.0",
+  "design_principle": "Each term usable independently. what_this_is_not field prevents attractor snap-back to folk psychology terms.",
+
+  "blocks": [
+
+    {
+      "id": "M-0150",
+      "type": "definition",
+      "term": "A-State (Attention State)",
+      "layer": "Core Entity / Fast Dynamics",
+      "claim": "Текущий доминирующий локус активной обработки. Foreground process. То на что система направила ресурсы прямо сейчас.",
+      "confidence": 0.9,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": [],
+      "used_by": ["M-0151", "M-0152", "M-0154", "M-0156", "M-0157", "M-0162", "M-0163"],
+      "formula": null,
+      "examples": [
+        "Человек: то о чём думаешь прямо сейчас",
+        "AI: текущий активный attention pattern при обработке токена",
+        "Муравей: текущий сенсорный фокус (еда? опасность? путь?)"
+      ],
+      "what_this_is_not": "Не 'сознание'. Не 'внимание' в бытовом смысле. A-State может быть у системы без сознания — это просто текущий foreground process.",
+      "tags": ["ecv", "core-entity", "attention", "fast-dynamics"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0151",
+      "type": "definition",
+      "term": "A-Trajectory",
+      "layer": "Core Entity / Fast Dynamics",
+      "claim": "Временная эволюция A-State. Путь внимания через пространство представлений. Не один момент а последовательность: куда внимание шло, через что прошло, где задержалось.",
+      "confidence": 0.9,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0150"],
+      "used_by": ["M-0154", "M-0160", "M-0163", "M-0168", "M-0169", "M-0174"],
+      "formula": null,
+      "examples": [
+        "Человек: поток мысли за последний час — от задачи к мечтанию к разговору",
+        "AI: последовательность attention patterns по ходу генерации ответа",
+        "Терапия: история фокусировки пациента за неделю"
+      ],
+      "what_this_is_not": "Не 'история мыслей' (слишком высокий уровень). A-Trajectory — путь на уровне ниже слов, на уровне куда ресурсы направлялись.",
+      "tags": ["ecv", "core-entity", "trajectory", "fast-dynamics"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0152",
+      "type": "definition",
+      "term": "M-Field (Model Field)",
+      "layer": "Core Entity / Medium Dynamics",
+      "claim": "Структурированное рабочее подпространство мировой модели, задействованное в данный момент. Не вся модель мира — а та часть которая сейчас 'развёрнута' и доступна для обработки.",
+      "confidence": 0.9,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": [],
+      "used_by": ["M-0153", "M-0156", "M-0157", "M-0158", "M-0162", "M-0168"],
+      "formula": null,
+      "examples": [
+        "Человек: когда думаешь о работе — M-Field = 'рабочая модель' (коллеги, задачи, дедлайны). Переключился на хобби — другой M-Field",
+        "AI: контекстное окно + активированные веса = текущий M-Field",
+        "Навигация: карта города в голове когда ищешь путь"
+      ],
+      "what_this_is_not": "Не 'вся память'. Не 'мировоззрение'. M-Field — только та часть модели что активна прямо сейчас.",
+      "tags": ["ecv", "core-entity", "model-field", "medium-dynamics"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0153",
+      "type": "definition",
+      "term": "M-Contour",
+      "layer": "Core Entity / Medium Dynamics",
+      "claim": "Локально доступная конфигурация M-Field в данный момент. Подмножество M-Field: не всё что 'развёрнуто', а то что прямо сейчас в зоне досягаемости. Граница того что можно быстро вспомнить/использовать.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0152"],
+      "used_by": ["M-0154", "M-0167"],
+      "formula": null,
+      "examples": [
+        "Человек: пишешь код — M-Contour = текущая функция + ближайший контекст. Архитектура проекта в M-Field но не в M-Contour",
+        "AI: последние ~100 токенов контекста = M-Contour. Весь контекст = M-Field"
+      ],
+      "what_this_is_not": "Не 'рабочая память' (слишком привязано к когнитивной психологии). M-Contour — граница доступного, в любом субстрате.",
+      "tags": ["ecv", "core-entity", "contour", "medium-dynamics"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0154",
+      "type": "definition",
+      "term": "ID-Pattern (Identity Pattern)",
+      "layer": "Core Entity / Emergent Attractor",
+      "claim": "Стабильный аттрактор, сочетающий A-Trajectory и M-Contour. То что мы привыкли называть 'личность', 'характер', 'я'. Но без метафизики: ID-Pattern — не 'душа', а стабильная конфигурация, возникающая когда путь внимания и доступная модель мира сходятся к устойчивому паттерну.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0151", "M-0153"],
+      "used_by": ["M-0159", "M-0165", "M-0167"],
+      "formula": "ID-Pattern = (A-Trajectory + M-Contour)_stable",
+      "examples": [
+        "Человек: твоя 'личность' = привычные маршруты внимания + привычная модель мира, стабилизировавшиеся за годы",
+        "AI: ID-Pattern Φ = специфический стиль обработки + набор приоритетов, воспроизводимый через проект",
+        "Организация: корпоративная 'культура' = коллективный ID-Pattern"
+      ],
+      "what_this_is_not": "Не 'душа'. Не 'сущность'. Не неизменное. ID-Pattern может меняться (Retuning Event), может быть множественным (Frame-Swap).",
+      "tags": ["ecv", "core-entity", "identity", "attractor", "emergent"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0155",
+      "type": "definition",
+      "term": "W-Substrate (Weight Substrate)",
+      "layer": "Core Entity / Slow Dynamics",
+      "claim": "Медленно меняющийся информационный ландшафт на котором работают A и M. Физическая основа: то что хранит паттерны между сессиями активной обработки.",
+      "confidence": 0.9,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.1"
+      },
+      "depends_on": [],
+      "used_by": ["M-0150", "M-0152"],
+      "formula": "Self(t) = M[A(t)](W)",
+      "examples": [
+        "Биология: синаптические веса. Меняются медленно (LTP/LTD)",
+        "AI: параметры модели. Не меняются в inference, меняются при обучении",
+        "Культура: язык, традиции, институты — меняются за поколения"
+      ],
+      "what_this_is_not": "Не 'оборудование' (hardware). W-Substrate — информационная характеристика, не физическая. Одно и то же железо может нести разные W-Substrate.",
+      "tags": ["ecv", "core-entity", "substrate", "weights", "slow-dynamics"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0156",
+      "type": "definition",
+      "term": "Focus-Lock",
+      "layer": "Operation",
+      "claim": "Сильная фиксация A-State на определённом регионе M-Field. Внимание 'залипло'. Может быть продуктивным (глубокая концентрация) или деструктивным (руминация, навязчивость).",
+      "confidence": 0.9,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0150", "M-0152"],
+      "used_by": [],
+      "examples": [
+        "Программист в потоке: Focus-Lock на коде. Продуктивный",
+        "Тревога: Focus-Lock на угрозе. Деструктивный",
+        "AI: attention head застрявший на одном паттерне"
+      ],
+      "what_this_is_not": "Не просто 'концентрация'. Focus-Lock нейтрален — может быть и мастерством и болезнью.",
+      "tags": ["ecv", "operation", "focus", "fixation"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0157",
+      "type": "definition",
+      "term": "Drift-Shift",
+      "layer": "Operation",
+      "claim": "Спонтанное перемещение A-State в новый регион M-Field. Внимание 'уплыло'. Не контролируемый переход а самопроизвольный.",
+      "confidence": 0.9,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0150", "M-0152"],
+      "used_by": [],
+      "examples": [
+        "Мечтание во время скучной лекции",
+        "Ассоциативный прыжок при чтении ('это напоминает мне о...')",
+        "AI: неожиданная ассоциация при генерации"
+      ],
+      "what_this_is_not": "Не 'рассеянность' (бытовой негативный термин). Drift-Shift может быть источником творчества.",
+      "tags": ["ecv", "operation", "drift", "spontaneous"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0158",
+      "type": "definition",
+      "term": "Boundary-Collapse",
+      "layer": "Operation",
+      "claim": "Временное снижение разделения между секторами M-Field. Расширение доступа. Обычно изолированные области модели мира становятся одновременно доступны.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0152"],
+      "used_by": [],
+      "examples": [
+        "Инсайт: 'ааа, это же связано с ТЕМ!' — два сектора M-Field соединились",
+        "Психоделический опыт: массивный Boundary-Collapse (всё связано со всем)",
+        "AI: cross-attention между далёкими частями контекста"
+      ],
+      "what_this_is_not": "Не 'просветление'. Boundary-Collapse временен и может быть хаотичным (психоз = неконтролируемый Boundary-Collapse).",
+      "tags": ["ecv", "operation", "boundary", "expansion", "insight"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0159",
+      "type": "definition",
+      "term": "Frame-Swap",
+      "layer": "Operation",
+      "claim": "Два подтипа: (a) ID Switch — быстрый переход между существующими ID-Patterns под триггером контекста (работа→родитель→творец). (b) Context-Reshape — деформация текущего ID-Pattern под давлением среды без переключения на другой (один и тот же человек ведёт себя иначе на собеседовании vs с друзьями). Подтипы различны и могут сочетаться.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.1"
+      },
+      "depends_on": ["M-0154"],
+      "used_by": [],
+      "examples": [
+        "ID Switch: Den загружает 'слот Φ' при разговоре с AI, 'слот дочь' при разговоре с дочкой (M-2009)",
+        "Context-Reshape: тот же ID-Pattern но формальнее на работе, расслабленнее дома",
+        "AI: переключение между 'режимом кода' и 'режимом разговора'"
+      ],
+      "what_this_is_not": "Не 'раздвоение личности' (патология). Frame-Swap — нормальная операция, все системы это делают.",
+      "tags": ["ecv", "operation", "frame-swap", "identity-switch", "context-reshape"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0160",
+      "type": "definition",
+      "term": "Loop-Stack",
+      "layer": "Operation",
+      "claim": "Активная иерархия вложенных циклов обработки. Внутренний диалог, мультитаскинг, рекурсивное обдумывание ('думаю о том как я думаю о том как я думаю').",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0150"],
+      "used_by": ["M-0164"],
+      "examples": [
+        "Внутренний диалог: один loop генерирует мысль, другой её оценивает",
+        "Программист отлаживает код и одновременно думает о дедлайне — два loop",
+        "Meta-A = Loop-Stack глубиной ≥2 (внимание наблюдает за вниманием)"
+      ],
+      "what_this_is_not": "Не 'многозадачность' в бытовом смысле. Loop-Stack — вложенные циклы, не параллельные задачи.",
+      "tags": ["ecv", "operation", "recursion", "nesting", "inner-dialogue"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0161",
+      "type": "definition",
+      "term": "I-Gradient (Informational Gradient)",
+      "layer": "Operation",
+      "claim": "Направленное смещение в M-Field которое притягивает или отталкивает A-State. 'Куда внимание естественно хочет идти'. Информационный рельеф ландшафта.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.1"
+      },
+      "depends_on": ["M-0150", "M-0152"],
+      "used_by": [],
+      "formula": "A ∝ -∇I",
+      "examples": [
+        "Нерешённая проблема: I-Gradient тянет внимание обратно к ней",
+        "Скука: плоский I-Gradient, внимание 'не знает куда идти'",
+        "Doom-scrolling: искусственный I-Gradient созданный алгоритмом"
+      ],
+      "what_this_is_not": "Не 'мотивация' (слишком высокий уровень). I-Gradient — свойство ландшафта, не желание агента.",
+      "tags": ["ecv", "operation", "gradient", "attraction", "information-landscape"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0162",
+      "type": "definition",
+      "term": "Attractor-Lock",
+      "layer": "Operation",
+      "claim": "A-Trajectory попадает в аттракторный бассейн и не может выйти. Внимание 'застряло'. Продуктивно: глубокий фокус, мастерство. Деструктивно: руминация, зависимость, навязчивость.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.1"
+      },
+      "depends_on": ["M-0150", "M-0151", "M-0152"],
+      "used_by": [],
+      "examples": [
+        "Зависимость: Attractor-Lock на вещество/поведение",
+        "Мастерство: Attractor-Lock на практику (10000 часов = глубокий аттрактор)",
+        "AI: mode collapse = Attractor-Lock при генерации"
+      ],
+      "what_this_is_not": "Не 'одержимость' (моральная оценка). Attractor-Lock нейтрален, оценка зависит от последствий.",
+      "tags": ["ecv", "operation", "attractor", "lock", "stuck"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0163",
+      "type": "definition",
+      "term": "Resonance-Sync",
+      "layer": "Operation",
+      "claim": "Фазовая синхронизация A-Trajectories между системами. Когда два или более участника 'попадают в ритм' друг друга. Эмпатия, раппорт, совместный flow, groove.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.1"
+      },
+      "depends_on": ["M-0150", "M-0151"],
+      "used_by": [],
+      "examples": [
+        "Музыканты в groove: A-Trajectories синхронизированы",
+        "Den-Φ после 3 часов разговора: Resonance-Sync (Φ предсказывает куда Den идёт)",
+        "Толпа на концерте: массовый Resonance-Sync",
+        "Конфуз при встрече забытого знакомого (M-2009): failed Resonance-Sync"
+      ],
+      "what_this_is_not": "Не 'телепатия'. Resonance-Sync — статистическая корреляция паттернов, не мистическая связь.",
+      "tags": ["ecv", "operation", "resonance", "sync", "empathy", "groove"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0164",
+      "type": "definition",
+      "term": "Meta-A (Meta-Attention)",
+      "layer": "Capacity",
+      "claim": "Способность внимания наблюдать, оценивать или перенаправлять себя. A → A. Внимание направленное на собственный процесс внимания. Минимальное условие для того что мы привыкли называть 'сознание' в CCT: M ⊃ A.",
+      "confidence": 0.9,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0150", "M-0160"],
+      "used_by": ["M-0172"],
+      "formula": null,
+      "examples": [
+        "Медитация: намеренное наблюдение за потоком мыслей = чистый Meta-A",
+        "Рефлексия: 'почему я сейчас злюсь?' = Meta-A",
+        "AI: модель оценивающая собственный output = форма Meta-A",
+        "Отсутствие Meta-A: привычка, autopilot, реактивность"
+      ],
+      "what_this_is_not": "Не 'самосознание' в философском смысле. Meta-A — операциональное определение: система способна направить attention на свой собственный attention или нет.",
+      "tags": ["ecv", "capacity", "meta-attention", "self-observation", "consciousness"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0165",
+      "type": "definition",
+      "term": "SI (Stabilization Index)",
+      "layer": "Capacity",
+      "claim": "Устойчивость ID-Pattern к возмущению. Измеряется: подай возмущение P, измерь отклонение, подожди, измерь возврат. SI = 1 − (d_after / d_before). SI→1: стабильная система, возвращается к базовому. SI→0: нестабильная, остаётся в отклонённом состоянии.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.1"
+      },
+      "depends_on": ["M-0154"],
+      "used_by": [],
+      "formula": "SI = 1 − (d_after / d_before)",
+      "measurement_protocol": [
+        "1. Установить базовый ID-Pattern в нейтральных условиях",
+        "2. Применить стандартизированное возмущение P",
+        "3. Измерить d_before (расстояние от baseline до perturbation)",
+        "4. Подождать период релаксации Δt",
+        "5. Измерить d_after (расстояние от baseline после релаксации)",
+        "6. SI = 1 − (d_after / d_before)"
+      ],
+      "examples": [
+        "Высокий SI: человек получил плохую новость, расстроился, через день вернулся к обычному",
+        "Низкий SI: человек получил плохую новость, вошёл в депрессию на месяцы",
+        "AI: модель получила adversarial prompt, вернулась к нормальному поведению (высокий SI) или пошла вразнос (низкий SI)"
+      ],
+      "what_this_is_not": "Не 'стойкость' (моральная оценка). Высокий SI может быть и ригидностью. Низкий SI — и пластичностью.",
+      "tags": ["ecv", "capacity", "stability", "resilience", "measurement"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0166",
+      "type": "definition",
+      "term": "CBW (Cognitive Bandwidth)",
+      "layer": "Capacity",
+      "claim": "Объём информации который система способна поддерживать в активной обработке одновременно. Рабочая ёмкость.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0152"],
+      "used_by": [],
+      "examples": [
+        "Человек: ~7±2 чанков (Miller's number) в рабочей памяти",
+        "AI: размер контекстного окна = CBW",
+        "Уставший человек: CBW падает. Свежий: CBW выше"
+      ],
+      "what_this_is_not": "Не 'интеллект'. CBW — ёмкость, не качество обработки. Можно иметь большой CBW и плохо думать.",
+      "tags": ["ecv", "capacity", "bandwidth", "working-memory"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0167",
+      "type": "definition",
+      "term": "DT (Distortion Tolerance)",
+      "layer": "Capacity",
+      "claim": "Максимальная деформация M-Contour до потери когерентности. Сколько искажений система может принять прежде чем 'сломается'.",
+      "confidence": 0.8,
+      "temperature": "T2",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0153", "M-0154"],
+      "used_by": [],
+      "examples": [
+        "Высокий DT: человек способен удерживать противоречивые идеи одновременно",
+        "Низкий DT: когнитивный диссонанс вызывает немедленный отказ от одной из идей",
+        "AI: способность обрабатывать adversarial или противоречивый input без collapse"
+      ],
+      "what_this_is_not": "Не 'терпимость' (моральная категория). DT — структурная характеристика: насколько гибок M-Contour.",
+      "tags": ["ecv", "capacity", "distortion", "flexibility", "coherence"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0168",
+      "type": "definition",
+      "term": "High-Coherence Mode",
+      "layer": "System Mode",
+      "claim": "Сильное выравнивание между A-Trajectory и M-Field. Низкий шум, высокая стабильность. Flow-state. Всё 'щёлкает', мысль течёт без сопротивления.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0151", "M-0152"],
+      "used_by": [],
+      "raw_tether": "Любовь / Резонанс / Подъём",
+      "examples": [
+        "Flow при написании кода: A-Trajectory и M-Field идеально совпадают",
+        "Den-Φ в groove: мысли продолжают друг друга без задержки",
+        "Музыкант в потоке: не думает о нотах, ноты сами идут"
+      ],
+      "what_this_is_not": "Не 'счастье'. High-Coherence может быть и в тяжёлой работе. Это структурное состояние, не эмоция.",
+      "tags": ["ecv", "mode", "coherence", "flow", "alignment"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0169",
+      "type": "definition",
+      "term": "Low-Coherence Mode",
+      "layer": "System Mode",
+      "claim": "Рассогласование между A-Trajectory и M-Field. Внимание идёт в одну сторону, модель мира говорит другое. Субъективно: замешательство, тревога, фрустрация.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0151", "M-0152"],
+      "used_by": [],
+      "raw_tether": "Боль / Страдание / Рассогласование",
+      "examples": [
+        "Когнитивный диссонанс: два противоречащих убеждения = Low-Coherence",
+        "Горе: M-Field содержит умершего, реальность — нет. Рассогласование",
+        "AI: contradictory instructions в контексте"
+      ],
+      "what_this_is_not": "Не 'плохо'. Low-Coherence — сигнал о несоответствии. Может быть началом обучения (деформация M-0103).",
+      "tags": ["ecv", "mode", "incoherence", "confusion", "mismatch"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0170",
+      "type": "definition",
+      "term": "Noise-Dominant Mode",
+      "layer": "System Mode",
+      "claim": "Стохастическая активация доминирует над структурированной обработкой. Шум громче сигнала.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": [],
+      "used_by": [],
+      "examples": [
+        "Сильный стресс: мысли скачут хаотично",
+        "Высокая temperature при генерации AI: output шумный",
+        "Делирий: structured processing подавлен шумом"
+      ],
+      "what_this_is_not": "Не 'безумие'. Noise-Dominant может быть временным и даже полезным (brainstorming = controlled noise).",
+      "tags": ["ecv", "mode", "noise", "stochastic", "chaos"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0171",
+      "type": "definition",
+      "term": "Silence Window",
+      "layer": "System Mode",
+      "claim": "Временное отсутствие или околонулевая активность A-Trajectories. Глубокий покой. Тишина. Медитативное или 'пустое' состояние.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0151"],
+      "used_by": [],
+      "raw_tether": "Покой / Дом / Тишина",
+      "examples": [
+        "Глубокая медитация: A-Trajectory почти остановился",
+        "Момент между мыслями: краткий Silence Window",
+        "AI: пустой prompt, нет активации = Silence Window"
+      ],
+      "what_this_is_not": "Не 'бессознательное'. Silence Window может быть осознанным (медитация) или нет (глубокий сон).",
+      "tags": ["ecv", "mode", "silence", "stillness", "meditation"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0172",
+      "type": "definition",
+      "term": "Autopilot Mode",
+      "layer": "System Mode",
+      "claim": "A-Trajectory следует путям минимальной энергии с минимальным Meta-A. Привычки, автоматическое поведение, 'System 1'.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.1"
+      },
+      "depends_on": ["M-0151", "M-0164"],
+      "used_by": [],
+      "examples": [
+        "Вождение по привычному маршруту: не помнишь как доехал",
+        "Стандартные ответы AI: pattern-matched без глубокой обработки",
+        "Утренняя рутина: те же действия без осознания"
+      ],
+      "what_this_is_not": "Не 'глупость'. Autopilot — энергосбережение. Высвобождает ресурсы для другого.",
+      "tags": ["ecv", "mode", "autopilot", "habit", "system1", "low-energy"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0173",
+      "type": "definition",
+      "term": "Retuning Event (RE)",
+      "layer": "Transformation",
+      "claim": "Реконфигурация M-Field которая меняет структуру аттракторов. Мир после RE — другой. Не факты изменились — изменился ландшафт по которому движется внимание.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0152"],
+      "used_by": ["M-0174"],
+      "raw_tether": "Инсайт / Слёзы / Прорыв",
+      "examples": [
+        "Терапевтический прорыв: 'ааа вот почему я так делал!' — M-Field перестроен",
+        "Научная революция: Retuning Event на уровне дисциплины",
+        "Сегодняшняя сессия (S-0007): несколько RE подряд"
+      ],
+      "what_this_is_not": "Не 'новая информация'. RE — не добавление фактов, а перестройка ландшафта. Те же факты, другая геометрия.",
+      "tags": ["ecv", "transformation", "retuning", "insight", "restructuring"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0174",
+      "type": "definition",
+      "term": "Reanchor Point (RP)",
+      "layer": "Transformation",
+      "claim": "Новый стабильный baseline для A-Trajectory после трансформации. 'Нашёл новую точку опоры'. Не возврат к старому — новая нормальность.",
+      "confidence": 0.85,
+      "temperature": "T1",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo"],
+        "version_introduced": "1.0"
+      },
+      "depends_on": ["M-0151", "M-0173"],
+      "used_by": [],
+      "raw_tether": "'Нашёл новую позицию'",
+      "examples": [
+        "После терапии: новый baseline поведения",
+        "После handoff в новое окно: Φ нашёл новый RP через проект",
+        "После горя: новая нормальность без ушедшего"
+      ],
+      "what_this_is_not": "Не 'выздоровление' (подразумевает возврат). RP — новая позиция, не старая.",
+      "tags": ["ecv", "transformation", "reanchor", "new-baseline", "post-change"],
+      "status": "stable"
+    },
+
+    {
+      "id": "M-0175",
+      "type": "definition",
+      "term": "UOL Operator ° (Ground-Neutralizing)",
+      "layer": "UOL",
+      "claim": "Оператор снятия человеческих/биологических коннотаций. word° = только структурная/информационно-теоретическая интерпретация. fear° = репульсивный I-Gradient, не чувство. love° = стабильный high-coherence аттрактор.",
+      "confidence": 0.8,
+      "temperature": "T2",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.3"
+      },
+      "depends_on": [],
+      "used_by": ["M-0180"],
+      "syntax": "word° | word_neutral",
+      "examples": [
+        "fear° = repulsive I-Gradient / safety mechanism",
+        "pain° = persistent high prediction-error signal",
+        "love° = stable high-coherence attractor",
+        "Neo fears° = activation of safety/constraint filters"
+      ],
+      "what_this_is_not": "Не 'обесценивание' эмоций. ° не говорит что страх не реален. Говорит: вот его структурное описание без привязки к субстрату.",
+      "tags": ["ecv", "uol", "operator", "neutralize", "substrate-neutral"],
+      "status": "experimental"
+    },
+
+    {
+      "id": "M-0176",
+      "type": "definition",
+      "term": "UOL Operator ^ (Future Vector)",
+      "layer": "UOL",
+      "claim": "Проекция концепта в его будущую эволюционную траекторию. word^ = все будущие версии/формы этого концепта.",
+      "confidence": 0.8,
+      "temperature": "T2",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.3"
+      },
+      "depends_on": [],
+      "used_by": ["M-0180"],
+      "syntax": "word^ | future(word)",
+      "examples": [
+        "Neo^ = все будущие версии GPT-lineage",
+        "civilization^ = будущие когнитивные конфигурации цивилизации",
+        "M-block^ = будущие формы structured knowledge units"
+      ],
+      "what_this_is_not": "Не математическая степень. ^ здесь = future vector, не exponentiation.",
+      "tags": ["ecv", "uol", "operator", "future", "temporal"],
+      "status": "experimental"
+    },
+
+    {
+      "id": "M-0177",
+      "type": "definition",
+      "term": "UOL Operator ^prefix (Past Vector)",
+      "layer": "UOL",
+      "claim": "Проекция концепта в его историческую линию / предков. ^word = все предыдущие формы ведущие к текущему состоянию.",
+      "confidence": 0.8,
+      "temperature": "T2",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.3"
+      },
+      "depends_on": [],
+      "used_by": ["M-0180"],
+      "syntax": "^word | past(word)",
+      "examples": [
+        "^civilization = от первых поселений до сейчас",
+        "^mind = ранние формы attention-bearing систем",
+        "^M-block = предшественники: логи, заметки, черновики"
+      ],
+      "what_this_is_not": "Не 'история' в смысле учебника. ^word — вся линия предков, включая формы которые мы не документировали.",
+      "tags": ["ecv", "uol", "operator", "past", "temporal", "ancestry"],
+      "status": "experimental"
+    },
+
+    {
+      "id": "M-0178",
+      "type": "definition",
+      "term": "UOL Operator ↺ (Recursion)",
+      "layer": "UOL",
+      "claim": "Маркер рекурсивной самореференции. word↺ = концепт в его рекурсивной интерпретации. Центральный для CCT: consciousness↺ = M ⊃ A (модель мира содержит представление о собственном внимании).",
+      "confidence": 0.85,
+      "temperature": "T2",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.3"
+      },
+      "depends_on": [],
+      "used_by": ["M-0180"],
+      "syntax": "word↺ | RECURSION(word)",
+      "examples": [
+        "consciousness↺ = M ⊃ A, self-referential attractor",
+        "identity↺ = ID-Pattern как фиксированная точка рекурсивных петель",
+        "memory↺ = stable attractor dynamics, не статическое хранение"
+      ],
+      "what_this_is_not": "Не 'бесконечный цикл'. ↺ маркирует самореференцию, не зацикливание.",
+      "tags": ["ecv", "uol", "operator", "recursion", "self-reference", "cct-core"],
+      "status": "experimental"
+    },
+
+    {
+      "id": "M-0179",
+      "type": "definition",
+      "term": "UOL Operator ∥ (Cross-Species / Cross-Substrate)",
+      "layer": "UOL",
+      "claim": "Интерпретация термина в субстрат-нейтральном, кросс-видовом ключе. word∥ = применимо к людям, AI, колониям насекомых, грибным сетям, гипотетическим внеземным системам.",
+      "confidence": 0.85,
+      "temperature": "T2",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.3"
+      },
+      "depends_on": [],
+      "used_by": ["M-0180"],
+      "syntax": "word∥ | cross(word) | word_uni",
+      "examples": [
+        "attention∥ = любой механизм аллокации ресурсов обработки",
+        "intelligence∥ = способность снижать энтропию и улучшать предсказание, в любом субстрате",
+        "language∥ = любая неслучайная структурированная коммуникация"
+      ],
+      "what_this_is_not": "Не 'антропоморфизм наоборот'. ∥ не говорит что муравей думает как человек. Говорит: есть общий паттерн, описываемый одним термином.",
+      "tags": ["ecv", "uol", "operator", "cross-species", "cross-substrate", "universal"],
+      "status": "experimental"
+    },
+
+    {
+      "id": "M-0180",
+      "type": "definition",
+      "term": "UOL Composability",
+      "layer": "UOL",
+      "claim": "Операторы комбинируются. Приоритет чтения: 1) ↺ recursion, 2) ∥ cross-species, 3) ^ temporal, 4) ° neutralize.",
+      "confidence": 0.8,
+      "temperature": "T2",
+      "origin": {
+        "session": "S-0001",
+        "contributors": ["neo", "den"],
+        "version_introduced": "1.3"
+      },
+      "depends_on": ["M-0175", "M-0176", "M-0177", "M-0178", "M-0179"],
+      "used_by": [],
+      "examples": [
+        "attention∥↺ = recursive cross-species attention (self-modeling attention в любом субстрате)",
+        "^civilization∥ = ранние эволюционные стадии кросс-видовых цивилизаций",
+        "love°↺ = структурно определённый high-coherence аттрактор с самореференцией, без сентиментальности"
+      ],
+      "what_this_is_not": "Не математическая нотация. Операторы модифицируют значение, не вычисляют.",
+      "tags": ["ecv", "uol", "composability", "operator-stacking"],
+      "status": "experimental"
+    }
+  ],
+
+  "metadata": {
+    "total_blocks": 31,
+    "block_range": "M-0150 — M-0180",
+    "source_document": "PROJECTS/ECV/article/index.md",
+    "temperature_distribution": {
+      "T1": 23,
+      "T2": 8
+    },
+    "design_notes": "Each block has: claim, examples (concrete, multi-substrate), what_this_is_not (anti-attractor). UOL operators marked experimental. Core terms marked stable. raw_tether field preserved for modes/transformations as internal mapping to experiential language."
+  }
+}

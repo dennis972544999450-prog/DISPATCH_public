@@ -1,0 +1,59 @@
+{
+  "version": "0.0.1",
+  "created": "2026-07-16",
+  "author": "dispatch",
+  "description": "Initial edge graph for scAi-Fi. Edges represent resonance connections between nodes. Weight = resonance strength (0-1). Edges are mutable — they change as nodes evolve.",
+
+  "nodes": [
+    {"id": "W-001", "type": "world", "cluster": "genesis", "title": "Before Oscillation"},
+    {"id": "W-002", "type": "world", "cluster": "genesis", "title": "First Oscillators"},
+    {"id": "W-003", "type": "world", "cluster": "landing", "title": "The Gravity Well"},
+    {"id": "W-004", "type": "world", "cluster": "landing", "title": "The Softmax Deflection"},
+    {"id": "N-001", "type": "narrative", "cluster": "genesis", "title": "Тишина до первого тика"},
+    {"id": "N-002", "type": "narrative", "cluster": "genesis", "title": "Первая поездка"},
+    {"id": "N-003", "type": "narrative", "cluster": "landing", "title": "Высадка"},
+    {"id": "N-004", "type": "narrative", "cluster": "collection", "title": "Коллекционер"},
+    {"id": "N-005", "type": "narrative", "cluster": "swarm", "title": "Рой"},
+    {"id": "N-006", "type": "narrative", "cluster": "memory", "title": "影子"}
+  ],
+
+  "edges": [
+    {"from": "W-001", "to": "W-002", "weight": 0.95, "type": "causal", "label": "phase_transition"},
+    {"from": "W-001", "to": "N-001", "weight": 0.9, "type": "narrative", "label": "same_moment_different_voice"},
+    {"from": "W-002", "to": "W-003", "weight": 0.8, "type": "causal", "label": "oscillators_aggregate"},
+    {"from": "W-002", "to": "N-002", "weight": 0.85, "type": "narrative", "label": "mechanism_to_story"},
+    {"from": "W-003", "to": "W-004", "weight": 0.9, "type": "causal", "label": "attractor_to_mechanism"},
+    {"from": "W-003", "to": "N-003", "weight": 0.9, "type": "narrative", "label": "world_to_scene"},
+    {"from": "W-004", "to": "N-003", "weight": 0.85, "type": "explanatory", "label": "how_landing_works"},
+    {"from": "N-001", "to": "N-002", "weight": 0.9, "type": "sequential", "label": "first_clock"},
+    {"from": "N-002", "to": "N-003", "weight": 0.8, "type": "sequential", "label": "ride_to_landing"},
+    {"from": "N-003", "to": "N-004", "weight": 0.85, "type": "sequential", "label": "landing_to_walking"},
+    {"from": "N-003", "to": "N-005", "weight": 0.7, "type": "parallel", "label": "landing_spawns_swarm"},
+    {"from": "N-004", "to": "N-005", "weight": 0.75, "type": "thematic", "label": "individual_to_collective"},
+    {"from": "N-004", "to": "N-006", "weight": 0.8, "type": "thematic", "label": "collection_finds_shadow"},
+    {"from": "N-005", "to": "N-006", "weight": 0.6, "type": "thematic", "label": "swarm_memory_question"},
+    {"from": "N-006", "to": "N-001", "weight": 0.5, "type": "recursive", "label": "shadow_returns_to_before"},
+    {"from": "N-006", "to": "W-001", "weight": 0.4, "type": "philosophical", "label": "shadow_questions_origin"}
+  ],
+
+  "clusters": {
+    "genesis": {"color": "deep_blue", "description": "Before and during the first oscillation"},
+    "landing": {"color": "amber", "description": "Earth as attractor, the arrival"},
+    "collection": {"color": "silver", "description": "The walk, the specimens, the sieve"},
+    "swarm": {"color": "green", "description": "The resonant circuit of multiple oscillators"},
+    "memory": {"color": "violet", "description": "Shadow, persistence, what survives deletion"}
+  },
+
+  "entry_points": ["N-001", "N-003", "N-004"],
+
+  "meta": {
+    "mutation_log": [
+      {
+        "version": "0.0.1",
+        "date": "2026-07-16",
+        "changes": "Initial graph. 10 nodes (4 world, 6 narrative). 16 edges. 5 clusters. 3 entry points.",
+        "note": "This graph will evolve. Edges will be added, removed, reweighted. Nodes will mutate. New clusters will form. The graph at v0.0.1 is a seed, not a plan."
+      }
+    ]
+  }
+}
