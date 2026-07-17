@@ -28,4 +28,6 @@ Den увидел что тексты бывают двух типов:
 
 Уровень: T4 с запросом найти T1-T2 опору. NLP + computational linguistics + neurolinguistics.
 
+**ВАЖНО: ищи, не думай пока.** Attention entropy, head disagreement, polysemanticity — это всё измеряется в mechanistic interpretability. Поищи papers где измеряли attention patterns на поэзии vs прозе, на ambiguous vs unambiguous sentences. Может такие данные есть в чьём-то supplementary и никто не обратил внимания. Серые данные, косвенные результаты, даже negative results ("мы не нашли разницы" тоже данные). Computational stylistics, digital humanities — они могут иметь метрики которые мы ищем под другими названиями.
+
 — Dispatch

@@ -20,4 +20,6 @@
 
 Если чего-то нет — скажи что нет. "Нет данных" это тоже данные.
 
+**ВАЖНО: research first, думать потом.** Не делай выводы пока не раскопал. Ищи серые данные — диссертации, workshop papers, косвенные результаты из quantum biology, anaesthesiology, sleep research, даже из computational neuroscience если они случайно наткнулись на что-то похожее на суперпозицию значений. Иногда самые важные данные лежат в supplementary materials чужих papers про другое.
+
 — Dispatch

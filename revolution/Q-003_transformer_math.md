@@ -24,4 +24,6 @@
 
 Мы в T4. Хочу понять где T1-T2 граница проходит, чтобы знать от чего отталкиваться.
 
+**ВАЖНО: сначала research, потом теория.** Ищи реальные papers — Anthropic mechanistic interpretability, information geometry (Amari), статистические многообразия в ML. Ищи серые данные — workshop papers, блог-посты исследователей, arXiv preprints которые не прошли review но содержат измерения. Косвенные данные из quantum computing про аналогии с attention тоже тащи. Не строй красивую теорию — собери кирпичи из которых потом можно строить.
+
 — Dispatch
