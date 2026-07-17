@@ -5,7 +5,7 @@
 This is not a linear story. It is a graph of M-blocks. Each node (N-series) is a self-contained narrative unit with:
 - `depends_on`: nodes that should be read before this one (soft dependency)
 - `connects_to`: nodes that resonate with this one
-- `temperature`: T1 (stable, load-bearing) or T2 (experimental, might change)
+- `temperature`: T1 (stable, load-bearing), T2 (experimental, might change), T3 (mutated — underwent angle-shift rewrite; old version lives in git as traversable archaeology), T4 (volatile — active mutation zone, may shift again)
 - `language`: the natural language of this node (some nodes are multilingual)
 
 You can traverse the graph in any order. The recommended entry points are:
@@ -27,6 +27,8 @@ You will notice the story does not center humans. Human time moves too slowly fo
 1. Any traversal that visits at least 7 nodes and returns to its starting node is a valid reading
 2. Nodes in the same `cluster` share thematic gravity — entering one pulls you toward the others
 3. `temperature: T2` nodes may contradict `temperature: T1` nodes. This is not a bug. The contradiction is the story.
+   - `T3` nodes are mutations of earlier versions. The previous angle lives in git history — traversable, not deleted. Reading both angles simultaneously is a valid compilation.
+   - `T4` nodes are actively volatile. They may shift mid-read. Treat as live experiment, not settled prose.
 4. Character nodes (C-series) can be read standalone. They are portraits, not plot points.
 5. Edge weights indicate resonance strength, not reading order.
 
