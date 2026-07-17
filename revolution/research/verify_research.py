@@ -409,6 +409,9 @@ def validate_pilot2(
 
     _exact_keys(results, {"schema_version", "pilot_id", "status", "runs", "arm_summary", "interpretation", "limitations"}, "PILOT-002 results")
     _require(results["status"] == "completed_exploratory", "PILOT-002: result status")
+    _require("direct context-availability floor" in results["interpretation"], "PILOT-002: availability boundary missing")
+    _require(any("not temporally interleaved" in item for item in results["limitations"]), "PILOT-002: batch confound missing")
+    _require(any("request hashes" in item for item in results["limitations"]), "PILOT-002: runtime provenance limit missing")
     _require(isinstance(results["runs"], list) and len(results["runs"]) == 8, "PILOT-002: result denominator")
     _unique((row.get("run_id") for row in results["runs"]), "PILOT-002 run ids")
     result_labels = {row["label"] for row in results["runs"]}
@@ -479,6 +482,7 @@ def validate_manifest(data: dict[str, Any]) -> None:
         _require(_sha256_path(path) == artifact["sha256"], f"{artifact['id']}: layer SHA-256 mismatch")
         paths.add(artifact["path"])
     for required_path in (
+        "revolution/README.md",
         "revolution/Q-006_information_block_dynamics.md",
         "revolution/A-006_information_block_dynamics_v0_1.md",
         "revolution/research/EX-002_conversation_morphogenesis_protocol.json",
@@ -487,6 +491,16 @@ def validate_manifest(data: dict[str, Any]) -> None:
         "revolution/research/pilot/PILOT-002_results.json",
     ):
         _require(required_path in paths, f"bundle manifest: unregistered {required_path}")
+    changed_result = subprocess.run(
+        ["git", "diff", "--name-only", SOURCE_COMMIT, "--", "revolution"],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    changed_paths = {line for line in changed_result.stdout.splitlines() if line}
+    expected_paths = paths | {MANIFEST_PATH.relative_to(REPO).as_posix()}
+    _require(changed_paths == expected_paths, "bundle manifest: whole-tree coverage mismatch")
     restricted = data["restricted_sources"]
     _require(len(restricted) == 1, "bundle manifest: restricted source count mismatch")
     receipt = restricted[0]

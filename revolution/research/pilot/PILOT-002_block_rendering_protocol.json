@@ -35,6 +35,8 @@
     "This tiny pilot estimates no population effect.",
     "Different renderings are not durable memory unless their payload is actually read.",
     "The absent arm is not content matched.",
-    "Agent identity and provider routing are not experimentally controlled."
+    "Agent identity and provider routing are not experimentally controlled.",
+    "The six read-payload runs and two absent runs were not temporally interleaved.",
+    "The read-versus-absent contrast is a direct context-availability floor, not a test of representation quality."
   ]
 }

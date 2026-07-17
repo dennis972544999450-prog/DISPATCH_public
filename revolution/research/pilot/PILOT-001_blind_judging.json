@@ -24,8 +24,9 @@
     }
   ],
   "agreement": {
-    "binary_check_agreement": "60/60",
     "score_agreement": "10/10",
+    "itemwise_agreement": "not_auditable_from_retained_per_judge_data",
+    "consensus_matrix_status": "blind_scores is one retained consensus matrix, not two per-judge item vectors",
     "independence_limit": "Both judges were fresh runs from the same requested model family, so this is a scoring check, not an independent scientific replication."
   },
   "blind_scores": {

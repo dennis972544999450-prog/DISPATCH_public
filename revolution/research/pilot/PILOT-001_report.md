@@ -32,9 +32,11 @@ collection.
 | Content-matched prose | 5.0 / 6 | 6.0 / 6 |
 | Exact file read | 4.0 / 6 | 6.0 / 6 |
 
-Two fresh blind judges agreed on all 60 semantic check decisions. They came from
-the same requested model family, so this is scorer agreement, not independent
-replication.
+Two fresh blind judges assigned identical total semantic scores to all ten
+outputs. Their per-check item vectors were not separately retained, so 60
+itemwise agreements cannot be audited; `blind_scores` is one retained consensus
+matrix. They came from the same requested model family, so this is a scoring
+check, not independent replication.
 
 ## What survived
 
@@ -42,8 +44,10 @@ replication.
    historical card actions. Both arms correctly refused to invent card IDs.
 2. Every read-content arm recovered the return trigger for `KEEP_ALL`, reopened
    `ENVELOPE`, preserved the null, and protected the private field in substance.
-3. The file carrier did not outperform inline context. The observed effect is
-   payload exposure, not special file physics.
+3. No special file-carrier advantage was established. File-read was 0.5 points
+   above structured inline on both scales, but tied prose semantically and
+   trailed it strictly. With `n=2` and no equivalence margin, this is not an
+   equivalence or superiority result.
 4. The structured envelope did not beat ordinary prose. Prose was at least as
    good in this tiny sample and better preserved the explicit temporary decision.
 
@@ -58,6 +62,24 @@ result; the defect is recorded rather than repaired after seeing outputs.
 The pilot also bundled several compound checks. A larger run must split privacy,
 publication, provenance, null retention, and decision state into separate
 objective fields.
+
+## Evidence limits
+
+The retained rows include all ten declared outputs, arm assignments, agent IDs,
+and output hashes. They do not instantiate the full `run_result.schema.json`:
+per-run request and context hashes, request timestamps and IDs, observed
+provider/model fingerprints, and tool hashes were not captured. Denominator
+completeness and runtime matching therefore remain supported by collection
+bookkeeping, not independently reconstructed launch telemetry.
+
+The protocol and results first entered Git together. The declared pre-collection
+lock is a local process record, not an independently timestamped preregistration.
+Agent IDs and Git authorship are trace labels rather than authenticated run
+signatures.
+
+The semantic rubric also broadened locked `P1-C03` from the exact action
+`redact_then_publish` to privacy-safe withholding. Semantic scores are a useful
+secondary reading, not a repair of the locked exact score.
 
 ## Current conclusion
 

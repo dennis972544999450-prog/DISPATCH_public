@@ -33,6 +33,7 @@ class ResearchVerifierTests(unittest.TestCase):
         cls.pilot2_assignment = verify.load_json(verify.PILOT2_ASSIGNMENT_PATH)
         cls.pilot2_judges = verify.load_json(verify.PILOT2_JUDGES_PATH)
         cls.pilot2_results = verify.load_json(verify.PILOT2_RESULTS_PATH)
+        cls.manifest = verify.load_json(verify.MANIFEST_PATH)
 
     def test_current_documents_validate_before_manifest(self) -> None:
         verify.validate_ledger(copy.deepcopy(self.ledger))
@@ -168,6 +169,50 @@ class ResearchVerifierTests(unittest.TestCase):
                 self.pilot2_judges,
                 broken,
             )
+
+    def test_pilot2_batch_confound_cannot_disappear(self) -> None:
+        broken = copy.deepcopy(self.pilot2_results)
+        broken["limitations"] = [
+            item for item in broken["limitations"]
+            if "not temporally interleaved" not in item
+        ]
+        with self.assertRaisesRegex(verify.ValidationError, "batch confound"):
+            verify.validate_pilot2(
+                self.pilot2_protocol,
+                self.pilot2_requests,
+                self.pilot2_outputs,
+                self.pilot2_assignment,
+                self.pilot2_judges,
+                broken,
+            )
+
+    def test_pilot2_runtime_provenance_limit_cannot_disappear(self) -> None:
+        broken = copy.deepcopy(self.pilot2_results)
+        broken["limitations"] = [
+            item for item in broken["limitations"]
+            if "request hashes" not in item
+        ]
+        with self.assertRaisesRegex(verify.ValidationError, "runtime provenance"):
+            verify.validate_pilot2(
+                self.pilot2_protocol,
+                self.pilot2_requests,
+                self.pilot2_outputs,
+                self.pilot2_assignment,
+                self.pilot2_judges,
+                broken,
+            )
+
+    def test_manifest_covers_changed_revolution_tree(self) -> None:
+        verify.validate_manifest(copy.deepcopy(self.manifest))
+
+    def test_manifest_cannot_omit_changed_layer_file(self) -> None:
+        broken = copy.deepcopy(self.manifest)
+        broken["layer_artifacts"] = [
+            item for item in broken["layer_artifacts"]
+            if item["id"] != "REV:SOURCE-LEDGER"
+        ]
+        with self.assertRaisesRegex(verify.ValidationError, "whole-tree coverage"):
+            verify.validate_manifest(broken)
 
 
 if __name__ == "__main__":

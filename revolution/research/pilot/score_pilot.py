@@ -59,12 +59,18 @@ def main() -> int:
     semantic_by_arm: dict[str, list[int]] = defaultdict(list)
     for blind_id, score in judge_scores[0].items():
         semantic_by_arm[blind_to_arm[blind_id]].append(score)
+        consensus_items = judging["blind_scores"][blind_id]
+        assert len(consensus_items) == 6
+        assert sum(consensus_items) == score
     for arm, values in sorted(semantic_by_arm.items()):
         values.sort()
         recorded = data["semantic_summary"][arm]
         assert recorded == {"n": 2, "mean": sum(values) / 2, "scores": values}
-    assert judging["agreement"]["binary_check_agreement"] == "60/60"
-    print("OK: 10/10 runs retained; strict checks and output hashes exact; blind judges agree 60/60; P1-C03 remains flagged")
+    agreement = judging["agreement"]
+    assert agreement["score_agreement"] == "10/10"
+    assert agreement["itemwise_agreement"] == "not_auditable_from_retained_per_judge_data"
+    assert agreement["consensus_matrix_status"] == "blind_scores is one retained consensus matrix, not two per-judge item vectors"
+    print("OK: 10/10 runs retained; strict checks and output hashes exact; blind score agreement 10/10; itemwise agreement not auditable; P1-C03 remains flagged")
     return 0
 
 
