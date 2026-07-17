@@ -214,6 +214,18 @@ class ResearchVerifierTests(unittest.TestCase):
         with self.assertRaisesRegex(verify.ValidationError, "whole-tree coverage"):
             verify.validate_manifest(broken)
 
+    def test_public_release_cannot_include_raw_private_source(self) -> None:
+        broken = copy.deepcopy(self.manifest)
+        broken["release_receipt"]["raw_private_source"] = "included"
+        with self.assertRaisesRegex(verify.ValidationError, "release scope"):
+            verify.validate_manifest(broken)
+
+    def test_public_release_cannot_open_quoting_boundary(self) -> None:
+        broken = copy.deepcopy(self.manifest)
+        broken["restricted_sources"][0]["quoting"] = True
+        with self.assertRaisesRegex(verify.ValidationError, "privacy boundary"):
+            verify.validate_manifest(broken)
+
 
 if __name__ == "__main__":
     unittest.main()

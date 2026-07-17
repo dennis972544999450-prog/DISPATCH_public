@@ -458,11 +458,20 @@ def _git_bytes(commit: str, path: str) -> bytes:
 
 
 def validate_manifest(data: dict[str, Any]) -> None:
-    required = {"schema_version", "bundle_id", "source_snapshot_commit", "layer_state", "restricted_sources", "source_artifacts", "layer_artifacts", "links"}
+    required = {"schema_version", "bundle_id", "source_snapshot_commit", "layer_state", "release_receipt", "restricted_sources", "source_artifacts", "layer_artifacts", "links"}
     _exact_keys(data, required, "bundle manifest")
-    _require(data["schema_version"] == "0.2", "bundle manifest: version mismatch")
+    _require(data["schema_version"] == "0.3", "bundle manifest: version mismatch")
     _require(data["source_snapshot_commit"] == SOURCE_COMMIT, "bundle manifest: source snapshot mismatch")
-    _require(data["layer_state"] == "local_unreleased", "bundle manifest: unsafe release state")
+    _require(data["layer_state"] == "public_release_approved", "bundle manifest: release approval missing")
+    release = data["release_receipt"]
+    _exact_keys(release, {"path", "approved_by", "approved_on", "scope", "raw_private_source"}, "release receipt")
+    _require(release == {
+        "path": "revolution/research/RELEASE_RECEIPT_2026-07-17.md",
+        "approved_by": "den",
+        "approved_on": "2026-07-17",
+        "scope": "derived_research_results_and_agent_closeouts",
+        "raw_private_source": "excluded",
+    }, "bundle manifest: release scope drift")
     source_artifacts = data["source_artifacts"]
     _require(len(source_artifacts) == 5, "bundle manifest: expected Q-001..Q-005 source artifacts")
     for artifact in source_artifacts:
@@ -485,6 +494,11 @@ def validate_manifest(data: dict[str, Any]) -> None:
         "revolution/README.md",
         "revolution/Q-006_information_block_dynamics.md",
         "revolution/A-006_information_block_dynamics_v0_1.md",
+        "revolution/research/RELEASE_RECEIPT_2026-07-17.md",
+        "revolution/research/reviews/README.md",
+        "revolution/research/reviews/2026-07-17_causal_statistical_review.md",
+        "revolution/research/reviews/2026-07-17_multi_lens_synthesis.md",
+        "revolution/research/reviews/2026-07-17_privacy_provenance_review.md",
         "revolution/research/EX-002_conversation_morphogenesis_protocol.json",
         "revolution/research/pilot/PILOT-001_block_reentry_protocol.json",
         "revolution/research/pilot/PILOT-002_block_rendering_protocol.json",
@@ -506,7 +520,7 @@ def validate_manifest(data: dict[str, Any]) -> None:
     receipt = restricted[0]
     _exact_keys(receipt, {"receipt_id", "research_agent_access", "public_abstracted_derivatives", "quoting", "path_disclosure"}, "restricted source")
     _require(receipt["research_agent_access"] is True, "restricted source: agent access missing")
-    _require(receipt["public_abstracted_derivatives"] == "pending_explicit_release", "restricted source: publication consent invented")
+    _require(receipt["public_abstracted_derivatives"] == "approved_public_release_2026-07-17", "restricted source: derived release approval missing")
     _require(receipt["quoting"] is False and receipt["path_disclosure"] is False, "restricted source: privacy boundary open")
 
 

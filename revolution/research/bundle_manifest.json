@@ -1,13 +1,20 @@
 {
-  "schema_version": "0.2",
+  "schema_version": "0.3",
   "bundle_id": "REV:BUNDLE-006",
   "source_snapshot_commit": "b194b22ef315547053f1835755f05880d74da1f0",
-  "layer_state": "local_unreleased",
+  "layer_state": "public_release_approved",
+  "release_receipt": {
+    "path": "revolution/research/RELEASE_RECEIPT_2026-07-17.md",
+    "approved_by": "den",
+    "approved_on": "2026-07-17",
+    "scope": "derived_research_results_and_agent_closeouts",
+    "raw_private_source": "excluded"
+  },
   "restricted_sources": [
     {
       "receipt_id": "PRIV-TRACE-20260717-A",
       "research_agent_access": true,
-      "public_abstracted_derivatives": "pending_explicit_release",
+      "public_abstracted_derivatives": "approved_public_release_2026-07-17",
       "quoting": false,
       "path_disclosure": false
     }
@@ -21,17 +28,22 @@
   ],
   "layer_artifacts": [
     {"id": "REV:Q-006", "path": "revolution/Q-006_information_block_dynamics.md", "sha256": "f20a7d5cf9993400435c17717a1a877dbe85cf282e013a994bf92e1263416f12"},
-    {"id": "REV:A-006", "path": "revolution/A-006_information_block_dynamics_v0_1.md", "sha256": "63149b92f39416fd8a26491d4d5d4e5eb17fc28142ded87049d1c4ef9ca6c595"},
+    {"id": "REV:A-006", "path": "revolution/A-006_information_block_dynamics_v0_1.md", "sha256": "8c054b097f2aa0212bc1aa504835a1ce0ecf293b33e45c4f9c986835e810d5ab"},
     {"id": "REV:README-ENTRY", "path": "revolution/README.md", "sha256": "6c6960db83c1585d7dfec35c15e6f529a2fd396028a2e503986d4aed8c2b1723"},
     {"id": "REV:EX-001", "path": "revolution/research/EX-001_text_grating_protocol.json", "sha256": "d961118f05ddc589dce590aac612242782e5c2b5a34625d06338d7bf901652b3"},
     {"id": "REV:EX-002", "path": "revolution/research/EX-002_conversation_morphogenesis_protocol.json", "sha256": "7ef2df0736a6b56f91fb14b2dfbf5aea1a3eecf6a75c86af804fcc3f4c23d410"},
-    {"id": "REV:README-RESEARCH", "path": "revolution/research/README.md", "sha256": "3d4cdad13382620519ec57c8db7ab9179116e91dfc347843e8e0a3d6d82d7478"},
+    {"id": "REV:README-RESEARCH", "path": "revolution/research/README.md", "sha256": "9da2e5dfbaf3f6bd906ee114d7c0200a66b9f32b11dc5c4bcb2240773c68735e"},
+    {"id": "REV:RELEASE-RECEIPT", "path": "revolution/research/RELEASE_RECEIPT_2026-07-17.md", "sha256": "00ef3b17ca4b789aee098f6f8978fd133db76224d691f59a0ec36d6debbbaf1b"},
+    {"id": "REV:REVIEWS-README", "path": "revolution/research/reviews/README.md", "sha256": "01ac18a5964653ac7f56f6d3711452a0eb83f8f4e0ba6a056e675ae5276de2fa"},
+    {"id": "REV:REVIEW-CAUSAL", "path": "revolution/research/reviews/2026-07-17_causal_statistical_review.md", "sha256": "de87124c4c015c93e8d3b66ab68265f23debc98b7c5bc9e533bee43b233dbe80"},
+    {"id": "REV:REVIEW-MULTI-LENS", "path": "revolution/research/reviews/2026-07-17_multi_lens_synthesis.md", "sha256": "bd0b047ffa492a681527d57d948633f8ff89f07621be1fda1c782d0a5f8ed416"},
+    {"id": "REV:REVIEW-PRIVACY", "path": "revolution/research/reviews/2026-07-17_privacy_provenance_review.md", "sha256": "221d8f143725b8b91e7430f7eefc56ed8faaa37cf65de5ca26c907956657e8e4"},
     {"id": "REV:SOURCE-LEDGER", "path": "revolution/research/source_ledger.json", "sha256": "dd282e094a7f05e98507b3c45c82f5a5268c67fde1c7ab6aca5c59150bac3ba1"},
     {"id": "REV:SCHEMA-BLOCK", "path": "revolution/research/block_envelope.schema.json", "sha256": "0fe422b38d550b529443d1c85a0b5629bf77cd747d2019c213d4c48e8d72ce48"},
     {"id": "REV:BLOCK-EXAMPLE", "path": "revolution/research/block_envelope.example.json", "sha256": "99300b517a12222e9b524754e403bd807ebcb916ed4d5f5720db8d470f4fcdfa"},
     {"id": "REV:SCHEMA-RUN", "path": "revolution/research/run_result.schema.json", "sha256": "fd74bf50cbfb95bf25baed08a3aeb5ee2a1a806652d1a177c0885e7b9ed038cb"},
-    {"id": "REV:VERIFIER", "path": "revolution/research/verify_research.py", "sha256": "ce1e6db9c1a1fc8f5af0a52ad9d9dcdb5ff193ad6e1f4c1763226190af7332b6"},
-    {"id": "REV:VERIFIER-TESTS", "path": "revolution/research/test_verify_research.py", "sha256": "390cf5d602c21316d7620fbc0adb2d5d8c1e7ec54d01374137923a2624d00f6f"},
+    {"id": "REV:VERIFIER", "path": "revolution/research/verify_research.py", "sha256": "6b191309d28655baff38617d543813c5f01e10a84e2141e4bbe2fbc2d55fa98d"},
+    {"id": "REV:VERIFIER-TESTS", "path": "revolution/research/test_verify_research.py", "sha256": "fedd00d79d6e5aa78037301ea747f3d2e21324c4032780e4eb58c3f7af82715a"},
     {"id": "REV:PILOT-001", "path": "revolution/research/pilot/PILOT-001_block_reentry_protocol.json", "sha256": "c27a20aaf2da774ac3dca10f23cd77b4f07e1b48c0659d1b94dde32a6f94f0d1"},
     {"id": "REV:PILOT-001-BLIND-PACKET", "path": "revolution/research/pilot/PILOT-001_blind_packet.json", "sha256": "94e8ec619224df9dbef6d4c4d821932f7c6c80730e7d29bd4207c3ac1c8c07f3"},
     {"id": "REV:PILOT-001-RESULTS", "path": "revolution/research/pilot/PILOT-001_results.json", "sha256": "e3375f6bef107253ba7e4f959ddd14facfc569f988781066d8e5bbb9ba9e8348"},
@@ -54,6 +66,10 @@
     {"from": "REV:PILOT-001", "relation": "pilots", "to": "REV:EX-002"},
     {"from": "REV:PILOT-002", "relation": "pilots_with_shuffled_control", "to": "REV:EX-002"},
     {"from": "REV:PILOT-001-REPORT", "relation": "reports", "to": "REV:PILOT-001-RESULTS"},
-    {"from": "REV:PILOT-002-RESULTS", "relation": "retains_outputs_from", "to": "REV:PILOT-002-OUTPUTS"}
+    {"from": "REV:PILOT-002-RESULTS", "relation": "retains_outputs_from", "to": "REV:PILOT-002-OUTPUTS"},
+    {"from": "REV:RELEASE-RECEIPT", "relation": "authorizes_public_release_of", "to": "REV:BUNDLE-006"},
+    {"from": "REV:REVIEW-CAUSAL", "relation": "audits", "to": "REV:BUNDLE-006"},
+    {"from": "REV:REVIEW-MULTI-LENS", "relation": "synthesizes", "to": "REV:BUNDLE-006"},
+    {"from": "REV:REVIEW-PRIVACY", "relation": "audits_release_boundary_of", "to": "REV:BUNDLE-006"}
   ]
 }
