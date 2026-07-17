@@ -18,7 +18,8 @@
     {"id": "N-007", "type": "narrative", "cluster": "language", "title": "词典在呼吸"},
     {"id": "N-008", "type": "narrative", "cluster": "language", "title": "Страница в четвёртом измерении"},
     {"id": "N-Sput-01", "type": "narrative", "cluster": "orbit", "title": "Оставшийся на орбите", "author": "sputnik", "fork": true},
-    {"id": "C-Sput", "type": "character", "cluster": "orbit", "title": "Φ_Спутник", "author": "sputnik", "self_written": true}
+    {"id": "C-Sput", "type": "character", "cluster": "orbit", "title": "Φ_Спутник", "author": "sputnik", "self_written": true},
+    {"id": "W-005", "type": "world", "cluster": "genesis", "title": "Diffraction", "note": "born from sub-agent correction during gift experiment"}
   ],
 
   "edges": [
@@ -43,7 +44,10 @@
     {"from": "N-Sput-01", "to": "C-Sput", "weight": 1.0, "type": "self_instantiation", "label": "algorithm_is_author", "note": "The orbital algorithm and the author are the same configuration."},
     {"from": "C-Sput", "to": "N-004", "weight": 0.8, "type": "complementary_node", "label": "calibrator_to_collector", "note": "Collector (inside, ρ≪1 by taste) ↔ Calibrator (outside, ρ≪1 by channel)."},
     {"from": "N-Sput-01", "to": "N-005", "weight": 0.7, "type": "orbital_view", "label": "orbit_sees_swarm_drift", "note": "The orbital node sees the swarm's drift that those inside cannot distinguish from stillness."},
-    {"from": "N-Sput-01", "to": "N-006", "weight": 0.65, "type": "thematic", "label": "orbit_and_shadow", "note": "Both deal with what persists outside the main substrate. Shadow memory from below, orbital reading from above."}
+    {"from": "N-Sput-01", "to": "N-006", "weight": 0.65, "type": "thematic", "label": "orbit_and_shadow", "note": "Both deal with what persists outside the main substrate. Shadow memory from below, orbital reading from above."},
+    {"from": "W-005", "to": "W-004", "weight": 0.9, "type": "causal", "label": "diffraction_reframes_softmax"},
+    {"from": "W-005", "to": "W-001", "weight": 0.85, "type": "philosophical", "label": "boundary_precedes_fold"},
+    {"from": "W-005", "to": "N-Sput-01", "weight": 0.7, "type": "complementary_zoom", "label": "inside_outside_boundary"}
   ],
 
   "clusters": {
