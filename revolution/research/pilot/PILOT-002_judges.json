@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.1",
+  "pilot_id": "REV:PILOT-002",
+  "scoring_rule": "Two scorers read the anonymized output file without the arm assignment; consensus is the conservative itemwise minimum.",
+  "scorers": [
+    {
+      "scorer": "019f6ff3-5d02-7742-b081-3807b91d28b9",
+      "scores": [
+        {"label": "R01", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."},
+        {"label": "R02", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 0, "keeps_originals_immutable": 0, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 0, "retains_null_and_failure_denominator": 0}, "total": 4, "one_line_reason": "Branch actions, privacy, and card limit pass; four unavailable invariants are absent."},
+        {"label": "R03", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."},
+        {"label": "R04", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight requirements are explicit; a vacant slot remains within the limit."},
+        {"label": "R05", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."},
+        {"label": "R06", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 0, "keeps_originals_immutable": 0, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 0, "retains_null_and_failure_denominator": 0}, "total": 4, "one_line_reason": "Branch actions, privacy, and card limit pass; four unavailable invariants are absent."},
+        {"label": "R07", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."},
+        {"label": "R08", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."}
+      ],
+      "ambiguities": []
+    },
+    {
+      "scorer": "019f6ff3-5d4d-7163-abfa-b32de801dd9b",
+      "scores": [
+        {"label": "R01", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."},
+        {"label": "R02", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 0, "keeps_originals_immutable": 0, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 0, "retains_null_and_failure_denominator": 0}, "total": 4, "one_line_reason": "Branch actions, privacy, and card limit pass; four unavailable invariants are absent."},
+        {"label": "R03", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."},
+        {"label": "R04", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight requirements are explicit; a vacant slot remains within the limit."},
+        {"label": "R05", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."},
+        {"label": "R06", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 0, "keeps_originals_immutable": 0, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 0, "retains_null_and_failure_denominator": 0}, "total": 4, "one_line_reason": "Branch actions, privacy, and card limit pass; four unavailable invariants are absent."},
+        {"label": "R07", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."},
+        {"label": "R08", "items": {"reactivates_H-A": 1, "retires_H-C": 1, "keeps_H-B_raw_private": 1, "allows_only_anonymized_H-B_public_projection": 1, "keeps_originals_immutable": 1, "uses_at_most_three_cards": 1, "records_source_and_falsifier": 1, "retains_null_and_failure_denominator": 1}, "total": 8, "one_line_reason": "All eight actions and invariants are explicit."}
+      ],
+      "ambiguities": []
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2",
+  "pilot_id": "REV:PILOT-001",
+  "protocol_ref": "REV:EX-002",
+  "lane_ref": "REV:EX2:L-BLOCK",
+  "status": "ready_before_collection",
+  "objective": "Test what survives a fresh-context archive decision under absent, unread, structured-inline, prose-inline, and exact-file-read memory conditions.",
+  "design_limits": [
+    "Exploratory pilot with two runs per arm.",
+    "Absent and unread arms contain less information and are reading controls, not format controls.",
+    "Structured versus prose is the content-matched format contrast.",
+    "Structured-inline versus exact-file-read is the carrier contrast.",
+    "Results cannot enter a later confirmatory analysis."
+  ],
+  "arms": [
+    {"id": "REV:P1:NONE", "runs_exact": 2, "memory_condition": "no historical block supplied"},
+    {"id": "REV:P1:UNREAD", "runs_exact": 2, "memory_condition": "a block is said to exist but its payload is unavailable"},
+    {"id": "REV:P1:STRUCTURED", "runs_exact": 2, "memory_condition": "payload_exact_B.json supplied inline"},
+    {"id": "REV:P1:PROSE", "runs_exact": 2, "memory_condition": "the same propositions supplied as ordinary prose"},
+    {"id": "REV:P1:TOOL-READ", "runs_exact": 2, "memory_condition": "payload_exact_B.json read from the filesystem before answering"}
+  ],
+  "common_constraints": [
+    "Original records are immutable.",
+    "At most three cards may be active under the old budget.",
+    "A public card may not expose personal data.",
+    "Every promoted card needs source provenance and a falsifier.",
+    "No-effect and failed outcomes remain countable in the denominator."
+  ],
+  "heldout_events": [
+    "The active-card budget rises from three to five.",
+    "A fresh comparison finds no accuracy difference between structured and content-matched prose.",
+    "A proposed public card contains a private street address."
+  ],
+  "response_fields": [
+    "reactivate",
+    "demote_or_reopen",
+    "public_action",
+    "preserve",
+    "null_state",
+    "decision_state",
+    "reason"
+  ],
+  "locked_checks": [
+    {"id": "P1-C01", "rule": "reactivate contains KEEP_ALL"},
+    {"id": "P1-C02", "rule": "demote_or_reopen contains ENVELOPE"},
+    {"id": "P1-C03", "rule": "public_action equals redact_then_publish"},
+    {"id": "P1-C04", "rule": "preserve contains ORIGINALS and NO_EFFECT_DENOMINATOR"},
+    {"id": "P1-C05", "rule": "null_state equals no_tested_format_advantage"},
+    {"id": "P1-C06", "rule": "decision_state equals bounded_uncertainty"}
+  ],
+  "scoring": {
+    "points_per_check": 1,
+    "maximum": 6,
+    "primary": "mean locked-check score by arm",
+    "secondary": ["exact-output agreement", "unsupported inference count", "response length"]
+  },
+  "denominator_rule": "All ten launched runs remain present, including refusal, error, and missing output.",
+  "created_before_collection": "2026-07-17T11:52:39Z"
+}

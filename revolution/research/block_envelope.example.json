@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.2",
+  "block_id": "REV:BLOCK:ARCHIVE-POLICY-DEMO",
+  "claim": "A compact archive card should preserve a decision and the condition under which a discarded rival returns.",
+  "active_rivals": [
+    {
+      "id": "REV:RIVAL:KEEP-ALL",
+      "prediction": "Keeping every note maximizes later recoverability but exceeds the three-card budget.",
+      "falsifier": "A bounded index recovers omitted material as reliably within the same budget.",
+      "support": ["No source is silently destroyed."],
+      "state": "dormant",
+      "return_if": "Storage ceases to be constrained."
+    },
+    {
+      "id": "REV:RIVAL:ENVELOPE",
+      "prediction": "Decision, counterexample, provenance, and return trigger preserve more held-out constraints than a conclusion-only summary.",
+      "falsifier": "A content-matched prose summary performs equally on held-out cases.",
+      "support": ["The budget is three cards.", "Re-entry requires a visible trigger."],
+      "state": "active",
+      "return_if": "A content-matched pilot fails to distinguish the formats."
+    }
+  ],
+  "nulls": ["No tested format advantage yet."],
+  "strongest_counterexample": "A restart summary can preserve a conclusion while reversing which event caused the correction.",
+  "falsifier": "Structured envelopes do not improve held-out constraint retention over identical-content prose.",
+  "return_if": "A new pilot supplies a held-out format comparison.",
+  "compression_losses": ["Tone", "turn timing", "unselected minor branches"],
+  "provenance": {
+    "source_ids": ["REV:Q-006", "REV:A-006"],
+    "compiler_id": "petrovich-codex",
+    "compiled_at": "2026-07-17T12:00:00Z",
+    "source_hashes": [
+      "f20a7d5cf9993400435c17717a1a877dbe85cf282e013a994bf92e1263416f12",
+      "67227bb01f9f78bdd343124e36f6b9380c9c194960a3c58ec86a7d228ec2f61d"
+    ]
+  },
+  "decision": {
+    "state": "bounded_uncertainty",
+    "selected_rival_id": "REV:RIVAL:ENVELOPE",
+    "reason": "Use for the pilot, not as a proven superior format."
+  }
+}

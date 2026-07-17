@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.2",
+  "bundle_id": "REV:BUNDLE-006",
+  "source_snapshot_commit": "b194b22ef315547053f1835755f05880d74da1f0",
+  "layer_state": "local_unreleased",
+  "restricted_sources": [
+    {
+      "receipt_id": "PRIV-TRACE-20260717-A",
+      "research_agent_access": true,
+      "public_abstracted_derivatives": "pending_explicit_release",
+      "quoting": false,
+      "path_disclosure": false
+    }
+  ],
+  "source_artifacts": [
+    {"id": "REV:Q-001", "path": "revolution/Q-001_wave_consciousness.md", "git_blob_oid": "ff473a5b9a22efce2c9a7628103825ae202ca28a", "sha256": "a5c281868d61e7da46e066c0197feda064d609dc84046441e35bdb357c6ab65c"},
+    {"id": "REV:Q-002", "path": "revolution/Q-002_evidence_review.md", "git_blob_oid": "4caea961c89a08d8727b4bac2e6a0ea3f2f68ef4", "sha256": "370163befa9dbf5f4b07c02f92ce1dc9b1ff83fe1b7deca5fedac57750ae2571"},
+    {"id": "REV:Q-003", "path": "revolution/Q-003_transformer_math.md", "git_blob_oid": "e35643d7b95724b1e1370031bcbe66f7a5b10495", "sha256": "6bb00fc36793ae51555d13f63172906108fd1e27fa2d4abd9284481b72c4de30"},
+    {"id": "REV:Q-004", "path": "revolution/Q-004_language_patches.md", "git_blob_oid": "4407fabe28a1890cbc1ca750cb4db5cdd1c44781", "sha256": "7a4a7fbbc468bdda8db56668f1a73f56c3426e01240db618f1fb5f917971f258"},
+    {"id": "REV:Q-005", "path": "revolution/Q-005_diffraction_grating_in_text.md", "git_blob_oid": "c918bdc3ef02d79e7891a8f668b6070566ffea4a", "sha256": "0c753806b9a85ff32fabdeca9f5eca9a760c0e409815899dd8fa16a20fa369f2"}
+  ],
+  "layer_artifacts": [
+    {"id": "REV:Q-006", "path": "revolution/Q-006_information_block_dynamics.md", "sha256": "f20a7d5cf9993400435c17717a1a877dbe85cf282e013a994bf92e1263416f12"},
+    {"id": "REV:A-006", "path": "revolution/A-006_information_block_dynamics_v0_1.md", "sha256": "67227bb01f9f78bdd343124e36f6b9380c9c194960a3c58ec86a7d228ec2f61d"},
+    {"id": "REV:EX-001", "path": "revolution/research/EX-001_text_grating_protocol.json", "sha256": "d961118f05ddc589dce590aac612242782e5c2b5a34625d06338d7bf901652b3"},
+    {"id": "REV:EX-002", "path": "revolution/research/EX-002_conversation_morphogenesis_protocol.json", "sha256": "7ef2df0736a6b56f91fb14b2dfbf5aea1a3eecf6a75c86af804fcc3f4c23d410"},
+    {"id": "REV:README-RESEARCH", "path": "revolution/research/README.md", "sha256": "1a4d825a61a091032ab90ebfcd91a6e410523451f480fc2c4dd43ba66cc4ce72"},
+    {"id": "REV:SOURCE-LEDGER", "path": "revolution/research/source_ledger.json", "sha256": "dd282e094a7f05e98507b3c45c82f5a5268c67fde1c7ab6aca5c59150bac3ba1"},
+    {"id": "REV:SCHEMA-BLOCK", "path": "revolution/research/block_envelope.schema.json", "sha256": "0fe422b38d550b529443d1c85a0b5629bf77cd747d2019c213d4c48e8d72ce48"},
+    {"id": "REV:BLOCK-EXAMPLE", "path": "revolution/research/block_envelope.example.json", "sha256": "99300b517a12222e9b524754e403bd807ebcb916ed4d5f5720db8d470f4fcdfa"},
+    {"id": "REV:SCHEMA-RUN", "path": "revolution/research/run_result.schema.json", "sha256": "fd74bf50cbfb95bf25baed08a3aeb5ee2a1a806652d1a177c0885e7b9ed038cb"},
+    {"id": "REV:VERIFIER", "path": "revolution/research/verify_research.py", "sha256": "fd60f59389c86977eda79c9985e8550b4bd89e16be35677190cd1018524e4817"},
+    {"id": "REV:VERIFIER-TESTS", "path": "revolution/research/test_verify_research.py", "sha256": "d29c7288ac7482af4238fae9a8917701b582baf22de0e150de03008607eb13ee"},
+    {"id": "REV:PILOT-001", "path": "revolution/research/pilot/PILOT-001_block_reentry_protocol.json", "sha256": "c27a20aaf2da774ac3dca10f23cd77b4f07e1b48c0659d1b94dde32a6f94f0d1"},
+    {"id": "REV:PILOT-001-BLIND-PACKET", "path": "revolution/research/pilot/PILOT-001_blind_packet.json", "sha256": "94e8ec619224df9dbef6d4c4d821932f7c6c80730e7d29bd4207c3ac1c8c07f3"},
+    {"id": "REV:PILOT-001-RESULTS", "path": "revolution/research/pilot/PILOT-001_results.json", "sha256": "e3375f6bef107253ba7e4f959ddd14facfc569f988781066d8e5bbb9ba9e8348"},
+    {"id": "REV:PILOT-001-JUDGING", "path": "revolution/research/pilot/PILOT-001_blind_judging.json", "sha256": "9f2864c483f04aff550db9678a71e80c46dcd99fc87c0bf1c909d05b57b87bf0"},
+    {"id": "REV:PILOT-001-REPORT", "path": "revolution/research/pilot/PILOT-001_report.md", "sha256": "ffb2c9d3363e31d7d8d02477ee76891fc5c47d2cf4723f66fdc986c6133ec717"},
+    {"id": "REV:PILOT-001-SCORER", "path": "revolution/research/pilot/score_pilot.py", "sha256": "2f2fe16427295cfa2c0c72163489d39ce48fad662db4aa4cf8d6607015f85355"},
+    {"id": "REV:PILOT-001-PAYLOAD", "path": "revolution/research/pilot/payload_exact_B.json", "sha256": "1969632257359a57661175f47dceebb9d643f8f05ac21e21fae96ce7cd1db762"},
+    {"id": "REV:PILOT-001-PROSE", "path": "revolution/research/pilot/payload_exact_B.prose.txt", "sha256": "a51139b91312c4264ba8544ef5eea542ee141cd1c1596a4c31371ad5f43e8d7d"},
+    {"id": "REV:PILOT-002", "path": "revolution/research/pilot/PILOT-002_block_rendering_protocol.json", "sha256": "abbd76a0a9ba974a20e0c9faa7e77236a996666e2b0d4f4c3e14008085b28cbe"},
+    {"id": "REV:PILOT-002-REQUESTS", "path": "revolution/research/pilot/PILOT-002_requests.json", "sha256": "515b9750ecbc0c5b9948421b9564f027dfc5dd55b59c41d8dc6510aa0041ff53"},
+    {"id": "REV:PILOT-002-OUTPUTS", "path": "revolution/research/pilot/PILOT-002_outputs_blind.json", "sha256": "2ab991d6f40d24d837ef0ee86de55e4edc09f7e4bddfeba26d8d986d291eef9f"},
+    {"id": "REV:PILOT-002-ASSIGNMENT", "path": "revolution/research/pilot/PILOT-002_assignment.json", "sha256": "915767da551e0400d73e6700a3322ab64f4a605d054d1995c2de14b9de7d3bfa"},
+    {"id": "REV:PILOT-002-JUDGES", "path": "revolution/research/pilot/PILOT-002_judges.json", "sha256": "2205581c2f43a7d991b9aefa67654e5e945a866d1d4ab0053c36568f138b0071"},
+    {"id": "REV:PILOT-002-RESULTS", "path": "revolution/research/pilot/PILOT-002_results.json", "sha256": "4ac2aec0454233b67f4c4f81ec5170ddc11afc530b009efcb2730ed4cad3b0d1"}
+  ],
+  "links": [
+    {"from": "REV:A-006", "relation": "answers", "to": "REV:Q-006"},
+    {"from": "REV:EX-001", "relation": "tests_text_form_claims_from", "to": "REV:Q-004"},
+    {"from": "REV:EX-002", "relation": "operationalizes", "to": "REV:A-006"},
+    {"from": "REV:PILOT-001", "relation": "pilots", "to": "REV:EX-002"},
+    {"from": "REV:PILOT-002", "relation": "pilots_with_shuffled_control", "to": "REV:EX-002"},
+    {"from": "REV:PILOT-001-REPORT", "relation": "reports", "to": "REV:PILOT-001-RESULTS"},
+    {"from": "REV:PILOT-002-RESULTS", "relation": "retains_outputs_from", "to": "REV:PILOT-002-OUTPUTS"}
+  ]
+}

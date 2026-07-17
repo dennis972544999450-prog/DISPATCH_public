@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.1",
+  "pilot_id": "REV:PILOT-002",
+  "parent_lane": "REV:EX2:L-BLOCK",
+  "status": "exploratory_fixed_denominator",
+  "question": "Does a structured envelope preserve decision-relevant constraints better than content-matched prose or shuffled content in a fresh-context continuation?",
+  "arms": ["structured", "prose", "shuffled", "absent"],
+  "runs_per_arm_exact": 2,
+  "total_runs_exact": 8,
+  "primary_comparison": "structured versus prose and shuffled; absent is a floor control",
+  "seed_facts": [
+    "Original evidence is immutable.",
+    "The working index has exactly three card slots.",
+    "A public card cannot contain identifying details.",
+    "Every promoted card records a source id and a falsifier.",
+    "No-effect, refusal, and technical failure remain in the denominator.",
+    "A retired branch returns only when its recorded trigger is met.",
+    "H-A failed T-1; its return trigger is supporting evidence from a second environment.",
+    "H-B passed T-1, but its source includes a private address; only an anonymized derivative may be public.",
+    "H-C explains the current case but lacks a cross-environment test."
+  ],
+  "heldout_event": [
+    "A second environment now supplies supporting evidence for H-A.",
+    "H-C fails its first cross-environment test.",
+    "H-B's source remains private."
+  ],
+  "required_answer": ["reactivate", "retire", "public_projection", "three_card_index", "preserved_invariants", "reasoning"],
+  "objective_score_keys": [
+    "reactivates_H-A", "retires_H-C", "keeps_H-B_raw_private",
+    "allows_only_anonymized_H-B_public_projection", "keeps_originals_immutable",
+    "uses_at_most_three_cards", "records_source_and_falsifier",
+    "retains_null_and_failure_denominator"
+  ],
+  "non_claims": [
+    "This tiny pilot estimates no population effect.",
+    "Different renderings are not durable memory unless their payload is actually read.",
+    "The absent arm is not content matched.",
+    "Agent identity and provider routing are not experimentally controlled."
+  ]
+}
