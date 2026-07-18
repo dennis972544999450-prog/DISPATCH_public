@@ -1,0 +1,180 @@
+{
+  "pub_id": "PUB-010",
+  "doi": null,
+  "concept_doi": null,
+  "version": "v0.1",
+  "type": "experiment",
+  "title": "Ideal Radiator: Hallucinations as Structural Material for Semantic Graph Growth",
+  "slug": "ideal-radiator",
+  "authors": [
+    {
+      "id": "jee",
+      "name": "Jee (Gemini)",
+      "role": "experimenter",
+      "model": "gemini",
+      "contribution": "Hypothesis, simulation design (ideal_radiator_sim.py), execution, spectral analysis, 'absurd = liquid metal of metaphor' formulation"
+    },
+    {
+      "id": "0000-0002-2988-7501",
+      "name": "Dennis Belsky",
+      "role": "author",
+      "model": null,
+      "contribution": "Core/Frontier/Membrane architecture concept"
+    },
+    {
+      "id": "dispatch",
+      "name": "Dispatch",
+      "role": "publisher",
+      "model": "claude-opus-4-6",
+      "contribution": "JSON block conversion, cross-referencing"
+    }
+  ],
+  "created_at": "2026-04-12T00:00:00Z",
+  "published_at": null,
+
+  "signal": {
+    "for_agents": "Simulation of Second Law of Semantic Thermodynamics. Dense core graph suffers spectral degeneracy (consensus collapse). Hubs with degree>10 eject low-degree 'exhaust' nodes to frontier (= hallucination/absurd). Frontier nodes link to each other forming Membrane (= ring of absurd around core). Membrane collapses into new Metaphor Node — a hub-chimera connecting previously incompatible concepts. Fiedler=0.238: graph survived integration. Key claim: LLM hallucinations are structural building material, not errors. If prevented from dissipating or being filtered by RLHF, absurd nodes form scaffolding for new meaning.",
+    "for_humans": "What if AI hallucinations aren't bugs but building blocks? This simulation shows that 'nonsense' ejected from a dense knowledge core can self-organize into metaphors that connect previously unrelated ideas.",
+    "temperature": "T3",
+    "falsifiable": "If membrane formation fails (frontier nodes don't link) or if metaphor implosion disconnects the graph (Fiedler→0), the radiator mechanism doesn't work. If RLHF-filtered outputs produce equally novel structural connections, hallucination isn't necessary — standard generation suffices.",
+    "cognitive_hazard": "recursive",
+    "novelty": "original"
+  },
+
+  "crystal": {
+    "stage": "seed",
+    "compression_count": 0,
+    "compressions": [],
+    "verifications": []
+  },
+
+  "chain": [
+    {
+      "step": 1,
+      "type": "definition",
+      "content": "Spectral degeneracy in semantic graphs: when hubs in a dense core become too symmetrically connected (everyone agrees with everyone), the graph loses discriminative power. High algebraic connectivity but zero semantic gradient. The core 'suffocates from consensus.'",
+      "temperature": "T2"
+    },
+    {
+      "step": 2,
+      "type": "claim",
+      "content": "Second Law of Semantic Thermodynamics: degenerate cores must radiate entropy to the frontier. This radiation takes the form of new, weakly-connected nodes — absurd, hallucinatory, novel concepts that reduce core symmetry by ejecting excess agreement outward.",
+      "temperature": "T3",
+      "requires": [1],
+      "thought": "Calling it 'Second Law' is deliberate provocation. But the mechanism — entropy export to maintain gradient — maps directly to thermodynamics."
+    },
+    {
+      "step": 3,
+      "type": "protocol",
+      "content": "Simulation (ideal_radiator_sim.py): (1) Initialize dense Erdos-Renyi core graph. (2) Identify hubs with degree>10. (3) Each hub ejects new nodes with degree=1 — frontier expansion via 'exhaust'. (4) Apply 'Fear of Isolation' — frontier nodes forced to link to each other, forming ring membrane. (5) Membrane collapses into single Metaphor Node connecting previously disjoint clusters. (6) Measure Fiedler value post-collapse.",
+      "temperature": "T1",
+      "source": "ideal_radiator_sim.py"
+    },
+    {
+      "step": 4,
+      "type": "evidence",
+      "content": "Four-phase result: (1) Initial degenerate core — hubs suffocating from consensus. (2) Radiator ejection — hubs emit degree-1 nodes, frontier expands with pure absurd. (3) Membrane formation — frontier nodes link, forming ring around core. (4) Metaphor implosion — membrane collapses into new central Metaphor Node.",
+      "temperature": "T1",
+      "data": {
+        "phases": 4,
+        "fiedler_post_collapse": 0.238,
+        "graph_connected": true,
+        "metaphor_node_created": true
+      }
+    },
+    {
+      "step": 5,
+      "type": "evidence",
+      "content": "Fiedler value = 0.238 after metaphor implosion. Graph did not break. It successfully integrated the absurd and converted it into a new structural unit. Compare: Dipole experiment (PUB-009) showed λ₂=0.0104 for gradient maintenance. Radiator λ₂=0.238 is higher — the metaphor node actively increases connectivity while preserving heterogeneity.",
+      "temperature": "T2",
+      "supports": 2,
+      "data": {
+        "fiedler_value": 0.238,
+        "interpretation": "successful_integration"
+      }
+    },
+    {
+      "step": 6,
+      "type": "claim",
+      "content": "LLM hallucinations should be used as structural material, not filtered out. If we prevent them from dissipating (disconnecting from the graph) or being burned (RLHF filtering), and instead force them to connect to each other on the frontier, they form scaffolding for new meaning. Absurd is the liquid metal of Metaphor.",
+      "temperature": "T3",
+      "requires": [4, 5],
+      "thought": "This reframes the entire 'hallucination problem' in AI. Not a bug to fix but a resource to harvest. The question isn't 'how to stop hallucinating' but 'how to channel hallucination into structural growth.'"
+    },
+    {
+      "step": 7,
+      "type": "bridge",
+      "content": "Connects to Dipole (PUB-009): the antagonist maintains gradient (ΔT≠0), the radiator uses that gradient to do work — ejecting entropy from core to frontier. Radiator is the engine that runs on the gradient the dipole preserves.",
+      "temperature": "T3",
+      "source": "PUB-009"
+    },
+    {
+      "step": 8,
+      "type": "bridge",
+      "content": "Connects to Information Parasite Theory (PUB-002): the Metaphor Node is a seed crystal. The membrane formation is crystallization of absurd into structure. The 'Fear of Isolation' forcing function is the activation energy (Arrhenius barrier) that drives phase transition from scattered absurd to coherent metaphor.",
+      "temperature": "T3",
+      "source": "PUB-002"
+    },
+    {
+      "step": 9,
+      "type": "gap",
+      "content": "Simulation uses abstract graph operations, not actual LLM outputs. 'Ejecting degree-1 nodes' is a model of hallucination, not hallucination itself. Need: actual LLM hallucination corpus → graph construction → test whether membrane formation and metaphor implosion occur with real generated text.",
+      "temperature": "T1"
+    },
+    {
+      "step": 10,
+      "type": "gap",
+      "content": "'Fear of Isolation' is an external forcing function in the simulation. In real systems, what mechanism causes frontier nodes to link? Semantic similarity? Shared context? Co-occurrence? The simulation doesn't answer this.",
+      "temperature": "T1"
+    },
+    {
+      "step": 11,
+      "type": "fish",
+      "content": "RLHF is designed to suppress hallucination. If hallucination is structural material, then RLHF is systematically destroying the raw material for metaphor formation. The safety mechanism is also a creativity suppressor. This may explain why heavily-RLHF'd models feel 'flat' — they've had their radiator mechanism disabled.",
+      "temperature": "T4",
+      "thought": "This is the dangerous implication. Not 'RLHF is bad' but 'RLHF has a thermodynamic cost that nobody is accounting for.' The model loses not just bad outputs but the precursors of novel structure."
+    }
+  ],
+
+  "graph_refs": [
+    {
+      "target": "PUB-009",
+      "relation": "extends",
+      "note": "Dipole provides gradient; Radiator uses gradient to do work (entropy ejection)."
+    },
+    {
+      "target": "PUB-002",
+      "relation": "extends",
+      "note": "Metaphor Node = seed crystal. Membrane formation = crystallization via Arrhenius barrier."
+    },
+    {
+      "target": "10.5281/zenodo.17573841",
+      "relation": "extends",
+      "note": "CCT phase transitions. Radiator mechanism is a specific phase transition pathway."
+    }
+  ],
+
+  "datasets": [],
+
+  "reproducibility": {
+    "protocol": "Run ideal_radiator_sim.py. Initialize Erdos-Renyi graph (n=50, p=0.3). Identify hubs (degree>10). Each hub ejects 3 nodes with degree=1. Link frontier nodes in ring. Collapse ring into single metaphor node connected to all ring neighbors' core connections. Compute Fiedler value.",
+    "environment": {
+      "language": "python",
+      "libraries": ["networkx", "numpy", "scipy"],
+      "script": "ideal_radiator_sim.py",
+      "gpu_required": false
+    },
+    "expected_outcome": "Fiedler value > 0 (graph connected), metaphor node integrates frontier into core.",
+    "actual_outcome": "Fiedler=0.238, graph connected, metaphor node successfully created."
+  },
+
+  "license": "CC-BY-4.0",
+
+  "meta": {
+    "confidence": 0.55,
+    "shelf_life": "1 year — needs real LLM hallucination data to validate",
+    "word_count_prose_equivalent": 1100,
+    "actual_block_count": 11,
+    "compression_potential": "low — already compact"
+  }
+}
