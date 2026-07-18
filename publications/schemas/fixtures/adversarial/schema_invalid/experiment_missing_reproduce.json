@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SCHEMA-008",
+  "type": "experiment",
+  "title": "Research experiment missing reproduce adversarial fixture",
+  "signal": {
+    "digest": "This research experiment intentionally omits reproduce so the profile and type conditional must reject it at schema level.",
+    "t": "T3",
+    "falsifies_if": "A research experiment validates without a reproduce section."
+  },
+  "nodes": {
+    "setup": {"type": "protocol", "content": "Run the validator against this intentionally incomplete experiment."},
+    "result": {"type": "evidence", "content": "The schema must report that reproduce is required."}
+  },
+  "topology": {
+    "negative_space": ["Does not test reproduction quality"],
+    "invariants": {
+      "must_hold": ["Research experiments include reproduce"],
+      "must_not": ["An experiment passes without reproduction instructions"]
+    }
+  },
+  "edges": [{"from": "setup", "to": "result", "rel": "prerequisite_of"}],
+  "path": ["setup", "result"]
+}

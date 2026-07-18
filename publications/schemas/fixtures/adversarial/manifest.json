@@ -1,0 +1,136 @@
+{
+  "schema": "ompu-block-v0.2-adversarial-manifest.v0",
+  "canonical_commit": "6680c7f",
+  "golden_valid": [
+    "../valid_lite.json",
+    "../valid_research.json"
+  ],
+  "fixtures": [
+    {
+      "file": "schema_invalid/root_array.json",
+      "expected_layer": "schema",
+      "expected_error_code": "SCHEMA_ROOT_OBJECT",
+      "expected_pointer": "/"
+    },
+    {
+      "file": "schema_invalid/wrong_version.json",
+      "expected_layer": "schema",
+      "expected_error_code": "SCHEMA_VERSION_CONST",
+      "expected_pointer": "/$self/version"
+    },
+    {
+      "file": "schema_invalid/wrong_profile.json",
+      "expected_layer": "schema",
+      "expected_error_code": "SCHEMA_PROFILE_ENUM",
+      "expected_pointer": "/profile"
+    },
+    {
+      "file": "schema_invalid/unknown_top_level.json",
+      "expected_layer": "schema",
+      "expected_error_code": "SCHEMA_ADDITIONAL_PROPERTY",
+      "expected_pointer": "/"
+    },
+    {
+      "file": "schema_invalid/legacy_requires_relation.json",
+      "expected_layer": "schema",
+      "expected_error_code": "SCHEMA_EDGE_REL_ENUM",
+      "expected_pointer": "/edges/0/rel"
+    },
+    {
+      "file": "schema_invalid/research_missing_topology.json",
+      "expected_layer": "schema",
+      "expected_error_code": "SCHEMA_RESEARCH_TOPOLOGY_REQUIRED",
+      "expected_pointer": "/"
+    },
+    {
+      "file": "schema_invalid/bad_status_claim.json",
+      "expected_layer": "schema",
+      "expected_error_code": "SCHEMA_STATUS_ENUM",
+      "expected_pointer": "/topology/negative_space/0"
+    },
+    {
+      "file": "schema_invalid/experiment_missing_reproduce.json",
+      "expected_layer": "schema",
+      "expected_error_code": "SCHEMA_REPRODUCE_REQUIRED",
+      "expected_pointer": "/"
+    },
+    {
+      "file": "semantic_invalid/dangling_edge_endpoint.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_EDGE_DANGLING_TARGET",
+      "expected_pointer": "/edges[0]/to"
+    },
+    {
+      "file": "semantic_invalid/path_unknown_node.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_PATH_UNKNOWN_NODE",
+      "expected_pointer": "/path[1]"
+    },
+    {
+      "file": "semantic_invalid/empty_negative_space.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_RESEARCH_NEGATIVE_SPACE_EMPTY",
+      "expected_pointer": "/topology/negative_space"
+    },
+    {
+      "file": "semantic_invalid/empty_edges.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_RESEARCH_EDGES_EMPTY",
+      "expected_pointer": "/edges"
+    },
+    {
+      "file": "semantic_invalid/empty_path.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_RESEARCH_PATH_EMPTY",
+      "expected_pointer": "/path"
+    },
+    {
+      "file": "semantic_invalid/duplicate_path.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_PATH_DUPLICATE",
+      "expected_pointer": "/path"
+    },
+    {
+      "file": "semantic_invalid/incomplete_path.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_PATH_INCOMPLETE",
+      "expected_pointer": "/path"
+    },
+    {
+      "file": "semantic_invalid/reversed_prerequisite.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_PREREQUISITE_ORDER",
+      "expected_pointer": "/edges[0]"
+    },
+    {
+      "file": "semantic_invalid/prerequisite_cycle.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_PREREQUISITE_CYCLE",
+      "expected_pointer": "/edges"
+    },
+    {
+      "file": "semantic_invalid/alias_cycle.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_ALIAS_COLLISION",
+      "expected_pointer": "/nodes"
+    },
+    {
+      "file": "semantic_invalid/derived_without_source.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_DERIVED_WITHOUT_SOURCE",
+      "expected_pointer": "/topology/negative_space/0"
+    },
+    {
+      "file": "semantic_invalid/published_without_doi.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_PUBLISHED_WITHOUT_DOI",
+      "expected_pointer": "/crystal/stage"
+    },
+    {
+      "file": "semantic_invalid/empty_must_not.json",
+      "expected_layer": "semantic",
+      "expected_error_code": "SEM_RESEARCH_MUST_NOT_EMPTY",
+      "expected_pointer": "/topology/invariants/must_not"
+    }
+  ]
+}

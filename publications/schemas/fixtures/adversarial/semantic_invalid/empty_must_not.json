@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-013",
+  "type": "theory",
+  "title": "Empty must-not invariants adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block leaves invariants.must_not empty and must fail complete research-boundary validation.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts an empty research must_not boundary."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "Research invariants include explicit anti-invariants."},
+    "claim": {"type": "claim", "content": "An empty must_not list leaves overextension unconstrained."}
+  },
+  "topology": {
+    "negative_space": ["Does not require many anti-invariants"],
+    "invariants": {
+      "must_hold": ["Research anti-invariants are explicit"],
+      "must_not": []
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise", "claim"]
+}
