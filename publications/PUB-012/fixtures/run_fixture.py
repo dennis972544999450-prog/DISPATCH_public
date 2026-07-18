@@ -54,14 +54,18 @@ def compute_environment_hash():
     return sha256_str(env_str), f"jsonschema_{js_version}"
 
 
-def run_validator_once(validator_path, case_path, schema_path):
+def run_validator_once(validator_path, case_path, schema_path, hashseed=None):
     """Run validator on a case file once, return parsed output."""
     cmd = [sys.executable, validator_path, '--json-output', case_path]
     if schema_path:
         cmd.extend(['--schema', schema_path])
 
+    env = os.environ.copy()
+    if hashseed is not None:
+        env['PYTHONHASHSEED'] = str(hashseed)
+
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, env=env)
     except subprocess.TimeoutExpired:
         return {"exit_code": -1, "parsed": {"error": "timeout"}, "timeout": True}
     except Exception as e:
@@ -109,11 +113,16 @@ def extract_digest_neg_warnings(validator_output):
     return digest_neg, matched_keywords
 
 
-def run_n_times(validator_path, case_path, schema_path, n_runs):
-    """Run validator N times independently, collecting all results."""
+def run_n_times(validator_path, case_path, schema_path, n_runs, sweep_hashseed=False):
+    """Run validator N times independently, collecting all results.
+
+    If sweep_hashseed=True, each run uses PYTHONHASHSEED=i to make
+    nondeterminism reproducible (same seed → same set() ordering).
+    """
     runs = []
     for i in range(n_runs):
-        output = run_validator_once(validator_path, case_path, schema_path)
+        seed = i if sweep_hashseed else None
+        output = run_validator_once(validator_path, case_path, schema_path, hashseed=seed)
         warnings, keywords = extract_digest_neg_warnings(output)
         runs.append({
             "run_index": i,
@@ -235,6 +244,8 @@ def main():
     parser.add_argument('--ledger', default='results.jsonl', help='Path to output ledger')
     parser.add_argument('--fixture-spec', default=None, help='Path to F-012-001 fixture spec')
     parser.add_argument('--n-runs', type=int, default=5, help='Runs per case for nondeterminism')
+    parser.add_argument('--sweep-hashseed', action='store_true',
+                        help='Set PYTHONHASHSEED=i for run i (reproducible nondeterminism)')
     args = parser.parse_args()
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -276,6 +287,7 @@ def main():
     print(f"Environment hash: {environment_hash[:16]}...")
     print(f"N runs per case: {args.n_runs}")
     print(f"Min valid ratio: {MINIMUM_VALID_RATIO}")
+    print(f"Sweep PYTHONHASHSEED: {args.sweep_hashseed}")
     print()
 
     case_results = []
@@ -297,7 +309,8 @@ def main():
         carrier_hash = sha256_file(case_path)
 
         print(f"  Running {case['id']} ({args.n_runs}x): {case['description']}")
-        runs = run_n_times(args.validator, case_path, args.schema, args.n_runs)
+        runs = run_n_times(args.validator, case_path, args.schema, args.n_runs,
+                           sweep_hashseed=args.sweep_hashseed)
 
         status, classification, nondeterminism = classify_case(
             runs, case["expected"], case["target_keyword"]
@@ -349,6 +362,7 @@ def main():
             "platform": sys.platform
         },
         "n_runs_per_case": args.n_runs,
+        "sweep_hashseed": args.sweep_hashseed,
         "minimum_valid_ratio": MINIMUM_VALID_RATIO,
         "results": {r["case_id"]: r["status"] for r in case_results},
         "carrier_hashes": {r["case_id"]: r.get("carrier_hash", "missing") for r in case_results},

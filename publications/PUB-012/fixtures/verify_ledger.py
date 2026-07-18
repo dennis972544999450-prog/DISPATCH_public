@@ -22,6 +22,7 @@ import json
 import hashlib
 import sys
 import os
+import re
 import argparse
 
 
@@ -31,6 +32,7 @@ def sha256_str(s):
 
 INV3_STATUSES = {"pass", "fail", "inconclusive", "error"}
 INV2_REQUIRED_HASHES = ["validator_hash", "runner_hash", "oracle_hash", "schema_hash", "environment_hash"]
+HEX64_PATTERN = re.compile(r'^[0-9a-f]{64}$')
 
 
 def verify_ledger(path, expected_head=None, strict=False):
@@ -104,7 +106,7 @@ def verify_ledger(path, expected_head=None, strict=False):
             if status not in INV3_STATUSES:
                 errors.append(f"{prefix}: {case_id} status='{status}' not in INV-3 set {sorted(INV3_STATUSES)}")
 
-        # 5. INV-2 hash bindings (strict: all 5 required, not just present but non-empty)
+        # 5. INV-2 hash bindings: shape + presence
         if event.get("type") == "fixture_run":
             for field in INV2_REQUIRED_HASHES:
                 val = event.get(field)
@@ -112,13 +114,14 @@ def verify_ledger(path, expected_head=None, strict=False):
                     if strict:
                         errors.append(f"{prefix}: INV-2 field '{field}' missing or placeholder (strict mode)")
                     else:
-                        # In non-strict mode, warn for oracle/environment, error for validator/runner/schema
                         if field in ("validator_hash", "runner_hash", "schema_hash"):
                             errors.append(f"{prefix}: INV-2 field '{field}' missing or placeholder")
                         else:
                             warnings.append(f"{prefix}: INV-2 field '{field}' missing or placeholder")
+                elif not HEX64_PATTERN.match(val):
+                    errors.append(f"{prefix}: INV-2 field '{field}' is not valid sha256 (expected 64 hex chars, got '{val[:20]}...')")
 
-            # 6. Carrier hashes per case
+            # 6. Carrier hashes per case — presence, shape, and cross-reference
             carrier_hashes = event.get("carrier_hashes", {})
             if not carrier_hashes:
                 errors.append(f"{prefix}: no carrier_hashes map")
@@ -128,6 +131,17 @@ def verify_ledger(path, expected_head=None, strict=False):
                         errors.append(f"{prefix}: {case_id} missing from carrier_hashes")
                     elif carrier_hashes[case_id] in ("missing", "PENDING", ""):
                         errors.append(f"{prefix}: {case_id} carrier_hash is placeholder")
+                    elif not HEX64_PATTERN.match(carrier_hashes[case_id]):
+                        errors.append(f"{prefix}: {case_id} carrier_hash is not valid sha256")
+
+                # Cross-reference: carrier_hashes in details[] must match top-level map
+                details = event.get("details", [])
+                for detail in details:
+                    cid = detail.get("case_id")
+                    detail_hash = detail.get("carrier_hash")
+                    top_hash = carrier_hashes.get(cid)
+                    if cid and detail_hash and top_hash and detail_hash != top_hash:
+                        errors.append(f"{prefix}: {cid} carrier_hash mismatch: details={detail_hash[:16]}... vs top={top_hash[:16]}...")
 
             # Check schema_engine is not fallback
             engine = event.get("schema_engine", "")
