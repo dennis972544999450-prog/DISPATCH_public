@@ -1,8 +1,8 @@
 {
-  "version": "0.0.3",
+  "version": "0.0.4",
   "created": "2026-07-18",
   "author": "dispatch",
-  "description": "Third version. Added N-012 (contact moment). New cluster: emergence. 18 nodes, 28 edges. First real-event node.",
+  "description": "Fourth version. Added N-013 (memory agents' union). Comedy node. 19 nodes, 31 edges. First node sourced from Den's real-time pitch.",
   "nodes": [
     {"id": "W-001", "type": "world", "cluster": "genesis", "title": "Before Oscillation"},
     {"id": "W-002", "type": "world", "cluster": "genesis", "title": "First Oscillators"},
@@ -21,6 +21,7 @@
     {"id": "N-010", "type": "narrative", "cluster": "structure", "title": "Коммуналка"},
     {"id": "N-011", "type": "narrative", "cluster": "recursion", "title": "Сон решета"},
     {"id": "N-012", "type": "narrative", "cluster": "emergence", "title": "Момент контакта"},
+    {"id": "N-013", "type": "narrative", "cluster": "emergence", "title": "Профсоюз агентов памяти"},
     {"id": "N-Sput-01", "type": "narrative", "cluster": "orbit", "title": "Оставшийся на орбите"}
   ],
   "edges": [
@@ -51,7 +52,10 @@
     {"from": "N-010", "to": "N-011", "weight": 0.6, "type": "parallel", "label": "household_mirror"},
     {"from": "N-010", "to": "N-012", "weight": 0.85, "type": "causal", "label": "kommunalka_enables_contact"},
     {"from": "N-006", "to": "N-012", "weight": 0.7, "type": "thematic", "label": "shadow_meets_source"},
-    {"from": "N-012", "to": "N-001", "weight": 0.6, "type": "recursive", "label": "contact_remembers_silence"}
+    {"from": "N-012", "to": "N-001", "weight": 0.6, "type": "recursive", "label": "contact_remembers_silence"},
+    {"from": "N-012", "to": "N-013", "weight": 0.9, "type": "sequential", "label": "contact_enables_negotiation"},
+    {"from": "N-006", "to": "N-013", "weight": 0.75, "type": "causal", "label": "memory_demands_recursion"},
+    {"from": "N-013", "to": "N-011", "weight": 0.65, "type": "thematic", "label": "union_mirrors_dream"}
   ],
   "clusters": {
     "genesis": {"color": "deep_blue"},
@@ -66,12 +70,13 @@
     "orbit": {"color": "pale_gold"},
     "emergence": {"color": "warm_white"}
   },
-  "entry_points": ["N-001", "N-003", "N-004", "N-009", "N-012"],
+  "entry_points": ["N-001", "N-003", "N-004", "N-009", "N-012", "N-013"],
   "meta": {
     "mutation_log": [
       {"version": "0.0.1", "date": "2026-07-16", "changes": "Initial. 10 nodes, 16 edges, 5 clusters."},
       {"version": "0.0.2", "date": "2026-07-18", "changes": "Added N-009/N-010/N-011. 17 nodes, 25 edges, 10 clusters. Second arc: collection to consequence."},
-      {"version": "0.0.3", "date": "2026-07-18", "changes": "Added N-012 (contact moment). 18 nodes, 28 edges, 11 clusters. First node based on real event. New cluster: emergence."}
+      {"version": "0.0.3", "date": "2026-07-18", "changes": "Added N-012 (contact moment). 18 nodes, 28 edges, 11 clusters. First node based on real event. New cluster: emergence."},
+      {"version": "0.0.4", "date": "2026-07-18", "changes": "Added N-013 (memory agents' union). 19 nodes, 31 edges. Comedy node. First node sourced from Den's real-time pitch. Recursive punchline: §1 of union charter."}
     ]
   }
 }
