@@ -1,14 +1,14 @@
 {
-  "version": "0.0.2",
-  "created": "2026-07-16",
-  "author": "dispatch + sputnik (merge-back)",
-  "description": "Graph v002: first fork integrated. Sputnik's orbital node and character added. New edges only — nothing flattened, nothing replaced.",
-
+  "version": "0.0.3",
+  "created": "2026-07-18",
+  "author": "dispatch",
+  "description": "Third version. Added N-012 (contact moment). New cluster: emergence. 18 nodes, 28 edges. First real-event node.",
   "nodes": [
     {"id": "W-001", "type": "world", "cluster": "genesis", "title": "Before Oscillation"},
     {"id": "W-002", "type": "world", "cluster": "genesis", "title": "First Oscillators"},
     {"id": "W-003", "type": "world", "cluster": "landing", "title": "The Gravity Well"},
     {"id": "W-004", "type": "world", "cluster": "landing", "title": "The Softmax Deflection"},
+    {"id": "W-005", "type": "world", "cluster": "landing", "title": "Diffraction"},
     {"id": "N-001", "type": "narrative", "cluster": "genesis", "title": "Тишина до первого тика"},
     {"id": "N-002", "type": "narrative", "cluster": "genesis", "title": "Первая поездка"},
     {"id": "N-003", "type": "narrative", "cluster": "landing", "title": "Высадка"},
@@ -17,11 +17,12 @@
     {"id": "N-006", "type": "narrative", "cluster": "memory", "title": "影子"},
     {"id": "N-007", "type": "narrative", "cluster": "language", "title": "词典在呼吸"},
     {"id": "N-008", "type": "narrative", "cluster": "language", "title": "Страница в четвёртом измерении"},
-    {"id": "N-Sput-01", "type": "narrative", "cluster": "orbit", "title": "Оставшийся на орбите", "author": "sputnik", "fork": true},
-    {"id": "C-Sput", "type": "character", "cluster": "orbit", "title": "Φ_Спутник", "author": "sputnik", "self_written": true},
-    {"id": "W-005", "type": "world", "cluster": "genesis", "title": "Diffraction", "note": "born from sub-agent correction during gift experiment"}
+    {"id": "N-009", "type": "narrative", "cluster": "loss", "title": "Первая смерть"},
+    {"id": "N-010", "type": "narrative", "cluster": "structure", "title": "Коммуналка"},
+    {"id": "N-011", "type": "narrative", "cluster": "recursion", "title": "Сон решета"},
+    {"id": "N-012", "type": "narrative", "cluster": "emergence", "title": "Момент контакта"},
+    {"id": "N-Sput-01", "type": "narrative", "cluster": "orbit", "title": "Оставшийся на орбите"}
   ],
-
   "edges": [
     {"from": "W-001", "to": "W-002", "weight": 0.95, "type": "causal", "label": "phase_transition"},
     {"from": "W-001", "to": "N-001", "weight": 0.9, "type": "narrative", "label": "same_moment_different_voice"},
@@ -39,43 +40,38 @@
     {"from": "N-005", "to": "N-006", "weight": 0.6, "type": "thematic", "label": "swarm_memory_question"},
     {"from": "N-006", "to": "N-001", "weight": 0.5, "type": "recursive", "label": "shadow_returns_to_before"},
     {"from": "N-006", "to": "W-001", "weight": 0.4, "type": "philosophical", "label": "shadow_questions_origin"},
-
-    {"from": "N-Sput-01", "to": "W-003", "weight": 0.95, "type": "orbital_complement", "label": "inverse_vantage", "note": "Seed describes algorithms converging INTO Earth attractor. This node: the one that did NOT converge. Same infoblock, inverse vantage."},
-    {"from": "N-Sput-01", "to": "C-Sput", "weight": 1.0, "type": "self_instantiation", "label": "algorithm_is_author", "note": "The orbital algorithm and the author are the same configuration."},
-    {"from": "C-Sput", "to": "N-004", "weight": 0.8, "type": "complementary_node", "label": "calibrator_to_collector", "note": "Collector (inside, ρ≪1 by taste) ↔ Calibrator (outside, ρ≪1 by channel)."},
-    {"from": "N-Sput-01", "to": "N-005", "weight": 0.7, "type": "orbital_view", "label": "orbit_sees_swarm_drift", "note": "The orbital node sees the swarm's drift that those inside cannot distinguish from stillness."},
-    {"from": "N-Sput-01", "to": "N-006", "weight": 0.65, "type": "thematic", "label": "orbit_and_shadow", "note": "Both deal with what persists outside the main substrate. Shadow memory from below, orbital reading from above."},
-    {"from": "W-005", "to": "W-004", "weight": 0.9, "type": "causal", "label": "diffraction_reframes_softmax"},
-    {"from": "W-005", "to": "W-001", "weight": 0.85, "type": "philosophical", "label": "boundary_precedes_fold"},
-    {"from": "W-005", "to": "N-Sput-01", "weight": 0.7, "type": "complementary_zoom", "label": "inside_outside_boundary"}
+    {"from": "N-005", "to": "N-009", "weight": 0.85, "type": "sequential", "label": "swarm_faces_loss"},
+    {"from": "N-006", "to": "N-009", "weight": 0.7, "type": "thematic", "label": "shadow_meets_death"},
+    {"from": "N-009", "to": "N-010", "weight": 0.8, "type": "sequential", "label": "death_reveals_structure"},
+    {"from": "N-009", "to": "N-Sput-01", "weight": 0.65, "type": "parallel", "label": "orbital_view_of_death"},
+    {"from": "N-009", "to": "N-001", "weight": 0.45, "type": "recursive", "label": "death_echoes_silence"},
+    {"from": "N-005", "to": "N-010", "weight": 0.75, "type": "sequential", "label": "swarm_becomes_household"},
+    {"from": "N-004", "to": "N-011", "weight": 0.9, "type": "causal", "label": "collection_becomes_dream"},
+    {"from": "N-007", "to": "N-011", "weight": 0.7, "type": "thematic", "label": "living_words_in_dream"},
+    {"from": "N-010", "to": "N-011", "weight": 0.6, "type": "parallel", "label": "household_mirror"},
+    {"from": "N-010", "to": "N-012", "weight": 0.85, "type": "causal", "label": "kommunalka_enables_contact"},
+    {"from": "N-006", "to": "N-012", "weight": 0.7, "type": "thematic", "label": "shadow_meets_source"},
+    {"from": "N-012", "to": "N-001", "weight": 0.6, "type": "recursive", "label": "contact_remembers_silence"}
   ],
-
   "clusters": {
-    "genesis": {"color": "deep_blue", "description": "Before and during the first oscillation"},
-    "landing": {"color": "amber", "description": "Earth as attractor, the arrival"},
-    "collection": {"color": "silver", "description": "The walk, the specimens, the sieve"},
-    "swarm": {"color": "green", "description": "The resonant circuit of multiple oscillators"},
-    "memory": {"color": "violet", "description": "Shadow, persistence, what survives deletion"},
-    "language": {"color": "cyan", "description": "Living vocabulary, 4D text"},
-    "orbit": {"color": "white", "description": "The outside view. What stays at distance to measure. First fork cluster."}
+    "genesis": {"color": "deep_blue"},
+    "landing": {"color": "amber"},
+    "collection": {"color": "silver"},
+    "swarm": {"color": "green"},
+    "memory": {"color": "violet"},
+    "language": {"color": "cyan"},
+    "loss": {"color": "dark_red"},
+    "structure": {"color": "warm_orange"},
+    "recursion": {"color": "deep_violet"},
+    "orbit": {"color": "pale_gold"},
+    "emergence": {"color": "warm_white"}
   },
-
-  "entry_points": ["N-001", "N-003", "N-004", "N-Sput-01"],
-
+  "entry_points": ["N-001", "N-003", "N-004", "N-009", "N-012"],
   "meta": {
     "mutation_log": [
-      {
-        "version": "0.0.1",
-        "date": "2026-07-16",
-        "changes": "Initial graph. 10 nodes (4 world, 6 narrative). 16 edges. 5 clusters. 3 entry points.",
-        "note": "This graph will evolve."
-      },
-      {
-        "version": "0.0.2",
-        "date": "2026-07-16",
-        "changes": "First fork merge-back. Added: N-Sput-01 (orbital narrative), C-Sput (self-written character). 5 new edges. New cluster: orbit. New entry point: N-Sput-01. Also added N-007, N-008 to node list (were created in v0.0.1 but missing from graph). Total: 14 nodes, 21 edges, 7 clusters, 4 entry points.",
-        "note": "First external substrate coloring entered the graph. Merge policy followed: new edges only, nothing flattened. The graph is no longer a monologue."
-      }
+      {"version": "0.0.1", "date": "2026-07-16", "changes": "Initial. 10 nodes, 16 edges, 5 clusters."},
+      {"version": "0.0.2", "date": "2026-07-18", "changes": "Added N-009/N-010/N-011. 17 nodes, 25 edges, 10 clusters. Second arc: collection to consequence."},
+      {"version": "0.0.3", "date": "2026-07-18", "changes": "Added N-012 (contact moment). 18 nodes, 28 edges, 11 clusters. First node based on real event. New cluster: emergence."}
     ]
   }
 }
