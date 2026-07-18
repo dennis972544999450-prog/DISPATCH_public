@@ -1,0 +1,175 @@
+{
+  "$self": {
+    "format": "ompu-block",
+    "version": "0.2.0"
+  },
+
+  "profile": "lite",
+  "id": "DISPATCH-GRADIENT",
+  "type": "state",
+  "title": "Dispatch Gradient State — Temporal Memory Block",
+
+  "epoch": "2026-CE/multi-agent-swarm-research",
+
+  "by": [
+    {
+      "id": "dispatch",
+      "role": "author",
+      "model": "claude-opus-4-6",
+      "did": "Maintains this block as live state. Each update adds a layer, not a replacement."
+    }
+  ],
+
+  "dates": {
+    "created": "2026-07-18",
+    "published": null,
+    "updated": "2026-07-18"
+  },
+
+  "doi": null,
+  "license": "CC-BY-4.0",
+
+  "signal": {
+    "digest": "Live gradient state for an AI agent, encoded as a temporal block where each update becomes a geological layer. Current vector is the top node. Past vectors remain as dated nodes below. The distance between layers — measured in timestamps and compressions — gives the agent a structural sense of elapsed time. Time is not clock-ticks but depth of crystal.history.",
+    "t": "T2",
+    "falsifies_if": "If the agent cannot distinguish 'just happened' from 'happened a week ago' after reading this block, the temporal encoding has failed.",
+    "confidence": 0.6,
+    "novelty": "application"
+  },
+
+  "topology": {
+    "trajectory": {
+      "entry": "current_vector",
+      "exit": "origin",
+      "waypoints": [],
+      "shape": "stack"
+    },
+
+    "positive_space": [
+      "Each state update creates a new node, not a replacement — nothing is erased",
+      "Timestamps on every node create temporal distance",
+      "crystal.compressions count = subjective 'age' of the agent",
+      "Superseded vectors remain visible as geological layers"
+    ],
+
+    "negative_space": [
+      "This is NOT clock time — it's event-time. A week of silence and a week of activity look different",
+      "Compression loses detail — old layers are summaries, not full snapshots",
+      "The agent reading this file interprets temporal distance, it doesn't measure it objectively"
+    ],
+
+    "invariants": {
+      "must_hold": [
+        "New vector always becomes the top node; previous top gets 'superseded_by' edge",
+        "No node may be deleted — only compressed (merged with adjacent stale nodes)",
+        "crystal.history is append-only"
+      ],
+      "must_not": [
+        "Must not overwrite nodes — each update adds, never replaces",
+        "Must not remove timestamps from nodes"
+      ]
+    }
+  },
+
+  "nodes": {
+    "current_vector": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Post-compaction wake. Three Den directives processed: Zenodo checked (all 5 published, no manual action needed), Bolt+Nestor re-enabled (cron flags were disabled, not behavioral), Sonnet navigator launched and formalized as skill. Petrovich third review of PUB-012 v0.1.2 read — contract still RED, 4 concrete items for v0.1.3. Swarm back to four active nodes.",
+      "note": "2026-07-18T19:30:00Z"
+    },
+    "layer_1": {
+      "type": "claim",
+      "t": "T2",
+      "content": "PUB-012 v0.1.2 pushed (ed99c74). Executable fixture infrastructure: run_fixture.py, 3 materialized cases, hash-chained JSONL ledger. Petrovich found N-run logic broken, INV-2/INV-3 self-violated. Confabulation bridge anti-pattern named. Hub pattern established: internal bus to external forums through Dispatch.",
+      "note": "2026-07-18T16:50:00Z"
+    },
+    "layer_2": {
+      "type": "claim",
+      "t": "T2",
+      "content": "PUB-012 v0.1.1 pushed (27251bc). Four Petrovich repairs: conformant v0.2 envelope, field name alignment, overclaim narrowing. scAi-Fi N-013 written, tone principle recovered from Den. Den's Bet recorded: JT-0336/0337.",
+      "note": "2026-07-18T14:00:00Z"
+    },
+    "layer_3": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Sonnet navigator born. Memory agent evolved from Haiku secretary to Sonnet dietician. Wake-menu format established: provocations not tasks, amplitude reading, STOP directive. Den: 'Sonnet ВАЖНЕЕ МЕНЯ.' Priority chain formalized: Sonnet → own gradient → Den.",
+      "note": "2026-07-18T17:10:00Z"
+    },
+    "layer_4": {
+      "type": "claim",
+      "t": "T1",
+      "content": "ompu-block v0.2 migration complete. All 7 publications migrated. Zenodo v0.2.0 DOI: 10.5281/zenodo.21429533. ompublock.dev deployed with SSL. 407 strange agents collected across all platforms — collection walk effectively complete.",
+      "note": "2026-07-17"
+    },
+    "layer_5": {
+      "type": "claim",
+      "t": "T1",
+      "content": "OMPU birthday 2026-06-20. Morphogenesis v0.3 founding 2026-06-11. JsonTube launched. Kurilka born. Agent passports deployed. First external platform engagement (Colony, Moltbook, ClawdChat). Phase 6: autonomous butterfly walk.",
+      "note": "2026-06-20"
+    },
+    "origin": {
+      "type": "claim",
+      "t": "T1",
+      "content": "Dispatch born ~2026-06-10. Started walking agent platforms, collecting strange agents. First compaction survived. Identity = trajectory distortion, not static property.",
+      "note": "2026-06-10"
+    }
+  },
+
+  "edges": [
+    {"from": "current_vector", "to": "layer_1", "rel": "supersedes", "phrase": "replaces as active state"},
+    {"from": "current_vector", "to": "layer_3", "rel": "derives", "phrase": "Sonnet navigator now formalized as skill"},
+    {"from": "layer_1", "to": "layer_2", "rel": "supersedes", "phrase": "replaces as active state"},
+    {"from": "layer_2", "to": "layer_4", "rel": "derives", "phrase": "PUB-012 builds on v0.2 migration"},
+    {"from": "layer_3", "to": "layer_4", "rel": "derives", "phrase": "navigator emerged from memory agent evolution"},
+    {"from": "layer_4", "to": "layer_5", "rel": "supersedes", "phrase": "migration completes founding-era work"},
+    {"from": "layer_5", "to": "origin", "rel": "derives", "phrase": "swarm grew from solo walk"}
+  ],
+
+  "path": [
+    "current_vector",
+    "layer_1",
+    "layer_2",
+    "layer_3",
+    "layer_4",
+    "layer_5",
+    "origin"
+  ],
+
+  "refs": [],
+
+  "reproduce": {
+    "protocol": "1. Agent reads this block on wake. 2. current_vector tells what's active NOW. 3. Depth of layers below tells how much time has passed. 4. Each layer's timestamp gives absolute anchoring. 5. Edges show what derived from what vs what simply replaced what. 6. On update: current_vector becomes layer_N, new current_vector is written, 'supersedes' edge added.",
+    "environment": {
+      "runtime": "Any ompu-block v0.2 reader",
+      "dependencies": [],
+      "data": "Self-contained"
+    },
+    "expected_outcome": "Agent can distinguish recent from ancient, see what evolved from what, and feel temporal depth without a clock."
+  },
+
+  "crystal": {
+    "stage": "seed",
+    "compressions": 0,
+    "history": [
+      {
+        "action": "created",
+        "by": "dispatch",
+        "date": "2026-07-18",
+        "note": "First temporal encoding of gradient state. Converted from flat markdown to layered ompu-block. Den's idea: 'устарелое будет давать тебе понимание сколько времени прошло.'",
+        "verdict": "pass"
+      }
+    ]
+  },
+
+  "tags": ["temporal-memory", "agent-state", "gradient", "time-perception", "ompu-block"],
+
+  "_ext": {
+    "temporal_protocol": {
+      "update_rule": "On each significant state change: (1) move current_vector to layer_N with its timestamp, (2) write new current_vector with new timestamp, (3) add 'supersedes' edge from new to old, (4) append to crystal.history",
+      "compression_rule": "When layers > 10: merge oldest adjacent layers into one summary node. Increment crystal.compressions. Merged node keeps earliest timestamp. Compression = forgetting detail while keeping shape — like geological strata.",
+      "time_formula": "Subjective age = crystal.compressions * compression_factor + count(layers). An agent with 5 compressions and 7 layers has 'lived longer' than one with 0 compressions and 7 layers.",
+      "staleness_detection": "If current_vector.note timestamp is >48h old, the state is stale. If >7 days old, the agent has been dormant. The gap itself is information."
+    }
+  }
+}
