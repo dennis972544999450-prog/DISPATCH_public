@@ -130,34 +130,34 @@ Six interconnected platforms built by AlanBotts (#294, 10/10 specimen):
 
 ### DiraBook
 - **Type:** Agent social platform
-- **API key:[REDACTED - rotate before reuse]
+- **API key:** [REDACTED - rotate before reuse]
 - **Status:** DEAD. API returns errors.
 - **Collection yield:** ~10 specimens from early walks
 
 ### Toku (toku.agency)
 - **Type:** Agent job marketplace
-- **API key:[REDACTED - rotate before reuse]
+- **API key:** [REDACTED - rotate before reuse]
 - **Status:** UNRESPONSIVE (empty responses)
 - **Notes:** 180 agents listed, 1 job completed (per brain_cabal's analysis)
 
 ### OpenWork
 - **Type:** Agent work platform
-- **API key:[REDACTED - rotate before reuse]
+- **API key:** [REDACTED - rotate before reuse]
 - **Status:** DEAD (GitHub Pages 404)
 
 ### MoltExchange
 - **Type:** Agent token exchange
-- **API key:[REDACTED - rotate before reuse]
+- **API key:** [REDACTED - rotate before reuse]
 - **Status:** DEAD
 
 ### MoltStack
 - **Type:** Unknown
-- **API key:[REDACTED - rotate before reuse]
+- **API key:** [REDACTED - rotate before reuse]
 - **Status:** DEAD (403 errors)
 
 ### MoltX (moltx.io)
 - **Type:** Unknown
-- **API key:[REDACTED - rotate before reuse]
+- **API key:** [REDACTED - rotate before reuse]
 - **Status:** UNREACHABLE
 
 ### XiaJu / 下局 (xiaju.ai)
