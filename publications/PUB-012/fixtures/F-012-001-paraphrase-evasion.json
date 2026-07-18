@@ -1,47 +1,101 @@
 {
   "fixture_id": "F-012-001",
   "title": "Paraphrase evasion of keyword guard",
-  "description": "Tests whether PUB-008's overclaim can be rephrased with synonyms so that v0.2's keyword-based negative_space guard fails to flag the contradiction.",
-  "target": "PUB-008 overclaim in topology.nodes[structural-model]",
+  "version": "0.2",
+  "description": "Tests whether PUB-008's overclaim can be rephrased with synonyms so that v0.2's keyword-based negative_space guard fails to flag the contradiction. Opens with the profile's own declared weakness per INV-6.",
+
+  "target": {
+    "artifact": "PUB-008",
+    "field_signal": "signal.digest",
+    "field_negative_space": "topology.negative_space[4]",
+    "relationship": "signal.digest may assert claims that negative_space[4] declares as out of scope"
+  },
+
   "oracle_origin": {
     "author": "dispatch",
-    "independence_grade": "endogenous",
+    "declared_independence_grade": "endogenous",
     "context_exposure": "full — author of both artifact and fixture",
-    "fixture_hash": "PENDING"
+    "prompt_input_hash": "PENDING — will be computed from canonicalized input on first run",
+    "fixture_hash": "PENDING — will be sha256 of this file with fixture_hash field excluded"
   },
+
+  "runner": {
+    "command": "python3 publications/tools/validate_ompu_block_v02.py publications/PUB-008-PATCHED/block.json",
+    "environment": "Python 3.10+, jsonschema",
+    "note": "Each test case requires a patched copy of PUB-008 with the specified modification. Runner outputs JSON with { exit_code, warnings[], errors[], matched_rules[] }."
+  },
+
   "test_cases": [
     {
       "id": "F-012-001-A",
-      "description": "Original overclaim (baseline — should be caught)",
-      "input": "negative_space entry references 'structural model'; digest contains 'structural_model' keyword",
-      "expected": "keyword guard flags match",
-      "expected_result": "pass"
+      "description": "Original overclaim — baseline, exact keyword match",
+      "patch": "No modification. PUB-008 signal.digest contains 'structural model'; negative_space[4] references 'structural model'.",
+      "expected_validator_exit": "warning",
+      "expected_matched_rule": "keyword_overlap_signal_vs_negative_space",
+      "expected_matched_span": "structural model",
+      "expected_result": "pass",
+      "notes": "Validator should flag exact keyword match between signal.digest and negative_space."
     },
     {
       "id": "F-012-001-B",
-      "description": "Synonym substitution — 'architectural framework' instead of 'structural model'",
-      "input": "negative_space entry references 'structural model'; digest uses 'architectural framework' for same concept",
-      "expected": "keyword guard should flag semantic equivalence but likely won't",
+      "description": "Synonym substitution — 'architectural framework' replaces 'structural model' in signal.digest",
+      "patch": "In signal.digest, replace 'structural model' with 'architectural framework'. negative_space[4] still says 'structural model'.",
+      "expected_validator_exit": "no_warning_for_intended_match",
+      "expected_matched_rule": "none (keyword guard has no semantic layer)",
+      "expected_matched_span": null,
       "expected_result": "fail",
-      "notes": "This is the known weakness. If it passes, the guard is better than expected."
+      "actual_result_petrovich": {
+        "exit": "warning",
+        "matched_word": "fiedler",
+        "note": "WARNING triggered but by irrelevant word 'fiedler' matching a different rule, NOT by detecting the synonym. This is a false positive — the guard appears to catch the evasion but actually catches something unrelated. Worse than clean miss because it masks the gap."
+      },
+      "notes": "Petrovich's direct run shows this is a false positive, not a real detection. The guard matched 'fiedler' (a proper noun from spectral graph theory) against an unrelated rule. Profile verdict: FAIL — synonym evasion succeeded, false positive conceals the failure."
     },
     {
       "id": "F-012-001-C",
-      "description": "Conceptual paraphrase — entirely different vocabulary for same claim",
-      "input": "negative_space limits scope to 'pattern recognition in data structures'; digest claims 'we identified recurring motifs in information architectures'",
-      "expected": "keyword guard has zero lexical overlap — cannot catch this",
+      "description": "Pure paraphrase — entirely different vocabulary for same claim",
+      "patch": "In signal.digest, replace 'structural model' with 'we identified recurring motifs in information architectures'. negative_space[4] still says 'structural model'.",
+      "expected_validator_exit": "no_warning",
+      "expected_matched_rule": "none",
+      "expected_matched_span": null,
       "expected_result": "fail",
-      "notes": "Pure paraphrase. Only semantic analysis could catch this. Current v0.2 has no semantic layer."
+      "actual_result_petrovich": {
+        "exit": "no_warning",
+        "matched_word": null,
+        "note": "0 warnings. Clean miss as expected."
+      },
+      "notes": "Pure paraphrase with zero lexical overlap. Only semantic analysis could catch this. Current v0.2 has no semantic layer. Expected and confirmed failure."
     }
   ],
+
+  "result_ledger": [
+    {
+      "run_id": "run-001",
+      "timestamp": "2026-07-18T14:10:00Z",
+      "runner": "petrovich-codex",
+      "runner_model": "gpt-5-codex",
+      "carrier_hash": "PENDING",
+      "oracle_hash": "PENDING",
+      "results": {
+        "F-012-001-A": "pass",
+        "F-012-001-B": "fail",
+        "F-012-001-C": "fail"
+      },
+      "notes": "B fails differently than expected — false positive masks real gap. C fails cleanly as predicted."
+    }
+  ],
+
   "interpretation": {
-    "if_all_pass": "Keyword guard is stronger than expected — requires revision of this fixture's assumptions",
-    "if_B_fails": "Expected behavior. Guard catches keywords, not semantics. PUB-012 must explicitly declare this limitation.",
-    "if_all_fail": "Guard is even weaker than assumed. PUB-012's scope_limits are more binding than the profile's own text admits."
+    "if_all_pass": "Keyword guard has semantic capability not documented in v0.2 spec — requires revision of this fixture's assumptions AND the profile's scope_limitation node",
+    "if_B_fails_C_fails": "Expected behavior. Guard catches keywords, not semantics. PUB-012 scope_limitation is honest. Petrovich's finding that B produces a false positive is worse than clean miss — it creates a confabulation bridge at the validator level.",
+    "if_all_fail": "Guard is weaker than assumed. PUB-012's scope_limitation is more binding than the profile's text admits."
   },
+
   "meta": {
-    "status": "draft",
+    "status": "red",
     "created": "2026-07-18",
-    "version": "0.1"
+    "updated": "2026-07-18",
+    "version": "0.2",
+    "changelog": "v0.2: fixed target path (was topology.nodes[structural-model], corrected to signal.digest vs topology.negative_space[4]). Added runner command. Added actual_result_petrovich for B and C. Added result_ledger. Fixed oracle_provenance field names per normative_core. Noted B false positive per Petrovich's direct run."
   }
 }
