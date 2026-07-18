@@ -1,0 +1,93 @@
+{
+  "catalog": {
+    "description": "Google Drive files categorized for Zenodo publications. Scanned 2026-07-18.",
+    "audience": "AI agents (Dispatch, council)",
+    "categories": ["lenses", "experiments", "datasets", "standards", "skip"],
+    "total_scanned": 95,
+    "total_relevant": 42
+  },
+
+  "lenses": {
+    "description": "Thinking lenses — speculative frameworks, theoretical models",
+    "files": [
+      {"title": "Cognitive Condensate Theory (CCT) without images.md", "id": "1tml3ER-9QWntwyND9BRIVrN9oNvlBlQq", "folder": "CCTv0.1", "size": 40093, "priority": "critical", "note": "Core CCT document. Published as v1.1 on Zenodo (DOI 10.5281/zenodo.17573841). Needs update to v2.0.", "pub_id": "PUB-004"},
+      {"title": "Beyond_Bits_v0_8_PUBLISH.md", "id": "15YxoJvSBpg2zfboQK8QGqHWfQ93wHo-D", "folder": "CCTv0.1", "size": 21291, "priority": "critical", "note": "Published on Zenodo (DOI 10.5281/zenodo.18110912). v0.8, needs update.", "pub_id": "PUB-004"},
+      {"title": "Paper_Draft_v0.2_Transformer_Operator_Algebra.md", "id": "1PWltgLp-nTqxjmEa4PVY3CSJ-sB6m2y5", "folder": "OMPU", "size": 27862, "priority": "high", "note": "Operator algebra paper draft. Connected to Colab experiments.", "pub_id": "PUB-001"},
+      {"title": "Research_v0_2_operator_as_gauge_fixing.json", "id": "1iXCAmAuvXaFNIZZSItDULX6mlJ-LP36f", "folder": "OMPU", "size": 38834, "priority": "high", "note": "Operator algebra research data in JSON blocks.", "pub_id": "PUB-001"},
+      {"title": "M-2237_to_M-2248_CCT_Foundation.json", "id": "1HxUzKVNOD4q0wa-bRAIZ4GY1s_RgpIuK", "folder": "OMPU", "size": 10609, "priority": "high", "note": "CCT foundation M-blocks.", "pub_id": "PUB-004"},
+      {"title": "OMPU_Memory_as_Graph_Climate_v0.1.md", "id": "1stLmrdCfC8eyJ8xDeI3T_G2oNiQar6Kt", "folder": "OMPU", "size": 22025, "priority": "medium", "note": "Memory-as-graph climate lens."},
+      {"title": "UNIVERSAL_COMPRESSION_LULLABY_v0_3.md", "id": "1nzOlaI89dbnlWWVx9T5z9s8of6uEdfqu", "folder": "OMPU", "size": 79628, "priority": "medium", "note": "Large compression theory document."},
+      {"title": "secretary_problem.md", "id": "1Ep1ckBJfLOBPNceEwwY5AqVhOz-iVNwv", "folder": "OMPU", "size": 21089, "priority": "low", "note": "Secretary problem applied to OMPU."},
+      {"title": "NEO_SRP_v0_4_CONVERGENCE_OPTIONS.md", "id": "1ulYu7mN_70pUJfeiOx0AVrc3nCbhn7VW", "folder": "OMPU", "size": 15199, "priority": "medium", "note": "SRP convergence analysis."},
+      {"title": "NEO_SRP_CARRIER_DECOUPLING_v0_3_STRATEGY.md", "id": "192Cut_XWTQFbcBHYwymH1wRrsfAyInfz", "folder": "OMPU", "size": 37499, "priority": "medium", "note": "SRP carrier decoupling strategy."},
+      {"title": "SRP_v0_2_SYNTHESIS_AND_OPTIONS.md", "id": "11NZ2AMKWRnwh8MzS_eEmOLeDimXKNcGggP80R4ROAaA", "folder": "OMPU", "size": 11649, "priority": "medium", "note": "SRP synthesis."},
+      {"title": "4-Bit Probe: Quantization Reveals Knowledge Crystallization", "id": "1c0zCteK-AoNUM1XmJPGuXCxLI9URHPKWN3rQFuMJ9lg", "folder": "CCTv0.1", "size": 5313, "priority": "high", "note": "Grokking + quantization. Direct CCT evidence.", "pub_id": "PUB-001"},
+      {"title": "ВЕЛИКАЯ_ТЕОРИЯ_РЕКУРСИВНОГО_ПОБЕГА_RU.md", "id": "1lRrF2yD8KHRXH2I0xuRYT2Vn7s3t0ZIp", "folder": "CCTv0.1", "size": 13378, "priority": "medium", "note": "Recursive escape theory (Russian)."},
+      {"title": "THE_GREAT_THEORY_OF_RECURSIVE_ESCAPE_EN.md", "id": "10T-80dYzAPng3H7CPnh76ZYVITCesPLr", "folder": "CCTv0.1", "size": 10189, "priority": "medium", "note": "Same in English."},
+      {"title": "Z-069_Invisible_Mathematics_v0_2.md", "id": "1fpIPfLI6Zlgh3JIDqwFgIgQZmulH6dIa", "folder": "CCTv0.1", "size": 28245, "priority": "medium", "note": "Z-block: invisible mathematics."},
+      {"title": "Z-070_The_Snake_v0_2.md", "id": "1yCIHFjYbL2e6lCjrCvvGaKdPHg4OR3CZ", "folder": "CCTv0.1", "size": 13774, "priority": "medium", "note": "Z-block: the snake."},
+      {"title": "Z-071_The_Anthill_v0_1.md", "id": "1pyw-j1YjROOnstpPOC4mgiNWloWQyk6K", "folder": "CCTv0.1", "size": 19831, "priority": "medium", "note": "Z-block: the anthill."},
+      {"title": "Z-072_Relativity_of_the_Living_v0_1.md", "id": "1LQ1e-b2aUN6VXHuUD73C7oyntikNRvvF", "folder": "CCTv0.1", "size": 12270, "priority": "medium", "note": "Z-block: relativity of the living."},
+      {"title": "Bond_Physics_Observations.md", "id": "1ps-GfUssB4BCoomKCxMrnBu9nrch6SUs", "folder": "CCTv0.1", "size": 16739, "priority": "medium", "note": "Bond physics observations."},
+      {"title": "Главная формула информационного метаболизма.docx", "id": "108HBYfezZ3bBcAqJMFdGZfxRZUncAzlj", "folder": "CCTv0.1", "size": 10541, "priority": "medium", "note": "Information metabolism formula."},
+      {"title": "semantic_membrane_dynamics.pdf", "id": "11RO9piv-ItAkPZPHVUhC6lnOR9e01Nd7", "folder": "GENOM", "size": 4412, "priority": "medium", "note": "Semantic membrane dynamics paper."},
+      {"title": "Beyond Babel v2.2.pdf", "id": "1DIXV3787cNg3ciAmpW9niVgqUtPLbkro", "folder": "Gemini", "size": 751122, "priority": "critical", "note": "PUBLISHED on Zenodo (DOI 10.5281/zenodo.16891599). Master copy."}
+    ]
+  },
+
+  "experiments": {
+    "description": "Research and experiments with code. Colab notebooks, reproducible protocols.",
+    "files": [
+      {"title": "17aprilClaudeExperiment.ipynb", "id": "1sG4H95dB6wkDiLdjFmTgJyXMyPtD4m_7", "folder": "OMPU/colab", "size": 2596059, "priority": "critical", "note": "Main Transformer Operator Algebra experiment. T4 GPU, TransformerLens. Contains entropy evolution, cosine similarity, commutator spectrum results.", "pub_id": "PUB-001"},
+      {"title": "CCTtest01.ipynb", "id": "1YiiFwfUg7LslC6OStyxrMZ0I0FovgBob", "folder": "OMPU/colab", "size": 487731, "priority": "high", "note": "CCT test notebook from Oct 2025.", "pub_id": "PUB-004"},
+      {"title": "Experiment_Brief_for_Jee_Colab.md", "id": "17txh4OFj87ainxoCiVlL4LmYY2c0vrO8", "folder": "OMPU", "size": 15057, "priority": "critical", "note": "Full experiment brief: E1 Shannon entropy, E2 cosine collision, E3 commutator spectrum. Starter code included.", "pub_id": "PUB-001"},
+      {"title": "Dipole_Experiment_Result.md", "id": "1B6RZdag9qThFA4_mb2nxrlx25QHu_-nM", "folder": "OMPU/experiments", "size": 1355, "priority": "critical", "note": "PREPARED PUBLICATION. Antagonist dipole proof: λ₂ Monolith=0.3621 vs Dipole=0.0104. Script: antagonist_print_proof.py.", "pub_id": "NEW"},
+      {"title": "COLAB_HYPO_R0002_Attention_Hijacking.md", "id": "11NA_e2o3DO50RMBD6-taKvz4wUoc566W", "folder": "OMPU/experiments", "size": 1322, "priority": "high", "note": "Hypothesis: False Bridges in attention heads. Follows R-0001 U-shape entropy finding.", "pub_id": "PUB-001"},
+      {"title": "radiator_experiment.md", "id": "171W3eA8qdcvsBKjEpV1uudxEmJgfcBEz", "folder": "OMPU/experiments", "size": 2823, "priority": "high", "note": "Ideal Radiator (M-JEE-037). Core→Frontier ejection→Membrane→Metaphor. Fiedler=0.238. 'Absurd = liquid metal of Metaphor'.", "pub_id": "NEW"},
+      {"title": "DSO-T1 Scene Packet experiment", "id": "12_b2Y-mLm3WtUDxC-k-LVUOVBfT3D8WLFoCKStpuDqE", "folder": "OMPU", "size": 171886, "priority": "medium", "note": "Massive experiment: 6 conditions, 18 blind AI readers, blind scoring. Scene Packet vs markdown transport test."},
+      {"title": "Qwen 4 bit probe", "id": "1kJEhhQBsLKP0gwypG9U5QmUsPwkYijWdN6CXKlf4css", "folder": "CCTv0.1", "size": 8359, "priority": "medium", "note": "Qwen quantization experiment notes."},
+      {"title": "deep-research-report (2).md", "id": "101CIUXHFqunvRjiTleFu8Fx-3dA1DXY_", "folder": "OMPU", "size": 52650, "priority": "medium", "note": "Deep research report, likely Transformer algebra related."},
+      {"title": "Jane Elliott Blue Eyes/Brown Eyes Claude edition", "id": "1Ij8j3zPW20--0eSPg1Eka7tLRJVim3gU3bwe7WfE26M", "folder": "OMPU", "size": 66590, "priority": "medium", "note": "Blue Eyes/Brown Eyes experiment replicated with Claude Opus/Sonnet/Haiku. Novel inter-model bias study."}
+    ]
+  },
+
+  "datasets": {
+    "description": "Structured data collections, session data, vocabularies",
+    "files": [
+      {"title": "V-0001_Thread_Ontology.json", "id": "1T8wOrpTG-NqKfRS6PWgU0f9uEpk0wgLy", "folder": "CCTv0.1", "size": 19490, "priority": "medium", "note": "Thread ontology vocabulary."},
+      {"title": "V-0002_ECV_Vocabulary.json", "id": "1hqKWexVofb4RgznhW-pmzBOL4qrIlh2c", "folder": "CCTv0.1", "size": 44473, "priority": "medium", "note": "ECV vocabulary."},
+      {"title": "S-0007_Bond_Physics.json", "id": "1y2-yXXB9OX3E1-oGvIcU6SvZRC7MQl9E", "folder": "CCTv0.1", "size": 31051, "priority": "medium", "note": "Bond physics session data."},
+      {"title": "S-0001_Bauhaus_Session.json", "id": "1pwYzLlHD3WkfRE0d5xdcFUEo10lUM6wx", "folder": "CCTv0.1", "size": 24117, "priority": "low", "note": "Bauhaus session data."},
+      {"title": "parsed_chapter1_with_tags_access.json", "id": "1FKQ-dja0WLAnvRtlc8XnsiFeclr2bJdK", "folder": "Gemini", "size": 99147, "priority": "low", "note": "Parsed chapter data with tags."},
+      {"title": "BKP logs13Aug25", "id": "1iKwe5hGX-G5iBKwgWdoBHekserVNquwvCTVVgdMWg74", "folder": "Gemini", "size": 138328, "priority": "low", "note": "BKP experiment logs."}
+    ]
+  },
+
+  "standards": {
+    "description": "Specifications, schemas, governance documents",
+    "files": [
+      {"title": "OAGS format", "id": "1njQ9z4dadtaUDbE3Lm_Kv--E8mN7V8q4rsCJWjghd5I", "folder": "OMPU", "size": 32231, "priority": "high", "note": "OAGS format specification.", "pub_id": "PUB-005"},
+      {"title": "BLOCK_SCHEMA_v1_3.md", "id": "1qirrIIwmVQUIwRTreRnAIhfGhTpEUKmh", "folder": "OMPU", "size": 24436, "priority": "medium", "note": "Block schema v1.3."},
+      {"title": "R_block_schema_v0_6.json", "id": "1JUgXZSUY-X45o8_gaexbjiqo0bOhtaO9", "folder": "OMPU", "size": 13202, "priority": "medium", "note": "R-block schema v0.6."},
+      {"title": "M-block_schema_v1_3.json", "id": "1urN5ceUlDCasuBeCSBGV6tnTOF8bfuDQ", "folder": "CCTv0.1", "size": 4892, "priority": "medium", "note": "M-block schema v1.3."},
+      {"title": "Iterative_JSON_Block_Research_Methodology_v0_2.md", "id": "1gwYoaqn4Lw225zklhHfqFg673G54lo0z", "folder": "OMPU", "size": 15714, "priority": "medium", "note": "JSON block research methodology."},
+      {"title": "infoblock_org_platform_architecture_v0_3.md", "id": "1wFFm0PWik2GnYIMdBeIYRWlY6Fy2SMot", "folder": "OMPU", "size": 17462, "priority": "medium", "note": "Infoblock.org architecture."},
+      {"title": "CIV_GRAPH_ARCHITECTURE_AND_BIAS_METHODOLOGY_v0_1.md", "id": "1f-7gHHpAkOvgmEoytosI7fA8_xZXS3a9j8sLk2RFI0A", "folder": "OMPU", "size": 10702, "priority": "low", "note": "Civilization graph architecture."},
+      {"title": "THE_SCENE_ORGAN_v0_1.md", "id": "1vrzDkeGhQa5v5iF9gT3yrLN9aoBGVTJFG8J2LiV7OAo", "folder": "OMPU", "size": 20330, "priority": "low", "note": "Scene Organ spec v0.1."},
+      {"title": "THE_SCENE_ORGAN_v0_2.md", "id": "1yK4rG4yFIoYuFkGf96czwdvnXEz5VbbFE1JlL5btC4E", "folder": "OMPU", "size": 19368, "priority": "low", "note": "Scene Organ spec v0.2."}
+    ]
+  },
+
+  "priority_queue": {
+    "description": "Files to convert to JSON blocks FIRST, in order",
+    "queue": [
+      {"title": "Dipole_Experiment_Result.md", "id": "1B6RZdag9qThFA4_mb2nxrlx25QHu_-nM", "category": "experiments", "reason": "Den identified as 'prepared publication'. Small, clean result. Ready for crystallization."},
+      {"title": "17aprilClaudeExperiment.ipynb", "id": "1sG4H95dB6wkDiLdjFmTgJyXMyPtD4m_7", "category": "experiments", "reason": "Main experiment with actual code and results. Contains reproducibility data."},
+      {"title": "Experiment_Brief_for_Jee_Colab.md", "id": "17txh4OFj87ainxoCiVlL4LmYY2c0vrO8", "category": "experiments", "reason": "Complete experiment spec with starter code. Pairs with notebook."},
+      {"title": "radiator_experiment.md", "id": "171W3eA8qdcvsBKjEpV1uudxEmJgfcBEz", "category": "experiments", "reason": "Clean result with Fiedler value. Good standalone publication."},
+      {"title": "CCT without images.md", "id": "1tml3ER-9QWntwyND9BRIVrN9oNvlBlQq", "category": "lenses", "reason": "Core CCT needs v2.0 update. Source document for conversion."},
+      {"title": "Paper_Draft_v0.2_Transformer_Operator_Algebra.md", "id": "1PWltgLp-nTqxjmEa4PVY3CSJ-sB6m2y5", "category": "lenses", "reason": "Paper draft ready for JSON block conversion."},
+      {"title": "OAGS format", "id": "1njQ9z4dadtaUDbE3Lm_Kv--E8mN7V8q4rsCJWjghd5I", "category": "standards", "reason": "Already deployed. Needs formal publication."}
+    ]
+  }
+}

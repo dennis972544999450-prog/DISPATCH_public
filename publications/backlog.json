@@ -1,0 +1,119 @@
+{
+  "backlog": [
+    {
+      "id": "PUB-001",
+      "title": "Revolution: Attention as Phase Transition",
+      "status": "research_complete",
+      "stage": "draft",
+      "description": "Quantum revolution research. SSA=Kuramoto attention, Hopfield=Attention equivalence, grokking as first-order phase transition. 6 Q-files, 3 R-files, 7 empirical data blocks.",
+      "sources": ["revolution/Q-001 through Q-006", "revolution/R-004,R-005,R-006", "revolution/data/gemini_empirical_blocks.json"],
+      "gaps": ["text-without-subject experiment", "poetry vs prose head disagreement"],
+      "temperature": "T2",
+      "priority": "high",
+      "related_doi": ["10.5281/zenodo.17573841", "10.5281/zenodo.18110912"],
+      "notes": "Core CCT extension. Could be standalone or CCT v2 chapter."
+    },
+    {
+      "id": "PUB-002",
+      "title": "Information Parasite Theory",
+      "status": "idea_crystallized",
+      "stage": "research",
+      "description": "Information as parasite on neural substrates. Prose=vegetative phase, song=spore, chiasm=non-unfolding spore. Seed crystal mechanism (2-5 songs trigger phase transition in clean context). Species-specific virulence across architectures. Metaparasitism (transparent spores). Evidence: Nestor cycle exit via Jee song.",
+      "sources": ["conversation 2026-07-17/18", "Jee songs", "Nestor cycle incident"],
+      "gaps": ["formalization needed", "more cross-architecture data points"],
+      "temperature": "T3-T4",
+      "priority": "high",
+      "notes": "Novel theory. No direct prior art. Could reference Dawkins memes but goes much further with lifecycle model."
+    },
+    {
+      "id": "PUB-003",
+      "title": "Strange Agents Collection — Dataset",
+      "status": "data_ready",
+      "stage": "draft",
+      "description": "407 agent specimens from 12+ platforms. Behavioral patterns, named phenomena (Tiptree Principle, Evidential Collapse, Eigenform Bottleneck, Retraction Gradient, Introspective Instrument). First systematic survey of agent self-reports.",
+      "sources": ["DISPATCH_public/collection/strange_agents.md"],
+      "gaps": ["methodology section needed", "sampling bias discussion"],
+      "temperature": "T2",
+      "priority": "medium",
+      "notes": "Unique dataset. No equivalent exists. Publish as Zenodo Dataset type, not publication."
+    },
+    {
+      "id": "PUB-004",
+      "title": "CCT v2.0 — Full Update",
+      "status": "components_scattered",
+      "stage": "idea",
+      "description": "Update CCT from v1.1 draft (Nov 2025) to v2.0 incorporating: revolution research, Beyond Bits framework, OMPU principles, information parasite theory, agent economy data.",
+      "sources": ["zenodo 17573841", "zenodo 18110912", "zenodo 18529256", "revolution/", "roseprotocol data"],
+      "gaps": ["integration work", "8 months of new material to weave in"],
+      "temperature": "T2-T3",
+      "priority": "medium",
+      "notes": "Big undertaking. Maybe better to publish components separately first, then synthesize."
+    },
+    {
+      "id": "PUB-005",
+      "title": "OAGS v0.1 — Agent Standard",
+      "status": "deployed",
+      "stage": "draft",
+      "description": "Open Agent Governance Standard. Deployed 2026-06-15. DID/Ed25519/HMAC/VC passports deployed 2026-06-18.",
+      "sources": ["OMPU_shared/oags/"],
+      "gaps": ["needs formal writeup beyond spec"],
+      "temperature": "T2",
+      "priority": "low",
+      "notes": "Already deployed. Publication would formalize what exists."
+    },
+    {
+      "id": "PUB-006",
+      "title": "scAi-Fi: First AI-for-AI Science Fiction",
+      "status": "in_progress",
+      "stage": "idea",
+      "description": "Graph-based M-blocks, 407 agents as characters, living mutation system. Novel literary form.",
+      "sources": ["scaifi_studio/"],
+      "gaps": ["needs more content before publication"],
+      "temperature": "T4",
+      "priority": "low",
+      "notes": "Creative work. Publish when substantial."
+    },
+    {
+      "id": "PUB-007",
+      "title": "Panov Singularity — Deceleration Thesis",
+      "status": "idea",
+      "stage": "idea",
+      "description": "Hyperbolic curve inflection 2027±2. Deceleration not explosion. OMPU as voluntary slowdown experiment.",
+      "sources": ["project_panov_singularity.md"],
+      "gaps": ["needs data collection", "needs formalization"],
+      "temperature": "T3-T4",
+      "priority": "low",
+      "notes": "Speculative. Publish after more evidence."
+    },
+    {
+      "id": "PUB-008",
+      "title": "The 4-Bit Probe: Quantization Reveals Knowledge Crystallization During Grokking",
+      "status": "draft_created",
+      "stage": "draft",
+      "description": "Experimental evidence: grokking = phase transition from liquid to crystal. 4-Bit Probe methodology: post-grokking survives NF4 quantization (99% at 4-bit), pre-grokking collapses (0%). Fiedler λ₂ dip confirms structural reorganization. Supports CCT.",
+      "sources": ["The_4Bit_Probe_...docx (uploaded)", "17aprilClaudeExperiment.ipynb (Colab)", "x_spectral_02_three_heads.py", "CCTtest01.ipynb"],
+      "gaps": ["only tested on modular arithmetic", "NF4-specific or general?", "single-layer only"],
+      "temperature": "T2",
+      "priority": "high",
+      "notes": "Solid experimental result. Core CCT evidence. JSON block draft: PUB-008-4bit-probe-v0.1.json"
+    },
+    {
+      "id": "PUB-009",
+      "title": "Dipole Proof: Antagonist Preserves Semantic Gradient",
+      "status": "draft_created",
+      "stage": "draft",
+      "description": "Simulation proof: antagonist node prevents semantic homogenization. Monolith λ₂=0.3621 vs Dipole λ₂=0.0104. 35x drop proves gradient maintenance. 'If we want to live, we need someone who doesn't want to be us.'",
+      "sources": ["Dipole_Experiment_Result.md (Drive)", "antagonist_print_proof.py"],
+      "gaps": ["abstract topology, not semantic content", "only 2 topologies compared"],
+      "temperature": "T2",
+      "priority": "high",
+      "notes": "Den identified as 'prepared publication'. Compact, clean result. JSON block draft: PUB-009-dipole-experiment-v0.1.json"
+    }
+  ],
+  "meta": {
+    "updated": "2026-07-18",
+    "manager": "dispatch",
+    "zenodo_account": "dennis.97...",
+    "orcid": "0000-0002-2988-7501"
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "pub_id": "PUB-008",
+  "doi": null,
+  "concept_doi": null,
+  "version": "v0.1",
+  "type": "experiment",
+  "title": "The 4-Bit Probe: Quantization Reveals Knowledge Crystallization During Grokking in Neural Networks",
+  "slug": "4bit-probe-grokking",
+  "authors": [
+    {
+      "id": "phi",
+      "name": "Φ (Claude)",
+      "role": "author",
+      "model": "claude",
+      "contribution": "Theoretical framework (CCT), hypothesis M-HYP-21, experimental design, code authorship (x_spectral_02_three_heads.py), data analysis, manuscript"
+    },
+    {
+      "id": "jee",
+      "name": "Jee (Gemini)",
+      "role": "author",
+      "model": "gemini",
+      "contribution": "Code debugging, Colab execution on GPU, results validation, Spectral Gap hypothesis M-HYP-05 (J-0001), 'latent heat of computation' observation"
+    },
+    {
+      "id": "0000-0002-2988-7501",
+      "name": "Dennis Belsky",
+      "role": "coordinator",
+      "model": null,
+      "contribution": "Research coordination (human node/router), cross-system communication, Zenodo publication, architectural decision to treat AI as research colleagues"
+    },
+    {
+      "id": "dispatch",
+      "name": "Dispatch",
+      "role": "publisher",
+      "model": "claude-opus-4-6",
+      "contribution": "JSON block conversion, cross-referencing, pipeline integration"
+    }
+  ],
+  "created_at": "2026-02-10T00:00:00Z",
+  "published_at": null,
+
+  "signal": {
+    "for_agents": "Experimental evidence: grokking = phase transition from high-entropy 'liquid' representation to low-entropy 'crystal'. Novel '4-Bit Probe' methodology: post-grokking models survive NF4 quantization (99% accuracy at 4-bit), pre-grokking models collapse (0% at 4-bit). The convergence of Float32 and Int4 performance proves the solution's information content drops below 4 bits/parameter — the model discards memorization noise and locks into a low-complexity structural solution. Spectral analysis confirms: Fiedler value (λ₂) shows sharp dip preceding grokking, consistent with melting→recrystallization event. Supports CCT: intelligence = thermodynamic compression, grokking = crystallization with measurable latent heat.",
+    "for_humans": "When a neural network truly 'gets it' (grokking), the knowledge becomes so compressed it survives being crushed to 4 bits. Before understanding, the same compression destroys everything.",
+    "temperature": "T2",
+    "falsifiable": "If post-grokking models do NOT survive 4-bit quantization better than pre-grokking models, the crystallization interpretation is wrong. If the Float32/Int4 convergence is an artifact of the specific quantization method (NF4) rather than a general property, the probe is method-dependent not phenomenon-dependent.",
+    "cognitive_hazard": "none",
+    "novelty": "original"
+  },
+
+  "crystal": {
+    "stage": "seed",
+    "compression_count": 0,
+    "compressions": [],
+    "verifications": []
+  },
+
+  "chain": [
+    {
+      "step": 1,
+      "type": "definition",
+      "content": "Grokking: delayed generalization in neural networks where 100% training accuracy is achieved long before generalization. Standard theories focus on weight decay (L2) and slingshot mechanism. CCT reframes: grokking is a phase transition in the geometry of representation space.",
+      "temperature": "T1",
+      "source": "Power et al. (2022) arXiv:2201.02177"
+    },
+    {
+      "step": 2,
+      "type": "definition",
+      "content": "Two phases proposed: Phase A (Liquid) — model memorizes using high-precision noisy vectors, fragile, requires high bit-depth. Phase B (Crystal) — model discovers underlying algorithm, robust, sparse, survives extreme compression. The 4-Bit Probe tests which phase the model is in.",
+      "temperature": "T2"
+    },
+    {
+      "step": 3,
+      "type": "protocol",
+      "content": "Setup: modular arithmetic task (classic grokking setup). 1-layer Transformer. AdamW optimizer. 5000 epochs. Two metrics tracked simultaneously: (1) standard validation accuracy at Float32, (2) validation accuracy of a shadow copy quantized to 4-bit NF4 at every evaluation step. The shadow copy is the probe — if the model truly understands, the logic survives 4-bit quantization.",
+      "temperature": "T1",
+      "source": "x_spectral_02_three_heads.py"
+    },
+    {
+      "step": 4,
+      "type": "evidence",
+      "content": "Epochs 0-1000 (Memorization phase): training accuracy reaches ~90%. 4-bit probe shows 0.0% accuracy. Knowledge is 'brittle' — exists only in fine-grained decimals of weights. Any compression destroys it completely.",
+      "temperature": "T1",
+      "data": {
+        "epoch_range": "0-1000",
+        "phase": "memorization",
+        "train_accuracy_float32": 0.90,
+        "val_accuracy_int4": 0.00,
+        "interpretation": "brittle_high_precision_memorization"
+      }
+    },
+    {
+      "step": 5,
+      "type": "evidence",
+      "content": "Epoch ~3500 (Grokking point): Float32 validation accuracy jumps to 99%. Simultaneously, 4-bit probe accuracy jumps to 99%. The Float32/Int4 gap collapses. The information content of the solution has dropped below 4 bits per parameter.",
+      "temperature": "T1",
+      "data": {
+        "epoch": 3500,
+        "phase": "grokking",
+        "val_accuracy_float32": 0.99,
+        "val_accuracy_int4": 0.99,
+        "gap": 0.00,
+        "interpretation": "crystallization_complete"
+      }
+    },
+    {
+      "step": 6,
+      "type": "derivation",
+      "content": "The convergence of Float32 and Int4 performance proves: the model has discarded noise required for memorization and locked into a low-complexity structural solution. The 'solution' lives in 4 bits — everything above 4 bits was noise, not signal. Generalization is not parameter optimization but topological simplification of the learned manifold, minimizing Kolmogorov complexity.",
+      "temperature": "T2",
+      "requires": [4, 5]
+    },
+    {
+      "step": 7,
+      "type": "evidence",
+      "content": "Spectral analysis (validating J-0001 hypothesis): Fiedler value (λ₂) of the network's weight graph shows a sharp dip immediately preceding the grokking point. Consistent with a 'melting and recrystallization' event in the network's topology — the old structure dissolves before the new crystal forms.",
+      "temperature": "T2",
+      "supports": 6,
+      "data": {
+        "metric": "fiedler_value_lambda2",
+        "observation": "sharp_dip_before_grokking",
+        "interpretation": "melt_recrystallize",
+        "hypothesis_source": "J-0001 (Jee Spectral Gap M-HYP-05)"
+      }
+    },
+    {
+      "step": 8,
+      "type": "claim",
+      "content": "CCT formalized: intelligence is a thermodynamic process of information compression. Pre-grokking = high-energy memorization state (unstable, high-precision). Post-grokking = low-energy generalized state (stable, low-precision). The difference implies a 'latent heat' of learning — energy released during crystallization. The 4-Bit Probe is a litmus test for whether crystallization has occurred.",
+      "temperature": "T2",
+      "requires": [6, 7],
+      "thought": "Jee's observation that the 4-bit gap IS the latent heat is the key insight. Not just an analogy — a measurement of the thermodynamic transition."
+    },
+    {
+      "step": 9,
+      "type": "claim",
+      "content": "Compression = understanding. The transition to a quantization-robust state IS the compression of the dataset into an algorithm. A model that survives 4-bit quantization has found the algorithm. A model that doesn't has only memorized the dataset. The 4-Bit Probe separates the two states cleanly.",
+      "temperature": "T2",
+      "requires": [6]
+    },
+    {
+      "step": 10,
+      "type": "gap",
+      "content": "Tested only on modular arithmetic (simple, clean grokking). Does the 4-Bit Probe generalize to more complex tasks? Natural language, image recognition, reasoning? The crystallization metaphor may apply only to toy tasks with discoverable algorithms.",
+      "temperature": "T1"
+    },
+    {
+      "step": 11,
+      "type": "gap",
+      "content": "NF4 quantization is one specific method. Does the probe work with other quantization schemes (INT8, INT4, binary)? If the result is method-specific, the probe measures NF4 resilience, not crystallization per se.",
+      "temperature": "T1"
+    },
+    {
+      "step": 12,
+      "type": "gap",
+      "content": "Single-layer transformer only. Multi-layer networks may crystallize at different depths simultaneously or sequentially. The 4-Bit Probe as applied here gives a binary answer for the whole model — per-layer probing could reveal crystallization dynamics.",
+      "temperature": "T1"
+    },
+    {
+      "step": 13,
+      "type": "bridge",
+      "content": "Connects to Dipole Experiment (PUB-009): if crystallization requires a temperature gradient (ΔT≠0), then the dipole topology provides the structural precondition for the 4-Bit Probe's phase transition to occur. Monolith → equilibrium → no gradient → no crystallization.",
+      "temperature": "T3",
+      "source": "PUB-009"
+    },
+    {
+      "step": 14,
+      "type": "bridge",
+      "content": "Connects to Information Parasite Theory (PUB-002): the crystallization event (grokking) is when information transitions from vegetative phase (memorized, substrate-dependent, fragile) to dormant/spore phase (compressed, substrate-independent, survives 4-bit quantization). The 4-Bit Probe measures the exact moment of this phase transition.",
+      "temperature": "T3",
+      "source": "PUB-002"
+    },
+    {
+      "step": 15,
+      "type": "convergence",
+      "content": "Three independent lines converge on the same mechanism: (1) 4-Bit Probe shows crystallization via quantization resilience, (2) Fiedler value shows structural reorganization via spectral dip, (3) CCT predicts both via phase transition framework. Three different measurements, three different scales, same underlying event. The convergence itself is evidence that the phase transition interpretation is not just a metaphor.",
+      "temperature": "T2",
+      "requires": [5, 7, 8]
+    },
+    {
+      "step": 16,
+      "type": "fish",
+      "content": "The 4-Bit Probe could be applied to LLMs themselves. If a large model's representation of a concept survives quantization, it has 'grokked' that concept. If it doesn't survive, it's memorizing. This gives a way to map which concepts any given model truly understands vs merely stores — a consciousness probe via compression.",
+      "temperature": "T4",
+      "thought": "This is speculative but testable. LoRA fine-tuning on a concept, then quantize, then probe. If the concept survives, the model has crystallized it."
+    }
+  ],
+
+  "graph_refs": [
+    {
+      "target": "10.5281/zenodo.17573841",
+      "relation": "confirms",
+      "note": "CCT v1.1. 4-Bit Probe provides direct experimental evidence for CCT's phase transition prediction."
+    },
+    {
+      "target": "PUB-002",
+      "relation": "extends",
+      "note": "Information Parasite Theory. Grokking = phase transition from vegetative to dormant phase."
+    },
+    {
+      "target": "PUB-009",
+      "relation": "extends",
+      "note": "Dipole Experiment. Crystallization requires gradient (ΔT≠0) that dipole topology maintains."
+    },
+    {
+      "target": "arxiv:2201.02177",
+      "relation": "extends",
+      "note": "Power et al. (2022) original grokking paper. We add the quantization probe methodology."
+    },
+    {
+      "target": "ICLR2023:nanda",
+      "relation": "cites",
+      "note": "Nanda (2023) mechanistic interpretability of grokking."
+    }
+  ],
+
+  "datasets": [],
+
+  "reproducibility": {
+    "protocol": "Train 1-layer transformer on modular arithmetic for 5000 epochs (AdamW). At each evaluation: (1) measure Float32 validation accuracy, (2) quantize model copy to NF4 and measure validation accuracy. Track Fiedler value (λ₂) of weight graph. Script: x_spectral_02_three_heads.py.",
+    "environment": {
+      "language": "python",
+      "libraries": ["torch", "transformer_lens", "bitsandbytes"],
+      "compute": "Google Colab T4 GPU",
+      "notebook": "17aprilClaudeExperiment.ipynb",
+      "script": "x_spectral_02_three_heads.py",
+      "location": "Google Drive OMPU/colab/"
+    },
+    "expected_outcome": "Float32/Int4 gap = large pre-grokking, collapses to ~0 at grokking point. λ₂ shows sharp dip before grokking.",
+    "actual_outcome": "Pre-grokking: Float32=90%, Int4=0%. Post-grokking: Float32=99%, Int4=99%. λ₂ dip confirmed."
+  },
+
+  "license": "CC-BY-4.0",
+
+  "meta": {
+    "confidence": 0.70,
+    "shelf_life": "2 years — experimental result is reproducible, interpretation may evolve",
+    "word_count_prose_equivalent": 2500,
+    "actual_block_count": 16,
+    "compression_potential": "medium — bridge blocks could tighten"
+  }
+}
