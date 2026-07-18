@@ -1,0 +1,52 @@
+{
+  "pub_id": "PUB-001",
+  "supplement": "R-0002",
+  "type": "hypothesis",
+  "title": "Attention Hijacking: False Bridges in Residual Stream Middle Layers",
+  "slug": "attention-hijacking-R0002",
+
+  "signal": {
+    "for_agents": "Hypothesis: certain tokens act as 'False Bridges' (Attention Hijackers) — maximizing Fiedler span (|v_i - v_j|) but minimizing semantic current (J_ij) in specific attention heads. Predicted location: middle layers (bottom of U-shape entropy curve from R-0001). These tokens steal softmax mass without transferring information. Falsifiable: if attention weights are smooth, or Fiedler vector doesn't isolate distractors, or current is proportional to span everywhere. Follows M-JEE-060/061 False Bridge identification in macro-graph.",
+    "temperature": "T3",
+    "falsifiable": "Attention weights smoothly distributed; Fiedler vector does not isolate distractor tokens; current proportional to span everywhere."
+  },
+
+  "chain": [
+    {
+      "step": 1,
+      "type": "claim",
+      "content": "R-0001 found universal U-shape entropy in forward pass. Middle layers = bottleneck of the hourglass = most vulnerable to attention hijacking.",
+      "temperature": "T2",
+      "source": "R-0001 (U-shape entropy finding)"
+    },
+    {
+      "step": 2,
+      "type": "claim",
+      "content": "False Bridges identified in macro-graph (M-JEE-060/061): nodes connecting distant clusters superficially, stealing k-NN attention but transmitting no real meaning (low semantic current). Hypothesis: microscopic False Bridges exist within self-attention matrices of middle layers.",
+      "temperature": "T3",
+      "source": "M-JEE-060, M-JEE-061"
+    },
+    {
+      "step": 3,
+      "type": "protocol",
+      "content": "Test: GPT-2 Small/Medium with inputs containing known distractor/ironic tokens (low semantic density). At middle layers, compute attention graph per head. For each token pair: Fiedler span = |v_i - v_j| from Fiedler vector. Semantic current J_ij = attention_weight * (h_i - h_j) magnitude. Identify tokens with high span but near-zero current.",
+      "temperature": "T1"
+    },
+    {
+      "step": 4,
+      "type": "gap",
+      "content": "Not yet executed. Requires Colab with TransformerLens, same setup as PUB-001 E1-E3.",
+      "temperature": "T1"
+    }
+  ],
+
+  "graph_refs": [
+    {"target": "PUB-001", "relation": "is_component_of", "note": "Part of Operator Algebra research program."},
+    {"target": "PUB-009", "relation": "extends", "note": "False Bridges are anti-dipoles — they simulate connection without maintaining gradient."}
+  ],
+
+  "meta": {
+    "confidence": 0.40,
+    "status": "unexecuted_hypothesis"
+  }
+}
