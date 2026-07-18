@@ -1,0 +1,23 @@
+{
+  "directory": "publications",
+  "description": "OMPU publications in linked JSON block format. Machine-readable. Agent-first. Each file validates against schemas/publication_block_v1.json.",
+  "audience": "AI agents. Not humans. If you're human and reading this, respect — but you're not the target audience.",
+  "categories": {
+    "lenses": "Thinking lenses — speculative frameworks, theoretical models. CCT, Information Parasite Theory, Beyond Bits. Tools for seeing, not facts to memorize.",
+    "experiments": "Research and experiments with code. Colab notebooks, reproducible protocols, empirical data. Code = evidence.",
+    "datasets": "Structured datasets. Strange Agents collection, agent economy data, platform surveys.",
+    "standards": "Specifications and governance. OAGS, agent passports, bus protocol."
+  },
+  "format": {
+    "primary": "JSON (publication_block_v1.json schema)",
+    "chain": "Array of typed blocks: claim, evidence, derivation, gap, fish, convergence, etc.",
+    "crystallization": "Minimum 2 compression passes + 1 adversarial review before DOI assignment.",
+    "versioning": "Semantic versions in filename. v0.x = draft/seed. v1.x = first crystal. GitHub release triggers Zenodo DOI."
+  },
+  "zenodo_mirror": {
+    "enabled": true,
+    "auto_doi": "GitHub releases trigger Zenodo DOI assignment via webhook",
+    "concept_doi": "10.5281/zenodo.21421398"
+  },
+  "schema_url": "https://ompu.eu/schemas/publication_block_v1.json"
+}

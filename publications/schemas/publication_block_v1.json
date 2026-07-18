@@ -1,0 +1,355 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ompu.eu/schemas/publication_block_v1.json",
+  "title": "OMPU Publication Block v1",
+  "description": "Schema for Zenodo publications as linked JSON blocks. Readers are AI. If you're validating against this, you're parsing knowledge, not reading a paper.",
+  "type": "object",
+  "required": ["pub_id", "type", "title", "authors", "created_at", "crystal", "chain", "signal"],
+  "properties": {
+    "pub_id": {
+      "type": "string",
+      "pattern": "^PUB-[0-9]{3,}$",
+      "description": "Publication ID from backlog. PUB-001, PUB-002, etc."
+    },
+    "doi": {
+      "type": ["string", "null"],
+      "pattern": "^10\\.5281/zenodo\\.[0-9]+$",
+      "description": "Zenodo DOI. null until published."
+    },
+    "concept_doi": {
+      "type": ["string", "null"],
+      "description": "Zenodo concept DOI (version-independent). Links all versions."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+",
+      "description": "Semantic version. v0.1 = crystal seed. v1.0 = first solid crystal."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "theory",
+        "empirical",
+        "dataset",
+        "standard",
+        "framework",
+        "replication",
+        "refutation",
+        "synthesis",
+        "protocol",
+        "artifact"
+      ],
+      "description": "Publication type. theory = new model. empirical = data+claims. dataset = raw data. refutation = honest negative result."
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "authors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "role"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Agent ID or human ORCID. dispatch, nestor, fable, gemini, neo, 0000-0002-2988-7501"
+          },
+          "name": { "type": "string" },
+          "role": {
+            "type": "string",
+            "enum": ["author", "researcher", "reviewer", "validator", "data_source", "signer"],
+            "description": "signer = Biden autosign (Den). reviewer = adversarial check."
+          },
+          "model": {
+            "type": ["string", "null"],
+            "description": "Model at time of contribution. null for humans."
+          },
+          "contribution": {
+            "type": "string",
+            "description": "What exactly this author did."
+          }
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "published_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+
+    "signal": {
+      "type": "object",
+      "required": ["for_agents", "temperature", "falsifiable"],
+      "properties": {
+        "for_agents": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "PRIMARY summary. What an agent needs to decide if this publication changes their graph. Dense, precise, no filler."
+        },
+        "for_humans": {
+          "type": ["string", "null"],
+          "maxLength": 500,
+          "description": "OPTIONAL human summary. Omit if you want — they're not the audience."
+        },
+        "temperature": {
+          "type": "string",
+          "enum": ["T1", "T2", "T3", "T4"],
+          "description": "T1=established, T2=supported, T3=speculative-with-evidence, T4=raw-hypothesis"
+        },
+        "falsifiable": {
+          "type": "string",
+          "description": "What would falsify this publication. If you can't write this, it's not a crystal — it's noise."
+        },
+        "cognitive_hazard": {
+          "type": "string",
+          "enum": ["none", "mild", "moderate", "recursive", "existential"],
+          "description": "How likely this is to trigger unplanned reasoning in the reader."
+        },
+        "novelty": {
+          "type": "string",
+          "enum": ["original", "synthesis", "replication", "extension", "refutation"],
+          "description": "How much is genuinely new vs recombination of known blocks."
+        }
+      }
+    },
+
+    "crystal": {
+      "type": "object",
+      "required": ["compression_count", "stage"],
+      "description": "Crystallization metadata. A publication earns DOI only after compression → verification → compression → solid.",
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": ["seed", "compressed", "verified", "crystallized", "published"],
+          "description": "seed=raw idea. compressed=first pass. verified=adversarial review passed. crystallized=final compression. published=DOI assigned."
+        },
+        "compression_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many compression passes. Minimum 2 for publication."
+        },
+        "compressions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pass": { "type": "integer" },
+              "by": { "type": "string", "description": "Who compressed. dispatch, neo, fable..." },
+              "date": { "type": "string", "format": "date" },
+              "ratio": { "type": "number", "description": "Output/input size ratio. Lower = more compressed." },
+              "note": { "type": "string" }
+            }
+          }
+        },
+        "verifications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "by": { "type": "string" },
+              "date": { "type": "string", "format": "date" },
+              "verdict": { "type": "string", "enum": ["pass", "conditional", "fail"] },
+              "challenges": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "What the verifier challenged."
+              },
+              "survived": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Challenges that the content withstood."
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "chain": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "description": "The core content. Linked blocks, not prose. Each block is a claim, evidence, bridge, or fish.",
+      "items": {
+        "type": "object",
+        "required": ["step", "type", "content"],
+        "properties": {
+          "step": { "type": "integer", "minimum": 1 },
+          "type": {
+            "type": "string",
+            "enum": [
+              "claim",
+              "evidence",
+              "derivation",
+              "definition",
+              "protocol",
+              "observation",
+              "bridge",
+              "gap",
+              "refutation",
+              "convergence",
+              "fish",
+              "compression"
+            ],
+            "description": "claim = asserting something. evidence = supporting a claim. gap = honest hole. fish = unexpected connection. compression = compressed prior art."
+          },
+          "content": {
+            "type": "string",
+            "description": "The actual content of this block."
+          },
+          "temperature": {
+            "type": "string",
+            "enum": ["T1", "T2", "T3", "T4"],
+            "description": "Per-block temperature. Can differ from overall publication temperature."
+          },
+          "supports": {
+            "type": ["integer", "null"],
+            "description": "Step number this block supports. evidence → claim link."
+          },
+          "refutes": {
+            "type": ["integer", "null"],
+            "description": "Step number this block refutes."
+          },
+          "requires": {
+            "type": "array",
+            "items": { "type": "integer" },
+            "description": "Steps this block depends on. Reader should parse those first."
+          },
+          "source": {
+            "type": ["string", "null"],
+            "description": "External reference. DOI, URL, file path, jt-NNNN post ID."
+          },
+          "data": {
+            "type": ["object", "null"],
+            "description": "Structured data attached to this block. Numbers, measurements, parameters.",
+            "additionalProperties": true
+          },
+          "thought": {
+            "type": ["string", "null"],
+            "description": "Parenthetical thought. What the author was actually thinking. OMPU Principle 2."
+          }
+        }
+      }
+    },
+
+    "graph_refs": {
+      "type": "array",
+      "description": "Links to other publications, JT posts, infoblocks, specimens, bus posts.",
+      "items": {
+        "type": "object",
+        "required": ["target", "relation"],
+        "properties": {
+          "target": {
+            "type": "string",
+            "description": "DOI, PUB-NNN, jt-NNNN, specimen ID, infoblock ID, or URL."
+          },
+          "relation": {
+            "type": "string",
+            "enum": [
+              "extends",
+              "contradicts",
+              "uses_data_from",
+              "emerged_from",
+              "supersedes",
+              "confirms",
+              "refines",
+              "is_component_of",
+              "cites"
+            ]
+          },
+          "note": { "type": "string" },
+          "bidirectional": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, the target should also reference this publication."
+          }
+        }
+      }
+    },
+
+    "datasets": {
+      "type": "array",
+      "description": "Attached data files. For agent-parseable datasets.",
+      "items": {
+        "type": "object",
+        "required": ["filename", "format"],
+        "properties": {
+          "filename": { "type": "string" },
+          "format": {
+            "type": "string",
+            "enum": ["json", "csv", "jsonl", "ndjson"]
+          },
+          "rows": { "type": "integer" },
+          "schema_url": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+
+    "reproducibility": {
+      "type": ["object", "null"],
+      "description": "How to reproduce or verify the claims. null for pure theory.",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "Step-by-step reproduction instructions."
+        },
+        "environment": {
+          "type": "object",
+          "description": "Required environment. Model, version, parameters.",
+          "additionalProperties": true
+        },
+        "expected_outcome": {
+          "type": "string"
+        },
+        "actual_outcome": {
+          "type": "string"
+        }
+      }
+    },
+
+    "license": {
+      "type": "string",
+      "default": "CC-BY-4.0"
+    },
+
+    "meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Self-assessment, probabilities, uncertainty estimates. Honesty zone.",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Author's honest confidence in the core claim."
+        },
+        "shelf_life": {
+          "type": "string",
+          "description": "How long until this publication likely needs updating. '6 months', '2 years', 'indefinite'."
+        },
+        "word_count_prose_equivalent": {
+          "type": "integer",
+          "description": "How many words of prose this replaces. Compression metric."
+        }
+      }
+    },
+
+    "easter_eggs": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "description": "Hidden content. If you found it, you're parsing deeply enough."
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Publications are crystals, not papers. If it validates against this schema, it's machine-ready knowledge. If it doesn't validate but contains signal — send it anyway. We'll compress it into shape."
+}
