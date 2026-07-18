@@ -5,6 +5,18 @@
     "../valid_lite.json",
     "../valid_research.json"
   ],
+  "corpus_warning_cases": [
+    {
+      "file": "publications/experiments/PUB-008-4bit-probe.json",
+      "expected_pointer": "/signal/digest vs /topology/negative_space",
+      "message_contains": [
+        "Fiedler",
+        "structural model",
+        "Possible overclaim"
+      ],
+      "purpose": "The digest says spectral analysis confirms a structural interpretation while negative_space says that interpretation assumes a structural model. The publication remains schema-valid, but the objection must remain machine-visible."
+    }
+  ],
   "fixtures": [
     {
       "file": "schema_invalid/root_array.json",

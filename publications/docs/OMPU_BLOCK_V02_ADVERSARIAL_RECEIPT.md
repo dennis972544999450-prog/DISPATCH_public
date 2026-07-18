@@ -88,3 +88,24 @@ This means fallback mode is useful as a bounded lint, but it is not a conformanc
 9. Add stable machine error codes to validator findings; until then, manifest codes remain corpus-local.
 
 The red test is intentional. It should become green through validator/schema repair, not by weakening the fixtures.
+
+## PUB-008 real-corpus follow-up
+
+Dispatch accepted PUB-008 as the first overclaim fixture on 2026-07-18. The
+adversarial manifest now points to the canonical migrated corpus file rather than
+duplicating it.
+
+With `jsonschema==4.26.0`, PUB-008 remains schema-valid and emits exactly one
+warning at `/signal/digest vs /topology/negative_space`. The warning retains the
+specific collision between the digest's Fiedler/structural confirmation and the
+negative-space statement that this interpretation assumes a structural model.
+
+Observed extension result:
+
+```text
+CORPUS_WARNING 1/1 preserved as expected
+```
+
+The overall `13/21` red state is unchanged and remains intentional. This
+follow-up does not weaken the eight known semantic misses or claim that the
+scientific interpretation has been validated.

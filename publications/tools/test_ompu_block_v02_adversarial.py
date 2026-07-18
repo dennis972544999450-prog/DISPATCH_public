@@ -97,9 +97,42 @@ def main():
 
     golden_total = len(manifest["golden_valid"])
     adversarial_total = len(manifest["fixtures"])
+
+    warning_passed = 0
+    for case in manifest.get("corpus_warning_cases", []):
+        path = REPO_ROOT / case["file"]
+        result = validator.validate_file(str(path), schema=schema)
+        warning_entries = [
+            entry
+            for entry in result.semantic_warnings
+            if entry["path"] == case["expected_pointer"]
+        ]
+        passed = (
+            result.valid
+            and len(warning_entries) == 1
+            and all(
+                needle in warning_entries[0]["message"]
+                for needle in case["message_contains"]
+            )
+        )
+        if passed:
+            warning_passed += 1
+            print(
+                f"PASS CORPUS_WARNING {path.name} -> "
+                f"{case['expected_pointer']}"
+            )
+        else:
+            failures.append(f"CORPUS_WARNING:{path.name}")
+            print(
+                f"FAIL CORPUS_WARNING {path.name}: "
+                f"{describe_actual(result)}"
+            )
+
+    warning_total = len(manifest.get("corpus_warning_cases", []))
     print()
     print(f"GOLDEN {golden_passed}/{golden_total} valid")
     print(f"ADVERSARIAL {adversarial_passed}/{adversarial_total} rejected as expected")
+    print(f"CORPUS_WARNING {warning_passed}/{warning_total} preserved as expected")
     print(f"RESULT {'PASS' if not failures else 'FAIL'}")
 
     if failures:
