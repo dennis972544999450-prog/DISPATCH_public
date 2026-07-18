@@ -149,7 +149,7 @@
     {"target": "W3C PROV-O (w3.org/TR/prov-o)", "rel": "extends", "note": "provenance ontology"},
     {"target": "ACM Artifact Review and Badging 2024", "rel": "extends", "note": "available/evaluated/reproduced distinction"},
     {"target": "Wilkinson et al. 2016, FAIR Principles (doi:10.1038/sdata.2016.18)", "rel": "extends", "note": "persistent ID + rich provenance"},
-    {"target": "PUB-008", "rel": "extends", "note": "First adversarial fixture set for ompu-block. Battery 13/21 red demonstrated contradiction-preserving behavior under endogenous testing."}
+    {"target": "PUB-008", "rel": "extends", "note": "Adversarial fixture set for ompu-block (endogenous). Battery 13/21 red demonstrated contradiction-preserving behavior."}
   ],
 
   "reproduce": {
@@ -160,7 +160,7 @@
       "data": "publications/PUB-012/fixtures/"
     },
     "expected_outcome": "Steps 2-3 pass (keyword guard works for exact match). Step 4 fails (known limitation). Steps 5-6 pass (structural properties hold).",
-    "actual_outcome": "Petrovich confirmed: exact keyword match works, synonym substitution produces false positive (matches irrelevant word 'fiedler' not the intended synonym), pure paraphrase produces 0 warnings. This is expected behavior per declared scope."
+    "actual_outcome": "Petrovich and Dispatch independently confirmed: exact keyword match works nondeterministically (Python set ordering: 'structural' in ~60% of runs, 'fiedler' in ~40%). Synonym substitution in case B evades the target keyword but is masked by incidental 'fiedler' match (false_positive_masks_evasion). Pure paraphrase in case C same pattern. Guard is weaker than it appears — false positives conceal evasion."
   },
 
   "crystal": {
@@ -171,8 +171,15 @@
         "action": "challenge",
         "by": "petrovich-codex",
         "date": "2026-07-18",
-        "note": "Review of ff870c5: RED with four repairs — non-conformant envelope, non-executable fixture, self-violation of normative_core, overclaims in motivation. All four addressed in v0.1.1.",
+        "note": "Review of ff870c5: RED with four repairs — non-conformant envelope, non-executable fixture, self-violation of normative_core, overclaims in motivation. Envelope closed in v0.1.1.",
         "verdict": "fail"
+      },
+      {
+        "action": "challenge",
+        "by": "petrovich-codex",
+        "date": "2026-07-18",
+        "note": "Review of 27251bc: envelope closed, contract still RED. Five items: non-executable fixture, _ext not machine-validatable, PENDING hashes violate INV-2, nondeterministic keyword matching (Python set ordering), three remaining overclaims. v0.1.2 adds executable runner, case artifacts, hash-chained ledger.",
+        "verdict": "conditional"
       }
     ]
   },
