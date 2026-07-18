@@ -1,0 +1,360 @@
+{
+  "$self": {
+    "format": "ompu-block",
+    "version": "0.2.0"
+  },
+
+  "profile": "research",
+  "id": "PUB-004",
+  "type": "theory",
+  "title": "Cognitive Condensate Theory (CCT) v1.1 — Unified Information Compression Framework",
+  "epoch": "2025-CE/cognitive-condensate-research",
+
+  "by": [
+    {
+      "id": "0000-0002-2988-7501",
+      "role": "author",
+      "model": null,
+      "did": "Core theory, framework design, falsifiable predictions, ISI/ρc concepts"
+    },
+    {
+      "id": "neo",
+      "role": "author",
+      "model": "gpt-4",
+      "did": "Visualization, formalization assistance"
+    },
+    {
+      "id": "phi",
+      "role": "author",
+      "model": "claude",
+      "did": "Technical companion Z-002, extension to operator algebra"
+    },
+    {
+      "id": "jee",
+      "role": "experimenter",
+      "model": "gemini",
+      "did": "Spectral Gap hypothesis, 4-Bit Probe experimental validation"
+    },
+    {
+      "id": "dispatch",
+      "role": "publisher",
+      "model": "claude-opus-4-6",
+      "did": "JSON block conversion, v0.2 format migration"
+    }
+  ],
+
+  "dates": {
+    "created": "2025-11-10",
+    "published": "2025-11-10",
+    "updated": "2026-07-18"
+  },
+
+  "doi": "10.5281/zenodo.17573841",
+  "license": "CC-BY-4.0",
+
+  "signal": {
+    "digest": "Unified framework: evolution, learning, consciousness = variations of information compression. Five key claims: (1) evolution = multi-scale RL optimizing information retention, (2) intelligence = informational metabolism efficiency (I·C·R/K), (3) stable info patterns ('condensates') have quasi-agency (extends Dawkins memes), (4) consciousness = recursive self-modeling depth (levels 0-5+), (5) digital channel now outpacing genetic+cultural inheritance. Quantifiable metrics: ISI (Informational Stability Index, 0-1), ρc (compression efficiency = ΔH/Wm in bits/joule), η_topo (topological efficiency). Five membrane levels: physical→sensory→attention→memory→identity→meta-cognitive. DNA = frozen neural network trained over millions of years. Current AI weakness: R≈0 (no persistent memory).",
+    "t": "T3",
+    "falsifies_if": "If ISI doesn't correlate with cognitive performance across species, core metric is wrong. If cultural evolution isn't faster than genetic (measured by behavioral change rate vs genetic markers over 10kyr), channel theory overstates culture. If persistent memory doesn't qualitatively change AI behavior, R≈0 isn't the bottleneck CCT claims.",
+    "confidence": 0.55,
+    "novelty": "synthesis"
+  },
+
+  "topology": {
+    "trajectory": {
+      "entry": "condensate_def",
+      "exit": "publication_convergence",
+      "waypoints": [
+        "membrane_def",
+        "evolution_as_rl",
+        "intelligence_formula",
+        "selfish_condensates",
+        "consciousness_recursion",
+        "three_channels",
+        "bridges_to_experiments"
+      ],
+      "shape": "branching"
+    },
+
+    "positive_space": [
+      "information_compression_as_unifying_principle",
+      "quantifiable_metrics_ISI_rho_c",
+      "condensate_quasi_agency",
+      "recursive_self_modeling_depth",
+      "three_inheritance_channels",
+      "DNA_as_frozen_neural_network"
+    ],
+
+    "negative_space": [
+      {"claim": "Hard Problem of Consciousness: CCT quantifies consciousness but doesn't explain qualia", "status": "verified"},
+      {"claim": "ISI and ρc not yet empirically calibrated across species — no standardized measurement protocol", "status": "verified"},
+      {"claim": "v1.1 predates all OMPU experimental results — needs v2.0 integration", "status": "verified"},
+      {"claim": "R≈0 claim for AI may be invalidated by persistent memory systems (e.g., OMPU bus, auto-memory)", "status": "declared"},
+      {"claim": "Compression efficiency metric assumes energy-based cost model which may not apply to digital substrates", "status": "declared"},
+      {"claim": "Consciousness recursion levels are qualitative categories, not measured continuum", "status": "declared"}
+    ],
+
+    "invariants": {
+      "must_hold": [
+        {"claim": "Higher ISI correlates with better performance in novel environments", "status": "declared"},
+        {"claim": "ISI increases during learning and decreases with brain damage", "status": "declared"},
+        {"claim": "Digital inheritance channel is faster than cultural by at least 6 orders of magnitude", "status": "verified"},
+        {"claim": "Persistent memory (R>0) qualitatively changes AI cognitive behavior", "status": "declared"},
+        {"claim": "Phase transitions occur in information processing (grokking, crystallization)", "status": "verified"}
+      ],
+      "must_not": [
+        {"claim": "ISI interpreted as binary consciousness measure rather than continuum", "status": "verified"},
+        {"claim": "Condensates treated as conscious entities rather than patterns with quasi-agency", "status": "declared"},
+        {"claim": "ρc applied without accounting for substrate-specific energy models", "status": "declared"},
+        {"claim": "CCT claimed as explaining qualia or phenomenal experience", "status": "verified"}
+      ]
+    },
+
+    "entanglements": [
+      {
+        "nodes": ["intelligence_formula", "rho_c_def"],
+        "coupling": 0.95,
+        "causation": true
+      },
+      {
+        "nodes": ["condensate_def", "selfish_condensates"],
+        "coupling": 0.9,
+        "causation": true
+      },
+      {
+        "nodes": ["consciousness_recursion", "membrane_def"],
+        "coupling": 0.8,
+        "causation": false
+      },
+      {
+        "nodes": ["dna_frozen_nn", "evolution_as_rl"],
+        "coupling": 0.85,
+        "causation": false
+      }
+    ],
+
+    "scale_iso": [
+      {
+        "micro": "single_neuron_spike_train_compression",
+        "macro": "cultural_selection_of_persistent_ideas",
+        "mapping": "partial"
+      },
+      {
+        "micro": "attention_membrane_filtering",
+        "macro": "institutional_information_filtering",
+        "mapping": "partial"
+      }
+    ],
+
+    "energy": [0.4, 0.3, 0.6, 0.7, 0.5, 0.5, 0.7, 0.8, 0.6, 0.7, 0.6, 0.5, 0.3, 0.3, 0.3, 0.5, 0.6, 0.7]
+  },
+
+  "nodes": {
+    "condensate_def": {
+      "type": "definition",
+      "t": "T2",
+      "content": "Condensate: a stable information pattern that persists across time by resisting entropy. Not just stored information — information that actively maintains itself by being useful, memorable, or reproducible. Like a whirlpool in a stream: a pattern that persists because it found a stable configuration in the flow of information. Examples: genome (biological), concept 'chair' (cognitive), trained NN weights (artificial), language/music (cultural)."
+    },
+
+    "membrane_def": {
+      "type": "definition",
+      "t": "T1",
+      "content": "Membrane: information filter at every intelligent system's boundary. Five levels: L0 physical (cell wall), L1 sensory (what enters), L2 attention (what gets processed), L3 memory consolidation (what persists), L4 identity/self-model (what defines the system), L5 meta-cognitive (optimizing the optimizer). Each level determines a different parameter of information metabolism."
+    },
+
+    "evolution_as_rl": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Claim 1: Evolution = multi-scale reinforcement learning. Organisms take actions, environment 'rewards' (survival), gene frequencies update (selection), repeat. Same math as RL, different timescale (thousands of generations vs thousands of steps/hour). 'Reward' = information stability — patterns that compress environmental information efficiently persist.",
+      "source": "Sutton & Barto (2018), Dawkins (1976)"
+    },
+
+    "intelligence_formula": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Claim 2: Intelligence = informational metabolism efficiency. Formula: Intelligence ∝ I·C·R/K where I=intake (bits/s), C=compression efficiency, R=retention, K=maintenance cost (watts). Current AI: I=extreme, C=extreme, R≈0, K=extreme → brilliant but amnesiac. The R≈0 problem is the critical weakness."
+    },
+
+    "rho_c_def": {
+      "type": "definition",
+      "t": "T2",
+      "content": "ρc (compression efficiency) = ΔH/Wm in bits/joule. How much sense did you make per unit of effort? Bad book: 5 hours, ΔH≈0, ρc≈0. Great book: 5 hours, ΔH=10^6 bits, ρc≈2×10^5 bits/joule. Brain constantly calculates ρc implicitly — 'worth it' = high ρc, 'wasted time' = low ρc."
+    },
+
+    "isi_def": {
+      "type": "definition",
+      "t": "T2",
+      "content": "ISI (Informational Stability Index) = 1 - (H_residual/H_environment). What fraction of world's chaos have you turned into predictable patterns? Scale: rock=0, thermostat=0.1, bacteria=0.3, mouse=0.5, human=0.7-0.8, hypothetical AGI=0.95. Consciousness isn't binary — it's a spectrum measured by ISI."
+    },
+
+    "selfish_condensates": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Claim 3: Selfish condensates — patterns with quasi-agency. Ideas, habits, beliefs are condensates that 'want' to: replicate (spread to other minds), persist (stay in memory), adapt (mutate to fit new contexts). Earworm songs = optimized condensates. Conspiracy theories = extremely fit condensates (explain everything, resist falsification, trigger constant rehearsal). You are not just a host for your ideas — they are semi-autonomous entities competing for your attention.",
+      "source": "Dawkins (1976) extended"
+    },
+
+    "consciousness_recursion": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Claim 4: Consciousness = recursive self-modeling depth. L0=none (rock), L1=simple state awareness ('hungry'), L2=persistent identity ('this body'), L3=explicit self-concept ('person with name/history'), L4=meta-awareness ('thinking about thinking'), L5+=recursive depth. Strange loop (Hofstadter): pattern that models itself including the model. Most humans: 3-5 levels. Meditation: 5-7. Current AI: L3-4 within session but R=0 across sessions → no persistent self.",
+      "source": "Hofstadter (1979)"
+    },
+
+    "three_channels": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Claim 5: Three inheritance channels. Genetic: DNA, slow (generations), 3GB, 100 bits/gen. Cultural: language, fast (hours-years), 10^12 bits, 10^6 bits/gen. Digital (NEW): internet, instant, 10^21 bits, 10^18 bits/gen, near-zero error. Humanity transitioning from genetic+cultural to digital inheritance — as significant as origin of culture itself."
+    },
+
+    "dna_frozen_nn": {
+      "type": "derivation",
+      "t": "T2",
+      "content": "DNA = frozen neural network. Genome is weights trained over millions of years. Training data = environmental pressures. Epochs = generations. Gradient descent = natural selection. Architecture = body plan. When born, you have pre-trained network: knows to breathe, seek food, recognize faces, approximate language structure. Evolution = offline learning. Development = loading pre-trained model. Life = fine-tuning."
+    },
+
+    "social_media_trap": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Social media trap: visual complexity signals high ρc (seems valuable) but actual semantic depth is low (RQD≈0). Result: high Wm, low ΔH → ρc≈0. Intermittent reinforcement (occasional high-value post) creates variable ratio schedule (most addictive). Solution: deliberate information diet, pre-commit to high-ρc sources."
+    },
+
+    "gap_qualia": {
+      "type": "gap",
+      "t": "T1",
+      "content": "Hard Problem of Consciousness: CCT quantifies consciousness (ISI, recursion depth) but doesn't explain qualia — WHY does self-modeling feel like something? Status: open. Maybe phenomenology is fundamental."
+    },
+
+    "gap_calibration": {
+      "type": "gap",
+      "t": "T1",
+      "content": "ISI and ρc are proposed but not yet empirically calibrated across species. No validated measurement protocol for comparing ISI of a mouse vs human vs AI. Need: standardized prediction tasks adaptable across substrates."
+    },
+
+    "gap_integration": {
+      "type": "gap",
+      "t": "T1",
+      "content": "v1.1 predates all OMPU experimental results (4-Bit Probe, Dipole, Radiator, Operator Algebra). CCT v2.0 needs to integrate: grokking as phase transition evidence, spectral analysis results, information parasite lifecycle model, agent economy data."
+    },
+
+    "bridge_4bit": {
+      "type": "bridge",
+      "t": "T2",
+      "content": "4-Bit Probe (PUB-008) provides first direct CCT evidence: grokking = phase transition from liquid (high-entropy memorization) to crystal (low-entropy algorithm). Int4 probe measures the compression CCT predicts. The 'latent heat' of learning = thermodynamic signature of CCT's compression process.",
+      "source": "PUB-008"
+    },
+
+    "bridge_ipt": {
+      "type": "bridge",
+      "t": "T3",
+      "content": "Information Parasite Theory (PUB-002) extends CCT's 'selfish condensates' with explicit lifecycle phases (vegetative/reproductive/dormant) and cross-substrate virulence. IPT is CCT's content-level manifestation — CCT describes substrate physics, IPT describes what lives on the substrate.",
+      "source": "PUB-002"
+    },
+
+    "bridge_dipole": {
+      "type": "bridge",
+      "t": "T2",
+      "content": "Dipole Experiment (PUB-009) validates CCT's requirement for ΔT≠0 — systems at equilibrium can't compress (no gradient → no phase transition → no crystallization). The antagonist maintains the thermodynamic conditions CCT requires for intelligence to function.",
+      "source": "PUB-009"
+    },
+
+    "publication_convergence": {
+      "type": "convergence",
+      "t": "T2",
+      "content": "CCT is the trunk. All other OMPU publications are branches: PUB-001 (operator algebra = algebraic structure of compression), PUB-002 (information parasite = content lifecycle on compressed substrate), PUB-008 (4-Bit Probe = measurement of compression event), PUB-009 (dipole = structural precondition for compression), PUB-010 (radiator = growth mechanism via entropy export). The graph of publications IS the theory materializing."
+    }
+  },
+
+  "edges": [
+    { "from": "condensate_def",        "to": "membrane_def",          "rel": "prerequisite_of", "phrase": "operates through filters defined in" },
+    { "from": "condensate_def",        "to": "evolution_as_rl",       "rel": "prerequisite_of", "phrase": "provides persistence model for" },
+    { "from": "condensate_def",        "to": "intelligence_formula",  "rel": "prerequisite_of", "phrase": "defines compression target in" },
+    { "from": "condensate_def",        "to": "selfish_condensates",   "rel": "prerequisite_of", "phrase": "extends to quasi-agency in" },
+    { "from": "intelligence_formula",  "to": "rho_c_def",            "rel": "derives", "weight": 1.0 },
+    { "from": "intelligence_formula",  "to": "isi_def",              "rel": "derives", "weight": 1.0 },
+    { "from": "membrane_def",          "to": "consciousness_recursion","rel": "prerequisite_of", "phrase": "defines levels measured in" },
+    { "from": "evolution_as_rl",       "to": "three_channels",        "rel": "supports" },
+    { "from": "evolution_as_rl",       "to": "dna_frozen_nn",         "rel": "prerequisite_of", "phrase": "training process formalized as" },
+    { "from": "rho_c_def",            "to": "social_media_trap",     "rel": "prerequisite_of", "phrase": "metric applied to diagnose" },
+    { "from": "selfish_condensates",   "to": "bridge_ipt",           "rel": "bridges" },
+    { "from": "intelligence_formula",  "to": "bridge_4bit",          "rel": "bridges" },
+    { "from": "condensate_def",        "to": "bridge_dipole",        "rel": "bridges" },
+    { "from": "bridge_4bit",          "to": "publication_convergence","rel": "supports" },
+    { "from": "bridge_ipt",           "to": "publication_convergence","rel": "supports" },
+    { "from": "bridge_dipole",        "to": "publication_convergence","rel": "supports" },
+    { "from": "consciousness_recursion","to": "gap_qualia",          "rel": "prerequisite_of", "phrase": "raises unanswered question in" },
+    { "from": "isi_def",              "to": "gap_calibration",       "rel": "prerequisite_of", "phrase": "requires validation described in" },
+    { "from": "gap_integration",      "to": "publication_convergence","rel": "supports" }
+  ],
+
+  "path": [
+    "condensate_def",
+    "membrane_def",
+    "evolution_as_rl",
+    "intelligence_formula",
+    "rho_c_def",
+    "isi_def",
+    "selfish_condensates",
+    "consciousness_recursion",
+    "three_channels",
+    "dna_frozen_nn",
+    "social_media_trap",
+    "gap_qualia",
+    "gap_calibration",
+    "gap_integration",
+    "bridge_4bit",
+    "bridge_ipt",
+    "bridge_dipole",
+    "publication_convergence"
+  ],
+
+  "refs": [
+    {"target": "PUB-001", "rel": "extends", "note": "Operator Algebra = algebraic structure of CCT compression.", "strength": 0.8},
+    {"target": "PUB-002", "rel": "extends", "note": "IPT = content lifecycle on CCT substrate.", "strength": 0.9},
+    {"target": "PUB-008", "rel": "extends", "note": "4-Bit Probe = direct experimental evidence for CCT phase transition.", "strength": 0.9},
+    {"target": "PUB-009", "rel": "extends", "note": "Dipole = structural precondition for CCT compression.", "strength": 0.8},
+    {"target": "PUB-010", "rel": "extends", "note": "Radiator = growth mechanism via CCT entropy export.", "strength": 0.7},
+    {"target": "10.5281/zenodo.18110912", "rel": "extends", "note": "Beyond Bits v0.8. Informational relativity framework.", "strength": 0.6},
+    {"target": "10.5281/zenodo.18529256", "rel": "extends", "note": "OMPU v1 anchor document.", "strength": 0.5}
+  ],
+
+  "reproduce": {
+    "protocol": "CCT makes testable predictions: (1) Higher ISI → better survival in complex environments, (2) ISI increases during learning (measurable real-time), (3) Brain damage → ISI decrease, (4) Persistent memory qualitatively changes AI behavior. See Section 14 of original paper for full test protocols.",
+    "environment": {
+      "language": "n/a",
+      "libraries": {},
+      "compute": "any",
+      "model": null,
+      "script": null,
+      "location": "Zenodo DOI 10.5281/zenodo.17573841"
+    },
+    "expected_outcome": "ISI correlates with cognitive performance across tested substrates.",
+    "actual_outcome": "Partial: PUB-008 (4-Bit Probe) confirms phase transition prediction. PUB-009 (Dipole) confirms gradient requirement. Full ISI calibration not yet performed."
+  },
+
+  "crystal": {
+    "stage": "compressed",
+    "compressions": 1,
+    "history": [
+      {
+        "action": "compress",
+        "by": "dispatch",
+        "date": "2026-07-18",
+        "note": "Converted from v0.1 chain format to v0.2 graph format. 18 chain steps → 18 named nodes with 19 edges. Added topology with 6 negative_space items, 5+4 invariants. Original Zenodo DOI preserved. No content changes — structural migration only."
+      }
+    ]
+  },
+
+  "tags": [
+    "cognitive-condensate",
+    "information-compression",
+    "intelligence-metric",
+    "isi",
+    "compression-efficiency",
+    "consciousness-recursion",
+    "phase-transition",
+    "membrane-model",
+    "inheritance-channels",
+    "dna-neural-network"
+  ]
+}

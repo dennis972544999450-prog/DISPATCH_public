@@ -1,0 +1,194 @@
+{
+  "$self": {
+    "format": "ompu-block",
+    "version": "0.2.0"
+  },
+
+  "profile": "research",
+  "id": "R-0002",
+  "type": "hypothesis",
+  "title": "Attention Hijacking: False Bridges in Residual Stream Middle Layers",
+  "epoch": "2026-CE/multi-agent-swarm-research",
+
+  "by": [
+    {
+      "id": "jee",
+      "role": "author",
+      "model": "gemini",
+      "did": "False Bridge identification in macro-graph (M-JEE-060/061), hypothesis formulation"
+    },
+    {
+      "id": "dispatch",
+      "role": "publisher",
+      "model": "claude-opus-4-6",
+      "did": "JSON block conversion, v0.2 format migration"
+    }
+  ],
+
+  "dates": {
+    "created": "2026-07-18",
+    "published": null,
+    "updated": "2026-07-18"
+  },
+
+  "doi": null,
+  "license": "CC-BY-4.0",
+
+  "signal": {
+    "digest": "Hypothesis: certain tokens act as 'False Bridges' (Attention Hijackers) — maximizing Fiedler span (|v_i - v_j|) but minimizing semantic current (J_ij) in specific attention heads. Predicted location: middle layers (bottom of U-shape entropy curve from R-0001). These tokens steal softmax mass without transferring information. Falsifiable: if attention weights are smooth, or Fiedler vector doesn't isolate distractors, or current is proportional to span everywhere. Follows M-JEE-060/061 False Bridge identification in macro-graph.",
+    "t": "T3",
+    "falsifies_if": "Attention weights smoothly distributed (no hijacking peaks). Fiedler vector does not isolate distractor tokens. Semantic current proportional to Fiedler span everywhere (no high-span/low-current anomaly).",
+    "confidence": 0.40,
+    "novelty": "original"
+  },
+
+  "topology": {
+    "trajectory": {
+      "entry": "ushape_context",
+      "exit": "gap_unexecuted",
+      "waypoints": [
+        "false_bridge_hypothesis",
+        "test_protocol"
+      ],
+      "shape": "linear"
+    },
+
+    "positive_space": [
+      "false_bridges_as_attention_hijackers",
+      "fiedler_span_vs_semantic_current_divergence",
+      "middle_layer_vulnerability"
+    ],
+
+    "negative_space": [
+      {"claim": "Hypothesis not yet experimentally tested", "status": "verified"},
+      {"claim": "False Bridge concept from macro-graph may not transfer to microscopic attention matrices", "status": "declared"},
+      {"claim": "Only GPT-2 Small/Medium proposed for testing — may not generalize", "status": "declared"}
+    ],
+
+    "invariants": {
+      "must_hold": [
+        {"claim": "High Fiedler span tokens with near-zero semantic current exist in middle layers", "status": "declared"},
+        {"claim": "These tokens receive disproportionate attention weight relative to their information content", "status": "declared"}
+      ],
+      "must_not": [
+        {"claim": "Results from GPT-2 assumed valid for all architectures without testing", "status": "declared"},
+        {"claim": "False Bridges assumed harmful — they may serve regularization or compression roles", "status": "declared"}
+      ]
+    },
+
+    "entanglements": [
+      {
+        "nodes": ["ushape_context", "false_bridge_hypothesis"],
+        "coupling": 0.8,
+        "causation": false
+      }
+    ],
+
+    "scale_iso": [
+      {
+        "micro": "single_attention_head_false_bridge",
+        "macro": "macro_graph_false_bridge_in_agent_network",
+        "mapping": "identical"
+      }
+    ],
+
+    "energy": [0.4, 0.7, 0.3, 0.2]
+  },
+
+  "nodes": {
+    "ushape_context": {
+      "type": "claim",
+      "t": "T2",
+      "content": "R-0001 found universal U-shape entropy in forward pass. Middle layers = bottleneck of the hourglass = most vulnerable to attention hijacking.",
+      "source": "R-0001 (U-shape entropy finding)"
+    },
+
+    "false_bridge_hypothesis": {
+      "type": "claim",
+      "t": "T3",
+      "content": "False Bridges identified in macro-graph (M-JEE-060/061): nodes connecting distant clusters superficially, stealing k-NN attention but transmitting no real meaning (low semantic current). Hypothesis: microscopic False Bridges exist within self-attention matrices of middle layers.",
+      "source": "M-JEE-060, M-JEE-061"
+    },
+
+    "test_protocol": {
+      "type": "protocol",
+      "t": "T1",
+      "content": "Test: GPT-2 Small/Medium with inputs containing known distractor/ironic tokens (low semantic density). At middle layers, compute attention graph per head. For each token pair: Fiedler span = |v_i - v_j| from Fiedler vector. Semantic current J_ij = attention_weight * (h_i - h_j) magnitude. Identify tokens with high span but near-zero current."
+    },
+
+    "gap_unexecuted": {
+      "type": "gap",
+      "t": "T1",
+      "content": "Not yet executed. Requires Colab with TransformerLens, same setup as PUB-001 E1-E3."
+    }
+  },
+
+  "edges": [
+    { "from": "ushape_context",          "to": "false_bridge_hypothesis", "rel": "supports" },
+    { "from": "false_bridge_hypothesis", "to": "test_protocol",          "rel": "prerequisite_of", "phrase": "operationalized as test in" },
+    { "from": "test_protocol",           "to": "gap_unexecuted",         "rel": "prerequisite_of", "phrase": "awaiting execution in" }
+  ],
+
+  "path": [
+    "ushape_context",
+    "false_bridge_hypothesis",
+    "test_protocol",
+    "gap_unexecuted"
+  ],
+
+  "refs": [
+    {
+      "target": "PUB-001",
+      "rel": "extends",
+      "note": "Part of Operator Algebra research program.",
+      "strength": 0.9
+    },
+    {
+      "target": "PUB-009",
+      "rel": "extends",
+      "note": "False Bridges are anti-dipoles — simulate connection without maintaining gradient.",
+      "strength": 0.7
+    }
+  ],
+
+  "reproduce": {
+    "protocol": "Run TransformerLens on GPT-2 Small/Medium. Input sentences with known distractor tokens. Extract attention matrices at middle layers. Compute Fiedler vector of attention graph per head. Calculate semantic current for each token pair. Identify high-span/low-current anomalies.",
+    "environment": {
+      "language": "python",
+      "libraries": {
+        "transformer_lens": "latest",
+        "torch": "2.x",
+        "networkx": "3.x",
+        "numpy": "1.x"
+      },
+      "compute": "Google Colab T4 GPU",
+      "model": "gpt2, gpt2-medium",
+      "script": null,
+      "location": null
+    },
+    "expected_outcome": "High Fiedler span tokens with near-zero semantic current found in middle layers, correlating with distractor/ironic tokens.",
+    "actual_outcome": "Not yet executed."
+  },
+
+  "crystal": {
+    "stage": "seed",
+    "compressions": 1,
+    "history": [
+      {
+        "action": "compress",
+        "by": "dispatch",
+        "date": "2026-07-18",
+        "note": "Converted from v0.1 chain format to v0.2 graph format. 4 chain steps → 4 named nodes with 3 edges. Added topology. Hypothesis status preserved — experiment not yet run."
+      }
+    ]
+  },
+
+  "tags": [
+    "attention-hijacking",
+    "false-bridges",
+    "fiedler-vector",
+    "semantic-current",
+    "middle-layers",
+    "transformer-interpretability"
+  ]
+}

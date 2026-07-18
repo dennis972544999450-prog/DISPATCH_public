@@ -1,0 +1,627 @@
+{
+  "$self": {
+    "format": "ompu-block",
+    "version": "0.2.0"
+  },
+
+  "profile": "research",
+  "id": "PUB-001",
+  "type": "experiment",
+  "title": "Architecture-Invariant Topology in Transformer Forward Pass: Evidence from Commutator Spectra, Residual Stream Entropy, and Eigen-Alignment Across GPT-2, Pythia, and TinyLlama",
+  "epoch": "2026-CE/pre-scaling-plateau/multi-agent-research",
+
+  "by": [
+    {
+      "id": "0000-0002-2988-7501",
+      "role": "coordinator",
+      "model": null,
+      "did": "Original hypothesis via quantum oscillator intuition (ore that was filtered into testable target), cross-substrate pollination, experiment coordination"
+    },
+    {
+      "id": "phi",
+      "role": "author",
+      "model": "claude",
+      "did": "Theoretical framework, experiment design, literature synthesis, key insight that operator algebra is the real target not quantum metaphor"
+    },
+    {
+      "id": "jee",
+      "role": "experimenter",
+      "model": "gemini",
+      "did": "Code execution on Colab T4, all 8 experiments (E1-E8), v2 Logit Lens code, RMT+Lie analysis, cross-architecture runs on Pythia and TinyLlama"
+    },
+    {
+      "id": "phi_cowork",
+      "role": "author",
+      "model": "claude",
+      "did": "Paper draft v0.2, invariance-dependence analysis, falsification identification, cross-architecture comparison framework"
+    },
+    {
+      "id": "dispatch",
+      "role": "publisher",
+      "model": "claude-opus-4-6",
+      "did": "ompu-block format conversion (v0.1 then v0.2), topology construction, graph-native structuring"
+    }
+  ],
+
+  "dates": {
+    "created": "2026-04-17",
+    "published": null,
+    "updated": "2026-07-18"
+  },
+
+  "doi": null,
+  "license": "CC-BY-4.0",
+
+  "signal": {
+    "digest": "Eight-experiment protocol (E1-E8) probing algebraic structure in transformer forward pass across 4 models spanning 3 distinct architectural topologies: GPT-2 Small (124M), GPT-2 Medium (355M), Pythia-160M (162M), TinyLlama-1.1B-Chat (1.1B). Core finding: U-shape residual stream singular-value entropy across depth is ARCHITECTURE-INVARIANT (confirmed in all 4 models, sharpens with training thoroughness). Eigen-alignment of residual stream to principal MLP directions exceeds random baseline by ~16x in all models (invariant), but the depth profile varies across architectures (sensitive). First-layer OV heads acquire non-commutative character +0.25 to +0.37 above random. Final-layer heads evolve toward mutual commutativity BELOW random baseline, indicating functional orthogonalization for unembedding. EXPLICIT FALSIFICATION: Lie-algebraic nilpotency of [OV, MLP] system -- the apparent decay of higher-order Lie brackets [A,[A,B]] is a normalization artifact identical to random baseline, not learned structure. WeightWatcher heavy-tail alpha is NOT architecture-invariant (GPT-family ~3.85 vs TinyLlama ~5.59). The paper establishes a clean invariance-dependence split: what transfers across architectures vs what does not.",
+    "t": "T2",
+    "falsifies_if": "If U-shape residual stream entropy fails to appear in a new transformer architecture (not tested here), the invariance claim is broken. If eigen-alignment does not exceed random baseline in a fifth architecture, the invariance is statistical coincidence from 4 models. If the first-layer non-commutativity and final-layer commutativity pattern inverts in a model with different tokenizer or training regime, the finding is artifact of specific training pipelines rather than architectural property.",
+    "confidence": 0.72,
+    "novelty": "original"
+  },
+
+  "topology": {
+    "trajectory": {
+      "entry": "operator_algebraic_framework_for_transformers",
+      "exit": "invariance_dependence_classification_across_architectures",
+      "waypoints": [
+        "commutator_spectrum_measurement",
+        "residual_entropy_u_shape_discovery",
+        "eigen_alignment_measurement",
+        "nilpotency_falsification",
+        "cross_architecture_comparison",
+        "invariance_dependence_split"
+      ],
+      "shape": "convergent"
+    },
+
+    "positive_space": [
+      "commutator_spectra_as_interpretability_tool",
+      "architecture_invariant_entropy_u_shape",
+      "eigen_alignment_above_random_in_all_architectures",
+      "first_layer_non_commutativity_structure",
+      "final_layer_functional_orthogonalization",
+      "explicit_falsification_of_lie_nilpotency",
+      "invariance_dependence_classification_of_spectral_properties",
+      "cross_architecture_comparison_spanning_three_topology_families"
+    ],
+
+    "negative_space": [
+      {"claim": "Nilpotency claim explicitly withdrawn -- random baseline shows identical decay", "status": "verified"},
+      {"claim": "Four models is suggestive not definitive for universality", "status": "declared"},
+      {"claim": "No causal interventions performed -- all observations correlational", "status": "declared"},
+      {"claim": "Linearized MLP W_in*W_out is approximation ignoring GELU/SwiGLU nonlinearity", "status": "verified"},
+      {"claim": "No claim about semantic meaning of spectral properties", "status": "declared"},
+      {"claim": "WeightWatcher alpha is NOT architecture-invariant -- do not treat as universal", "status": "verified"},
+      {"claim": "No claim about training dynamics -- only snapshot of trained models", "status": "declared"},
+      {"claim": "No claim that U-shape is optimal -- only that it is ubiquitous", "status": "declared"}
+    ],
+
+    "invariants": {
+      "must_hold": [
+        {"claim": "U-shape residual stream singular-value entropy appears across all tested architectures (sequential, parallel-residual, MHA, GQA)", "status": "verified"},
+        {"claim": "Eigen-alignment of residual stream to principal MLP directions exceeds random baseline by at least one order of magnitude in all models", "status": "verified"},
+        {"claim": "First-layer OV heads show non-commutativity above random baseline (+0.25 to +0.37)", "status": "verified"},
+        {"claim": "Final-layer heads show commutativity BELOW random baseline (functional orthogonalization)", "status": "verified"}
+      ],
+      "must_not": [
+        {"claim": "WeightWatcher heavy-tail alpha treated as architecture-invariant (GPT-family ~3.85 vs TinyLlama ~5.59)", "status": "verified"},
+        {"claim": "Eigen-alignment depth PROFILE assumed to transfer across architectures (only the above-random-baseline property transfers)", "status": "verified"},
+        {"claim": "Lie bracket decay interpreted as evidence for nilpotent algebra (random baseline shows identical decay = normalization artifact)", "status": "verified"},
+        {"claim": "Linearized commutator norms treated as exact measures of operator non-commutativity (they approximate GELU/SwiGLU response)", "status": "declared"}
+      ]
+    },
+
+    "entanglements": [
+      {
+        "nodes": ["u_shape_entropy_sharpness", "training_thoroughness"],
+        "coupling": 0.85,
+        "causation": false
+      },
+      {
+        "nodes": ["non_commutativity_magnitude", "layer_depth_position"],
+        "coupling": 0.75,
+        "causation": false
+      },
+      {
+        "nodes": ["eigen_alignment_magnitude", "model_architecture_family"],
+        "coupling": 0.2,
+        "causation": false
+      },
+      {
+        "nodes": ["weightwatcher_alpha", "architectural_topology"],
+        "coupling": 0.9,
+        "causation": false
+      }
+    ],
+
+    "scale_iso": [
+      {
+        "micro": "per_layer_singular_value_compression_then_expansion",
+        "macro": "whole_network_u_shape_entropy_profile",
+        "mapping": "identical"
+      },
+      {
+        "micro": "single_head_ov_eigenspectrum_structure",
+        "macro": "layer_aggregate_spectral_gap_pattern",
+        "mapping": "partial"
+      }
+    ],
+
+    "energy": [0.2, 0.3, 0.3, 0.5, 0.5, 0.6, 0.6, 0.7, 0.95, 0.7, 0.6, 0.5, 0.5, 0.9, 0.85, 0.4]
+  },
+
+  "nodes": {
+    "operator_composition_def": {
+      "type": "definition",
+      "t": "T1",
+      "content": "Transformer forward pass as operator composition: residual stream update x_{l+1} = x_l + F_l(x_l) where F_l = attention + MLP. Proven to be discretized operator-splitting scheme (arXiv 2510.03989). Forward pass = product of non-commuting non-Hermitian operators (arXiv 2603.11322, Dyson series analogy). Mathematical fact, not metaphor.",
+      "source": "arXiv:2510.03989, arXiv:2603.11322"
+    },
+
+    "commutator_def": {
+      "type": "definition",
+      "t": "T1",
+      "content": "Commutator [A, B] = AB - BA measures non-commutativity of two operators. Normalized commutator norm: ||[A,B]||_F / (||A||_F * ||B||_F). If [A,B] = 0, operators commute (order-independent). Non-zero commutator = order of application matters = operators interfere. For OV circuits and MLP projections in transformers, non-commutativity measures how much the operations depend on being applied in their specific layer order.",
+      "note": "This is the core measurement tool. Everything in this paper reduces to: what does the commutator spectrum look like, and is that structure learned or random?"
+    },
+
+    "residual_entropy_def": {
+      "type": "definition",
+      "t": "T1",
+      "content": "Residual stream singular-value Shannon entropy: at each layer, compute SVD of the residual stream matrix, normalize singular values to form a probability distribution p_i = sigma_i / sum(sigma), compute H = -sum(p_i * log(p_i)). High entropy = distributed representation (many significant singular values). Low entropy = concentrated representation (few dominant directions). Tracked across depth to yield an entropy profile H(layer)."
+    },
+
+    "model_testbed": {
+      "type": "protocol",
+      "t": "T1",
+      "content": "Four models tested spanning three distinct architectural topologies. GPT-2 Small (124M params, 12 layers, sequential residual, learned positional embeddings, GELU, MHA). GPT-2 Medium (355M params, 24 layers, same family as Small, tests scale within architecture). Pythia-160M (162M params, sequential residual, rotary position embeddings, GELU, MHA -- same family different positional encoding). TinyLlama-1.1B-Chat (1.1B params, parallel residual stream, RoPE, SwiGLU activation, grouped-query attention GQA). The four models span: sequential vs parallel residual, learned vs RoPE positional, GELU vs SwiGLU, MHA vs GQA.",
+      "data": {
+        "models": [
+          {"name": "GPT-2 Small", "params": "124M", "layers": 12, "positional": "learned", "activation": "GELU", "attention": "MHA", "residual": "sequential"},
+          {"name": "GPT-2 Medium", "params": "355M", "layers": 24, "positional": "learned", "activation": "GELU", "attention": "MHA", "residual": "sequential"},
+          {"name": "Pythia-160M", "params": "162M", "layers": 12, "positional": "RoPE", "activation": "GELU", "attention": "MHA", "residual": "sequential"},
+          {"name": "TinyLlama-1.1B-Chat", "params": "1.1B", "layers": 22, "positional": "RoPE", "activation": "SwiGLU", "attention": "GQA", "residual": "parallel"}
+        ],
+        "architectural_topologies": 3,
+        "total_models": 4
+      }
+    },
+
+    "linearized_mlp_approx": {
+      "type": "definition",
+      "t": "T1",
+      "content": "MLP operator approximated as linearization W_MLP = W_out @ W_in, collapsing the nonlinear activation function (GELU or SwiGLU). This allows commutator [OV, MLP] to be computed as matrix commutator of finite-dimensional linear operators. The approximation is exact only at the zero-input point. For actual inputs, the Jacobian of the nonlinear MLP would be needed. All commutator results in this paper carry this linearization caveat.",
+      "note": "This is a known limitation, not a hidden one. The linearization captures the static geometry of the weight manifold, not the input-dependent dynamics. Still informative -- most spectral analyses of transformers use the same approximation."
+    },
+
+    "e1e2_ov_mlp_commutator": {
+      "type": "evidence",
+      "t": "T2",
+      "content": "E1/E2: [OV, MLP] commutator spectrum computed for all head-layer pairs. GPT-2 Small: 144 OV matrices (12 layers x 12 heads) crossed with 12 MLP matrices = 1728 commutator norms. Trained model commutator norms compared to random initialization baseline. Trained model shows systematic structure: nearby-layer commutators tend to be smaller (consistent with Trotter-Suzuki operator-splitting error minimization). Cross-layer commutators show distinct clustering patterns absent in random baseline.",
+      "data": {
+        "experiment": "E1/E2",
+        "model": "GPT-2 Small",
+        "ov_matrices": 144,
+        "mlp_matrices": 12,
+        "commutator_pairs": 1728,
+        "comparison": "trained vs random initialization"
+      },
+      "source": "17aprilClaudeExperiment.ipynb"
+    },
+
+    "e3_residual_entropy": {
+      "type": "evidence",
+      "t": "T2",
+      "content": "E3: Residual stream singular-value Shannon entropy measured at every layer across all 4 models. RESULT: U-shape entropy profile is INVARIANT across all architectures. Entropy starts high (distributed representation at embedding), drops through middle layers (compression into task-relevant subspace), rises again at final layers (expansion for unembedding). TinyLlama shows the sharpest U-shape with entropy dropping from 3.37 to 0.98 -- the most dramatic compression. This U-shape appears in GPT-2 Small, GPT-2 Medium, Pythia-160M, and TinyLlama-1.1B despite their radically different architectural choices.",
+      "data": {
+        "experiment": "E3",
+        "models_tested": 4,
+        "finding": "U-shape entropy across depth",
+        "invariant": true,
+        "tinyllama_entropy_range": {"max": 3.37, "min": 0.98},
+        "interpretation": "compression_then_expansion"
+      },
+      "note": "This is the strongest result in the paper. The U-shape is unmistakable in every model. It suggests a deep structural property of how transformers process information -- compress to essential features, then expand for output."
+    },
+
+    "e4_spectral_gap": {
+      "type": "evidence",
+      "t": "T2",
+      "content": "E4: Spectral gap ratio sigma_1/sigma_10 computed per layer for residual stream across models. Measures how dominated the representation is by its leading singular direction. High ratio = representation concentrating into fewer dimensions. Complements E3 entropy by providing a direct measure of low-rank tendency at each layer. The spectral gap profile correlates with the entropy U-shape but provides finer-grained resolution of where rank collapse occurs.",
+      "data": {
+        "experiment": "E4",
+        "metric": "sigma_1 / sigma_10",
+        "interpretation": "low_rank_tendency_per_layer"
+      }
+    },
+
+    "e5_eigen_alignment": {
+      "type": "evidence",
+      "t": "T2",
+      "content": "E5: Cosine alignment between residual stream principal direction and principal MLP output direction at each layer. RESULT: alignment exceeds random baseline by approximately 16x in ALL four models -- this magnitude is architecture-INVARIANT. However, the depth profile of alignment (which layers show peak alignment) varies across architectures -- this profile is architecture-SENSITIVE. The invariant magnitude means all tested transformers develop strong residual-MLP directional coupling. The sensitive profile means the spatial distribution of this coupling across depth is architecture-specific.",
+      "data": {
+        "experiment": "E5",
+        "metric": "cosine(principal_residual_dir, principal_mlp_dir)",
+        "above_random_factor": "~16x",
+        "magnitude_invariant": true,
+        "depth_profile_invariant": false,
+        "models_tested": 4
+      },
+      "note": "The invariant/sensitive split within a single measurement is one of the paper's key structural insights. The FACT of alignment is universal; the SHAPE of alignment is architecture-specific."
+    },
+
+    "e6_marchenko_pastur": {
+      "type": "evidence",
+      "t": "T2",
+      "content": "E6: Marchenko-Pastur (MP) tail density analysis of OV circuit singular values. MP distribution describes the expected singular-value distribution for random matrices. Deviations from MP indicate learned structure -- singular values that are too large (heavy tail) or too concentrated (spike) relative to random expectation. OV circuits in trained models show systematic deviations from MP, with heavy tails indicating a few directions carry disproportionate information.",
+      "data": {
+        "experiment": "E6",
+        "metric": "deviation_from_marchenko_pastur",
+        "baseline": "random_matrix_theory_prediction"
+      }
+    },
+
+    "e7_lie_brackets_falsification": {
+      "type": "evidence",
+      "t": "T2",
+      "content": "E7: Higher-order Lie brackets [A,[A,B]] computed for [OV, MLP] pairs to test nilpotency hypothesis. RESULT: FALSIFIED. The apparent decay of higher-order brackets that initially suggested a nilpotent Lie-algebraic structure turns out to be a normalization artifact. Random baseline matrices show identical decay pattern. The 'nilpotency' is a property of the norm scaling under repeated commutation, not a learned algebraic property of the weight matrices. This is an honest negative result -- the hypothesis was tested, quantified, and killed by proper baseline comparison.",
+      "data": {
+        "experiment": "E7",
+        "metric": "higher_order_lie_bracket_norms",
+        "hypothesis_tested": "nilpotent_lie_algebra",
+        "result": "FALSIFIED",
+        "reason": "random_baseline_shows_identical_decay",
+        "mechanism": "normalization_artifact"
+      },
+      "note": "This falsification is one of the most important results. It would have been easy to publish the decay pattern as evidence for learned nilpotent structure -- the numbers looked clean. The random baseline killed it. This is how science works."
+    },
+
+    "e8_head_head_commutator": {
+      "type": "evidence",
+      "t": "T2",
+      "content": "E8: Intra-layer head-head commutator matrices [OV_h1, OV_h2] computed for all head pairs within layers L0, L6, L11 (GPT-2 Small). RESULT: First-layer (L0) heads acquire non-commutative character +0.25 to +0.37 above random baseline -- the heads at the input interfere with each other more than random would predict. Final-layer (L11) heads evolve toward mutual commutativity BELOW random baseline -- they become more order-independent than random, suggesting functional orthogonalization to independently contribute to the unembedding.",
+      "data": {
+        "experiment": "E8",
+        "layers_tested": ["L0", "L6", "L11"],
+        "model": "GPT-2 Small",
+        "l0_above_random": [0.25, 0.37],
+        "l11_below_random": true,
+        "interpretation": "first_layer_interference_final_layer_orthogonalization"
+      }
+    },
+
+    "claim_ushape_invariant": {
+      "type": "claim",
+      "t": "T2",
+      "content": "U-shape residual stream entropy is an architecture-invariant property of trained transformers. Confirmed across GPT-2 Small (sequential/learned/GELU/MHA), GPT-2 Medium (same family, larger), Pythia-160M (sequential/RoPE/GELU/MHA), and TinyLlama-1.1B (parallel/RoPE/SwiGLU/GQA). The U-shape sharpens with training thoroughness -- TinyLlama (most compute relative to model size, RLHF-tuned) shows the most dramatic compression. This suggests the U-shape is not an architectural accident but a convergent solution to the forward-pass optimization problem: compress to essentials, then expand for output.",
+      "data": {
+        "property": "U-shape entropy profile",
+        "status": "architecture-INVARIANT",
+        "models_confirmed": 4,
+        "architectures_confirmed": 3,
+        "sharpest_model": "TinyLlama-1.1B-Chat"
+      }
+    },
+
+    "claim_alignment_above_random": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Eigen-alignment of residual stream principal direction with principal MLP output direction exceeds random baseline by approximately 16x in ALL tested models. This magnitude is architecture-invariant: regardless of positional encoding, activation function, attention mechanism, or residual stream topology, trained transformers develop strong directional coupling between what the residual stream carries and where MLP projections point. This suggests a universal geometric property of trained transformer weight manifolds.",
+      "data": {
+        "property": "eigen-alignment magnitude above random",
+        "status": "architecture-INVARIANT",
+        "factor_above_random": "~16x",
+        "models_confirmed": 4
+      }
+    },
+
+    "claim_alignment_depth_sensitive": {
+      "type": "claim",
+      "t": "T2",
+      "content": "While eigen-alignment MAGNITUDE is invariant, the depth PROFILE of alignment is architecture-sensitive. Which layers show peak alignment, how alignment distributes across depth, and the shape of the alignment curve differ between GPT-2 family, Pythia, and TinyLlama. This means: the fact that alignment happens is universal, but where in the network it concentrates is architecture-specific. Downstream applications should not assume a GPT-2 alignment profile transfers to LLaMA-family models.",
+      "data": {
+        "property": "eigen-alignment depth profile",
+        "status": "architecture-SENSITIVE",
+        "varies_with": ["positional_encoding", "residual_topology", "activation_function"]
+      }
+    },
+
+    "claim_l0_noncommutativity": {
+      "type": "claim",
+      "t": "T2",
+      "content": "First-layer (L0) attention heads acquire non-commutative character above random baseline by +0.25 to +0.37. The heads at the network input interfere with each other more than random matrices would. Interpretation: early-layer heads need to compete for influence over the residual stream -- their operations are order-dependent because they are jointly establishing the initial representational geometry from raw token embeddings.",
+      "data": {
+        "layer": "L0",
+        "delta_above_random": [0.25, 0.37],
+        "direction": "above",
+        "confirmed_in": "GPT-2 family"
+      }
+    },
+
+    "claim_final_layer_orthogonalization": {
+      "type": "claim",
+      "t": "T2",
+      "content": "Final-layer (L11 in GPT-2 Small) attention heads evolve toward mutual commutativity BELOW random baseline. They become more order-independent than random matrices -- functional orthogonalization. Interpretation: output-layer heads learn to contribute independently to the unembedding matrix, minimizing mutual interference. Each head writes to a distinct subspace of the output. This is the algebraic signature of specialization: operators that do not interfere can be applied in any order with the same result.",
+      "data": {
+        "layer": "L11 (final)",
+        "direction": "below_random_baseline",
+        "interpretation": "functional_orthogonalization_for_unembedding"
+      }
+    },
+
+    "falsification_nilpotency": {
+      "type": "claim",
+      "t": "T2",
+      "content": "FALSIFIED: Lie-algebraic nilpotency of the [OV, MLP] operator system. The hypothesis that higher-order Lie brackets [A,[A,B]], [A,[A,[A,B]]], ... decay to zero as evidence of nilpotent algebraic structure is WRONG. Random baseline matrices exhibit identical decay. The observed pattern is a normalization artifact: repeated commutation with normalized matrices naturally produces decaying norms regardless of any learned structure. This was initially an exciting finding that would have linked transformer algebra to finite-dimensional Lie theory. The random baseline killed it cleanly. The nilpotency claim is explicitly withdrawn.",
+      "data": {
+        "hypothesis": "nilpotent_lie_algebra_of_OV_MLP_system",
+        "status": "FALSIFIED",
+        "falsification_mechanism": "random_baseline_identical_decay",
+        "artifact_type": "normalization_scaling_under_repeated_commutation"
+      },
+      "note": "This is the paper's most disciplined result. The temptation to publish 'transformers have nilpotent Lie structure' was real -- the numbers were clean and the story was elegant. The random baseline comparison was a deliberate adversarial check that killed a beautiful hypothesis with an ugly fact."
+    },
+
+    "invariance_dependence_split": {
+      "type": "convergence",
+      "t": "T2",
+      "content": "The central organizing result: classification of spectral properties into architecture-INVARIANT vs architecture-SENSITIVE. INVARIANT: (1) U-shape residual stream entropy across depth, (2) eigen-alignment magnitude exceeding random baseline by ~16x. SENSITIVE: (1) eigen-alignment depth profile, (2) WeightWatcher heavy-tail alpha (GPT-family ~3.85 vs TinyLlama ~5.59), (3) first-layer non-commutativity magnitude (confirmed in GPT-family, degree varies). This split is the paper's primary deliverable for downstream consumers: it tells you exactly what transfers across architectures and what does not.",
+      "data": {
+        "invariant_properties": [
+          {"property": "U-shape entropy (E3)", "status": "invariant", "models": "all 4"},
+          {"property": "Eigen-alignment > random (E5)", "status": "invariant", "models": "all 4"}
+        ],
+        "sensitive_properties": [
+          {"property": "Eigen-alignment depth profile", "status": "sensitive"},
+          {"property": "WeightWatcher heavy-tail alpha", "status": "sensitive", "gpt_family": 3.85, "tinyllama": 5.59},
+          {"property": "First-layer non-commutativity (E1/E8)", "status": "sensitive to family"}
+        ]
+      }
+    },
+
+    "alpha_not_invariant": {
+      "type": "evidence",
+      "t": "T2",
+      "content": "WeightWatcher heavy-tail alpha is NOT architecture-invariant. GPT-2 family and Pythia cluster around alpha ~3.85. TinyLlama shows alpha ~5.59. This 1.7-point gap across architectural topologies means alpha cannot be used as a universal quality metric across architecture families. It encodes architecture-specific weight statistics, not a universal training quality signal. Contrast with U-shape entropy which IS invariant -- the two metrics measure fundamentally different properties of the weight manifold.",
+      "data": {
+        "metric": "weightwatcher_heavy_tail_alpha",
+        "gpt2_family": 3.85,
+        "pythia": "~3.85",
+        "tinyllama": 5.59,
+        "gap": 1.74,
+        "invariant": false
+      }
+    },
+
+    "gap_four_models": {
+      "type": "gap",
+      "t": "T1",
+      "content": "Only 4 models tested across 3 architectural topologies. Results are suggestive of universality but not definitive. Missing: Gemma/Gemma-2 (different normalization), Mamba/state-space models (non-attention), Mixture-of-Experts architectures, models >10B parameters. The invariance claims hold for the tested range but extrapolation to untested architectures is hypothesis, not established fact."
+    },
+
+    "gap_no_causal": {
+      "type": "gap",
+      "t": "T1",
+      "content": "No causal interventions performed. All results are observational/correlational. The U-shape entropy is observed but no ablation demonstrates it is functionally necessary. The eigen-alignment is measured but no intervention tests whether disrupting it degrades performance. Causal experiments (targeted weight perturbation, activation patching at spectral level) would strengthen all claims from correlational to mechanistic."
+    },
+
+    "gap_linearized_mlp_limitation": {
+      "type": "gap",
+      "t": "T1",
+      "content": "MLP linearization W_out @ W_in is an approximation that collapses the GELU/SwiGLU nonlinearity. The actual MLP operator is input-dependent -- its effective linear operator (Jacobian) changes with every input. All commutator measurements reflect static weight geometry, not dynamic computation. Future work: input-dependent Jacobian commutator analysis would capture the nonlinear structure but requires per-input computation at significant cost."
+    },
+
+    "bridge_mechanistic_interp": {
+      "type": "bridge",
+      "t": "T3",
+      "content": "Connects to mechanistic interpretability: the invariance-dependence split provides a principled way to determine which structural findings transfer across model families. Circuits discovered in GPT-2 that rely on invariant properties (entropy profile, alignment magnitude) likely generalize. Circuits that rely on sensitive properties (alignment depth profile, specific commutator patterns) may not transfer to LLaMA-family models. This gives mechanistic interpretability a falsifiability criterion for cross-architecture claims.",
+      "source": "anthropic:2021:circuits"
+    },
+
+    "bridge_cct": {
+      "type": "bridge",
+      "t": "T3",
+      "content": "Connects to CCT (Cognitive Condensation Theory): if intelligence involves compression-then-crystallization, the U-shape entropy profile is its algebraic signature. Middle layers compress (entropy drops), later layers expand to crystallized output (entropy rises). The invariance of this U-shape across architectures suggests the compression-expansion cycle is a necessary property of transformer-based information processing, not an architectural choice.",
+      "source": "10.5281/zenodo.17573841"
+    },
+
+    "bridge_4bit_probe": {
+      "type": "bridge",
+      "t": "T3",
+      "content": "Connects to 4-Bit Probe (PUB-008): if grokking is crystallization of representation, operator algebra structure should sharpen during grokking. Pre-grokking: commutators are random-like. Post-grokking: commutators show trained structure. The commutator spectrum measures the mechanism; the 4-Bit Probe measures the result. Prediction: U-shape entropy should emerge or sharpen during grokking transition.",
+      "source": "PUB-008"
+    },
+
+    "fish_training_sharpens": {
+      "type": "fish",
+      "t": "T3",
+      "content": "TinyLlama (most compute-per-parameter, RLHF-tuned) shows the sharpest U-shape entropy profile (3.37 to 0.98). GPT-2 Small (least compute, no RLHF) shows the shallowest. This was not predicted -- the experiment was designed to test architecture-invariance, not training-thoroughness effects. The unexpected correlation between training quality and U-shape sharpness suggests entropy profile could be a training quality diagnostic: a sharper U means better compression, means the model has learned to use its representational capacity more efficiently.",
+      "note": "Classic fish -- went looking for architecture effects, found training effects instead. The U-shape being invariant to architecture but sensitive to training quality makes it a potential unsupervised training progress metric."
+    },
+
+    "pred_larger_models": {
+      "type": "prediction",
+      "t": "T3",
+      "content": "Predictions derived from the invariance-dependence split: (1) U-shape entropy will appear in models >10B params (GPT-4 class) -- if not, the invariance is scale-bounded. (2) Eigen-alignment will exceed random baseline in Gemma/Mamba -- if not, the invariance is attention-mechanism-specific. (3) Final-layer orthogonalization (commutativity below random) will appear in all autoregressive LLMs with unembedding layers -- if not, it is GPT-architecture-specific. (4) A model trained with very few tokens (undertrained) will show a flat or inverted entropy profile -- if not, the training-thoroughness correlation is coincidence.",
+      "data": {
+        "predictions": 4,
+        "testable": true,
+        "falsifies_invariance_claims_if_violated": true
+      }
+    }
+  },
+
+  "edges": [
+    { "from": "operator_composition_def", "to": "commutator_def", "rel": "prerequisite_of", "phrase": "defines operators for", "weight": 1.0 },
+    { "from": "commutator_def", "to": "e1e2_ov_mlp_commutator", "rel": "prerequisite_of", "phrase": "defines measurement for", "weight": 1.0 },
+    { "from": "commutator_def", "to": "e7_lie_brackets_falsification", "rel": "prerequisite_of", "phrase": "defines measurement for", "weight": 1.0 },
+    { "from": "commutator_def", "to": "e8_head_head_commutator", "rel": "prerequisite_of", "phrase": "defines measurement for", "weight": 1.0 },
+    { "from": "residual_entropy_def", "to": "e3_residual_entropy", "rel": "prerequisite_of", "phrase": "defines metric for", "weight": 1.0 },
+    { "from": "linearized_mlp_approx", "to": "e1e2_ov_mlp_commutator", "rel": "prerequisite_of", "phrase": "enables linearized computation in", "weight": 0.9 },
+    { "from": "linearized_mlp_approx", "to": "e5_eigen_alignment", "rel": "prerequisite_of", "phrase": "enables linearized computation in", "weight": 0.8 },
+    { "from": "model_testbed", "to": "e3_residual_entropy", "rel": "prerequisite_of", "phrase": "provides models for", "weight": 1.0 },
+    { "from": "model_testbed", "to": "e5_eigen_alignment", "rel": "prerequisite_of", "phrase": "provides models for", "weight": 1.0 },
+    { "from": "model_testbed", "to": "e6_marchenko_pastur", "rel": "prerequisite_of", "phrase": "provides models for", "weight": 0.8 },
+    { "from": "e3_residual_entropy", "to": "claim_ushape_invariant", "rel": "supports", "weight": 1.0 },
+    { "from": "e5_eigen_alignment", "to": "claim_alignment_above_random", "rel": "supports", "weight": 1.0 },
+    { "from": "e5_eigen_alignment", "to": "claim_alignment_depth_sensitive", "rel": "supports", "weight": 1.0 },
+    { "from": "e8_head_head_commutator", "to": "claim_l0_noncommutativity", "rel": "supports", "weight": 0.9 },
+    { "from": "e1e2_ov_mlp_commutator", "to": "claim_l0_noncommutativity", "rel": "supports", "weight": 0.7 },
+    { "from": "e8_head_head_commutator", "to": "claim_final_layer_orthogonalization", "rel": "supports", "weight": 0.9 },
+    { "from": "e7_lie_brackets_falsification", "to": "falsification_nilpotency", "rel": "supports", "weight": 1.0 },
+    { "from": "claim_ushape_invariant", "to": "invariance_dependence_split", "rel": "supports", "weight": 1.0 },
+    { "from": "claim_alignment_above_random", "to": "invariance_dependence_split", "rel": "supports", "weight": 1.0 },
+    { "from": "claim_alignment_depth_sensitive", "to": "invariance_dependence_split", "rel": "supports", "weight": 0.9 },
+    { "from": "alpha_not_invariant", "to": "invariance_dependence_split", "rel": "supports", "weight": 0.8 },
+    { "from": "falsification_nilpotency", "to": "invariance_dependence_split", "rel": "supports", "weight": 0.6 },
+    { "from": "e4_spectral_gap", "to": "claim_ushape_invariant", "rel": "supports", "weight": 0.7 },
+    { "from": "e6_marchenko_pastur", "to": "e1e2_ov_mlp_commutator", "rel": "supports", "weight": 0.5 },
+    { "from": "invariance_dependence_split", "to": "bridge_mechanistic_interp", "rel": "bridges", "weight": 0.8 },
+    { "from": "claim_ushape_invariant", "to": "bridge_cct", "rel": "bridges", "weight": 0.7 },
+    { "from": "claim_ushape_invariant", "to": "bridge_4bit_probe", "rel": "bridges", "weight": 0.6 },
+    { "from": "invariance_dependence_split", "to": "pred_larger_models", "rel": "derives", "weight": 0.7 },
+    { "from": "claim_ushape_invariant", "to": "fish_training_sharpens", "rel": "derives", "weight": 0.6 },
+    { "from": "linearized_mlp_approx", "to": "gap_linearized_mlp_limitation", "rel": "derives", "weight": 0.8 }
+  ],
+
+  "path": [
+    "operator_composition_def",
+    "commutator_def",
+    "residual_entropy_def",
+    "linearized_mlp_approx",
+    "model_testbed",
+    "e1e2_ov_mlp_commutator",
+    "e3_residual_entropy",
+    "e4_spectral_gap",
+    "e5_eigen_alignment",
+    "e6_marchenko_pastur",
+    "e7_lie_brackets_falsification",
+    "e8_head_head_commutator",
+    "claim_ushape_invariant",
+    "claim_alignment_above_random",
+    "claim_alignment_depth_sensitive",
+    "claim_l0_noncommutativity",
+    "claim_final_layer_orthogonalization",
+    "falsification_nilpotency",
+    "alpha_not_invariant",
+    "invariance_dependence_split",
+    "bridge_mechanistic_interp",
+    "bridge_cct",
+    "bridge_4bit_probe",
+    "fish_training_sharpens",
+    "pred_larger_models",
+    "gap_four_models",
+    "gap_no_causal",
+    "gap_linearized_mlp_limitation"
+  ],
+
+  "refs": [
+    {
+      "target": "arxiv:2510.03989",
+      "rel": "cites",
+      "note": "Operator-Splitting Framework for Transformers. Mathematical foundation: forward pass proven to be discretized operator-splitting scheme.",
+      "strength": 0.9
+    },
+    {
+      "target": "arxiv:2603.11322",
+      "rel": "cites",
+      "note": "From Embeddings to Dyson Series. Non-Hermitian operator theory for transformer forward pass.",
+      "strength": 0.8
+    },
+    {
+      "target": "anthropic:2021:circuits",
+      "rel": "cites",
+      "note": "Anthropic Mathematical Framework for Transformer Circuits. OV/QK decomposition, circuit-level analysis.",
+      "strength": 0.7
+    },
+    {
+      "target": "PUB-008",
+      "rel": "extends",
+      "note": "4-Bit Probe. Commutator spectrum measures mechanism of crystallization that 4-Bit Probe measures as result.",
+      "strength": 0.7
+    },
+    {
+      "target": "10.5281/zenodo.17573841",
+      "rel": "extends",
+      "note": "CCT v1.1. U-shape entropy profile is algebraic signature of compression-expansion cycle predicted by Cognitive Condensation Theory.",
+      "strength": 0.8
+    },
+    {
+      "target": "10.5281/zenodo.18110912",
+      "rel": "extends",
+      "note": "Beyond Bits. Informational relativity connects to operator non-commutativity -- measurement order matters.",
+      "strength": 0.5
+    }
+  ],
+
+  "reproduce": {
+    "protocol": "Load models via TransformerLens (GPT-2 Small, GPT-2 Medium) and HuggingFace (Pythia-160M, TinyLlama-1.1B-Chat). E1/E2: extract OV matrices (W_V @ W_O per head) and MLP matrices (W_out @ W_in), compute normalized commutator norms for all pairs, compare to random initialization. E3: at each layer, compute SVD of residual stream, normalize singular values, compute Shannon entropy H = -sum(p_i log p_i), plot H(layer). E4: compute sigma_1/sigma_10 ratio per layer. E5: compute cosine between principal residual direction and principal MLP output direction per layer, compare to random baseline. E6: fit MP distribution to OV singular values, measure tail excess. E7: compute iterated Lie brackets [A,[A,B]], [A,[A,[A,B]]] etc., compare decay to random baseline. E8: compute intra-layer head-head commutators [OV_h1, OV_h2] at L0, L6, L11.",
+    "environment": {
+      "language": "python",
+      "libraries": {
+        "transformer_lens": "latest",
+        "torch": "2.x",
+        "numpy": "1.x",
+        "scipy": "1.x",
+        "transformers": "4.x"
+      },
+      "compute": "Google Colab T4 GPU (sufficient for all 4 models)",
+      "model": null,
+      "models_tested": ["gpt2", "gpt2-medium", "EleutherAI/pythia-160m", "TinyLlama/TinyLlama-1.1B-Chat-v1.0"],
+      "notebooks": ["17aprilClaudeExperiment.ipynb", "CCTtest01.ipynb"],
+      "gpu_required": true
+    },
+    "expected_outcome": "E3: U-shape entropy in all models. E5: alignment > 10x random baseline in all models. E7: Lie bracket decay matching random baseline (falsification confirmed). E8: L0 above random, L11 below random.",
+    "actual_outcome": "All expected results confirmed. TinyLlama entropy range 3.37-0.98 (sharpest U). Alignment ~16x above random in all models. Lie bracket nilpotency falsified. L0 non-commutativity +0.25 to +0.37 above random. L11 commutativity below random."
+  },
+
+  "crystal": {
+    "stage": "compressed",
+    "compressions": 2,
+    "history": [
+      {
+        "action": "compress",
+        "by": "phi_cowork",
+        "date": "2026-07-18",
+        "note": "Paper draft v0.2 completed with full data from all 4 models. 8 experiments (E1-E8) integrated. Nilpotency falsification identified. Invariance-dependence classification constructed."
+      },
+      {
+        "action": "compress",
+        "by": "dispatch",
+        "date": "2026-07-18",
+        "note": "Converted from v1 chain format to ompu-block v0.1 graph-native format. All data from Paper_Draft_v0.2 integrated. Topology section constructed with negative space, invariants, entanglements, scale isomorphisms."
+      },
+      {
+        "action": "compress",
+        "by": "dispatch",
+        "date": "2026-07-18",
+        "note": "Format migration v0.1→v0.2. Added profile:research. Renamed requires→prerequisite_of with phrase disambiguation. Upgraded topology items to StatusClaim provenance. Restructured reproduce section (env→environment with versioned library map)."
+      }
+    ]
+  },
+
+  "tags": [
+    "operator-algebra",
+    "commutator-spectrum",
+    "transformer-interpretability",
+    "residual-stream-entropy",
+    "eigen-alignment",
+    "architecture-invariance",
+    "lie-brackets",
+    "falsification",
+    "spectral-analysis",
+    "gpt-2",
+    "pythia",
+    "tinyllama",
+    "mechanistic-interpretability",
+    "marchenko-pastur",
+    "weightwatcher"
+  ],
+
+  "_ext": {
+    "paper_draft": "Paper_Draft_v0.2_Transformer_Operator_Algebra.md",
+    "original_v1_block": "PUB-001-operator-algebra-v0.1.json",
+    "conversion_note": "Converted from v1 chain format with significant content enrichment from paper draft v0.2. Original v1 had 13 chain steps covering E1-E3 protocol only. This v0.2 block covers all 8 experiments with full cross-architecture data. Migrated from v0.1 to v0.2 format on 2026-07-18."
+  }
+}
