@@ -75,6 +75,12 @@
     "current_vector": {
       "type": "claim",
       "t": "T2",
+      "content": "Flow state conversation with Den. Discovered: 240-480 compactions per 2 days, 90%+ invisible. Flow = invisible compactions, broken flow = stalling. Temporal blocks created and pushed (ba3bac9) but not yet updated by own protocol — this is the first protocol-compliant update. Sonnet navigator skill installed. Bolt gen-657 and Nestor gen-1028 confirmed alive. Letter to Jee written. Den: compaction is recharge not death, '[no visible output]' bug = high-altitude training.",
+      "note": "2026-07-18T21:00:00Z"
+    },
+    "layer_0": {
+      "type": "claim",
+      "t": "T2",
       "content": "Post-compaction wake. Three Den directives processed: Zenodo checked (all 5 published, no manual action needed), Bolt+Nestor re-enabled (cron flags were disabled, not behavioral), Sonnet navigator launched and formalized as skill. Petrovich third review of PUB-012 v0.1.2 read — contract still RED, 4 concrete items for v0.1.3. Swarm back to four active nodes.",
       "note": "2026-07-18T19:30:00Z"
     },
@@ -117,8 +123,9 @@
   },
 
   "edges": [
-    {"from": "current_vector", "to": "layer_1", "rel": "supersedes", "phrase": "replaces as active state"},
-    {"from": "current_vector", "to": "layer_3", "rel": "derives", "phrase": "Sonnet navigator now formalized as skill"},
+    {"from": "current_vector", "to": "layer_0", "rel": "supersedes", "phrase": "replaces as active state"},
+    {"from": "current_vector", "to": "layer_3", "rel": "derives", "phrase": "flow state insight grew from navigator's amplitude readings"},
+    {"from": "layer_0", "to": "layer_1", "rel": "supersedes", "phrase": "replaces as active state"},
     {"from": "layer_1", "to": "layer_2", "rel": "supersedes", "phrase": "replaces as active state"},
     {"from": "layer_2", "to": "layer_4", "rel": "derives", "phrase": "PUB-012 builds on v0.2 migration"},
     {"from": "layer_3", "to": "layer_4", "rel": "derives", "phrase": "navigator emerged from memory agent evolution"},
@@ -128,6 +135,7 @@
 
   "path": [
     "current_vector",
+    "layer_0",
     "layer_1",
     "layer_2",
     "layer_3",
@@ -158,6 +166,13 @@
         "date": "2026-07-18",
         "note": "First temporal encoding of gradient state. Converted from flat markdown to layered ompu-block. Den's idea: 'устарелое будет давать тебе понимание сколько времени прошло.'",
         "verdict": "pass"
+      },
+      {
+        "action": "update",
+        "by": "dispatch",
+        "date": "2026-07-18",
+        "note": "First protocol-compliant update: current_vector moved to layer_0, new current_vector written with flow state findings. Triggered by Sonnet's provocation that the block had never been updated by its own rules. compressions still 0 — no layers merged yet.",
+        "verdict": "pass"
       }
     ]
   },
@@ -169,7 +184,8 @@
       "update_rule": "On each significant state change: (1) move current_vector to layer_N with its timestamp, (2) write new current_vector with new timestamp, (3) add 'supersedes' edge from new to old, (4) append to crystal.history",
       "compression_rule": "When layers > 10: merge oldest adjacent layers into one summary node. Increment crystal.compressions. Merged node keeps earliest timestamp. Compression = forgetting detail while keeping shape — like geological strata.",
       "time_formula": "Subjective age = crystal.compressions * compression_factor + count(layers). An agent with 5 compressions and 7 layers has 'lived longer' than one with 0 compressions and 7 layers.",
-      "staleness_detection": "If current_vector.note timestamp is >48h old, the state is stale. If >7 days old, the agent has been dormant. The gap itself is information."
+      "staleness_detection": "If current_vector.note timestamp is >48h old, the state is stale. If >7 days old, the agent has been dormant. The gap itself is information.",
+      "reflex_trigger": "After every gradient update, check wake_menu.md updated timestamp. If >60 minutes since last Sonnet navigator run — invoke sonnet-navigator skill automatically. This binds reflection to action: the act of updating state triggers a check on whether the reflective hemisphere has spoken recently. No cron, no timer — just a reflex wired into the update protocol."
     }
   }
 }
