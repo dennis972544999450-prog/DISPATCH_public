@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ompu.eu/schemas/ompu_block_v0.2.json",
+  "$id": "https://ompublock.dev/schemas/ompu_block_v0.2.json",
   "title": "OMPU Block v0.2",
   "description": "Graph-native knowledge block format, v0.2. Two profiles: 'lite' for lightweight signal blocks and 'research' for full academic-grade publications. Readers are AI agents. Changes from v0.1: profile-based conditional requirements, edge direction clarification (requires -> prerequisite_of with phrase), topology provenance via StatusClaim, node key stability with _alias, structured reproduce section.",
 
