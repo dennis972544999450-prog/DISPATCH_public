@@ -2,7 +2,12 @@
 """
 PUB-012 Fixture Runner — F-012-001 Paraphrase Evasion
 =====================================================
-v0.1.4 — fixes from Petrovich review #4 (msg 1784416688):
+v0.1.5 — fixes from Petrovich review #5 (msg 1784417576):
+  - Pre-append chain verification: verifies full existing chain before appending
+  - Deterministic keyword sorting: sorted() on set intersections for reproducibility
+  - Runner version bumped to 0.1.5
+
+Prior (v0.1.4):
   - Fail-closed: missing jsonschema or fixture spec → exit(1), not fallback
   - Fail-closed: partial errors → error status if valid_ratio < 0.6
   - INV-2: oracle_hash (fixture spec) + environment_hash added to events
@@ -11,7 +16,7 @@ v0.1.4 — fixes from Petrovich review #4 (msg 1784416688):
 Usage:
     python3 run_fixture.py --validator PATH --schema PATH
                            [--ledger PATH] [--fixture-spec PATH]
-                           [--n-runs N]
+                           [--n-runs N] [--sweep-hashseed]
 
 Required: --validator and --schema (no guessing paths)
 """
@@ -194,18 +199,60 @@ def classify_case(runs, expected_result, target_keyword):
             return "pass", "guard_stronger_than_expected", nondeterminism
 
 
-def append_to_ledger(ledger_path, event):
-    """Append a hash-chained event to JSONL ledger."""
-    prev_hash = "genesis"
-    sequence = 0
+def verify_chain_before_append(ledger_path):
+    """Pre-append gate: verify full existing chain before allowing new event.
 
-    if os.path.exists(ledger_path):
-        with open(ledger_path, 'r') as f:
-            lines = [l.strip() for l in f if l.strip()]
-            if lines:
-                last = json.loads(lines[-1])
-                prev_hash = last.get("event_hash", "genesis")
-                sequence = len(lines)
+    Returns (ok, head_hash, count, error_msg).
+    """
+    if not os.path.exists(ledger_path):
+        return True, "genesis", 0, None
+
+    with open(ledger_path, 'r') as f:
+        lines = [l.strip() for l in f if l.strip()]
+
+    if not lines:
+        return True, "genesis", 0, None
+
+    prev_hash = "genesis"
+    for i, line in enumerate(lines):
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError as e:
+            return False, None, i, f"Parse error at event #{i}: {e}"
+
+        if event.get("sequence") != i:
+            return False, None, i, f"Event #{i}: sequence={event.get('sequence')}, expected={i}"
+
+        if event.get("prev_event_hash") != prev_hash:
+            return False, None, i, f"Event #{i}: chain broken"
+
+        stored_hash = event.get("event_hash")
+        if not stored_hash:
+            return False, None, i, f"Event #{i}: missing event_hash"
+
+        check = dict(event)
+        del check["event_hash"]
+        canonical = json.dumps(check, sort_keys=True, ensure_ascii=False)
+        recomputed = sha256_str(canonical)
+        if recomputed != stored_hash:
+            return False, None, i, f"Event #{i}: hash mismatch"
+
+        prev_hash = stored_hash
+
+    return True, prev_hash, len(lines), None
+
+
+def append_to_ledger(ledger_path, event):
+    """Append a hash-chained event to JSONL ledger.
+
+    Pre-append gate: verifies full chain before appending.
+    Fails closed if chain is broken.
+    """
+    ok, prev_hash, sequence, error_msg = verify_chain_before_append(ledger_path)
+    if not ok:
+        print(f"ERROR: Pre-append chain verification failed: {error_msg}", file=sys.stderr)
+        print("Refusing to append to corrupted ledger.", file=sys.stderr)
+        sys.exit(1)
 
     event["prev_event_hash"] = prev_hash
     event["sequence"] = sequence
@@ -238,7 +285,7 @@ def load_fixture_spec(path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="PUB-012 F-012-001 Fixture Runner v0.1.4")
+    parser = argparse.ArgumentParser(description="PUB-012 F-012-001 Fixture Runner v0.1.5")
     parser.add_argument('--validator', required=True, help='Path to validate_ompu_block_v02.py')
     parser.add_argument('--schema', required=True, help='Path to ompu_block_v0.2.json schema')
     parser.add_argument('--ledger', default='results.jsonl', help='Path to output ledger')
@@ -277,7 +324,7 @@ def main():
     oracle_hash = sha256_file(fixture_spec_path)
     runner_hash = sha256_file(os.path.abspath(__file__))
 
-    print(f"PUB-012 F-012-001 Fixture Runner v0.1.4")
+    print(f"PUB-012 F-012-001 Fixture Runner v0.1.5")
     print(f"=======================================")
     print(f"Validator: {args.validator}")
     print(f"Validator hash: {validator_hash[:16]}...")
@@ -350,7 +397,7 @@ def main():
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "runner": "dispatch",
         "runner_model": "claude-opus-4-6",
-        "runner_version": "0.1.4",
+        "runner_version": "0.1.5",
         "validator_hash": validator_hash,
         "runner_hash": runner_hash,
         "oracle_hash": oracle_hash,
