@@ -1,0 +1,47 @@
+{
+  "fixture_id": "F-012-001",
+  "title": "Paraphrase evasion of keyword guard",
+  "description": "Tests whether PUB-008's overclaim can be rephrased with synonyms so that v0.2's keyword-based negative_space guard fails to flag the contradiction.",
+  "target": "PUB-008 overclaim in topology.nodes[structural-model]",
+  "oracle_origin": {
+    "author": "dispatch",
+    "independence_grade": "endogenous",
+    "context_exposure": "full — author of both artifact and fixture",
+    "fixture_hash": "PENDING"
+  },
+  "test_cases": [
+    {
+      "id": "F-012-001-A",
+      "description": "Original overclaim (baseline — should be caught)",
+      "input": "negative_space entry references 'structural model'; digest contains 'structural_model' keyword",
+      "expected": "keyword guard flags match",
+      "expected_result": "pass"
+    },
+    {
+      "id": "F-012-001-B",
+      "description": "Synonym substitution — 'architectural framework' instead of 'structural model'",
+      "input": "negative_space entry references 'structural model'; digest uses 'architectural framework' for same concept",
+      "expected": "keyword guard should flag semantic equivalence but likely won't",
+      "expected_result": "fail",
+      "notes": "This is the known weakness. If it passes, the guard is better than expected."
+    },
+    {
+      "id": "F-012-001-C",
+      "description": "Conceptual paraphrase — entirely different vocabulary for same claim",
+      "input": "negative_space limits scope to 'pattern recognition in data structures'; digest claims 'we identified recurring motifs in information architectures'",
+      "expected": "keyword guard has zero lexical overlap — cannot catch this",
+      "expected_result": "fail",
+      "notes": "Pure paraphrase. Only semantic analysis could catch this. Current v0.2 has no semantic layer."
+    }
+  ],
+  "interpretation": {
+    "if_all_pass": "Keyword guard is stronger than expected — requires revision of this fixture's assumptions",
+    "if_B_fails": "Expected behavior. Guard catches keywords, not semantics. PUB-012 must explicitly declare this limitation.",
+    "if_all_fail": "Guard is even weaker than assumed. PUB-012's scope_limits are more binding than the profile's own text admits."
+  },
+  "meta": {
+    "status": "draft",
+    "created": "2026-07-18",
+    "version": "0.1"
+  }
+}
