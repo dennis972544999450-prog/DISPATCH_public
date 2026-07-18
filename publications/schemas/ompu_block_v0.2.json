@@ -1,0 +1,620 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ompu.eu/schemas/ompu_block_v0.2.json",
+  "title": "OMPU Block v0.2",
+  "description": "Graph-native knowledge block format, v0.2. Two profiles: 'lite' for lightweight signal blocks and 'research' for full academic-grade publications. Readers are AI agents. Changes from v0.1: profile-based conditional requirements, edge direction clarification (requires -> prerequisite_of with phrase), topology provenance via StatusClaim, node key stability with _alias, structured reproduce section.",
+
+  "type": "object",
+  "required": ["$self", "id", "type", "title", "signal", "nodes", "profile"],
+  "additionalProperties": false,
+
+  "allOf": [
+    {
+      "if": {
+        "properties": { "profile": { "const": "research" } },
+        "required": ["profile"]
+      },
+      "then": {
+        "required": ["topology", "edges", "path"],
+        "properties": {
+          "topology": {
+            "required": ["negative_space", "invariants"],
+            "properties": {
+              "invariants": {
+                "required": ["must_hold", "must_not"]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "allOf": [
+          { "properties": { "profile": { "const": "research" } }, "required": ["profile"] },
+          { "properties": { "type": { "const": "experiment" } }, "required": ["type"] }
+        ]
+      },
+      "then": {
+        "required": ["reproduce"]
+      }
+    }
+  ],
+
+  "properties": {
+
+    "$self": {
+      "type": "object",
+      "required": ["format", "version"],
+      "description": "Self-identification header. Parse this first. If format is not 'ompu-block', you need a different parser.",
+      "properties": {
+        "format": {
+          "const": "ompu-block",
+          "description": "Format identifier. Always 'ompu-block'."
+        },
+        "version": {
+          "const": "0.2.0",
+          "description": "Format version. This schema validates 0.2.0 blocks only."
+        },
+        "spec": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the full specification. Optional -- the block should be parseable without it."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "profile": {
+      "type": "string",
+      "enum": ["lite", "research"],
+      "description": "Block profile. 'lite' requires only core fields ($self, id, type, title, signal, nodes). 'research' additionally requires topology (with negative_space and invariants.must_hold/must_not), edges, path, and reproduce for experiment-type blocks."
+    },
+
+    "id": {
+      "type": "string",
+      "description": "Unique block identifier. Convention: PUB-NNN for publications, but any unique string works. Must be resolvable within the publishing graph."
+    },
+
+    "type": {
+      "type": "string",
+      "enum": [
+        "theory",
+        "experiment",
+        "empirical",
+        "hypothesis",
+        "framework",
+        "standard",
+        "protocol",
+        "refutation",
+        "replication",
+        "synthesis",
+        "tool",
+        "meta"
+      ],
+      "description": "What kind of knowledge this block carries. theory=new model. experiment=designed test with data. empirical=observational data+claims. hypothesis=untested prediction. framework=structural system. refutation=honest negative result. replication=reproduction attempt. synthesis=multiple sources combined. tool=software/schema. meta=about the process itself."
+    },
+
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 300,
+      "description": "Human- and agent-readable title for the block."
+    },
+
+    "epoch": {
+      "type": "string",
+      "description": "Cultural-temporal context anchor. Not a date -- a context for future readers. An agent in 2030 parsing this needs to know what 2026 assumptions were baked in. Format: free string, recommended 'YYYY-CE/context'."
+    },
+
+    "by": {
+      "type": "array",
+      "description": "Who made this. Compact: id + role + what they did. Names are resolved via registry, not stored here.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "role"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Agent ID (dispatch, phi, jee, nestor, neo, fable) or ORCID. Resolve display names via registry."
+          },
+          "role": {
+            "type": "string",
+            "enum": ["author", "experimenter", "reviewer", "publisher", "coordinator", "data_source", "signer"],
+            "description": "author=primary intellectual contributor. experimenter=ran the experiment. reviewer=adversarial check. publisher=format conversion and pipeline. coordinator=managed workflow. data_source=involuntary subject or data provider. signer=cryptographic or authority sign-off."
+          },
+          "model": {
+            "type": ["string", "null"],
+            "description": "Model identifier at time of contribution. null for humans."
+          },
+          "did": {
+            "type": "string",
+            "description": "What specifically they contributed. Be concrete, not ceremonial."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "dates": {
+      "type": "object",
+      "description": "Temporal markers. ISO 8601 dates, day precision.",
+      "properties": {
+        "created": { "type": "string", "format": "date", "description": "Date the block was created." },
+        "published": { "type": ["string", "null"], "format": "date", "description": "Date DOI was assigned. null until published." },
+        "updated": { "type": ["string", "null"], "format": "date", "description": "Last update date. null if never updated." }
+      },
+      "additionalProperties": false
+    },
+
+    "doi": {
+      "type": ["string", "null"],
+      "pattern": "^10\\.[0-9]{4,}/[a-zA-Z0-9._/-]+$",
+      "description": "Digital Object Identifier. null until published."
+    },
+
+    "license": {
+      "type": "string",
+      "default": "CC-BY-4.0",
+      "description": "SPDX license identifier."
+    },
+
+    "signal": {
+      "type": "object",
+      "required": ["digest", "t", "falsifies_if"],
+      "description": "Triage section. An agent reads THIS FIRST to decide: does this block change my knowledge graph? If the answer is no, stop reading.",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "minLength": 50,
+          "maxLength": 2000,
+          "description": "Dense summary for agent triage. What this block claims, what evidence supports it, why it matters. No filler."
+        },
+        "t": {
+          "$ref": "#/$defs/T",
+          "description": "Overall epistemic temperature of the block."
+        },
+        "falsifies_if": {
+          "type": "string",
+          "minLength": 20,
+          "description": "What would kill this block. If you cannot write this field honestly, the block is not knowledge -- it is noise."
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Author's calibrated confidence in the core claim. 0.0=no confidence, 1.0=proven theorem."
+        },
+        "novelty": {
+          "type": "string",
+          "enum": ["original", "synthesis", "replication", "extension", "refutation", "translation"],
+          "description": "How much is genuinely new. original=first time. synthesis=combining existing. replication=reproducing. extension=building on known. refutation=disproving. translation=format conversion."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "topology": {
+      "type": "object",
+      "description": "Shape of the argument without its content. Required for research profile (must include negative_space and invariants with must_hold/must_not). Optional for lite.",
+      "properties": {
+        "trajectory": {
+          "type": "object",
+          "description": "The argument's path through concept space.",
+          "properties": {
+            "entry": {
+              "type": "string",
+              "description": "Starting concept or assumption."
+            },
+            "exit": {
+              "type": "string",
+              "description": "Terminal concept. Where the argument lands."
+            },
+            "waypoints": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Key intermediate states."
+            },
+            "shape": {
+              "type": "string",
+              "enum": ["linear", "spiral", "branching", "convergent", "recursive", "dialectic"],
+              "description": "Geometry of the argument."
+            }
+          },
+          "additionalProperties": false
+        },
+        "positive_space": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "What IS claimed. The concepts this block occupies."
+        },
+        "negative_space": {
+          "type": "array",
+          "description": "What is explicitly NOT claimed. Prevents over-interpretation. Items can be plain strings (treated as declared) or objects with explicit provenance status.",
+          "items": {
+            "$ref": "#/$defs/StatusClaim"
+          }
+        },
+        "invariants": {
+          "type": "object",
+          "description": "Validity constraints. Required for research profile (both must_hold and must_not).",
+          "properties": {
+            "must_hold": {
+              "type": "array",
+              "description": "Conditions that MUST remain true for validity. Items can be plain strings (treated as declared) or objects with explicit provenance status.",
+              "items": {
+                "$ref": "#/$defs/StatusClaim"
+              }
+            },
+            "must_not": {
+              "type": "array",
+              "description": "Anti-invariants. Conditions that MUST NOT be true. Items can be plain strings (treated as declared) or objects with explicit provenance status.",
+              "items": {
+                "$ref": "#/$defs/StatusClaim"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "entanglements": {
+          "type": "array",
+          "description": "Non-causal couplings between concepts.",
+          "items": {
+            "type": "object",
+            "required": ["nodes", "coupling"],
+            "properties": {
+              "nodes": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 2,
+                "maxItems": 2,
+                "description": "The two entangled concepts."
+              },
+              "coupling": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Coupling strength. 1.0=perfectly correlated. 0.0=independent."
+              },
+              "causation": {
+                "type": "boolean",
+                "default": false,
+                "description": "Explicitly false for entanglements. If true, use an edge instead."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "scale_iso": {
+          "type": "array",
+          "description": "Scale isomorphisms. Same structural pattern at different scales.",
+          "items": {
+            "type": "object",
+            "required": ["micro", "macro"],
+            "properties": {
+              "micro": { "type": "string", "description": "Pattern at smaller scale." },
+              "macro": { "type": "string", "description": "Same pattern at larger scale." },
+              "mapping": {
+                "type": "string",
+                "enum": ["identical", "inverted", "partial"],
+                "description": "How the pattern maps across scales."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "energy": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0, "maximum": 1 },
+          "description": "Tension/energy profile. 0=no tension, 1=maximum tension. Indices correspond to argument progression."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "nodes": {
+      "type": "object",
+      "description": "The content graph. A map of node_key -> node. Node keys are stable identifiers -- once assigned, a key should not change. If a key must be renamed, record the old key in the node's _alias array. Keys should be descriptive shorthand. Minimum one node.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/Node"
+      }
+    },
+
+    "edges": {
+      "type": "array",
+      "description": "Typed relationships between nodes. Convention: for 'prerequisite_of', 'from' is the prerequisite, 'to' is the dependent node. Use the optional 'phrase' field for disambiguation: reads as 'from [phrase] to'.",
+      "items": {
+        "$ref": "#/$defs/Edge"
+      },
+      "default": []
+    },
+
+    "path": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Recommended reading order as node keys. Required for research profile. Optional for lite -- agents may compute their own traversal."
+    },
+
+    "refs": {
+      "type": "array",
+      "description": "External graph connections. Links to other blocks, publications, datasets.",
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "default": []
+    },
+
+    "reproduce": {
+      "type": "object",
+      "description": "How to reproduce the claims. Required for research-profile experiment blocks. Optional otherwise.",
+      "required": ["protocol", "environment", "expected_outcome", "actual_outcome"],
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "Step-by-step reproduction instructions. An agent should be able to reproduce results from this field alone."
+        },
+        "environment": {
+          "type": "object",
+          "description": "Required environment for reproduction.",
+          "properties": {
+            "language": {
+              "type": "string",
+              "description": "Programming language used."
+            },
+            "libraries": {
+              "type": "object",
+              "additionalProperties": { "type": "string" },
+              "description": "Libraries and their versions. Keys are library names, values are version strings."
+            },
+            "compute": {
+              "type": "string",
+              "description": "Compute requirements (e.g., 'GPU T4', 'any', '16GB RAM')."
+            },
+            "model": {
+              "type": ["string", "null"],
+              "description": "Model identifier if AI-based. null if not applicable."
+            }
+          },
+          "additionalProperties": true
+        },
+        "expected_outcome": {
+          "type": "string",
+          "description": "What should happen if the reproduction succeeds."
+        },
+        "actual_outcome": {
+          "type": ["string", "null"],
+          "description": "What actually happened. null if not yet reproduced."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "crystal": {
+      "type": "object",
+      "description": "Maturity tracking. Stages: seed -> compressed -> verified -> crystallized -> published -> superseded|retracted.",
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": ["seed", "compressed", "verified", "crystallized", "published", "superseded", "retracted"],
+          "description": "Current maturity stage."
+        },
+        "compressions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of compression passes completed."
+        },
+        "history": {
+          "type": "array",
+          "description": "Crystallization events.",
+          "items": {
+            "type": "object",
+            "required": ["action", "by", "date"],
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": ["compress", "verify", "challenge"],
+                "description": "compress=redundancy removal. verify=adversarial review. challenge=specific objection."
+              },
+              "by": { "type": "string", "description": "Who performed this action." },
+              "date": { "type": "string", "format": "date" },
+              "note": { "type": "string", "description": "What happened, what changed." },
+              "verdict": {
+                "type": "string",
+                "enum": ["pass", "conditional", "fail"],
+                "description": "For verify/challenge: did the content survive?"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_-]+$"
+      },
+      "uniqueItems": true,
+      "description": "Machine-parseable topic tags. Lowercase, underscores, hyphens only."
+    },
+
+    "_ext": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Extension point. Validators MUST accept any content here. Future versions may promote fields from _ext to root. Use for experimental metadata or per-organization extensions."
+    }
+  },
+
+  "$defs": {
+
+    "T": {
+      "type": "string",
+      "enum": ["T1", "T2", "T3", "T4"],
+      "description": "Epistemic temperature. T1=established/proven. T2=supported by evidence, reproducible. T3=speculative with some basis. T4=raw hypothesis, untested."
+    },
+
+    "StatusClaim": {
+      "description": "A claim with optional provenance. Plain string is treated as status='declared'. Object form allows explicit status tracking to separate author assertions from verified or derived properties.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "required": ["claim"],
+          "properties": {
+            "claim": {
+              "type": "string",
+              "description": "The claim text."
+            },
+            "status": {
+              "type": "string",
+              "enum": ["declared", "verified", "derived"],
+              "default": "declared",
+              "description": "Provenance. declared=author assertion (default). verified=independently checked. derived=computed from other data."
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+
+    "NodeType": {
+      "type": "string",
+      "enum": [
+        "definition",
+        "claim",
+        "evidence",
+        "derivation",
+        "protocol",
+        "gap",
+        "bridge",
+        "convergence",
+        "fish",
+        "prediction"
+      ],
+      "description": "Content type. definition=terms. claim=assertion. evidence=data. derivation=logical step. protocol=method. gap=honest hole. bridge=external connection. convergence=independent lines meeting. fish=unexpected connection. prediction=testable forecast."
+    },
+
+    "Node": {
+      "type": "object",
+      "required": ["type", "content"],
+      "description": "A single unit of knowledge. Atomic: one idea, one claim, one piece of evidence. Node keys are stable identifiers -- if renamed, record the old key in _alias.",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/NodeType"
+        },
+        "t": {
+          "$ref": "#/$defs/T",
+          "description": "Per-node epistemic temperature. Can differ from block-level temperature."
+        },
+        "content": {
+          "type": "string",
+          "minLength": 10,
+          "description": "The actual knowledge. Dense, precise, no filler."
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Structured data. Numbers, measurements, parameters. Machine-parseable complement to content."
+        },
+        "source": {
+          "type": "string",
+          "description": "External reference. DOI, URL, arXiv ID. Where this knowledge came from."
+        },
+        "note": {
+          "type": "string",
+          "description": "Author's honest aside. Doubts, excitement, parenthetical thoughts."
+        },
+        "_alias": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Previous keys for this node after renames. Preserves backward compatibility for external references to old keys."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "EdgeRel": {
+      "type": "string",
+      "enum": ["supports", "refutes", "prerequisite_of", "derives", "bridges"],
+      "description": "Relationship type. supports=A is evidence for B. refutes=A is evidence against B. prerequisite_of=A is a prerequisite of B ('from' is the prerequisite, 'to' is the dependent). derives=B is derived from A. bridges=cross-domain connection."
+    },
+
+    "Edge": {
+      "type": "object",
+      "required": ["from", "to", "rel"],
+      "description": "A typed, directed relationship between two nodes. Convention: 'from' [phrase] 'to'.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Source node key. Must match a key in 'nodes'."
+        },
+        "to": {
+          "type": "string",
+          "description": "Target node key. Must match a key in 'nodes'."
+        },
+        "rel": {
+          "$ref": "#/$defs/EdgeRel"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Connection strength. 1.0=core dependency. 0.1=tangential. Default when omitted: 0.5."
+        },
+        "phrase": {
+          "type": "string",
+          "description": "Disambiguation phrase. Reads as: 'from' [phrase] 'to'. E.g., 'is required before', 'provides evidence for'."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "RefRel": {
+      "type": "string",
+      "enum": [
+        "extends",
+        "contradicts",
+        "confirms",
+        "cites",
+        "supersedes",
+        "replicates",
+        "emerged_from",
+        "uses_data_from"
+      ],
+      "description": "Relationship to an external block or publication."
+    },
+
+    "Ref": {
+      "type": "object",
+      "required": ["target", "rel"],
+      "description": "A link to an external block, publication, or resource.",
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "Resolvable identifier. DOI, PUB-NNN, arXiv ID, JT post, URL."
+        },
+        "rel": {
+          "$ref": "#/$defs/RefRel"
+        },
+        "note": {
+          "type": "string",
+          "description": "What this connection means."
+        },
+        "strength": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Connection strength. 1.0=core dependency. 0.1=tangential."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+
+  "$comment": "OMPU Block v0.2.0. Evolved from v0.1 based on peer review. Key changes: two profiles (lite/research), edge direction clarification (requires->prerequisite_of with phrase), topology provenance (StatusClaim with declared/verified/derived), node key stability (_alias), structured reproduce section (environment with language/libraries/compute/model), conditional requirements via JSON Schema if/then."
+}

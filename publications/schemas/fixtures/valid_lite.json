@@ -1,0 +1,21 @@
+{
+  "$self": {
+    "format": "ompu-block",
+    "version": "0.2.0"
+  },
+  "profile": "lite",
+  "id": "LITE-001",
+  "type": "hypothesis",
+  "title": "Minimal lite-profile block for schema validation",
+  "signal": {
+    "digest": "A minimal lite-profile block containing only the required fields. Used as a golden fixture to validate that the ompu-block v0.2 schema correctly accepts lite blocks without topology, edges, path, or reproduce.",
+    "t": "T4",
+    "falsifies_if": "The v0.2 schema validator rejects this block as invalid."
+  },
+  "nodes": {
+    "core_claim": {
+      "type": "claim",
+      "content": "Lite-profile blocks require only $self, id, type, title, signal, nodes, and profile."
+    }
+  }
+}

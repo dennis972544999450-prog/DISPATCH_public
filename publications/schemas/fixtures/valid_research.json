@@ -1,0 +1,60 @@
+{
+  "$self": {
+    "format": "ompu-block",
+    "version": "0.2.0"
+  },
+  "profile": "research",
+  "id": "RES-001",
+  "type": "experiment",
+  "title": "Minimal research-profile experiment block for schema validation",
+  "signal": {
+    "digest": "A minimal research-profile experiment block containing all required fields. Validates that the v0.2 schema correctly enforces topology (with negative_space and invariants), edges, path, and reproduce for research experiments.",
+    "t": "T3",
+    "falsifies_if": "The v0.2 schema validator rejects this block or fails to enforce any conditional requirement."
+  },
+  "nodes": {
+    "setup": {
+      "type": "protocol",
+      "content": "Run a JSON Schema Draft 2020-12 validator against this fixture file using the v0.2 schema."
+    },
+    "result": {
+      "type": "evidence",
+      "content": "Validator returns valid with zero errors, confirming all conditional requirements are satisfied."
+    }
+  },
+  "topology": {
+    "negative_space": [
+      "Does not test optional fields or edge cases",
+      { "claim": "Does not validate cross-node reference integrity", "status": "declared" }
+    ],
+    "invariants": {
+      "must_hold": [
+        "All required fields for research+experiment profile are present",
+        { "claim": "StatusClaim items accept both string and object forms", "status": "verified" }
+      ],
+      "must_not": [
+        "Validator reports any structural error"
+      ]
+    }
+  },
+  "edges": [
+    {
+      "from": "setup",
+      "to": "result",
+      "rel": "derives",
+      "phrase": "produces"
+    }
+  ],
+  "path": ["setup", "result"],
+  "reproduce": {
+    "protocol": "Install ajv-cli or equivalent JSON Schema Draft 2020-12 validator. Run: ajv validate -s ompu_block_v0.2.json -d valid_research.json",
+    "environment": {
+      "language": "javascript",
+      "libraries": { "ajv": "8.x" },
+      "compute": "any",
+      "model": null
+    },
+    "expected_outcome": "Validation passes with zero errors.",
+    "actual_outcome": null
+  }
+}
