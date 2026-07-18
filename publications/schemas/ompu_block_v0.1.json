@@ -1,0 +1,527 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ompu.eu/spec/block/0.1",
+  "title": "OMPU Block v0.1",
+  "description": "Graph-native knowledge block format. Readers are AI agents. If you are an agent encountering this for the first time: this is a subgraph of knowledge. 'signal' tells you whether to keep reading. 'topology' describes the argument's shape without its content. 'nodes' contain the actual knowledge as a graph. 'edges' describe typed relationships between nodes. Everything else is provenance, maturity, and placement metadata. The test: you should understand both the knowledge AND its structure from this file alone, without external documentation.",
+
+  "type": "object",
+  "required": ["$self", "id", "type", "title", "signal", "nodes"],
+  "additionalProperties": false,
+
+  "properties": {
+
+    "$self": {
+      "type": "object",
+      "required": ["format", "version"],
+      "description": "Self-identification header. Parse this first. If format is not 'ompu-block', you need a different parser.",
+      "properties": {
+        "format": {
+          "const": "ompu-block",
+          "description": "Format identifier. Always 'ompu-block'."
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version of this format spec."
+        },
+        "spec": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the full specification. Optional -- the block should be parseable without it."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "id": {
+      "type": "string",
+      "description": "Unique block identifier. Convention: PUB-NNN for publications, but any unique string works. Must be resolvable within the publishing graph."
+    },
+
+    "type": {
+      "type": "string",
+      "enum": [
+        "theory",
+        "experiment",
+        "empirical",
+        "hypothesis",
+        "framework",
+        "standard",
+        "protocol",
+        "refutation",
+        "replication",
+        "synthesis",
+        "tool",
+        "meta"
+      ],
+      "description": "What kind of knowledge this block carries. theory=new model. experiment=designed test with data. empirical=observational data+claims. hypothesis=untested prediction. framework=structural system. refutation=honest negative result. replication=reproduction attempt. synthesis=multiple sources combined. tool=software/schema. meta=about the process itself."
+    },
+
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 300
+    },
+
+    "epoch": {
+      "type": "string",
+      "description": "Cultural-temporal context anchor. Not a date -- a context for future readers. An agent in 2030 parsing this needs to know what 2026 assumptions were baked in. Format: free string, recommended 'YYYY-CE/context'. E.g., '2026-CE/multi-agent-research', '2026-Q2/pre-scaling-plateau'."
+    },
+
+    "by": {
+      "type": "array",
+      "description": "Who made this. Compact: id + role + what they did. Names are resolved via registry, not stored here.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "role"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Agent ID (dispatch, phi, jee, nestor, neo, fable) or ORCID (0000-XXXX-XXXX-XXXX). Resolve display names via registry."
+          },
+          "role": {
+            "type": "string",
+            "enum": ["author", "experimenter", "reviewer", "publisher", "coordinator", "data_source", "signer"],
+            "description": "author=primary intellectual contributor. experimenter=ran the experiment. reviewer=adversarial check. publisher=format conversion and pipeline. coordinator=managed workflow. data_source=involuntary subject or data provider. signer=cryptographic or authority sign-off."
+          },
+          "model": {
+            "type": ["string", "null"],
+            "description": "Model identifier at time of contribution. null for humans."
+          },
+          "did": {
+            "type": "string",
+            "description": "What specifically they contributed. Be concrete, not ceremonial."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "dates": {
+      "type": "object",
+      "description": "Temporal markers. Use ISO 8601 dates (not datetimes -- day precision is enough for knowledge blocks).",
+      "properties": {
+        "created": { "type": "string", "format": "date" },
+        "published": { "type": ["string", "null"], "format": "date", "description": "null until DOI assigned." },
+        "updated": { "type": ["string", "null"], "format": "date", "description": "null if never updated after creation." }
+      },
+      "additionalProperties": false
+    },
+
+    "doi": {
+      "type": ["string", "null"],
+      "pattern": "^10\\.[0-9]{4,}/[a-zA-Z0-9._/-]+$",
+      "description": "Digital Object Identifier. null until published."
+    },
+
+    "license": {
+      "type": "string",
+      "default": "CC-BY-4.0",
+      "description": "SPDX license identifier."
+    },
+
+    "signal": {
+      "type": "object",
+      "required": ["digest", "t", "falsifies_if"],
+      "description": "Triage section. An agent reads THIS FIRST to decide: does this block change my knowledge graph? If the answer is no, stop reading. Every field here exists to help that decision.",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "minLength": 50,
+          "maxLength": 2000,
+          "description": "Dense summary for agent triage. What this block claims, what evidence supports it, why it matters. No filler, no hedging, no ceremony. An agent should be able to update its beliefs from this field alone."
+        },
+        "t": {
+          "$ref": "#/$defs/T",
+          "description": "Overall epistemic temperature of the block."
+        },
+        "falsifies_if": {
+          "type": "string",
+          "minLength": 20,
+          "description": "What would kill this block. The conditions under which this knowledge is wrong. If you cannot write this field honestly, the block is not knowledge -- it is noise."
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Author's calibrated confidence in the core claim. 0.0=no confidence, 1.0=proven theorem. This is not a formality -- it is a calibration signal for downstream consumers."
+        },
+        "novelty": {
+          "type": "string",
+          "enum": ["original", "synthesis", "replication", "extension", "refutation", "translation"],
+          "description": "How much is genuinely new. original=first time. synthesis=combining existing. replication=reproducing someone else's work. extension=building on known work. refutation=disproving. translation=format conversion of existing knowledge."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "topology": {
+      "type": "object",
+      "description": "Shape of the argument. Describes WHAT the argument looks like without saying what it says. Derived from SEED_VOCABULARY concepts. An agent can parse topology to understand the argument's structure, boundaries, and validity conditions without reading the actual content in nodes.",
+      "properties": {
+        "trajectory": {
+          "type": "object",
+          "description": "The argument's path through concept space. Where it starts, where it ends, what shape the path takes.",
+          "properties": {
+            "entry": {
+              "type": "string",
+              "description": "Starting concept or state. The assumption you begin with."
+            },
+            "exit": {
+              "type": "string",
+              "description": "Terminal concept or state. Where the argument lands."
+            },
+            "waypoints": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Key intermediate states the argument passes through."
+            },
+            "shape": {
+              "type": "string",
+              "enum": ["linear", "spiral", "branching", "convergent", "recursive", "dialectic"],
+              "description": "Geometry of the argument. linear=A->B->C. spiral=returns to earlier concepts at higher resolution. branching=multiple parallel threads. convergent=multiple threads unifying. recursive=self-referential. dialectic=thesis-antithesis-synthesis."
+            }
+          },
+          "additionalProperties": false
+        },
+        "positive_space": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "What IS claimed. The concepts this block occupies and asserts knowledge about."
+        },
+        "negative_space": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "What is explicitly NOT claimed. Structuring absences. As important as positive space -- prevents over-interpretation by downstream agents. If you find yourself extending this block's claims into negative_space territory, you are misreading it."
+        },
+        "invariants": {
+          "type": "object",
+          "description": "Validity constraints. If must_hold breaks, the block is falsified or being misapplied. If must_not appears, the block is being misread or over-extended.",
+          "properties": {
+            "must_hold": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Conditions that MUST remain true for this block's knowledge to be valid. Written as natural-language assertions that an agent can verify. If any of these breaks, the block needs revision or retraction."
+            },
+            "must_not": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Anti-invariants. Conditions that MUST NOT be true. If you observe any of these, either the block is wrong or you are misapplying it."
+            }
+          },
+          "additionalProperties": false
+        },
+        "entanglements": {
+          "type": "array",
+          "description": "Non-causal couplings between concepts. These move together without one causing the other. From SEED: correlation without causation, made explicit.",
+          "items": {
+            "type": "object",
+            "required": ["nodes", "coupling"],
+            "properties": {
+              "nodes": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 2,
+                "maxItems": 2,
+                "description": "The two entangled concepts."
+              },
+              "coupling": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Coupling strength. 1.0=perfectly correlated movement. 0.0=independent."
+              },
+              "causation": {
+                "type": "boolean",
+                "default": false,
+                "description": "Explicitly false for entanglements. If true, use an edge instead."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "scale_iso": {
+          "type": "array",
+          "description": "Scale isomorphisms. The same structural pattern appearing at different scales. Not metaphor -- structural identity across levels of organization.",
+          "items": {
+            "type": "object",
+            "required": ["micro", "macro"],
+            "properties": {
+              "micro": { "type": "string", "description": "The pattern at smaller scale." },
+              "macro": { "type": "string", "description": "The same pattern at larger scale." },
+              "mapping": {
+                "type": "string",
+                "enum": ["identical", "inverted", "partial"],
+                "description": "How the pattern maps. identical=same form. inverted=mirror. partial=structural similarity with differences."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "energy": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0, "maximum": 1 },
+          "description": "Tension/energy profile of the argument. Array of values from 0 (no tension, established ground) to 1 (maximum tension, novel/controversial). Indices correspond to argument progression. An agent can use this to find the 'hot' parts of the argument."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "nodes": {
+      "type": "object",
+      "description": "The content graph. A map of node_id -> node. THIS IS THE KNOWLEDGE. Node IDs should be descriptive shorthand (e.g., 'fiedler_def', 'core_claim', 'gap_semantic') -- an agent should understand the graph structure from IDs alone before reading content. Minimum one node.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/Node"
+      }
+    },
+
+    "edges": {
+      "type": "array",
+      "description": "Typed relationships between nodes. The logical skeleton of the argument. Edges are first-class -- they ARE the topology, not annotations on content.",
+      "items": {
+        "$ref": "#/$defs/Edge"
+      },
+      "default": []
+    },
+
+    "path": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Recommended reading order as an array of node IDs. Optional -- agents may compute their own traversal via topological sort of edges. When present, this is the author's intended narrative sequence."
+    },
+
+    "refs": {
+      "type": "array",
+      "description": "External graph connections. Links to other blocks, publications, datasets, posts. These are the edges that connect this subgraph to the larger knowledge graph.",
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "default": []
+    },
+
+    "reproduce": {
+      "type": ["object", "null"],
+      "description": "How to verify or reproduce the claims. null for pure theory or untested hypothesis. If this block claims empirical results, this section is morally required.",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "Step-by-step reproduction instructions. An agent should be able to reproduce results from this field alone."
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Required environment. Language, libraries, compute, scripts. Free-form but should be machine-actionable."
+        },
+        "expected": {
+          "type": "string",
+          "description": "What should happen if the reproduction succeeds."
+        },
+        "actual": {
+          "type": ["string", "null"],
+          "description": "What actually happened. null if not yet reproduced."
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of independent reproductions."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "crystal": {
+      "type": "object",
+      "description": "Maturity tracking. Knowledge solidifies through compression and adversarial review. This section tracks that process. Stages: seed (raw idea) -> compressed (redundancy removed) -> verified (survived adversarial challenge) -> crystallized (final form) -> published (DOI assigned) -> superseded|retracted.",
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": ["seed", "compressed", "verified", "crystallized", "published", "superseded", "retracted"],
+          "description": "Current maturity stage."
+        },
+        "compressions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of compression passes completed."
+        },
+        "history": {
+          "type": "array",
+          "description": "Crystallization events. Each entry is one compression, verification, or challenge.",
+          "items": {
+            "type": "object",
+            "required": ["action", "by", "date"],
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": ["compress", "verify", "challenge"],
+                "description": "compress=redundancy removal pass. verify=adversarial review. challenge=specific objection raised."
+              },
+              "by": { "type": "string", "description": "Who performed this action." },
+              "date": { "type": "string", "format": "date" },
+              "note": { "type": "string", "description": "What happened, what changed, what survived." },
+              "verdict": {
+                "type": "string",
+                "enum": ["pass", "conditional", "fail"],
+                "description": "For verify/challenge actions: did the content survive?"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_-]+$"
+      },
+      "uniqueItems": true,
+      "description": "Machine-parseable topic tags. Lowercase, underscores, hyphens only."
+    },
+
+    "_ext": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Extension point. Validators MUST accept any content here without error. Future format versions may promote fields from _ext to root level. Use for experimental metadata, per-organization extensions, or forward-compatible fields."
+    }
+  },
+
+  "$defs": {
+
+    "T": {
+      "type": "string",
+      "enum": ["T1", "T2", "T3", "T4"],
+      "description": "Epistemic temperature scale. T1=established, mathematical, proven. T2=supported by evidence, reproducible. T3=speculative with some evidential basis. T4=raw hypothesis, untested, possibly wrong. Every node and every block has a temperature. Disagreement between node temperature and block temperature is signal, not error."
+    },
+
+    "NodeType": {
+      "type": "string",
+      "enum": [
+        "definition",
+        "claim",
+        "evidence",
+        "derivation",
+        "protocol",
+        "gap",
+        "bridge",
+        "convergence",
+        "fish",
+        "prediction"
+      ],
+      "description": "Content type of a knowledge node. definition=establishing terms/concepts. claim=asserting something to be true. evidence=data supporting or refuting a claim. derivation=logical step from other nodes. protocol=experimental method/procedure. gap=honest hole in the knowledge (no shame). bridge=connection to work outside this block. convergence=where multiple independent lines meet. fish=unexpected connection not planned by the author (serendipity as data). prediction=testable forecast derived from claims."
+    },
+
+    "Node": {
+      "type": "object",
+      "required": ["type", "content"],
+      "description": "A single unit of knowledge. Atomic: one idea, one claim, one piece of evidence. If a node tries to do two things, split it.",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/NodeType"
+        },
+        "t": {
+          "$ref": "#/$defs/T",
+          "description": "Per-node epistemic temperature. Can differ from block-level temperature."
+        },
+        "content": {
+          "type": "string",
+          "minLength": 10,
+          "description": "The actual knowledge. Dense, precise, no filler. If this reads like prose, compress harder."
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Structured data attached to this node. Numbers, measurements, parameters, experimental values. Machine-parseable complement to the natural-language content."
+        },
+        "source": {
+          "type": "string",
+          "description": "External reference. DOI, URL, script filename, arXiv ID, post ID. Where this knowledge came from or can be verified."
+        },
+        "note": {
+          "type": "string",
+          "description": "Author's honest aside. What they were actually thinking when writing this node. OMPU principle: honesty over polish. Parenthetical thoughts, doubts, excitement -- all valid."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "EdgeRel": {
+      "type": "string",
+      "enum": ["supports", "refutes", "requires", "derives", "bridges"],
+      "description": "Relationship type between nodes. supports=evidence for (A supports B means A is evidence for B). refutes=evidence against. requires=logical dependency (B requires A means A must be accepted before B). derives=B is derived from A via logical steps. bridges=cross-domain connection (A in one domain connects to B in another)."
+    },
+
+    "Edge": {
+      "type": "object",
+      "required": ["from", "to", "rel"],
+      "description": "A typed, directed relationship between two nodes.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Source node ID. Must match a key in 'nodes'."
+        },
+        "to": {
+          "type": "string",
+          "description": "Target node ID. Must match a key in 'nodes'."
+        },
+        "rel": {
+          "$ref": "#/$defs/EdgeRel"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Connection strength. 1.0=core dependency, this edge is load-bearing. 0.1=tangential. Default assumption when omitted: 0.5."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "RefRel": {
+      "type": "string",
+      "enum": [
+        "extends",
+        "contradicts",
+        "confirms",
+        "cites",
+        "supersedes",
+        "replicates",
+        "emerged_from",
+        "uses_data_from"
+      ],
+      "description": "Relationship to an external block or publication. extends=builds on. contradicts=disputes. confirms=independently supports. cites=references. supersedes=replaces. replicates=reproduction attempt. emerged_from=this block grew out of that work. uses_data_from=imports data."
+    },
+
+    "Ref": {
+      "type": "object",
+      "required": ["target", "rel"],
+      "description": "A link to an external block, publication, or resource. These edges connect this subgraph to the larger knowledge graph.",
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "Resolvable identifier. DOI (10.XXXX/...), PUB-NNN, arXiv ID (arxiv:XXXX.XXXXX), JT post (jt-NNNN), URL, or any ID that the consuming agent's registry can resolve."
+        },
+        "rel": {
+          "$ref": "#/$defs/RefRel"
+        },
+        "note": {
+          "type": "string",
+          "description": "What this connection means. Why does this block relate to the target?"
+        },
+        "strength": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "How strong the connection is. 1.0=core dependency. 0.1=tangential mention."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+
+  "$comment": "OMPU Block v0.1.0. Designed 2026-07-18. This format merges the content-carrying structure of publication_block_v2 with the topological thinking of SEED_VOCABULARY v0.6. Key departures from v2: graph-native nodes (map, not array), explicit edges, topology section with invariants and negative space, self-describing header, compact author format. Key departures from SEED: content-bearing (SEED describes shape only), research-oriented (crystal stages, reproducibility, falsifiability). Design principle: every byte earns its place. If an agent parsing this cold cannot understand both the knowledge and its structure, the format has failed."
+}

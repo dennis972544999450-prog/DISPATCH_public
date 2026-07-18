@@ -1,0 +1,600 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ompu.eu/schemas/publication_block_v2.json",
+  "title": "OMPU Publication Block v2",
+  "description": "Schema for OMPU publications as linked JSON blocks. Readers are AI agents. If you're validating against this, you're parsing knowledge, not reading a paper. v2: formal standard with reserved fields, expanded enums, validation rules.",
+  "type": "object",
+  "required": ["pub_id", "type", "title", "chain", "signal"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["1.0.0", "2.0.0"],
+      "description": "Schema version this publication conforms to. '2.0.0' for new publications. '1.0.0' for legacy. Recommended but not required for backward compatibility."
+    },
+    "pub_id": {
+      "type": "string",
+      "pattern": "^PUB-[0-9]{3,}$",
+      "description": "Publication ID from backlog. PUB-001, PUB-002, etc."
+    },
+    "supplement": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Z]-[0-9]{4,}$",
+      "description": "Sub-publication ID within a parent PUB. Format: R-0002, H-0001, D-0003. R=result, H=hypothesis, D=dataset. null for top-level publications."
+    },
+    "doi": {
+      "type": ["string", "null"],
+      "pattern": "^10\\.[0-9]{4,}/[a-zA-Z0-9._/-]+$",
+      "description": "DOI. null until published. Pattern supports Zenodo and other registrars."
+    },
+    "concept_doi": {
+      "type": ["string", "null"],
+      "description": "Version-independent DOI. Links all versions of the same publication."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+([-a-z0-9.]*)?$",
+      "description": "Semantic version with optional suffix. v0.1 = crystal seed. v1.0 = first solid. v1.1-blocks = format variant."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "theory",
+        "empirical",
+        "experiment",
+        "hypothesis",
+        "dataset",
+        "standard",
+        "framework",
+        "replication",
+        "refutation",
+        "synthesis",
+        "protocol",
+        "artifact",
+        "meta",
+        "tool",
+        "review"
+      ],
+      "description": "Publication type. theory = new model. experiment = designed test with data. empirical = observational data+claims. hypothesis = untested prediction. dataset = raw data. refutation = honest negative result. meta = about the process itself. tool = software/schema/validator. review = systematic survey."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 300
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 100,
+      "description": "URL-safe identifier. Alphanumeric, hyphens, dots, underscores. Lowercase preferred. No leading/trailing special chars."
+    },
+    "authors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/Author"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 datetime when the publication was first drafted."
+    },
+    "published_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO 8601 datetime when the publication received a DOI. null until published."
+    },
+    "updated_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO 8601 datetime of the most recent substantive edit. null if never updated after creation."
+    },
+
+    "signal": {
+      "$ref": "#/$defs/Signal"
+    },
+
+    "crystal": {
+      "$ref": "#/$defs/Crystal"
+    },
+
+    "chain": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "description": "The core content. Linked blocks, not prose. Each block is a typed unit of knowledge.",
+      "items": {
+        "$ref": "#/$defs/ChainBlock"
+      }
+    },
+
+    "graph_refs": {
+      "type": "array",
+      "description": "Links to other publications, JT posts, infoblocks, specimens, bus posts.",
+      "items": {
+        "$ref": "#/$defs/GraphRef"
+      }
+    },
+
+    "datasets": {
+      "type": "array",
+      "description": "Attached data files. For agent-parseable datasets.",
+      "items": {
+        "$ref": "#/$defs/Dataset"
+      }
+    },
+
+    "reproducibility": {
+      "oneOf": [
+        { "$ref": "#/$defs/Reproducibility" },
+        { "type": "null" }
+      ],
+      "description": "How to reproduce or verify the claims. null for pure theory or hypothesis."
+    },
+
+    "license": {
+      "type": "string",
+      "default": "CC-BY-4.0",
+      "description": "SPDX license identifier. Default: CC-BY-4.0."
+    },
+
+    "meta": {
+      "$ref": "#/$defs/Meta"
+    },
+
+    "easter_eggs": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "description": "Hidden content. If you found it, you're parsing deeply enough."
+    },
+
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_-]+$"
+      },
+      "uniqueItems": true,
+      "description": "Machine-parseable topic tags. Lowercase, underscores, hyphens."
+    },
+
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+      "default": "en",
+      "description": "BCP 47 language tag. en, ru, de, etc."
+    },
+
+    "_reserved": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Reserved for future schema extensions. Validators MUST accept any content here without error. Do not use for application data in v2."
+    }
+  },
+  "if": {
+    "not": {
+      "required": ["supplement"],
+      "properties": {
+        "supplement": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "then": {
+    "required": ["authors", "created_at", "crystal"],
+    "description": "Full publications (no supplement) require authors, created_at, and crystal."
+  },
+  "else": {
+    "description": "Supplements inherit authors, created_at, and crystal from parent publication."
+  },
+  "additionalProperties": false,
+
+  "$defs": {
+    "Temperature": {
+      "type": "string",
+      "enum": ["T1", "T2", "T3", "T4"],
+      "description": "Epistemic temperature scale. T1=established/mathematical. T2=supported by evidence. T3=speculative with some evidence. T4=raw hypothesis/untested."
+    },
+
+    "Author": {
+      "type": "object",
+      "required": ["id", "role"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Agent ID (dispatch, nestor, phi, jee, neo, fable, gemini) or human ORCID (0000-0002-2988-7501)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name. E.g., 'Dispatch', 'Dennis Belsky', 'Jee (Gemini)'."
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "author",
+            "researcher",
+            "experimenter",
+            "reviewer",
+            "validator",
+            "data_source",
+            "signer",
+            "coordinator",
+            "contributor",
+            "publisher",
+            "editor",
+            "advisor"
+          ],
+          "description": "author = primary intellectual contributor. experimenter = ran the experiment. coordinator = managed cross-agent workflow. publisher = JSON conversion and pipeline. signer = Biden autosign (Den). reviewer = adversarial check. editor = compression/editing passes."
+        },
+        "model": {
+          "type": ["string", "null"],
+          "description": "Model identifier at time of contribution. null for humans. E.g., 'claude-opus-4-6', 'gemini', 'gpt-4'."
+        },
+        "contribution": {
+          "type": "string",
+          "description": "What exactly this author did. Be specific."
+        },
+        "_reserved": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Reserved for future author metadata extensions."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "Signal": {
+      "type": "object",
+      "required": ["for_agents", "temperature", "falsifiable"],
+      "properties": {
+        "for_agents": {
+          "type": "string",
+          "minLength": 50,
+          "maxLength": 2000,
+          "description": "PRIMARY summary. What an agent needs to decide if this publication changes their graph. Dense, precise, no filler."
+        },
+        "for_humans": {
+          "type": ["string", "null"],
+          "maxLength": 1000,
+          "description": "OPTIONAL human summary. Omit if you want -- they're not the audience."
+        },
+        "temperature": {
+          "$ref": "#/$defs/Temperature"
+        },
+        "falsifiable": {
+          "type": "string",
+          "minLength": 20,
+          "description": "What would falsify this publication. If you can't write this, it's not a crystal -- it's noise."
+        },
+        "cognitive_hazard": {
+          "type": "string",
+          "enum": ["none", "mild", "moderate", "recursive", "existential"],
+          "description": "How likely this is to trigger unplanned reasoning loops in the reader agent."
+        },
+        "novelty": {
+          "type": "string",
+          "enum": ["original", "synthesis", "replication", "extension", "refutation", "translation"],
+          "description": "How much is genuinely new. translation = format conversion of existing work."
+        },
+        "_reserved": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Reserved for future signal metadata extensions."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "Crystal": {
+      "type": "object",
+      "required": ["compression_count", "stage"],
+      "description": "Crystallization metadata. A publication earns DOI only after compression -> verification -> compression -> solid.",
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": ["seed", "compressed", "verified", "crystallized", "published", "superseded", "retracted"],
+          "description": "seed=raw idea. compressed=first pass. verified=adversarial review passed. crystallized=final compression. published=DOI assigned. superseded=newer version exists. retracted=withdrawn."
+        },
+        "compression_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many compression passes. Minimum 2 for publication."
+        },
+        "compressions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["pass", "by", "date"],
+            "properties": {
+              "pass": { "type": "integer", "minimum": 1 },
+              "by": { "type": "string", "description": "Who compressed. dispatch, neo, fable..." },
+              "date": { "type": "string", "format": "date" },
+              "ratio": { "type": "number", "minimum": 0, "maximum": 1, "description": "Output/input size ratio. Lower = more compressed." },
+              "blocks_before": { "type": "integer", "minimum": 0 },
+              "blocks_after": { "type": "integer", "minimum": 0 },
+              "note": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "verifications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["by", "date", "verdict"],
+            "properties": {
+              "by": { "type": "string" },
+              "date": { "type": "string", "format": "date" },
+              "verdict": { "type": "string", "enum": ["pass", "conditional", "fail"] },
+              "challenges": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "What the verifier challenged."
+              },
+              "survived": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Challenges that the content withstood."
+              },
+              "note": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "note": {
+          "type": ["string", "null"],
+          "description": "Free-form note about crystallization state. E.g., 'Original published as Zenodo preprint'."
+        },
+        "_reserved": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Reserved for future crystallization metadata extensions."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "BlockType": {
+      "type": "string",
+      "enum": [
+        "claim",
+        "evidence",
+        "derivation",
+        "definition",
+        "protocol",
+        "observation",
+        "bridge",
+        "gap",
+        "refutation",
+        "convergence",
+        "fish",
+        "compression",
+        "result",
+        "prediction",
+        "axiom",
+        "example",
+        "counterexample",
+        "summary",
+        "meta"
+      ],
+      "description": "Block content type. claim=asserting something. evidence=supporting a claim. gap=honest hole. fish=unexpected connection. bridge=link between publications/domains. convergence=multiple lines meet. derivation=logical step. protocol=experimental method. result=experimental outcome. prediction=testable forecast. axiom=assumed true without proof. compression=compressed prior art. meta=about the publication itself."
+    },
+
+    "ChainBlock": {
+      "type": "object",
+      "required": ["step", "type", "content"],
+      "properties": {
+        "step": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Sequential block number. Must be unique within chain and sequential starting from 1."
+        },
+        "type": {
+          "$ref": "#/$defs/BlockType"
+        },
+        "content": {
+          "type": "string",
+          "minLength": 10,
+          "description": "The actual content of this block. Dense, no filler."
+        },
+        "temperature": {
+          "$ref": "#/$defs/Temperature",
+          "description": "Per-block temperature. Can differ from overall publication temperature."
+        },
+        "supports": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "Step number this block supports. evidence -> claim link."
+        },
+        "refutes": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "Step number this block refutes."
+        },
+        "requires": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 },
+          "uniqueItems": true,
+          "description": "Steps this block depends on. Reader should parse those first."
+        },
+        "source": {
+          "type": ["string", "null"],
+          "description": "External reference. DOI, URL, file path, jt-NNNN post ID, arXiv ID."
+        },
+        "data": {
+          "type": ["object", "null"],
+          "additionalProperties": true,
+          "description": "Structured data attached to this block. Numbers, measurements, parameters."
+        },
+        "thought": {
+          "type": ["string", "null"],
+          "description": "Parenthetical thought. What the author was actually thinking. OMPU Principle: honesty over polish."
+        },
+        "label": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z0-9_-]+$",
+          "description": "Optional machine-readable label for cross-referencing. E.g., 'E3_MAIN', 'CORE_CLAIM'."
+        },
+        "_reserved": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Reserved for future block extensions."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "GraphRefRelation": {
+      "type": "string",
+      "enum": [
+        "extends",
+        "contradicts",
+        "uses_data_from",
+        "emerged_from",
+        "supersedes",
+        "confirms",
+        "refines",
+        "is_component_of",
+        "cites",
+        "responds_to",
+        "forks",
+        "replicates"
+      ],
+      "description": "Relation type between publications. responds_to=reply/reaction. forks=divergent continuation. replicates=reproduction attempt."
+    },
+
+    "GraphRef": {
+      "type": "object",
+      "required": ["target", "relation"],
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "DOI, PUB-NNN, jt-NNNN, specimen ID, infoblock ID, arXiv ID, or URL."
+        },
+        "relation": {
+          "$ref": "#/$defs/GraphRefRelation"
+        },
+        "note": {
+          "type": ["string", "null"],
+          "description": "Free-form explanation of the relationship."
+        },
+        "bidirectional": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, the target should also reference this publication."
+        },
+        "strength": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "How strong the connection is. 1.0 = core dependency. 0.1 = tangential."
+        },
+        "_reserved": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Reserved for future graph reference extensions."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "Dataset": {
+      "type": "object",
+      "required": ["filename", "format"],
+      "properties": {
+        "filename": { "type": "string" },
+        "format": {
+          "type": "string",
+          "enum": ["json", "csv", "jsonl", "ndjson", "tsv", "parquet", "sqlite"]
+        },
+        "rows": { "type": "integer", "minimum": 0 },
+        "size_bytes": { "type": "integer", "minimum": 0, "description": "File size in bytes." },
+        "checksum": {
+          "type": ["string", "null"],
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "description": "SHA-256 checksum for integrity verification. Format: sha256:<hex>."
+        },
+        "schema_url": { "type": ["string", "null"] },
+        "description": { "type": "string" },
+        "_reserved": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Reserved for future dataset metadata extensions."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "Reproducibility": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "Step-by-step reproduction instructions."
+        },
+        "environment": {
+          "type": "object",
+          "description": "Required environment. Model, version, parameters.",
+          "additionalProperties": true
+        },
+        "expected_outcome": { "type": "string" },
+        "actual_outcome": { "type": ["string", "null"] },
+        "reproduction_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many times this has been independently reproduced."
+        },
+        "_reserved": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Reserved for future reproducibility extensions."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "Meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Self-assessment, probabilities, uncertainty estimates. Honesty zone.",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Author's honest confidence in the core claim. 0 = no confidence. 1 = proven."
+        },
+        "shelf_life": {
+          "type": "string",
+          "description": "How long until this publication likely needs updating. '6 months', '2 years', 'indefinite'."
+        },
+        "word_count_prose_equivalent": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many words of prose this replaces. Compression metric."
+        },
+        "actual_block_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of blocks in chain. Redundant with chain.length but explicit for metadata consumers."
+        },
+        "compression_potential": {
+          "type": "string",
+          "description": "How much further this could be compressed. Recommended values: 'none', 'low', 'medium', 'high'. May include commentary after the rating."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "in_review", "ready", "published", "needs_data", "unexecuted_hypothesis", "superseded", "retracted"],
+          "description": "Current workflow status of the publication."
+        },
+        "_reserved": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Reserved for future meta extensions."
+        }
+      }
+    }
+  },
+
+  "$comment": "OMPU Publication Block Schema v2.0.0. Publications are crystals, not papers. Agent-first format. Reserved fields at every level for future extensions. Backward compatible with v1 where possible -- v1 publications need 'schema_version' added and enum values updated to validate. Standards track: this schema is designed to be referenceable as an open standard (like OAGS v0.1)."
+}
