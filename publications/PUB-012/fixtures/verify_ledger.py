@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
 """
-PUB-012 Ledger Verifier
-========================
-Verifies hash-chain integrity and INV-2/INV-3 compliance of results.jsonl.
+PUB-012 Ledger Verifier v0.1.4
+===============================
+Verifies hash-chain integrity, INV-2/INV-3 compliance, and anchored head.
 
 Checks:
-  1. Hash chain continuity (each event.prev_event_hash == previous event.event_hash)
-  2. Event hash correctness (recompute sha256 of canonical JSON sans event_hash)
-  3. INV-3 status compliance (all status values in {pass, fail, inconclusive, error})
-  4. INV-2 hash binding (carrier_hash, runner_hash, schema_hash present)
-  5. Sequence monotonicity (sequence numbers increase by 1)
-  6. Timestamp ordering (non-decreasing)
+  1. Non-empty (empty ledger = error, not pass)
+  2. Hash chain continuity
+  3. Event hash correctness (recompute)
+  4. INV-3 status compliance (all status values in {pass, fail, inconclusive, error})
+  5. INV-2 hash binding (all 5 hashes required: validator, runner, oracle, schema, environment)
+  6. INV-2 carrier hashes per case
+  7. Sequence monotonicity
+  8. Anchored head (if --head provided, verify final event hash matches)
 
 Usage:
-    python3 verify_ledger.py [results.jsonl]
+    python3 verify_ledger.py [results.jsonl] [--head HASH] [--strict]
 """
 
 import json
 import hashlib
 import sys
 import os
-from datetime import datetime
+import argparse
 
 
 def sha256_str(s):
@@ -28,9 +30,10 @@ def sha256_str(s):
 
 
 INV3_STATUSES = {"pass", "fail", "inconclusive", "error"}
+INV2_REQUIRED_HASHES = ["validator_hash", "runner_hash", "oracle_hash", "schema_hash", "environment_hash"]
 
 
-def verify_ledger(path):
+def verify_ledger(path, expected_head=None, strict=False):
     if not os.path.exists(path):
         print(f"ERROR: Ledger not found at {path}")
         return 1
@@ -38,9 +41,10 @@ def verify_ledger(path):
     with open(path, 'r') as f:
         lines = [l.strip() for l in f if l.strip()]
 
+    # Fail-closed: empty ledger is an error
     if not lines:
-        print("EMPTY: No events in ledger")
-        return 0
+        print("ERROR: Empty ledger — nothing to verify")
+        return 1
 
     events = []
     parse_errors = 0
@@ -98,29 +102,50 @@ def verify_ledger(path):
         results = event.get("results", {})
         for case_id, status in results.items():
             if status not in INV3_STATUSES:
-                errors.append(f"{prefix}: {case_id} status='{status}' not in INV-3 set {INV3_STATUSES}")
+                errors.append(f"{prefix}: {case_id} status='{status}' not in INV-3 set {sorted(INV3_STATUSES)}")
 
-        # 5. INV-2 hash bindings
+        # 5. INV-2 hash bindings (strict: all 5 required, not just present but non-empty)
         if event.get("type") == "fixture_run":
-            for field in ["validator_hash", "runner_hash", "schema_hash"]:
+            for field in INV2_REQUIRED_HASHES:
                 val = event.get(field)
-                if not val:
-                    warnings.append(f"{prefix}: missing INV-2 field '{field}'")
-                elif val in ("PENDING", ""):
-                    errors.append(f"{prefix}: INV-2 field '{field}' still PENDING")
+                if not val or val in ("PENDING", "no_spec", "no_schema"):
+                    if strict:
+                        errors.append(f"{prefix}: INV-2 field '{field}' missing or placeholder (strict mode)")
+                    else:
+                        # In non-strict mode, warn for oracle/environment, error for validator/runner/schema
+                        if field in ("validator_hash", "runner_hash", "schema_hash"):
+                            errors.append(f"{prefix}: INV-2 field '{field}' missing or placeholder")
+                        else:
+                            warnings.append(f"{prefix}: INV-2 field '{field}' missing or placeholder")
 
+            # 6. Carrier hashes per case
             carrier_hashes = event.get("carrier_hashes", {})
             if not carrier_hashes:
-                warnings.append(f"{prefix}: no carrier_hashes map")
+                errors.append(f"{prefix}: no carrier_hashes map")
             else:
                 for case_id in results:
                     if case_id not in carrier_hashes:
-                        warnings.append(f"{prefix}: {case_id} missing from carrier_hashes")
+                        errors.append(f"{prefix}: {case_id} missing from carrier_hashes")
+                    elif carrier_hashes[case_id] in ("missing", "PENDING", ""):
+                        errors.append(f"{prefix}: {case_id} carrier_hash is placeholder")
 
-        # 6. Timestamp present
+            # Check schema_engine is not fallback
+            engine = event.get("schema_engine", "")
+            if engine.startswith("fallback"):
+                errors.append(f"{prefix}: schema_engine='{engine}' — jsonschema not available at runtime")
+
+        # 7. Timestamp present
         ts = event.get("timestamp")
         if not ts:
             warnings.append(f"{prefix}: missing timestamp")
+
+    # 8. Anchored head check
+    if expected_head:
+        actual_head = events[-1].get("event_hash", "")
+        if actual_head != expected_head:
+            errors.append(f"Anchored head mismatch: expected={expected_head[:16]}..., actual={actual_head[:16]}...")
+        else:
+            print(f"Anchored head: ✓ ({actual_head[:16]}...)")
 
     # Print results
     if errors:
@@ -136,7 +161,7 @@ def verify_ledger(path):
     chain_ok = not any("chain broken" in e for e in errors)
     hash_ok = not any("hash mismatch" in e for e in errors)
     inv3_ok = not any("INV-3" in e for e in errors)
-    inv2_ok = not any("INV-2" in e and "PENDING" in e for e in errors)
+    inv2_ok = not any("INV-2" in e for e in errors)
 
     print(f"Chain integrity: {'✓' if chain_ok else '✗'}")
     print(f"Hash correctness: {'✓' if hash_ok else '✗'}")
@@ -157,5 +182,10 @@ def verify_ledger(path):
 
 
 if __name__ == "__main__":
-    path = sys.argv[1] if len(sys.argv) > 1 else "results.jsonl"
-    sys.exit(verify_ledger(path))
+    parser = argparse.ArgumentParser(description="PUB-012 Ledger Verifier v0.1.4")
+    parser.add_argument('ledger', nargs='?', default='results.jsonl', help='Path to ledger file')
+    parser.add_argument('--head', default=None, help='Expected hash of final event (anchored head)')
+    parser.add_argument('--strict', action='store_true', help='All INV-2 hashes required (not just core 3)')
+    args = parser.parse_args()
+
+    sys.exit(verify_ledger(args.ledger, args.head, args.strict))

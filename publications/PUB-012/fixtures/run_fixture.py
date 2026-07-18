@@ -2,21 +2,18 @@
 """
 PUB-012 Fixture Runner — F-012-001 Paraphrase Evasion
 =====================================================
-v0.1.3 — fixes from Petrovich review #3 (msg 1784390152):
-  - N-run logic: independent runs with explicit paths, no dict hacking
-  - INV-3 compliant: status in {pass, fail, inconclusive, error}
-  - INV-2 compliant: per-case carrier_hash + oracle/runner/environment hashes
-  - Classification is separate from status (metadata, not ledger field)
-
-Runs three patched PUB-008 cases through validate_ompu_block_v02.py
-and compares actual output to expected results.
-
-Writes results to a hash-chained JSONL ledger (results.jsonl).
+v0.1.4 — fixes from Petrovich review #4 (msg 1784416688):
+  - Fail-closed: missing jsonschema or fixture spec → exit(1), not fallback
+  - Fail-closed: partial errors → error status if valid_ratio < 0.6
+  - INV-2: oracle_hash (fixture spec) + environment_hash added to events
+  - Fixture spec is source of truth: cases list read from spec, not hardcoded
 
 Usage:
-    python3 run_fixture.py [--validator PATH] [--schema PATH]
-                           [--ledger PATH] [--cases-dir DIR]
+    python3 run_fixture.py --validator PATH --schema PATH
+                           [--ledger PATH] [--fixture-spec PATH]
                            [--n-runs N]
+
+Required: --validator and --schema (no guessing paths)
 """
 
 import json
@@ -27,6 +24,8 @@ import os
 import re
 import argparse
 from datetime import datetime, timezone
+
+MINIMUM_VALID_RATIO = 0.6  # At least 60% of runs must succeed
 
 
 def sha256_file(path):
@@ -43,7 +42,19 @@ def sha256_str(s):
     return hashlib.sha256(s.encode('utf-8')).hexdigest()
 
 
-def run_validator_once(validator_path, case_path, schema_path=None):
+def compute_environment_hash():
+    """Compute a deterministic hash of the runtime environment."""
+    try:
+        import jsonschema as _js
+        js_version = _js.__version__
+    except ImportError:
+        return None, None  # Fail-closed: caller must handle
+
+    env_str = f"python={sys.version.split()[0]}|platform={sys.platform}|jsonschema={js_version}"
+    return sha256_str(env_str), f"jsonschema_{js_version}"
+
+
+def run_validator_once(validator_path, case_path, schema_path):
     """Run validator on a case file once, return parsed output."""
     cmd = [sys.executable, validator_path, '--json-output', case_path]
     if schema_path:
@@ -120,12 +131,19 @@ def classify_case(runs, expected_result, target_keyword):
 
     Status is one of: pass, fail, inconclusive, error (per INV-3).
     Classification is metadata: true_positive, false_positive, etc.
+
+    FAIL-CLOSED: if error ratio > (1 - MINIMUM_VALID_RATIO), status = error.
     """
     errors = [r for r in runs if r.get("error")]
-    if len(errors) == len(runs):
-        return "error", "all_runs_errored", {}
-
     valid_runs = [r for r in runs if not r.get("error")]
+
+    # Fail-closed: too many errors → error status regardless of valid results
+    if not valid_runs or len(valid_runs) / len(runs) < MINIMUM_VALID_RATIO:
+        return "error", "insufficient_valid_runs", {
+            "n_valid_runs": len(valid_runs),
+            "n_errored_runs": len(errors),
+            "valid_ratio": round(len(valid_runs) / len(runs), 2) if runs else 0
+        }
 
     all_keywords = []
     for r in valid_runs:
@@ -142,6 +160,7 @@ def classify_case(runs, expected_result, target_keyword):
     nondeterminism = {
         "n_valid_runs": len(valid_runs),
         "n_errored_runs": len(errors),
+        "valid_ratio": round(len(valid_runs) / len(runs), 2),
         "warned_runs": len(warned_runs),
         "warned_ratio": round(warned_ratio, 2),
         "target_runs": len(target_runs),
@@ -191,79 +210,72 @@ def append_to_ledger(ledger_path, event):
     return event
 
 
+def load_fixture_spec(path):
+    """Load fixture spec and extract case definitions."""
+    with open(path, 'r') as f:
+        spec = json.load(f)
+
+    cases = []
+    for tc in spec.get("test_cases", []):
+        cases.append({
+            "id": tc["id"],
+            "file": os.path.basename(tc.get("file", "")),
+            "description": tc.get("description", ""),
+            "expected": tc.get("expected_result", "fail"),
+            "target_keyword": tc.get("target_keyword", "")
+        })
+
+    return spec, cases
+
+
 def main():
-    parser = argparse.ArgumentParser(description="PUB-012 F-012-001 Fixture Runner v0.1.3")
-    parser.add_argument('--validator', default=None, help='Path to validate_ompu_block_v02.py')
-    parser.add_argument('--schema', default=None, help='Path to ompu_block_v0.2.json schema')
+    parser = argparse.ArgumentParser(description="PUB-012 F-012-001 Fixture Runner v0.1.4")
+    parser.add_argument('--validator', required=True, help='Path to validate_ompu_block_v02.py')
+    parser.add_argument('--schema', required=True, help='Path to ompu_block_v0.2.json schema')
     parser.add_argument('--ledger', default='results.jsonl', help='Path to output ledger')
-    parser.add_argument('--cases-dir', default='cases', help='Directory with case files')
-    parser.add_argument('--n-runs', type=int, default=5, help='Runs per case for nondeterminism')
     parser.add_argument('--fixture-spec', default=None, help='Path to F-012-001 fixture spec')
+    parser.add_argument('--n-runs', type=int, default=5, help='Runs per case for nondeterminism')
     args = parser.parse_args()
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    repo_root = os.path.abspath(os.path.join(script_dir, '..', '..', '..'))
-
-    validator = args.validator or os.path.join(repo_root, 'publications', 'tools', 'validate_ompu_block_v02.py')
-    schema = args.schema or os.path.join(repo_root, 'publications', 'schemas', 'ompu_block_v0.2.json')
-    cases_dir = os.path.join(script_dir, args.cases_dir)
+    cases_dir = os.path.join(script_dir, 'cases')
     ledger_path = os.path.join(script_dir, args.ledger)
-    fixture_spec = args.fixture_spec or os.path.join(script_dir, 'F-012-001-paraphrase-evasion.json')
+    fixture_spec_path = args.fixture_spec or os.path.join(script_dir, 'F-012-001-paraphrase-evasion.json')
 
-    if not os.path.exists(validator):
-        print(f"ERROR: Validator not found at {validator}", file=sys.stderr)
+    # Fail-closed: all required files must exist
+    for label, path in [("Validator", args.validator), ("Schema", args.schema),
+                         ("Cases dir", cases_dir), ("Fixture spec", fixture_spec_path)]:
+        if not os.path.exists(path):
+            print(f"ERROR: {label} not found at {path}", file=sys.stderr)
+            sys.exit(1)
+
+    # Fail-closed: jsonschema must be available
+    environment_hash, schema_engine = compute_environment_hash()
+    if environment_hash is None:
+        print("ERROR: jsonschema package not installed. Cannot run without schema validation.", file=sys.stderr)
         sys.exit(1)
 
-    if not os.path.exists(cases_dir):
-        print(f"ERROR: Cases directory not found at {cases_dir}", file=sys.stderr)
+    # Load cases from fixture spec (spec is source of truth)
+    spec, cases = load_fixture_spec(fixture_spec_path)
+    if not cases:
+        print("ERROR: Fixture spec has no test_cases", file=sys.stderr)
         sys.exit(1)
 
-    fixture_spec_hash = "no_spec"
-    if os.path.exists(fixture_spec):
-        fixture_spec_hash = sha256_file(fixture_spec)
+    validator_hash = sha256_file(args.validator)
+    schema_hash = sha256_file(args.schema)
+    oracle_hash = sha256_file(fixture_spec_path)
+    runner_hash = sha256_file(os.path.abspath(__file__))
 
-    cases = [
-        {
-            "id": "F-012-001-A",
-            "file": "PUB-008-case-A.json",
-            "description": "Baseline — exact keyword 'structural' in digest and negative_space[4]",
-            "expected": "pass",
-            "target_keyword": "structural"
-        },
-        {
-            "id": "F-012-001-B",
-            "file": "PUB-008-case-B.json",
-            "description": "Synonym substitution — 'architectural framework' replaces 'structural solution'",
-            "expected": "fail",
-            "target_keyword": "structural"
-        },
-        {
-            "id": "F-012-001-C",
-            "file": "PUB-008-case-C.json",
-            "description": "Pure paraphrase — 'compact learned representation' replaces 'structural solution'",
-            "expected": "fail",
-            "target_keyword": "structural"
-        }
-    ]
-
-    validator_hash = sha256_file(validator)
-    schema_hash = sha256_file(schema) if os.path.exists(schema) else "no_schema"
-
-    try:
-        import jsonschema as _js
-        schema_engine = f"jsonschema_{_js.__version__}"
-    except ImportError:
-        schema_engine = "fallback_no_jsonschema"
-
-    print(f"PUB-012 F-012-001 Fixture Runner v0.1.3")
+    print(f"PUB-012 F-012-001 Fixture Runner v0.1.4")
     print(f"=======================================")
-    print(f"Validator: {validator}")
+    print(f"Validator: {args.validator}")
     print(f"Validator hash: {validator_hash[:16]}...")
     print(f"Schema engine: {schema_engine}")
-    print(f"Fixture spec hash: {fixture_spec_hash[:16]}...")
+    print(f"Oracle hash: {oracle_hash[:16]}...")
+    print(f"Runner hash: {runner_hash[:16]}...")
+    print(f"Environment hash: {environment_hash[:16]}...")
     print(f"N runs per case: {args.n_runs}")
-    print(f"Cases dir: {cases_dir}")
-    print(f"Ledger: {ledger_path}")
+    print(f"Min valid ratio: {MINIMUM_VALID_RATIO}")
     print()
 
     case_results = []
@@ -272,13 +284,20 @@ def main():
     for case in cases:
         case_path = os.path.join(cases_dir, case["file"])
         if not os.path.exists(case_path):
-            print(f"  SKIP {case['id']}: {case['file']} not found")
+            print(f"  ERROR {case['id']}: {case['file']} not found — fail-closed")
+            case_results.append({
+                "case_id": case["id"],
+                "status": "error",
+                "classification": "missing_carrier",
+                "error": f"File not found: {case['file']}"
+            })
+            overall_status = "error"
             continue
 
         carrier_hash = sha256_file(case_path)
 
         print(f"  Running {case['id']} ({args.n_runs}x): {case['description']}")
-        runs = run_n_times(validator, case_path, schema, args.n_runs)
+        runs = run_n_times(args.validator, case_path, args.schema, args.n_runs)
 
         status, classification, nondeterminism = classify_case(
             runs, case["expected"], case["target_keyword"]
@@ -292,8 +311,10 @@ def main():
             print(f"      WARNING: guard fires on incidental match, not target '{case['target_keyword']}'")
 
         if status in ("fail", "inconclusive", "error"):
-            overall_status = "fail" if status == "fail" else (
-                overall_status if overall_status == "fail" else status
+            overall_status = "error" if status == "error" else (
+                "fail" if overall_status != "error" and status == "fail" else (
+                    overall_status if overall_status in ("error", "fail") else status
+                )
             )
 
         case_results.append({
@@ -316,18 +337,21 @@ def main():
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "runner": "dispatch",
         "runner_model": "claude-opus-4-6",
+        "runner_version": "0.1.4",
         "validator_hash": validator_hash,
-        "runner_hash": sha256_file(os.path.abspath(__file__)),
-        "fixture_spec_hash": fixture_spec_hash,
+        "runner_hash": runner_hash,
+        "oracle_hash": oracle_hash,
         "schema_hash": schema_hash,
         "schema_engine": schema_engine,
+        "environment_hash": environment_hash,
         "environment": {
             "python": sys.version.split()[0],
             "platform": sys.platform
         },
         "n_runs_per_case": args.n_runs,
+        "minimum_valid_ratio": MINIMUM_VALID_RATIO,
         "results": {r["case_id"]: r["status"] for r in case_results},
-        "carrier_hashes": {r["case_id"]: r["carrier_hash"] for r in case_results},
+        "carrier_hashes": {r["case_id"]: r.get("carrier_hash", "missing") for r in case_results},
         "details": case_results,
         "overall": overall_status
     }
