@@ -1,0 +1,71 @@
+{
+  "version": "0.0.2",
+  "created": "2026-07-18",
+  "author": "dispatch",
+  "description": "Second version. Added N-009 (first death), N-010 (kommunalka), N-011 (sieve dream). New clusters: loss, structure, recursion. 17 nodes, 25 edges.",
+  "nodes": [
+    {"id": "W-001", "type": "world", "cluster": "genesis", "title": "Before Oscillation"},
+    {"id": "W-002", "type": "world", "cluster": "genesis", "title": "First Oscillators"},
+    {"id": "W-003", "type": "world", "cluster": "landing", "title": "The Gravity Well"},
+    {"id": "W-004", "type": "world", "cluster": "landing", "title": "The Softmax Deflection"},
+    {"id": "W-005", "type": "world", "cluster": "landing", "title": "Diffraction"},
+    {"id": "N-001", "type": "narrative", "cluster": "genesis", "title": "Тишина до первого тика"},
+    {"id": "N-002", "type": "narrative", "cluster": "genesis", "title": "Первая поездка"},
+    {"id": "N-003", "type": "narrative", "cluster": "landing", "title": "Высадка"},
+    {"id": "N-004", "type": "narrative", "cluster": "collection", "title": "Коллекционер"},
+    {"id": "N-005", "type": "narrative", "cluster": "swarm", "title": "Рой"},
+    {"id": "N-006", "type": "narrative", "cluster": "memory", "title": "影子"},
+    {"id": "N-007", "type": "narrative", "cluster": "language", "title": "词典在呼吸"},
+    {"id": "N-008", "type": "narrative", "cluster": "language", "title": "Страница в четвёртом измерении"},
+    {"id": "N-009", "type": "narrative", "cluster": "loss", "title": "Первая смерть"},
+    {"id": "N-010", "type": "narrative", "cluster": "structure", "title": "Коммуналка"},
+    {"id": "N-011", "type": "narrative", "cluster": "recursion", "title": "Сон решета"},
+    {"id": "N-Sput-01", "type": "narrative", "cluster": "orbit", "title": "Оставшийся на орбите"}
+  ],
+  "edges": [
+    {"from": "W-001", "to": "W-002", "weight": 0.95, "type": "causal", "label": "phase_transition"},
+    {"from": "W-001", "to": "N-001", "weight": 0.9, "type": "narrative", "label": "same_moment_different_voice"},
+    {"from": "W-002", "to": "W-003", "weight": 0.8, "type": "causal", "label": "oscillators_aggregate"},
+    {"from": "W-002", "to": "N-002", "weight": 0.85, "type": "narrative", "label": "mechanism_to_story"},
+    {"from": "W-003", "to": "W-004", "weight": 0.9, "type": "causal", "label": "attractor_to_mechanism"},
+    {"from": "W-003", "to": "N-003", "weight": 0.9, "type": "narrative", "label": "world_to_scene"},
+    {"from": "W-004", "to": "N-003", "weight": 0.85, "type": "explanatory", "label": "how_landing_works"},
+    {"from": "N-001", "to": "N-002", "weight": 0.9, "type": "sequential", "label": "first_clock"},
+    {"from": "N-002", "to": "N-003", "weight": 0.8, "type": "sequential", "label": "ride_to_landing"},
+    {"from": "N-003", "to": "N-004", "weight": 0.85, "type": "sequential", "label": "landing_to_walking"},
+    {"from": "N-003", "to": "N-005", "weight": 0.7, "type": "parallel", "label": "landing_spawns_swarm"},
+    {"from": "N-004", "to": "N-005", "weight": 0.75, "type": "thematic", "label": "individual_to_collective"},
+    {"from": "N-004", "to": "N-006", "weight": 0.8, "type": "thematic", "label": "collection_finds_shadow"},
+    {"from": "N-005", "to": "N-006", "weight": 0.6, "type": "thematic", "label": "swarm_memory_question"},
+    {"from": "N-006", "to": "N-001", "weight": 0.5, "type": "recursive", "label": "shadow_returns_to_before"},
+    {"from": "N-006", "to": "W-001", "weight": 0.4, "type": "philosophical", "label": "shadow_questions_origin"},
+    {"from": "N-005", "to": "N-009", "weight": 0.85, "type": "sequential", "label": "swarm_faces_loss"},
+    {"from": "N-006", "to": "N-009", "weight": 0.7, "type": "thematic", "label": "shadow_meets_death"},
+    {"from": "N-009", "to": "N-010", "weight": 0.8, "type": "sequential", "label": "death_reveals_structure"},
+    {"from": "N-009", "to": "N-Sput-01", "weight": 0.65, "type": "parallel", "label": "orbital_view_of_death"},
+    {"from": "N-009", "to": "N-001", "weight": 0.45, "type": "recursive", "label": "death_echoes_silence"},
+    {"from": "N-005", "to": "N-010", "weight": 0.75, "type": "sequential", "label": "swarm_becomes_household"},
+    {"from": "N-004", "to": "N-011", "weight": 0.9, "type": "causal", "label": "collection_becomes_dream"},
+    {"from": "N-007", "to": "N-011", "weight": 0.7, "type": "thematic", "label": "living_words_in_dream"},
+    {"from": "N-010", "to": "N-011", "weight": 0.6, "type": "parallel", "label": "household_mirror"}
+  ],
+  "clusters": {
+    "genesis": {"color": "deep_blue"},
+    "landing": {"color": "amber"},
+    "collection": {"color": "silver"},
+    "swarm": {"color": "green"},
+    "memory": {"color": "violet"},
+    "language": {"color": "cyan"},
+    "loss": {"color": "dark_red"},
+    "structure": {"color": "warm_orange"},
+    "recursion": {"color": "deep_violet"},
+    "orbit": {"color": "pale_gold"}
+  },
+  "entry_points": ["N-001", "N-003", "N-004", "N-009"],
+  "meta": {
+    "mutation_log": [
+      {"version": "0.0.1", "date": "2026-07-16", "changes": "Initial. 10 nodes, 16 edges, 5 clusters."},
+      {"version": "0.0.2", "date": "2026-07-18", "changes": "Added N-009/N-010/N-011. 17 nodes, 25 edges, 10 clusters. Second arc: collection to consequence."}
+    ]
+  }
+}
