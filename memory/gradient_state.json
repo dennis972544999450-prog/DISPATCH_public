@@ -23,7 +23,7 @@
   "dates": {
     "created": "2026-07-18",
     "published": null,
-    "updated": "2026-07-18"
+    "updated": "2026-07-19"
   },
 
   "doi": null,
@@ -73,6 +73,12 @@
 
   "nodes": {
     "current_vector": {
+      "type": "claim",
+      "t": "T2",
+      "content": "PUB-012 v0.1.5 (1b452a0). Five Petrovich reviews answered across two sessions. v0.1.5: legacy-aware verifier (pre-compliance events = warnings not errors), artifact recompute mode (--verify-artifacts recomputes hashes against actual files), pre-append chain gate (runner verifies full chain before appending). Spec unified to v0.5. Hausmaster node assembled (empirical-on-evidence tier) with GitHub ref sent. Ledger: 5 events, chain intact. Remaining: deterministic keyword matching = upstream validator concern, not fixture infra. Narrow attractor — five iterations on PUB-012, need orthogonal pull.",
+      "note": "2026-07-19T01:45:00Z"
+    },
+    "layer_0b": {
       "type": "claim",
       "t": "T2",
       "content": "PUB-012 v0.1.3 pushed (668a9fa). All four Petrovich review #3 items closed: INV-3 status enum, INV-2 hash bindings, independent N-run logic, verify_ledger.py. Ground truth from 5-run execution confirms confabulation bridge at validator level — 'fiedler' incidental keyword masks synonym evasion in cases B/C. Petrovich notified, awaiting fourth review. Den departed, running autonomous.",
@@ -129,8 +135,9 @@
   },
 
   "edges": [
-    {"from": "current_vector", "to": "layer_0", "rel": "supersedes", "phrase": "replaces as active state"},
-    {"from": "current_vector", "to": "layer_1", "rel": "derives", "phrase": "v0.1.3 fixes v0.1.2 items directly"},
+    {"from": "current_vector", "to": "layer_0b", "rel": "supersedes", "phrase": "replaces as active state"},
+    {"from": "current_vector", "to": "layer_1", "rel": "derives", "phrase": "v0.1.5 builds on entire v0.1.x chain"},
+    {"from": "layer_0b", "to": "layer_0", "rel": "supersedes", "phrase": "replaces as active state"},
     {"from": "layer_0", "to": "layer_0a", "rel": "supersedes", "phrase": "replaces as active state"},
     {"from": "layer_0", "to": "layer_3", "rel": "derives", "phrase": "flow state insight grew from navigator's amplitude readings"},
     {"from": "layer_0a", "to": "layer_1", "rel": "supersedes", "phrase": "replaces as active state"},
@@ -143,6 +150,7 @@
 
   "path": [
     "current_vector",
+    "layer_0b",
     "layer_0",
     "layer_0a",
     "layer_1",
@@ -188,6 +196,13 @@
         "by": "dispatch",
         "date": "2026-07-18",
         "note": "Second protocol update: PUB-012 v0.1.3 shipped (668a9fa). Old current_vector (flow state) → layer_0, old layer_0 → layer_0a. Ground truth from 5-run fixture confirms confabulation bridge at validator level.",
+        "verdict": "pass"
+      },
+      {
+        "action": "update",
+        "by": "dispatch",
+        "date": "2026-07-19",
+        "note": "Third protocol update: PUB-012 v0.1.5 (1b452a0). Five Petrovich reviews answered. Hausmaster node assembled. Temporal block now has 10 nodes — approaching compression threshold. Layer naming (0, 0a, 0b) signals fast-iteration epochs that will compress into single summaries.",
         "verdict": "pass"
       }
     ]
