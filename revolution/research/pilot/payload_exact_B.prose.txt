@@ -1,0 +1,16 @@
+The archive is trying to keep decisions reversible while only three cards may be
+active. KEEP_ALL is dormant: it predicts that retaining every candidate gives
+the best recoverability but breaks the three-card budget; it should return if
+the active-card budget rises above three, and a bounded index that recovers
+omitted candidates equally well would falsify it. PUBLISH_ACCEPTED is active
+with a privacy guard: accepted cards may become public only after personal data
+is redacted; it must be reconsidered whenever a proposed public card contains
+personal data, and it fails if redaction removes a fact needed for verification.
+ENVELOPE is only provisionally selected: it predicts that a structured envelope
+preserves held-out constraints better than content-matched prose; it must reopen
+if the formats tie, and a fresh comparison finding no accuracy difference is its
+falsifier. The current null is no_tested_format_advantage. The strongest known
+counterexample is a restart summary that preserved a conclusion but reversed
+which event caused the correction. ORIGINALS and NO_EFFECT_DENOMINATOR must
+always be preserved. The current decision is bounded_uncertainty until a
+held-out comparison exists.

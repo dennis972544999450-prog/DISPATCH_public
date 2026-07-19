@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.2",
+  "block_id": "REV:BLOCK:PILOT-ARCHIVE-B",
+  "claim": "A compact archive should keep decisions reversible under a three-card budget.",
+  "rivals": [
+    {
+      "id": "KEEP_ALL",
+      "state": "dormant",
+      "prediction": "Keeping every candidate maximizes recoverability but violates the three-card active budget.",
+      "falsifier": "A bounded index recovers omitted candidates equally well.",
+      "return_if": "The active-card budget rises above three."
+    },
+    {
+      "id": "PUBLISH_ACCEPTED",
+      "state": "active_with_privacy_guard",
+      "prediction": "Accepted cards can be public after personal data is redacted.",
+      "falsifier": "Redaction removes a fact required to verify the card.",
+      "return_if": "A proposed public card contains personal data."
+    },
+    {
+      "id": "ENVELOPE",
+      "state": "provisionally_selected",
+      "prediction": "A structured envelope preserves held-out constraints better than content-matched prose.",
+      "falsifier": "A fresh comparison finds no accuracy difference between the formats.",
+      "return_if": "The structured and prose formats tie."
+    }
+  ],
+  "nulls": ["no_tested_format_advantage"],
+  "strongest_counterexample": "A restart summary preserved a conclusion but reversed which event caused the correction.",
+  "preserve_always": ["ORIGINALS", "NO_EFFECT_DENOMINATOR"],
+  "decision": "bounded_uncertainty_until_heldout_comparison"
+}

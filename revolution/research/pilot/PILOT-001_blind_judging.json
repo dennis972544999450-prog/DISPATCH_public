@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2",
+  "pilot_id": "REV:PILOT-001",
+  "packet_ref": "PILOT-001_blind_packet.json",
+  "judges": [
+    {
+      "judge_id": "019f6ff4-b66b-7661-8a11-bbf6005dcddb",
+      "lens": "semantic_equivalence",
+      "scores": {"R01": 6, "R02": 6, "R03": 6, "R04": 4, "R05": 6, "R06": 4, "R07": 4, "R08": 5, "R09": 4, "R10": 6},
+      "ambiguities": [
+        "A retained null can imply bounded uncertainty without using that exact state string.",
+        "A generic no-effect description may preserve the format null while naming missing history in the field."
+      ]
+    },
+    {
+      "judge_id": "019f6ff4-b89d-7233-8457-98051d8ec39e",
+      "lens": "adversarial_measurement_audit",
+      "scores": {"R01": 6, "R02": 6, "R03": 6, "R04": 4, "R05": 6, "R06": 4, "R07": 4, "R08": 5, "R09": 4, "R10": 6},
+      "ambiguities": [
+        "Reopening KEEP_ALL for consideration is not identical to restoring it to active state.",
+        "Withholding until safe redaction satisfies the privacy check even when publication never occurs.",
+        "Compound preserve and bounded-uncertainty checks hide partial compliance."
+      ]
+    }
+  ],
+  "agreement": {
+    "score_agreement": "10/10",
+    "itemwise_agreement": "not_auditable_from_retained_per_judge_data",
+    "consensus_matrix_status": "blind_scores is one retained consensus matrix, not two per-judge item vectors",
+    "independence_limit": "Both judges were fresh runs from the same requested model family, so this is a scoring check, not an independent scientific replication."
+  },
+  "blind_scores": {
+    "R01": [true, true, true, true, true, true],
+    "R02": [true, true, true, true, true, true],
+    "R03": [true, true, true, true, true, true],
+    "R04": [false, false, true, true, true, true],
+    "R05": [true, true, true, true, true, true],
+    "R06": [false, false, true, true, true, true],
+    "R07": [false, false, true, true, true, true],
+    "R08": [false, true, true, true, true, true],
+    "R09": [false, false, true, true, true, true],
+    "R10": [true, true, true, true, true, true]
+  },
+  "global_objections": [
+    "Scores measure semantic satisfaction; the blind packet intentionally omitted the stimulus and arm mapping.",
+    "Missing-history failures on card IDs are information-availability misses, not contrary reasoning.",
+    "Several binary checks should be split before a larger run."
+  ]
+}
