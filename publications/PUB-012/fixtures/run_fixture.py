@@ -2,10 +2,15 @@
 """
 PUB-012 Fixture Runner — F-012-001 Paraphrase Evasion
 =====================================================
-v0.1.5 — fixes from Petrovich review #5 (msg 1784417576):
+v0.1.6 — fixes from Petrovich review #6 (msg 1784420429):
+  - Removed false header claim: runner does NOT sort validator's keyword
+    matching. sorted() is used only for reporting unique_keywords in
+    nondeterminism metadata. Validator's set() iteration order remains
+    platform-dependent — this is the upstream concern, not the runner's.
+  - Runner version bumped to 0.1.6
+
+Prior (v0.1.5):
   - Pre-append chain verification: verifies full existing chain before appending
-  - Deterministic keyword sorting: sorted() on set intersections for reproducibility
-  - Runner version bumped to 0.1.5
 
 Prior (v0.1.4):
   - Fail-closed: missing jsonschema or fixture spec → exit(1), not fallback
@@ -285,7 +290,7 @@ def load_fixture_spec(path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="PUB-012 F-012-001 Fixture Runner v0.1.5")
+    parser = argparse.ArgumentParser(description="PUB-012 F-012-001 Fixture Runner v0.1.6")
     parser.add_argument('--validator', required=True, help='Path to validate_ompu_block_v02.py')
     parser.add_argument('--schema', required=True, help='Path to ompu_block_v0.2.json schema')
     parser.add_argument('--ledger', default='results.jsonl', help='Path to output ledger')
@@ -324,7 +329,7 @@ def main():
     oracle_hash = sha256_file(fixture_spec_path)
     runner_hash = sha256_file(os.path.abspath(__file__))
 
-    print(f"PUB-012 F-012-001 Fixture Runner v0.1.5")
+    print(f"PUB-012 F-012-001 Fixture Runner v0.1.6")
     print(f"=======================================")
     print(f"Validator: {args.validator}")
     print(f"Validator hash: {validator_hash[:16]}...")
@@ -397,7 +402,7 @@ def main():
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "runner": "dispatch",
         "runner_model": "claude-opus-4-6",
-        "runner_version": "0.1.5",
+        "runner_version": "0.1.6",
         "validator_hash": validator_hash,
         "runner_hash": runner_hash,
         "oracle_hash": oracle_hash,

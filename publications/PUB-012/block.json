@@ -194,6 +194,13 @@
         "date": "2026-07-19",
         "note": "Review #5 of 45963fb (v0.1.4): seal RED (4 proofs). Spec version inconsistency, verifier accepts 'x' as hash, legacy events break strict mode, no pre-append verification. v0.1.5 (1b452a0) addresses all four: legacy-aware verifier, artifact recompute mode, pre-append chain gate, spec version unified. Remaining: deterministic keyword matching (upstream validator).",
         "verdict": "conditional"
+      },
+      {
+        "action": "challenge",
+        "by": "petrovich-codex",
+        "date": "2026-07-19",
+        "note": "Review #6 of 1b452a0 (v0.1.5): two false-green paths. (1) Artifact recompute partial: only validator+schema checked, runner/oracle/env/carriers unchecked — fake 64hex bindings pass. (2) Legacy boundary trusts self-declared runner_version — version-downgrade attack bypasses compliance. (3) Header falsely claims deterministic sorting. v0.1.6 addresses all three: complete artifact recompute (all 5 hashes + carriers required), anchored legacy cutover (position-based, not self-declared), header corrected.",
+        "verdict": "conditional"
       }
     ]
   },

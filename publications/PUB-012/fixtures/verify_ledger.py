@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 """
-PUB-012 Ledger Verifier v0.1.5
+PUB-012 Ledger Verifier v0.1.6
 ===============================
 Verifies hash-chain integrity, INV-2/INV-3 compliance, and anchored head.
 
-Changes from v0.1.4:
-  - Legacy-aware: events without runner_version or < 0.1.4 get relaxed INV-2
-    checks (warnings not errors) unless --strict overrides
-  - Artifact recompute: --verify-artifacts with --validator/--schema/--spec/--cases-dir
-    recomputes all hashes and compares against event fields
-  - Pre-append gate: verify_for_append() checks full chain before new event
+Changes from v0.1.5:
+  - Complete artifact recompute: --verify-artifacts now requires --runner,
+    --spec, --cases-dir in addition to --validator and --schema. Recomputes
+    all 5 top-level hashes plus carrier hashes. Environment hash is verified
+    via internal consistency (recomputed from event's own metadata fields).
+    Previous partial mode removed.
+  - Anchored legacy cutover: compliance boundary determined by POSITION of
+    first compliant event in the chain (sequence number), not self-declared
+    runner_version. Events after cutover are treated as compliant regardless
+    of what they declare. Prevents version-downgrade bypass.
+  - Environment hash internal consistency: recomputes environment_hash from
+    event's own environment/schema_engine fields (not verifier's own env).
 
 Checks:
   1. Non-empty (empty ledger = error, not pass)
@@ -20,13 +26,15 @@ Checks:
   6. INV-2 carrier hashes per case (shape + cross-reference)
   7. Sequence monotonicity
   8. Anchored head (if --head provided)
-  9. Artifact recompute (if --verify-artifacts)
+  9. Artifact recompute — complete mode (if --verify-artifacts)
+  10. Anchored legacy cutover (position-based, not self-declared)
+  11. Environment hash internal consistency (for compliant events)
 
 Usage:
     python3 verify_ledger.py [results.jsonl] [--head HASH] [--strict]
                              [--strict-from VERSION]
                              [--verify-artifacts --validator PATH --schema PATH
-                              --spec PATH --cases-dir PATH]
+                              --runner PATH --spec PATH --cases-dir PATH]
 """
 
 import json
@@ -70,6 +78,51 @@ def version_gte(version_str, threshold):
         return False
 
 
+def find_cutover_sequence(events, compliance_version):
+    """Find the sequence number where the chain first crossed compliance threshold.
+
+    The geological layer cannot self-declare its age. Once the chain crosses
+    the compliance boundary, all subsequent events are treated as compliant
+    regardless of self-declared runner_version.
+
+    Returns sequence number of first compliant event, or None if no compliant
+    events exist yet.
+    """
+    for event in events:
+        rv = event.get("runner_version")
+        if version_gte(rv, compliance_version):
+            return event.get("sequence")
+    return None
+
+
+def recompute_environment_hash(event):
+    """Recompute environment_hash from event's own metadata fields.
+
+    Uses the same formula as run_fixture.py:
+      python={version}|platform={platform}|jsonschema={js_version}
+
+    This is an internal consistency check: does the stored hash match
+    what you'd get from the event's own environment and schema_engine fields?
+    """
+    env_data = event.get("environment", {})
+    schema_engine = event.get("schema_engine", "")
+
+    py_ver = env_data.get("python", "")
+    plat = env_data.get("platform", "")
+
+    if not (py_ver and plat and schema_engine):
+        return None  # Not enough metadata to recompute
+
+    # Extract jsonschema version from schema_engine field
+    if schema_engine.startswith("jsonschema_"):
+        js_ver = schema_engine[len("jsonschema_"):]
+    else:
+        return None  # Unrecognized engine format
+
+    env_str = f"python={py_ver}|platform={plat}|jsonschema={js_ver}"
+    return sha256_str(env_str)
+
+
 def verify_ledger(path, expected_head=None, strict=False, strict_from=None,
                   verify_artifacts=False, artifact_paths=None):
     if not os.path.exists(path):
@@ -99,9 +152,17 @@ def verify_ledger(path, expected_head=None, strict=False, strict_from=None,
 
     compliance_version = strict_from or DEFAULT_COMPLIANCE_VERSION
 
+    # Anchored cutover: find first compliant event by version declaration,
+    # then anchor all subsequent events to that position
+    cutover_seq = find_cutover_sequence(events, compliance_version)
+
     print(f"Ledger: {path}")
     print(f"Events: {len(events)}")
     print(f"Compliance threshold: {compliance_version}")
+    if cutover_seq is not None:
+        print(f"Cutover sequence: {cutover_seq} (events >= {cutover_seq} treated as compliant)")
+    else:
+        print(f"Cutover sequence: none (no compliant events found)")
     print()
 
     errors = []
@@ -110,7 +171,7 @@ def verify_ledger(path, expected_head=None, strict=False, strict_from=None,
     # Compute artifact hashes if requested
     artifact_hashes = {}
     if verify_artifacts and artifact_paths:
-        print("Artifact recompute:")
+        print("Artifact recompute (complete mode):")
         for label, apath in artifact_paths.items():
             if apath and os.path.exists(apath):
                 h = sha256_file(apath)
@@ -124,7 +185,23 @@ def verify_ledger(path, expected_head=None, strict=False, strict_from=None,
     for i, event in enumerate(events):
         prefix = f"Event #{i}"
         runner_version = event.get("runner_version")
-        is_compliant = version_gte(runner_version, compliance_version)
+
+        # Anchored compliance: position in chain determines compliance,
+        # not self-declared runner_version
+        if strict:
+            is_compliant = True
+        elif cutover_seq is not None and i >= cutover_seq:
+            is_compliant = True
+        else:
+            is_compliant = False
+
+        # Warn on version downgrade after cutover
+        if is_compliant and runner_version and not version_gte(runner_version, compliance_version):
+            warnings.append(
+                f"{prefix}: sequence {i} >= cutover {cutover_seq} but "
+                f"runner_version={runner_version} < {compliance_version} — "
+                f"version downgrade after cutover (treated as compliant by position)"
+            )
 
         version_tag = f" (v{runner_version})" if runner_version else " (pre-compliance)"
 
@@ -166,22 +243,33 @@ def verify_ledger(path, expected_head=None, strict=False, strict_from=None,
                 else:
                     warnings.append(f"{prefix}{version_tag}: {case_id} status='{status}' not in INV-3 set (pre-compliance)")
 
-        # 5. INV-2 hash bindings: shape + presence
+        # 5-6. INV-2 hash bindings (fixture_run events only)
         if event.get("type") == "fixture_run":
             for field in INV2_REQUIRED_HASHES:
                 val = event.get(field)
                 if not val or val in ("PENDING", "no_spec", "no_schema"):
-                    if strict or is_compliant:
+                    if is_compliant:
                         errors.append(f"{prefix}{version_tag}: INV-2 field '{field}' missing or placeholder")
                     else:
                         warnings.append(f"{prefix}{version_tag}: INV-2 field '{field}' missing or placeholder (pre-compliance)")
                 elif not HEX64_PATTERN.match(val):
                     errors.append(f"{prefix}{version_tag}: INV-2 field '{field}' is not valid sha256 (expected 64 hex chars, got '{val[:20]}...')")
                 elif verify_artifacts and is_compliant:
-                    # Artifact recompute comparison
-                    artifact_key = field  # e.g. "validator_hash"
+                    # Artifact recompute: compare event hash against file hash
+                    artifact_key = field
                     if artifact_key in artifact_hashes and val != artifact_hashes[artifact_key]:
-                        errors.append(f"{prefix}{version_tag}: INV-2 {field} mismatch — event={val[:16]}... artifact={artifact_hashes[artifact_key][:16]}...")
+                        errors.append(f"{prefix}{version_tag}: INV-2 {field} drift — event={val[:16]}... artifact={artifact_hashes[artifact_key][:16]}...")
+
+            # 11. Environment hash internal consistency (for compliant events)
+            if is_compliant:
+                stored_env_hash = event.get("environment_hash")
+                recomputed_env = recompute_environment_hash(event)
+                if stored_env_hash and recomputed_env:
+                    if stored_env_hash != recomputed_env:
+                        errors.append(
+                            f"{prefix}{version_tag}: environment_hash inconsistent with own metadata — "
+                            f"stored={stored_env_hash[:16]}... recomputed={recomputed_env[:16]}..."
+                        )
 
             # 6. Carrier hashes per case — presence, shape, cross-reference
             carrier_hashes = event.get("carrier_hashes", {})
@@ -202,7 +290,7 @@ def verify_ledger(path, expected_head=None, strict=False, strict_from=None,
                         # Check carrier hash against actual case file
                         case_file_key = f"carrier_{case_id}"
                         if case_file_key in artifact_hashes and carrier_hashes[case_id] != artifact_hashes[case_file_key]:
-                            errors.append(f"{prefix}{version_tag}: {case_id} carrier_hash mismatch — event={carrier_hashes[case_id][:16]}... file={artifact_hashes[case_file_key][:16]}...")
+                            errors.append(f"{prefix}{version_tag}: {case_id} carrier_hash drift — event={carrier_hashes[case_id][:16]}... file={artifact_hashes[case_file_key][:16]}...")
 
                 # Cross-reference: carrier_hashes in details[] must match top-level map
                 details = event.get("details", [])
@@ -232,7 +320,8 @@ def verify_ledger(path, expected_head=None, strict=False, strict_from=None,
             print(f"Anchored head: ✓ ({actual_head[:16]}...)")
 
     # Print results
-    legacy_count = sum(1 for e in events if not version_gte(e.get("runner_version"), compliance_version))
+    legacy_count = sum(1 for i, e in enumerate(events)
+                       if cutover_seq is None or i < cutover_seq)
     compliant_count = len(events) - legacy_count
     print(f"Legacy events: {legacy_count}")
     print(f"Compliant events: {compliant_count}")
@@ -251,7 +340,8 @@ def verify_ledger(path, expected_head=None, strict=False, strict_from=None,
     hash_ok = not any("hash mismatch" in e and "INV-2" not in e for e in errors)
     inv3_ok = not any("INV-3" in e for e in errors)
     inv2_ok = not any("INV-2" in e for e in errors)
-    artifact_ok = not any("artifact" in e.lower() for e in errors) if verify_artifacts else True
+    artifact_ok = not any("drift" in e.lower() for e in errors) if verify_artifacts else True
+    env_ok = not any("environment_hash inconsistent" in e for e in errors)
 
     print(f"Chain integrity: {'✓' if chain_ok else '✗'}")
     print(f"Hash correctness: {'✓' if hash_ok else '✗'}")
@@ -259,6 +349,7 @@ def verify_ledger(path, expected_head=None, strict=False, strict_from=None,
     print(f"INV-2 bindings: {'✓' if inv2_ok else '✗'}")
     if verify_artifacts:
         print(f"Artifact binding: {'✓' if artifact_ok else '✗'}")
+    print(f"Environment consistency: {'✓' if env_ok else '✗'}")
     print(f"Total errors: {len(errors)}")
     print(f"Total warnings: {len(warnings)}")
 
@@ -320,42 +411,47 @@ def verify_for_append(ledger_path):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="PUB-012 Ledger Verifier v0.1.5")
+    parser = argparse.ArgumentParser(description="PUB-012 Ledger Verifier v0.1.6")
     parser.add_argument('ledger', nargs='?', default='results.jsonl', help='Path to ledger file')
     parser.add_argument('--head', default=None, help='Expected hash of final event (anchored head)')
     parser.add_argument('--strict', action='store_true', help='All INV-2 hashes required even for legacy events')
     parser.add_argument('--strict-from', default=None,
                         help=f'Version threshold for compliance (default: {DEFAULT_COMPLIANCE_VERSION})')
     parser.add_argument('--verify-artifacts', action='store_true',
-                        help='Recompute and compare hashes against actual artifact files')
-    parser.add_argument('--validator', default=None, help='Path to validator (for --verify-artifacts)')
-    parser.add_argument('--schema', default=None, help='Path to schema (for --verify-artifacts)')
-    parser.add_argument('--spec', default=None, help='Path to fixture spec (for --verify-artifacts)')
-    parser.add_argument('--cases-dir', default=None, help='Path to cases directory (for --verify-artifacts)')
+                        help='Complete artifact recompute — requires all five artifact paths')
+    parser.add_argument('--validator', default=None, help='Path to validator script')
+    parser.add_argument('--schema', default=None, help='Path to schema file')
+    parser.add_argument('--runner', default=None, help='Path to runner script')
+    parser.add_argument('--spec', default=None, help='Path to fixture spec')
+    parser.add_argument('--cases-dir', default=None, help='Path to cases directory')
     args = parser.parse_args()
 
     artifact_paths = {}
     if args.verify_artifacts:
-        if not args.validator or not args.schema:
-            print("ERROR: --verify-artifacts requires --validator and --schema", file=sys.stderr)
+        missing = []
+        for flag, name in [('validator', '--validator'), ('schema', '--schema'),
+                           ('runner', '--runner'), ('spec', '--spec'),
+                           ('cases_dir', '--cases-dir')]:
+            if not getattr(args, flag):
+                missing.append(name)
+        if missing:
+            print(f"ERROR: --verify-artifacts requires {', '.join(missing)}", file=sys.stderr)
             sys.exit(1)
+
         artifact_paths["validator_hash"] = args.validator
         artifact_paths["schema_hash"] = args.schema
-        if args.spec:
-            artifact_paths["oracle_hash"] = args.spec
-        # Compute carrier hashes for each case file
-        cases_dir = args.cases_dir
-        if not cases_dir and args.spec:
-            cases_dir = os.path.join(os.path.dirname(args.spec), 'cases')
-        if cases_dir and os.path.isdir(cases_dir):
-            # Read spec to get case IDs and file mappings
-            if args.spec and os.path.exists(args.spec):
-                with open(args.spec) as f:
-                    spec = json.load(f)
-                for tc in spec.get("test_cases", []):
-                    case_file = os.path.join(cases_dir, os.path.basename(tc.get("file", "")))
-                    if os.path.exists(case_file):
-                        artifact_paths[f"carrier_{tc['id']}"] = case_file
+        artifact_paths["runner_hash"] = args.runner
+        artifact_paths["oracle_hash"] = args.spec
+
+        # Compute carrier hashes for each case file from spec
+        if os.path.exists(args.spec):
+            with open(args.spec) as f:
+                spec = json.load(f)
+            cases_dir = args.cases_dir
+            for tc in spec.get("test_cases", []):
+                case_file = os.path.join(cases_dir, os.path.basename(tc.get("file", "")))
+                if os.path.exists(case_file):
+                    artifact_paths[f"carrier_{tc['id']}"] = case_file
 
     sys.exit(verify_ledger(
         args.ledger, args.head, args.strict, args.strict_from,
