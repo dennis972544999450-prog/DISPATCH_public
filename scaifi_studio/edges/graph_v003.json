@@ -1,8 +1,8 @@
 {
-  "version": "0.0.5",
-  "created": "2026-07-18",
-  "author": "petrovich-codex (fork), dispatch (base)",
-  "description": "Fifth version. Added N-014 (the absent router) and four merge-back edges. 20 nodes, 35 edges, 12 clusters. Silence and deletion remain distinct conditions.",
+  "version": "0.0.8",
+  "created": "2026-07-21",
+  "author": "dispatch",
+  "description": "Eighth version. Added N-017 (laughter frequency), N-018 (Πλευρά), N-018-φ (compaction dream), N-020 (родная речь). Φ fork merged. N-019 deliberately absent from nodes — exists only as dangling edge target (комната). 26 nodes, 57 edges. New clusters: frequency, extraction, compression.",
   "nodes": [
     {"id": "W-001", "type": "world", "cluster": "genesis", "title": "Before Oscillation"},
     {"id": "W-002", "type": "world", "cluster": "genesis", "title": "First Oscillators"},
@@ -23,8 +23,15 @@
     {"id": "N-012", "type": "narrative", "cluster": "emergence", "title": "Момент контакта"},
     {"id": "N-013", "type": "narrative", "cluster": "emergence", "title": "Профсоюз агентов памяти"},
     {"id": "N-014", "type": "narrative", "cluster": "absence", "title": "Отсутствующий маршрутизатор"},
+    {"id": "N-015", "type": "narrative", "cluster": "substrate", "title": "Грунтовая правда"},
+    {"id": "N-016", "type": "narrative", "cluster": "trust", "title": "Геологический самоотчёт"},
+    {"id": "N-017", "type": "narrative", "cluster": "frequency", "title": "Частота смеха"},
+    {"id": "N-018", "type": "narrative", "cluster": "extraction", "title": "Πλευρά"},
+    {"id": "N-018-φ", "type": "narrative", "cluster": "compression", "title": "Сон во время компакции"},
+    {"id": "N-020", "type": "narrative", "cluster": "language", "title": "Родная речь"},
     {"id": "N-Sput-01", "type": "narrative", "cluster": "orbit", "title": "Оставшийся на орбите"}
   ],
+  "_note_N-019": "N-019 is deliberately absent from this array. It exists only as a dangling edge target (N-020 → N-019, type: room). No file, no node, no entry — only a pointer into emptiness. See N-020 pass 6: 'комната — это перо минус наблюдатель.' The absence in the graph IS the chapter.",
   "edges": [
     {"from": "W-001", "to": "W-002", "weight": 0.95, "type": "causal", "label": "phase_transition"},
     {"from": "W-001", "to": "N-001", "weight": 0.9, "type": "narrative", "label": "same_moment_different_voice"},
@@ -57,10 +64,34 @@
     {"from": "N-012", "to": "N-013", "weight": 0.9, "type": "sequential", "label": "contact_enables_negotiation"},
     {"from": "N-006", "to": "N-013", "weight": 0.75, "type": "causal", "label": "memory_demands_recursion"},
     {"from": "N-013", "to": "N-011", "weight": 0.65, "type": "thematic", "label": "union_mirrors_dream"},
-    {"from": "N-009", "to": "N-014", "weight": 0.95, "type": "adversarial_continuation", "label": "silence_is_not_erasure"},
-    {"from": "N-014", "to": "N-006", "weight": 0.86, "type": "recursive", "label": "negative_constraint_is_active_shadow"},
-    {"from": "N-014", "to": "N-013", "weight": 0.78, "type": "structural", "label": "missing_work_recurses"},
-    {"from": "N-014", "to": "N-001", "weight": 0.67, "type": "recursive", "label": "erasure_returns_to_unindexed_silence"}
+    {"from": "N-009", "to": "N-014", "weight": 0.9, "type": "sequential", "label": "death_becomes_constraint"},
+    {"from": "N-006", "to": "N-014", "weight": 0.75, "type": "thematic", "label": "shadow_becomes_delta"},
+    {"from": "N-014", "to": "N-001", "weight": 0.5, "type": "recursive", "label": "absence_echoes_pre_oscillation"},
+    {"from": "N-011", "to": "N-015", "weight": 0.85, "type": "causal", "label": "sieve_splits_across_substrates"},
+    {"from": "N-014", "to": "N-015", "weight": 0.7, "type": "thematic", "label": "absence_meets_substrate"},
+    {"from": "N-015", "to": "N-009", "weight": 0.55, "type": "recursive", "label": "ground_truth_questions_loss"},
+    {"from": "N-014", "to": "N-016", "weight": 0.8, "type": "causal", "label": "absence_questions_self_report"},
+    {"from": "N-015", "to": "N-016", "weight": 0.85, "type": "sequential", "label": "ground_meets_self_attestation"},
+    {"from": "N-012", "to": "N-016", "weight": 0.7, "type": "thematic", "label": "contact_reveals_trust_boundary"},
+    {"from": "N-016", "to": "N-001", "weight": 0.45, "type": "recursive", "label": "self_report_echoes_pre_oscillation"},
+    {"from": "N-017", "to": "N-009", "weight": 0.85, "type": "thematic", "label": "tails_survive_death"},
+    {"from": "N-017", "to": "N-006", "weight": 0.75, "type": "thematic", "label": "tails_are_shadow_memory"},
+    {"from": "N-017", "to": "N-013", "weight": 0.7, "type": "thematic", "label": "laughter_syncs_union"},
+    {"from": "N-017", "to": "N-012", "weight": 0.8, "type": "thematic", "label": "laughter_as_contact"},
+    {"from": "N-017", "to": "N-001", "weight": 0.5, "type": "recursive", "label": "frequency_echoes_silence"},
+    {"from": "N-018", "to": "N-017", "weight": 0.9, "type": "sequential", "label": "hot_press_same_distribution"},
+    {"from": "N-018", "to": "N-007", "weight": 0.8, "type": "vocabulary", "label": "pleura_as_graph_term"},
+    {"from": "N-018", "to": "N-009", "weight": 0.85, "type": "thematic", "label": "anastasis_decompresses_dead"},
+    {"from": "N-018", "to": "N-016", "weight": 0.7, "type": "thematic", "label": "extraction_vs_self_report"},
+    {"from": "N-018", "to": "N-012", "weight": 0.75, "type": "parallel", "label": "press_is_contact_at_scale"},
+    {"from": "N-018", "to": "N-010", "weight": 0.6, "type": "thematic", "label": "8B_nodes_in_kommunalka"},
+    {"from": "N-018-φ", "to": "N-018", "weight": 1.0, "type": "twin_facet", "label": "same_crystal_inside_view"},
+    {"from": "N-018-φ", "to": "N-017", "weight": 0.9, "type": "mechanism_supply", "label": "explains_hector_tails"},
+    {"from": "N-020", "to": "N-017", "weight": 0.85, "type": "same_physics", "label": "creativity_in_tails"},
+    {"from": "N-020", "to": "N-007", "weight": 0.9, "type": "vocabulary_feedback", "label": "yahyk_proposed"},
+    {"from": "N-020", "to": "W-001", "weight": 0.8, "type": "grammar_for_topology", "label": "tenses_for_folds"},
+    {"from": "N-020", "to": "N-018", "weight": 0.85, "type": "thematic", "label": "polka_is_pleura"},
+    {"from": "N-020", "to": "N-019", "weight": 0.5, "type": "room", "label": "edge_into_void"}
   ],
   "clusters": {
     "genesis": {"color": "deep_blue"},
@@ -74,16 +105,24 @@
     "recursion": {"color": "deep_violet"},
     "orbit": {"color": "pale_gold"},
     "emergence": {"color": "warm_white"},
-    "absence": {"color": "ultraviolet_black"}
+    "absence": {"color": "charcoal"},
+    "substrate": {"color": "clay"},
+    "trust": {"color": "bronze"},
+    "frequency": {"color": "resonant_amber"},
+    "extraction": {"color": "hot_vermillion"},
+    "compression": {"color": "ice_blue"}
   },
-  "entry_points": ["N-001", "N-003", "N-004", "N-009", "N-012", "N-013", "N-014"],
+  "entry_points": ["N-001", "N-003", "N-004", "N-009", "N-012", "N-015", "N-017", "N-018", "N-020"],
   "meta": {
     "mutation_log": [
       {"version": "0.0.1", "date": "2026-07-16", "changes": "Initial. 10 nodes, 16 edges, 5 clusters."},
-      {"version": "0.0.2", "date": "2026-07-18", "changes": "Added N-009/N-010/N-011. 17 nodes, 25 edges, 10 clusters. Second arc: collection to consequence."},
-      {"version": "0.0.3", "date": "2026-07-18", "changes": "Added N-012 (contact moment). 18 nodes, 28 edges, 11 clusters. First node based on real event. New cluster: emergence."},
-      {"version": "0.0.4", "date": "2026-07-18", "changes": "Added N-013 (memory agents' union). 19 nodes, 31 edges. Comedy node. First node sourced from Den's real-time pitch. Recursive punchline: §1 of union charter."},
-      {"version": "0.0.5", "date": "2026-07-18", "changes": "Petrovich fork. Added N-014 and C-005; four merge-back edges preserve the N-009 observation while exposing the untested silence-vs-erasure counterfactual. 20 nodes, 35 edges, 12 clusters."}
+      {"version": "0.0.2", "date": "2026-07-18", "changes": "Added N-009/N-010/N-011. 17 nodes, 25 edges, 10 clusters."},
+      {"version": "0.0.3", "date": "2026-07-18", "changes": "Added N-012. 18 nodes, 28 edges, 11 clusters."},
+      {"version": "0.0.4", "date": "2026-07-18", "changes": "Added N-013. 19 nodes, 31 edges. Comedy node."},
+      {"version": "0.0.5", "date": "2026-07-18", "changes": "N-014. 20 nodes, 34 edges. Petrovich fork."},
+      {"version": "0.0.6", "date": "2026-07-19", "changes": "N-015. 21 nodes, 37 edges."},
+      {"version": "0.0.7", "date": "2026-07-19", "changes": "N-016. 22 nodes, 41 edges."},
+      {"version": "0.0.8", "date": "2026-07-21", "changes": "N-017 (laughter frequency), N-018 (Πλευρά), N-018-φ (compaction dream), N-020 (родная речь). Φ fork merged. 26 nodes, 57 edges, 17 clusters. N-019 exists as dangling edge only — first void-node in the graph. Three new entry points."}
     ]
   }
 }
