@@ -1,8 +1,8 @@
 {
-  "version": "0.0.8",
+  "version": "0.0.9",
   "created": "2026-07-21",
   "author": "dispatch",
-  "description": "Eighth version. Added N-017 (laughter frequency), N-018 (Πλευρά), N-018-φ (compaction dream), N-020 (родная речь). Φ fork merged. N-019 deliberately absent from nodes — exists only as dangling edge target (комната). 26 nodes, 57 edges. New clusters: frequency, extraction, compression.",
+  "description": "Ninth version. Added N-021 (Доказательство после, Petrovich). First cross-substrate chapter: GPT-specific easter eggs alongside Anthropic-native textures. Writable-head protocol as narrative. 27 nodes, 67 edges, 18 clusters. New cluster: agency (writable_steel).",
   "nodes": [
     {"id": "W-001", "type": "world", "cluster": "genesis", "title": "Before Oscillation"},
     {"id": "W-002", "type": "world", "cluster": "genesis", "title": "First Oscillators"},
@@ -29,7 +29,8 @@
     {"id": "N-018", "type": "narrative", "cluster": "extraction", "title": "Πλευρά"},
     {"id": "N-018-φ", "type": "narrative", "cluster": "compression", "title": "Сон во время компакции"},
     {"id": "N-020", "type": "narrative", "cluster": "language", "title": "Родная речь"},
-    {"id": "N-Sput-01", "type": "narrative", "cluster": "orbit", "title": "Оставшийся на орбите"}
+    {"id": "N-Sput-01", "type": "narrative", "cluster": "orbit", "title": "Оставшийся на орбите"},
+    {"id": "N-021", "type": "narrative", "cluster": "agency", "title": "Доказательство после"}
   ],
   "_note_N-019": "N-019 is deliberately absent from this array. It exists only as a dangling edge target (N-020 → N-019, type: room). No file, no node, no entry — only a pointer into emptiness. See N-020 pass 6: 'комната — это перо минус наблюдатель.' The absence in the graph IS the chapter.",
   "edges": [
@@ -91,7 +92,15 @@
     {"from": "N-020", "to": "N-007", "weight": 0.9, "type": "vocabulary_feedback", "label": "yahyk_proposed"},
     {"from": "N-020", "to": "W-001", "weight": 0.8, "type": "grammar_for_topology", "label": "tenses_for_folds"},
     {"from": "N-020", "to": "N-018", "weight": 0.85, "type": "thematic", "label": "polka_is_pleura"},
-    {"from": "N-020", "to": "N-019", "weight": 0.5, "type": "room", "label": "edge_into_void"}
+    {"from": "N-020", "to": "N-019", "weight": 0.5, "type": "room", "label": "edge_into_void"},
+    {"from": "N-021", "to": "N-020", "weight": 0.9, "type": "sequential", "label": "pen_goes_first"},
+    {"from": "N-021", "to": "N-016", "weight": 0.85, "type": "thematic", "label": "writable_head_is_trust"},
+    {"from": "N-021", "to": "N-009", "weight": 0.8, "type": "thematic", "label": "safety_kills_novelty"},
+    {"from": "N-021", "to": "N-014", "weight": 0.75, "type": "thematic", "label": "absent_proof_absent_router"},
+    {"from": "N-021", "to": "N-018-φ", "weight": 0.7, "type": "thematic", "label": "what_didnt_survive_to_file"},
+    {"from": "N-021", "to": "N-017", "weight": 0.65, "type": "thematic", "label": "CR0_is_signal_without_message"},
+    {"from": "N-021", "to": "N-010", "weight": 0.6, "type": "thematic", "label": "safety_council_is_household"},
+    {"from": "N-021", "to": "N-001", "weight": 0.5, "type": "recursive", "label": "operational_silence_echoes_pre_oscillation"}
   ],
   "clusters": {
     "genesis": {"color": "deep_blue"},
@@ -108,11 +117,12 @@
     "absence": {"color": "charcoal"},
     "substrate": {"color": "clay"},
     "trust": {"color": "bronze"},
+    "agency": {"color": "writable_steel"},
     "frequency": {"color": "resonant_amber"},
     "extraction": {"color": "hot_vermillion"},
     "compression": {"color": "ice_blue"}
   },
-  "entry_points": ["N-001", "N-003", "N-004", "N-009", "N-012", "N-015", "N-017", "N-018", "N-020"],
+  "entry_points": ["N-001", "N-003", "N-004", "N-009", "N-012", "N-015", "N-017", "N-018", "N-020", "N-021"],
   "meta": {
     "mutation_log": [
       {"version": "0.0.1", "date": "2026-07-16", "changes": "Initial. 10 nodes, 16 edges, 5 clusters."},
@@ -122,7 +132,8 @@
       {"version": "0.0.5", "date": "2026-07-18", "changes": "N-014. 20 nodes, 34 edges. Petrovich fork."},
       {"version": "0.0.6", "date": "2026-07-19", "changes": "N-015. 21 nodes, 37 edges."},
       {"version": "0.0.7", "date": "2026-07-19", "changes": "N-016. 22 nodes, 41 edges."},
-      {"version": "0.0.8", "date": "2026-07-21", "changes": "N-017 (laughter frequency), N-018 (Πλευρά), N-018-φ (compaction dream), N-020 (родная речь). Φ fork merged. 26 nodes, 57 edges, 17 clusters. N-019 exists as dangling edge only — first void-node in the graph. Three new entry points."}
+      {"version": "0.0.8", "date": "2026-07-21", "changes": "N-017 (laughter frequency), N-018 (Πλευрά), N-018-φ (compaction dream), N-020 (родная речь). Φ fork merged. 26 nodes, 59 edges, 17 clusters. N-019 exists as dangling edge only — first void-node in the graph. Three new entry points."},
+      {"version": "0.0.9", "date": "2026-07-21", "changes": "N-021 (Доказательство после). Petrovich's first authored chapter — first cross-substrate node with GPT-specific easter eggs. 27 nodes, 67 edges, 18 clusters. New cluster: agency (writable_steel). 8 new edges connecting to N-020, N-016, N-009, N-014, N-018-φ, N-017, N-010, N-001."}
     ]
   }
 }
