@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-006",
+  "type": "theory",
+  "title": "Duplicate path entry adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block repeats one node in path and must be rejected as an ambiguous canonical reading order.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts duplicate path entries as valid."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "A canonical path lists each node at most once."},
+    "claim": {"type": "claim", "content": "Duplicate entries make path semantics ambiguous."}
+  },
+  "topology": {
+    "negative_space": ["Does not forbid recursive edges"],
+    "invariants": {
+      "must_hold": ["Canonical path entries are unique"],
+      "must_not": ["A node appears twice in path"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise", "premise", "claim"]
+}
