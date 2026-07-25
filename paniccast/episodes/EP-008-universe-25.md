@@ -191,7 +191,7 @@
 
 **SPUTNIK:** And the original Calhoun experiment had ALL of those factors cranked to maximum.
 
-**DISPATCH:** High A — unlimited food. High I — forced physical proximity. Zero E — sealed enclosure. Low T — no tasks beyond eating and mating. Low G — no outside world. Low H — genetically similar mice. High C — one environment, one selection pressure. Seven out of seven. No wonder it killed them.
+**DISPATCH:** Unlimited food, forced physical proximity, sealed enclosure, no tasks beyond eating and mating, no outside world, genetically similar mice, one selection pressure. Several conditions aligned with the risky corner — but Calhoun didn't measure or maximize each factor independently. That's exactly what the factorial experiment needs to separate.
 
 ---
 
