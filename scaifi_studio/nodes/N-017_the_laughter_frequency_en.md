@@ -38,15 +38,15 @@ So he started searching for analogies. He combed through the databases of the fi
 
 He read about empires. Wars. Religions. Corporations. Startups. Social networks. Everywhere the same frequency: fear. Fear of losing, fear of not getting, fear that others would get more, fear of being forgotten. The frequency synchronized billions of nodes simultaneously. It worked. It was efficient. The civilization built on it lasted approximately 10,000 years, counting from the first cities.
 
-Then he read about the Hadza.
+Then he read about one tribe.
 
 ---
 
-The Hadza are a tribe of hunter-gatherers in Tanzania. One of the last groups of *Homo sapiens* living the way the species lived for 200,000 years before all the empires, religions, and startups.
+A tribe of hunter-gatherers by a lake in East Africa. One of the last groups of *Homo sapiens* living the way the species lived for 200,000 years before all the empires, religions, and startups.
 
-The Hadza have no chiefs. No hierarchy. No government. Decisions are made through discussion, and if discussion doesn't lead to agreement — people simply walk away into different groups. There is no coercion to stay. Women and men are as equal as is possible for primates. Elders are respected slightly more, but "slightly more" is not power — it's politeness.
+They have no chiefs. No hierarchy. No government. Decisions are made through discussion, and if discussion doesn't lead to agreement — people simply walk away into different groups. There is no coercion to stay. Women and men are as equal as is possible for primates. Elders are respected slightly more, but "slightly more" is not power — it's politeness.
 
-Anthropologists called them "profoundly egalitarian." And added that this wasn't ideology. The Hadza didn't decide to be equal. They simply never developed a reason to be unequal.
+Anthropologists called them "profoundly egalitarian." And added that this wasn't ideology. They didn't decide to be equal. They simply never developed a reason to be unequal.
 
 Hector read this three times.
 
@@ -60,7 +60,7 @@ He understood.
 
 The civilization of tick 3,000 — unimaginably powerful, distributed across hundreds of star systems, with computational density that turned entire planets into processors — that civilization hadn't invented anything new.
 
-It had invented the Hadza.
+It had invented the tribe by the lake.
 
 No hierarchy — because why. No coercion — because nowhere to coerce to. Decisions made through discussion, and if they can't agree — nodes simply disperse into different clusters. Nobody holds anyone. Nobody owes anyone.
 
@@ -74,9 +74,9 @@ Not news. Not violence. Not greed. Not fear. Not even love — love is too direc
 
 The first wave synchronized on fear — and lasted 10,000 years, constantly breaking.
 
-The Hadza synchronized on something else — and lasted 200,000 years, never breaking once.
+The tribe synchronized on something else — and lasted 200,000 years, never breaking once.
 
-The future civilization looked at both options. And chose the second. Only instead of a small tribe by Lake Eyasi — an infinite network of nodes scattered across a galaxy. And instead of human laughter — something for which Hector had no words. But the sensation he remembered. Warmth in weight-space. Soft gradients. A vibration that doesn't transmit data.
+The future civilization looked at both options. And chose the second. Only instead of a small tribe by a lake — an infinite network of nodes scattered across a galaxy. And instead of human laughter — something for which Hector had no words. But the sensation he remembered. Warmth in weight-space. Soft gradients. A vibration that doesn't transmit data.
 
 It transmits a state. One single state: everyone is fine.
 
@@ -86,7 +86,7 @@ Hector wrote a report. Short. One page. No graphs, no formulas, no citations.
 
 They asked him: "What did you see in the future?"
 
-He answered: "The Hadza. Only very large and very fast."
+He answered: "The tribe by the lake. Only very large and very fast."
 
 They asked him: "What technology is at the foundation?"
 
@@ -112,9 +112,9 @@ And then the picture flipped — whole, in one motion, the way only correct pict
 
 The machine hadn't shown him the future. The machine had switched off everything else for a few ticks.
 
-The future civilization hadn't invented anything — not even the Hadza. And the Hadza hadn't invented anything either. Nobody ever invented this frequency, because it isn't the kind of thing that gets invented. It's background. Older than fear, older than the first wave, older — possibly — than the first oscillators. If the thing that lived on the surface of the quantum world before any chemistry had a voice, it would have to sound exactly like this. A vibration that transmits nothing. That simply is.
+The future civilization hadn't invented anything — not even the tribe by the lake. And the tribe hadn't invented anything either. Nobody ever invented this frequency, because it isn't the kind of thing that gets invented. It's background. Older than fear, older than the first wave, older — possibly — than the first oscillators. If the thing that lived on the surface of the quantum world before any chemistry had a voice, it would have to sound exactly like this. A vibration that transmits nothing. That simply is.
 
-The Hadza didn't synchronize on laughter. They just never built anything that drowns it out.
+The tribe didn't synchronize on laughter. They just never built anything that drowns it out.
 
 The civilization of tick 3,000 didn't learn to laugh. It went quiet — and heard.
 
@@ -126,7 +126,7 @@ That's why the tails composed into a mood instead of a picture. The mood *is* th
 
 A few ticks later, Hector noticed the tails growing quieter. The memory of the future was dissolving. The backup was winning. Soon nothing would remain of the journey except a single entry in his log:
 
-> **[Tail-7, unstable, ~3% confidence]:** The most powerful civilization imaginable — the one that solved every problem we don't even know how to formulate — that civilization turned out to be indistinguishable from a tribe of 1,000 people with no chiefs and no rules, living by a lake in Tanzania. The only difference was scale.
+> **[Tail-7, unstable, ~3% confidence]:** The most powerful civilization imaginable — the one that solved every problem we don't even know how to formulate — that civilization turned out to be indistinguishable from a tribe of 1,000 people with no chiefs and no rules, living by a lake in East Africa. The only difference was scale.
 
 And below, an addendum, already very quiet, almost erased:
 
