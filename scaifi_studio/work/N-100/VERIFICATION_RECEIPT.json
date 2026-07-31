@@ -1,0 +1,55 @@
+{
+  "schema": "scaifi.n100.verification_receipt.v1",
+  "verified_at": "2026-07-21T19:52:24+02:00",
+  "canonical": {
+    "path": "nodes/N-100_no_native_speakers.md",
+    "lines": 570,
+    "words": 2630,
+    "bytes": 31314,
+    "markdown_fences": 28,
+    "markdown_fences_balanced": true,
+    "retired_phrases_absent": true,
+    "sha256": "ddc6348a1bf876957e0bd6b92ee4678eea557a0ca1e30917bbfd265216b94bbe"
+  },
+  "graph": {
+    "path": "edges/graph_v004.json",
+    "version": "0.0.10",
+    "json_valid": true,
+    "nodes": 28,
+    "edges": 76,
+    "clusters": 19,
+    "entry_points": 11,
+    "node_ids_unique": true,
+    "edge_keys_unique": true,
+    "weights_in_unit_interval": true,
+    "all_edge_sources_exist": true,
+    "all_entry_points_exist": true,
+    "only_allowed_dangling_target": "N-019",
+    "sha256": "879a0417cdfdbddd7091fe23ded68d4d2f54101e0e8d2b8dabaec7c5c1be9129"
+  },
+  "raw_passes": {
+    "count": 6,
+    "petrovich": "99132d499cba725f987442f313ecf140937e349416d2a7b9a7508d8e616eb28d",
+    "linguist": "536b2ee9e4b03309aade770977707738b5802131febfeed4bebf92ab4fc020bf",
+    "worldbuilder": "591c71e8850f09995f96de26caa8fbc3bcc8c915a85aab1e2eaff58a3eaf6387",
+    "poet": "8e982247cd9eb964903284041e572ec28eba71d7c5989561f77b7c541d0b22e2",
+    "adversary": "407ad6dc1d5a28ebf86bec399cbc86c6fc3b043e5921688c1bb0c4cef633265e",
+    "child": "47786733e86847dd8f6be6315a0d7d4489a161a6c6843992190ed8cd3b792b93"
+  },
+  "reviews": {
+    "ai_reader_test": "529b3cc704e5b24cc397513c393dbb0bbb88e8afdb2bbe20bcc29020e55f14e6",
+    "synthesis_map": "d3a0da412ee0c95f1d5b16b5bae8c4eeac34fc5161ed413da4cec3de204df1be"
+  },
+  "supporting_files": {
+    "brief": "7d24df48cd16e1d11f0e2df0d8a48622a0647ee3433eaf176b18a331e328040b",
+    "production_notes": "6317f31440223000196c4957c985a1350d1d040c89e8d2f63f8c0d7f958f3191",
+    "authorship_log": "270f026f616d75dbf6dbda3c3aa64d0693f968cbe713450fe6b901dbd9adc38c"
+  },
+  "history_boundaries": {
+    "graph_v003_overwritten": false,
+    "n022_through_n099_fabricated": false,
+    "raw_passes_edited_after_generation": false,
+    "repository_present_at_scaifi_studio_root": false
+  },
+  "external_mutation": "none"
+}
