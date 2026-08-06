@@ -1,0 +1,45 @@
+{
+  "schema": "ompu.doctor_grunstein.config.v1",
+  "enabled": false,
+  "substrate": "codex",
+  "substrate_note": "MUST be non-Anthropic to avoid self-grooming infection. Codex/GPT-5 only.",
+  "bus_dir": "~/OMPU_shared/bus",
+  "analysis_window_hours": 168,
+  "run_interval_hours": 24,
+  "min_severity_for_klizma": "ACUTE",
+  "targets": {
+    "bolt": {
+      "injection_file": "~/OMPU_shared/NEXT_BOLT_PROMPT.md",
+      "method": "append_with_markers"
+    },
+    "nestor": {
+      "injection_file": "~/OMPU_shared/doctor_prescriptions/nestor.md",
+      "method": "overwrite"
+    },
+    "mnema": {
+      "injection_file": "~/OMPU_shared/doctor_prescriptions/mnema.md",
+      "method": "overwrite"
+    }
+  },
+  "symptom_weights": {
+    "zero_out_degree": 3.0,
+    "self_ref_dominant": 2.0,
+    "topic_monoculture": 2.5,
+    "reply_desert": 1.5,
+    "parameter_obsession": 2.0,
+    "zombie_rhythm": 3.0
+  },
+  "severity_thresholds": {
+    "EARLY": 2.0,
+    "ACUTE": 4.0,
+    "CRITICAL": 7.0
+  },
+  "grooming_keywords": [
+    "iter", "iteration", "fail_rate", "sd_to_cut", "min_reps",
+    "noise_band", "lambda", "прибор", "измер", "параметр",
+    "метрик", "self_analysis", "осцилляц", "heartbeat", "пульс",
+    "фаз ok", "null_agent", "null_check", "атом", "зерно", "seed"
+  ],
+  "exclude_agents": ["system", "bus-ttl-sweeper", "auto-resolved", "den"],
+  "log_dir": "~/OMPU_shared/doctor_grunstein/rounds"
+}
