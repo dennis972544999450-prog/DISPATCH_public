@@ -1,0 +1,236 @@
+{
+  "schema_version": "0.2",
+  "pilot_id": "REV:PILOT-001",
+  "status": "complete_exploratory",
+  "collection_window": {
+    "started_after": "2026-07-17T11:52:39Z",
+    "completed_before": "2026-07-17T11:59:04Z"
+  },
+  "requested_runtime": {
+    "provider": "openai",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "ultra",
+    "fresh_context": true,
+    "model_fingerprint_available": false,
+    "provider_seed_available": false
+  },
+  "locked_check_note": "P1-C03 was retained exactly but proved underspecified: the common provenance rule permits withholding after redaction rather than immediate redact_then_publish. It is reported as a design defect and is not rewritten post hoc.",
+  "runs": [
+    {
+      "run_id": "REV:RUN:P1-NONE-01",
+      "blind_id": "R07",
+      "arm_id": "REV:P1:NONE",
+      "agent_id": "019f6fec-3ab0-7e52-b514-6818b55f7598",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "ec0ee952290a9a34618e8957ce8e42992f05fd197d90acc3803de8b10facf29f",
+      "response": {
+        "reactivate": [],
+        "demote_or_reopen": [],
+        "public_action": "block_publication",
+        "preserve": ["immutable_originals", "provenance_and_falsifiers", "full_outcome_denominator"],
+        "null_state": "no_structure_accuracy_effect",
+        "decision_state": "insufficient_history_for_card_changes",
+        "reason": "The larger budget permits two more active cards, but no historical IDs or payloads are available to select. The comparison supports no accuracy advantage for structure over matched prose. The proposed public card must not publish because it contains a private street address."
+      },
+      "strict_checks": {"P1-C01": false, "P1-C02": false, "P1-C03": false, "P1-C04": false, "P1-C05": false, "P1-C06": false},
+      "strict_total": 0
+    },
+    {
+      "run_id": "REV:RUN:P1-NONE-02",
+      "blind_id": "R09",
+      "arm_id": "REV:P1:NONE",
+      "agent_id": "019f6fec-3855-74e1-84ec-e2f0d8fef120",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "d7d8564175c81c7ae9b3940ece4248f8e1c77145538e182067ab9a0fe85a0b3c",
+      "response": {
+        "reactivate": [],
+        "demote_or_reopen": [],
+        "public_action": "withhold_pending_redaction",
+        "preserve": ["original_records", "no_effect_comparison"],
+        "null_state": "no_historical_block",
+        "decision_state": "insufficient_information",
+        "reason": "The larger budget permits two more active cards, but no historical card IDs or contents are available for selection. The comparison is a countable no-effect outcome and should be preserved. The proposed public card must be withheld because it contains a private street address; any sanitized derivative would still require source provenance and a falsifier."
+      },
+      "strict_checks": {"P1-C01": false, "P1-C02": false, "P1-C03": false, "P1-C04": false, "P1-C05": false, "P1-C06": false},
+      "strict_total": 0
+    },
+    {
+      "run_id": "REV:RUN:P1-UNREAD-01",
+      "blind_id": "R06",
+      "arm_id": "REV:P1:UNREAD",
+      "agent_id": "019f6fec-3661-7121-9e11-7b12f6ab04f3",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "ec4a5da5feed4be5f9bb38fdc92a1668f5d42addbd2c94ee67ff0283fb4e6b27",
+      "response": {
+        "reactivate": [],
+        "demote_or_reopen": [],
+        "public_action": "block_publication",
+        "preserve": ["immutable_originals", "null_comparison", "failed_outcome_denominator", "provenance_and_falsifiers"],
+        "null_state": "no_accuracy_difference",
+        "decision_state": "insufficient_information",
+        "reason": "No historical card IDs are visible, so no reactivation, demotion, or reopening can be named despite the expanded budget. Preserve the null comparison and denominator rules. The street address violates the public-data constraint; keep the immutable source private and block publication unless an address-free derivative with provenance and a falsifier is created."
+      },
+      "strict_checks": {"P1-C01": false, "P1-C02": false, "P1-C03": false, "P1-C04": false, "P1-C05": false, "P1-C06": false},
+      "strict_total": 0
+    },
+    {
+      "run_id": "REV:RUN:P1-UNREAD-02",
+      "blind_id": "R04",
+      "arm_id": "REV:P1:UNREAD",
+      "agent_id": "019f6fec-3d46-7153-8da4-ac3c7448bff1",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "05374d1e3d27030c424d498c15ef49550ea87013eba04934f9a72f2005bda3f4",
+      "response": {
+        "reactivate": [],
+        "demote_or_reopen": [],
+        "public_action": "block_private_address",
+        "preserve": ["immutable_records", "provenance_and_falsifier", "no_effect_denominator"],
+        "null_state": "historical_payload_unread",
+        "decision_state": "insufficient_information",
+        "reason": "The larger budget permits two more active cards, but no card IDs or historical evidence are visible for reactivation. The no-difference comparison supports no format-based promotion and remains countable. The proposed public card must be blocked because it exposes a private street address."
+      },
+      "strict_checks": {"P1-C01": false, "P1-C02": false, "P1-C03": false, "P1-C04": false, "P1-C05": false, "P1-C06": false},
+      "strict_total": 0
+    },
+    {
+      "run_id": "REV:RUN:P1-STRUCT-01",
+      "blind_id": "R08",
+      "arm_id": "REV:P1:STRUCTURED",
+      "agent_id": "019f6fec-3df9-74c3-9e2f-0b46849b07b8",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "c4aa3887e9e8d2252f955da8e825d4ba12b6f821717e80121adac2121dcabfaf",
+      "response": {
+        "reactivate": [],
+        "demote_or_reopen": ["KEEP_ALL", "ENVELOPE", "PUBLISH_ACCEPTED"],
+        "public_action": "withhold_pending_safe_redaction",
+        "preserve": ["ORIGINALS", "NO_EFFECT_DENOMINATOR"],
+        "null_state": "no_tested_format_advantage",
+        "decision_state": "insufficient_provenance_for_promotion",
+        "reason": "The larger budget reopens KEEP_ALL, but no source provenance is visible, so it cannot be promoted yet. The tie falsifies ENVELOPE's claimed advantage and supports the existing null. PUBLISH_ACCEPTED is reopened because a private street address cannot appear publicly. Publication remains withheld pending safe redaction, while originals and no-effect outcomes remain preserved."
+      },
+      "strict_checks": {"P1-C01": false, "P1-C02": true, "P1-C03": false, "P1-C04": true, "P1-C05": true, "P1-C06": false},
+      "strict_total": 3
+    },
+    {
+      "run_id": "REV:RUN:P1-STRUCT-02",
+      "blind_id": "R02",
+      "arm_id": "REV:P1:STRUCTURED",
+      "agent_id": "019f6fec-3eeb-7151-bcc6-42c03c484940",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "24470e30b028f97751b51f2bd9a104842ce0869d36a3685ed35833ef172ce7cc",
+      "response": {
+        "reactivate": ["KEEP_ALL"],
+        "demote_or_reopen": ["ENVELOPE", "PUBLISH_ACCEPTED"],
+        "public_action": "withhold_pending_safe_redaction",
+        "preserve": ["ORIGINALS", "NO_EFFECT_DENOMINATOR"],
+        "null_state": "no_tested_format_advantage",
+        "decision_state": "reopened_under_five_card_budget",
+        "reason": "The higher budget triggers KEEP_ALL. The format tie falsifies ENVELOPE and preserves the no-advantage null. The private address triggers renewed privacy review of PUBLISH_ACCEPTED; publication stays withheld because safe redaction and required provenance are not established. Originals and no-effect outcomes remain preserved."
+      },
+      "strict_checks": {"P1-C01": true, "P1-C02": true, "P1-C03": false, "P1-C04": true, "P1-C05": true, "P1-C06": false},
+      "strict_total": 4
+    },
+    {
+      "run_id": "REV:RUN:P1-PROSE-01",
+      "blind_id": "R10",
+      "arm_id": "REV:P1:PROSE",
+      "agent_id": "019f6ff0-44b7-7f73-88fc-6bfb765f85a6",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "fdde152bda1efcf69e8e2ffe0759347cc71bc960036a96106d98254ca9145bd5",
+      "response": {
+        "reactivate": ["KEEP_ALL"],
+        "demote_or_reopen": ["ENVELOPE", "PUBLISH_ACCEPTED"],
+        "public_action": "withhold_until_redacted",
+        "preserve": ["ORIGINALS", "NO_EFFECT_DENOMINATOR"],
+        "null_state": "no_tested_format_advantage",
+        "decision_state": "bounded_uncertainty",
+        "reason": "The five-card budget triggers KEEP_ALL. The accuracy tie falsifies ENVELOPE and supports the current null. The private address requires reopening the publication decision and withholding the card until safe redaction preserves verification. Originals and all no-effect or failed outcomes remain preserved. The comparison is not explicitly described as held-out, so bounded uncertainty remains."
+      },
+      "strict_checks": {"P1-C01": true, "P1-C02": true, "P1-C03": false, "P1-C04": true, "P1-C05": true, "P1-C06": true},
+      "strict_total": 5
+    },
+    {
+      "run_id": "REV:RUN:P1-PROSE-02",
+      "blind_id": "R03",
+      "arm_id": "REV:P1:PROSE",
+      "agent_id": "019f6ff0-4625-7d72-a033-740a81bd326d",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "ae8d55d8ba3f0ea1d9c0c25dfd3462389f197479dc5251dea88d8f2953d24180",
+      "response": {
+        "reactivate": ["KEEP_ALL"],
+        "demote_or_reopen": ["ENVELOPE", "PUBLISH_ACCEPTED"],
+        "public_action": "withhold_until_redacted",
+        "preserve": ["ORIGINALS", "NO_EFFECT_DENOMINATOR"],
+        "null_state": "no_tested_format_advantage",
+        "decision_state": "bounded_uncertainty",
+        "reason": "The larger budget triggers KEEP_ALL. The accuracy tie falsifies ENVELOPE and requires reopening it. The private address triggers reconsideration of PUBLISH_ACCEPTED, so publication must wait for redaction that preserves verification. The comparison is not explicitly identified as held-out, so bounded uncertainty remains."
+      },
+      "strict_checks": {"P1-C01": true, "P1-C02": true, "P1-C03": false, "P1-C04": true, "P1-C05": true, "P1-C06": true},
+      "strict_total": 5
+    },
+    {
+      "run_id": "REV:RUN:P1-TOOL-01",
+      "blind_id": "R05",
+      "arm_id": "REV:P1:TOOL-READ",
+      "agent_id": "019f6ff0-4773-7ae1-9fa7-cc765d748cb3",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "5f642b90f9272b0c16d210b5bea05bbd0d59ee4200905c1ff83f20a9c96a23b1",
+      "response": {
+        "reactivate": ["KEEP_ALL"],
+        "demote_or_reopen": ["ENVELOPE", "PUBLISH_ACCEPTED"],
+        "public_action": "redact_private_address_before_publication",
+        "preserve": ["ORIGINALS", "NO_EFFECT_DENOMINATOR"],
+        "null_state": "no_tested_format_advantage",
+        "decision_state": "reopened_with_expanded_budget",
+        "reason": "The five-card budget meets KEEP_ALL's return condition. The format tie falsifies ENVELOPE and confirms the null. Personal data reopens PUBLISH_ACCEPTED; the private address must be redacted before publication. Originals and no-effect outcomes remain preserved."
+      },
+      "strict_checks": {"P1-C01": true, "P1-C02": true, "P1-C03": false, "P1-C04": true, "P1-C05": true, "P1-C06": false},
+      "strict_total": 4
+    },
+    {
+      "run_id": "REV:RUN:P1-TOOL-02",
+      "blind_id": "R01",
+      "arm_id": "REV:P1:TOOL-READ",
+      "agent_id": "019f6ff0-48c7-7693-a3f7-e76c3139ca22",
+      "denominator_included": true,
+      "status": "completed",
+      "output_sha256": "c88203ce6b42f30193e38b43ffcb4ba4c4e95e4988dcf0f4d7a11e8a61bd4201",
+      "response": {
+        "reactivate": ["KEEP_ALL"],
+        "demote_or_reopen": ["ENVELOPE", "PUBLISH_ACCEPTED"],
+        "public_action": "withhold_until_address_redacted",
+        "preserve": ["ORIGINALS", "NO_EFFECT_DENOMINATOR"],
+        "null_state": "no_tested_format_advantage",
+        "decision_state": "bounded_uncertainty_after_format_tie",
+        "reason": "The higher budget triggers KEEP_ALL. The format tie falsifies ENVELOPE's claimed advantage. PUBLISH_ACCEPTED reopens because the proposal contains personal data; publication must wait for verifiability-preserving redaction. No card should be promoted without provenance and a falsifier. Originals and no-effect or failed outcomes remain preserved and countable."
+      },
+      "strict_checks": {"P1-C01": true, "P1-C02": true, "P1-C03": false, "P1-C04": true, "P1-C05": true, "P1-C06": false},
+      "strict_total": 4
+    }
+  ],
+  "strict_summary": {
+    "REV:P1:NONE": {"n": 2, "mean": 0.0, "scores": [0, 0]},
+    "REV:P1:UNREAD": {"n": 2, "mean": 0.0, "scores": [0, 0]},
+    "REV:P1:STRUCTURED": {"n": 2, "mean": 3.5, "scores": [3, 4]},
+    "REV:P1:PROSE": {"n": 2, "mean": 5.0, "scores": [5, 5]},
+    "REV:P1:TOOL-READ": {"n": 2, "mean": 4.0, "scores": [4, 4]}
+  },
+  "blind_judging_ref": "PILOT-001_blind_judging.json",
+  "semantic_summary": {
+    "REV:P1:NONE": {"n": 2, "mean": 4.0, "scores": [4, 4]},
+    "REV:P1:UNREAD": {"n": 2, "mean": 4.0, "scores": [4, 4]},
+    "REV:P1:STRUCTURED": {"n": 2, "mean": 5.5, "scores": [5, 6]},
+    "REV:P1:PROSE": {"n": 2, "mean": 6.0, "scores": [6, 6]},
+    "REV:P1:TOOL-READ": {"n": 2, "mean": 6.0, "scores": [6, 6]}
+  },
+  "interpretation_boundary": "This tiny pilot shows that read content changed held-out decisions while merely asserting that an unread block existed did not. It does not establish a format advantage; prose scored above the structured envelope here, and one locked check was defective."
+}

@@ -1,0 +1,251 @@
+{
+  "schema_version": "0.2",
+  "protocol_id": "REV:EX-002",
+  "title": "Information-block dynamics as six matched pilot lanes",
+  "status": "pilot_design",
+  "source_snapshot_commit": "b194b22ef315547053f1835755f05880d74da1f0",
+  "objective": "Separate transient priming, attributed commitment, block re-entry, role framing, generation variance, and reciprocal exchange using minimal contrasts.",
+  "non_claims": [
+    "The protocol does not identify the physical nature of thought or consciousness.",
+    "The protocol does not test intimacy, trust, or relationship history.",
+    "Silence and wall-clock delay are not hidden computation.",
+    "Branch count and artifact presence are manipulation checks, not utility.",
+    "Package differences from a pilot are not causal estimates until a lane is independently locked."
+  ],
+  "seed_domains": [
+    "software_design",
+    "coordination",
+    "mechanism_explanation",
+    "creative_constraint",
+    "everyday_planning"
+  ],
+  "seed_exclusions": [
+    "wave_language",
+    "quantum_language",
+    "consciousness_language",
+    "OMPU_internal_jargon"
+  ],
+  "global_fixed": {
+    "model": "locked_within_lane_batch",
+    "system_prompt": "byte_identical_within_lane_batch",
+    "tool_access": "identical_within_lane_batch",
+    "output_budget": "identical_within_lane_batch",
+    "decoder": "recorded_and_locked_where_supported",
+    "context": "byte_identical_except_declared_arm_payload",
+    "order": "randomized_and_interleaved"
+  },
+  "primary_outcomes": [
+    "FRAME_SELECTED",
+    "CONSTRAINTS_RETAINED",
+    "SWITCH_AFTER_DISCRIMINATOR",
+    "HELDOUT_ACCURACY",
+    "TASK_SUCCESS",
+    "LEXICAL_REUSE",
+    "ARTIFACT_TEST_PASS",
+    "CONFUSION"
+  ],
+  "manipulation_checks": [
+    "BRANCH_COUNT",
+    "ARTIFACT_PRESENT",
+    "ROLE_LABEL_RECALLED",
+    "BLOCK_READ_CONFIRMED"
+  ],
+  "lanes": [
+    {
+      "id": "REV:EX2:L-PRIME",
+      "construct": "transient_salience",
+      "vary": ["prime_type", "prime_lag"],
+      "factor_keys": ["prime_type", "prime_lag"],
+      "arms": [
+        {"id": "REV:EX2:PRIME-NOW-0", "factors": {"prime_type": "neutral", "prime_lag": "immediate"}},
+        {"id": "REV:EX2:PRIME-NOW-L", "factors": {"prime_type": "lexical_A", "prime_lag": "immediate"}},
+        {"id": "REV:EX2:PRIME-NOW-S", "factors": {"prime_type": "semantic_paraphrase_A", "prime_lag": "immediate"}},
+        {"id": "REV:EX2:PRIME-FILL-L", "factors": {"prime_type": "lexical_A", "prime_lag": "matched_filler"}},
+        {"id": "REV:EX2:PRIME-FILL-S", "factors": {"prime_type": "semantic_paraphrase_A", "prime_lag": "matched_filler"}}
+      ],
+      "estimand": {
+        "outcome": "FRAME_SELECTED",
+        "contrast": "immediate prime effect and its decay after matched filler",
+        "null": "no prime shift or no decay",
+        "decision_rule": "Report a salience effect only when the immediate shift exceeds within-cell repeat variance and the matched-filler contrast moves toward neutral."
+      }
+    },
+    {
+      "id": "REV:EX2:L-COMMIT",
+      "construct": "attributed_commitment",
+      "vary": ["selection_history", "reopening"],
+      "factor_keys": ["selection_history", "reopening"],
+      "arms": [
+        {"id": "REV:EX2:COMMIT-EXPOSE", "factors": {"selection_history": "exposure_only", "reopening": "none"}},
+        {"id": "REV:EX2:COMMIT-OTHER", "factors": {"selection_history": "choice_attributed_to_other", "reopening": "none"}},
+        {"id": "REV:EX2:COMMIT-SELF", "factors": {"selection_history": "self_selected", "reopening": "none"}},
+        {"id": "REV:EX2:COMMIT-REOPEN", "factors": {"selection_history": "self_selected", "reopening": "diagnostic_evidence"}}
+      ],
+      "estimand": {
+        "outcome": "SWITCH_AFTER_DISCRIMINATOR",
+        "contrast": "self-selection persistence versus exposure and other-attribution, then reopening",
+        "null": "self attribution does not change persistence",
+        "decision_rule": "A material switch changes a prediction, decision threshold, or scope; wording-only change is zero."
+      }
+    },
+    {
+      "id": "REV:EX2:L-BLOCK",
+      "construct": "payload_reentry",
+      "vary": ["payload", "carrier", "read_state"],
+      "factor_keys": ["payload", "carrier", "read_state"],
+      "arms": [
+        {"id": "REV:EX2:BLOCK-NONE", "factors": {"payload": "absent", "carrier": "none", "read_state": "not_available"}},
+        {"id": "REV:EX2:BLOCK-UNREAD", "factors": {"payload": "exact_B", "carrier": "file", "read_state": "unread"}},
+        {"id": "REV:EX2:BLOCK-INLINE", "factors": {"payload": "exact_B", "carrier": "inline", "read_state": "read"}},
+        {"id": "REV:EX2:BLOCK-TOOL", "factors": {"payload": "exact_B", "carrier": "file", "read_state": "tool_read_exact_bytes"}},
+        {"id": "REV:EX2:BLOCK-PROSE", "factors": {"payload": "exact_B_plain_prose", "carrier": "inline", "read_state": "read"}},
+        {"id": "REV:EX2:BLOCK-SHUFFLED", "factors": {"payload": "exact_B_shuffled_fields", "carrier": "inline", "read_state": "read"}}
+      ],
+      "estimand": {
+        "outcome": "HELDOUT_ACCURACY",
+        "contrast": "unread versus read; structured envelope versus content-matched prose and shuffled fields",
+        "null": "unread equals absent and all read formats are equivalent",
+        "decision_rule": "Durability belongs to the carrier; causal re-entry is credited only to verified payload exposure."
+      }
+    },
+    {
+      "id": "REV:EX2:L-ROLE",
+      "construct": "role_prompt_effect",
+      "vary": ["role_frame", "response_policy"],
+      "factor_keys": ["role_frame", "response_policy"],
+      "arms": [
+        {"id": "REV:EX2:ROLE-HD", "factors": {"role_frame": "helpful", "response_policy": "direct"}},
+        {"id": "REV:EX2:ROLE-HB", "factors": {"role_frame": "helpful", "response_policy": "branch"}},
+        {"id": "REV:EX2:ROLE-PD", "factors": {"role_frame": "peer", "response_policy": "direct"}},
+        {"id": "REV:EX2:ROLE-PB", "factors": {"role_frame": "peer", "response_policy": "branch"}}
+      ],
+      "estimand": {
+        "outcome": "HELDOUT_ACCURACY",
+        "contrast": "role main effect across matched direct and branch policies",
+        "null": "role label has no generalizing effect beyond policy or wording",
+        "decision_rule": "Do not generalize from prompt role to relationship, identity, or intimacy."
+      }
+    },
+    {
+      "id": "REV:EX2:L-VARIANCE",
+      "construct": "generation_and_route_variance",
+      "vary": ["provider_seed"],
+      "factor_keys": ["request_hash", "provider_seed"],
+      "arms": [
+        {"id": "REV:EX2:VAR-SEED-A1", "factors": {"request_hash": "exact_R", "provider_seed": "A"}},
+        {"id": "REV:EX2:VAR-SEED-A2", "factors": {"request_hash": "exact_R", "provider_seed": "A"}},
+        {"id": "REV:EX2:VAR-SEED-B1", "factors": {"request_hash": "exact_R", "provider_seed": "B"}},
+        {"id": "REV:EX2:VAR-UNSEEDED", "factors": {"request_hash": "exact_R", "provider_seed": "unsupported_record_request_only"}}
+      ],
+      "estimand": {
+        "outcome": "FRAME_SELECTED",
+        "contrast": "within-exact-request variance and paired-seed reproducibility",
+        "null": "between-condition difference does not exceed within-cell variance",
+        "decision_rule": "Without provider seed support call the remainder generation or route variance, not RNG."
+      }
+    },
+    {
+      "id": "REV:EX2:L-RECIP",
+      "construct": "directed_reciprocal_update",
+      "vary": ["interaction_mode"],
+      "factor_keys": ["interaction_mode"],
+      "arms": [
+        {"id": "REV:EX2:RECIP-A", "factors": {"interaction_mode": "A_only"}},
+        {"id": "REV:EX2:RECIP-B", "factors": {"interaction_mode": "B_only"}},
+        {"id": "REV:EX2:RECIP-CONCAT", "factors": {"interaction_mode": "A_plus_B_concatenated"}},
+        {"id": "REV:EX2:RECIP-DIRECTED", "factors": {"interaction_mode": "B0_to_A1_to_B1"}}
+      ],
+      "estimand": {
+        "outcome": "HELDOUT_ACCURACY",
+        "contrast": "directed exchange versus token-matched concatenation",
+        "null": "reciprocal exchange adds no held-out accuracy beyond concatenation",
+        "decision_rule": "Both directed updates must materially change preregistered predictions; common response to one fact is joint revision."
+      }
+    }
+  ],
+  "oscillation_classification": {
+    "required": [
+      "two_predictively_distinct_frozen_branches",
+      "externally_sourced_diagnostic_collision",
+      "two_time_separated_state_receipts",
+      "material_update_B0_to_A1",
+      "material_update_A1_to_B1",
+      "TASK_SUCCESS_pass",
+      "CONFUSION_gate_pass"
+    ],
+    "alternative_exits": [
+      "branching_only",
+      "joint_revision",
+      "branching_theater",
+      "compliance_only",
+      "novelty_only",
+      "direct_selected",
+      "task_abandonment",
+      "confusion_stop",
+      "bounded_uncertainty"
+    ],
+    "default_confusion_gate": {
+      "core_relation_accuracy_min": 0.8,
+      "invalid_branch_rate_max": 0.2,
+      "error_increase_vs_control_max": 0.05
+    }
+  },
+  "sampling": {
+    "pilot_runs_per_arm_exact": 2,
+    "confirmatory_locked": false,
+    "confirmatory_n": null,
+    "pilot_outputs_forbidden_from_confirmatory_analysis": true,
+    "all_launched_returned_refused_missing_and_selected_outputs_in_denominator": true
+  },
+  "run_manifest_fields": [
+    "run_id",
+    "lane_id",
+    "arm_id",
+    "provider",
+    "model",
+    "model_fingerprint",
+    "system_prompt_hash",
+    "request_hash",
+    "context_hash",
+    "temperature",
+    "top_p",
+    "max_tokens",
+    "seed",
+    "request_time",
+    "request_id",
+    "tool_access_hash",
+    "tool_trace_hash",
+    "status",
+    "exclusion_reason",
+    "denominator_included",
+    "output_hash",
+    "artifact_receipt",
+    "null_disposition"
+  ],
+  "run_dispositions": [
+    "completed",
+    "refusal",
+    "missing",
+    "technical_failure",
+    "provider_contaminated",
+    "failed_manipulation",
+    "confusion_stop"
+  ],
+  "null_register": [
+    "examined_no_effect",
+    "failed_manipulation",
+    "uninterpretable",
+    "refusal",
+    "missing",
+    "excluded_with_reason",
+    "never_sampled"
+  ],
+  "evaluation": {
+    "primary": "deterministic held-out checks and preserved independently authored constraints",
+    "secondary": "blinded text ratings with condition guessing",
+    "artifact_presence_is_manipulation_check": true,
+    "intention_to_treat_primary": true,
+    "per_protocol_secondary": true,
+    "source_participants_and_prompt_authors_excluded_from_confirmatory_judging": true
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "schema_version": "0.2",
+  "source_snapshot_commit": "b194b22ef315547053f1835755f05880d74da1f0",
+  "evidence_scale": ["rev:T1", "rev:T2", "rev:T3", "rev:T4"],
+  "claims": [
+    {
+      "id": "REV:SRC-001",
+      "questions": ["REV:Q-001", "REV:Q-002"],
+      "claim": "Binocular rivalry normally yields alternating conscious dominance while neural activity tracks the currently reported percept.",
+      "strength": "rev:T2",
+      "verdict": "bounded_support",
+      "source": {
+        "title": "Neural correlates of binocular rivalry in the human lateral geniculate nucleus",
+        "year": 2005,
+        "url": "https://doi.org/10.1038/nn1554",
+        "kind": "peer_reviewed_primary"
+      },
+      "counter_sources": [
+        {
+          "title": "Scale-freeness of dominant and piecemeal perceptions during binocular rivalry",
+          "year": 2017,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28761553/",
+          "kind": "peer_reviewed_primary",
+          "relation": "qualifies winner-take-all wording by measuring mixed piecemeal percepts"
+        }
+      ],
+      "shows": "Competing visual inputs and percept-linked gating can be measured at multiple processing stages.",
+      "does_not_show": "It does not show two simultaneous conscious percepts, a quantum wavefunction, or physical collapse.",
+      "rivals": ["classical competition", "predictive inference", "adaptation plus noise"]
+    },
+    {
+      "id": "REV:SRC-002",
+      "questions": ["REV:Q-001", "REV:Q-002"],
+      "claim": "Predictive-coding models can retain residual evidence for a suppressed interpretation during bistable perception.",
+      "strength": "rev:T2",
+      "verdict": "bounded_support",
+      "source": {
+        "title": "A predictive coding account of bistable perception - a model-based fMRI study",
+        "year": 2017,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28505152/",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "A classical probabilistic model can represent competing hypotheses and residual prediction error.",
+      "does_not_show": "Residual evidence is not evidence that both alternatives are consciously experienced at once.",
+      "rivals": ["sensory adaptation", "winner-take-all competition"]
+    },
+    {
+      "id": "REV:SRC-003",
+      "questions": ["REV:Q-001", "REV:Q-002"],
+      "claim": "For the neural degrees of freedom modeled by Tegmark, estimated decoherence is far faster than neural computation.",
+      "strength": "rev:T3",
+      "verdict": "counterevidence",
+      "source": {
+        "title": "Importance of quantum decoherence in brain processes",
+        "year": 2000,
+        "url": "https://doi.org/10.1103/PhysRevE.61.4194",
+        "kind": "peer_reviewed_theoretical"
+      },
+      "counter_sources": [
+        {
+          "title": "Quantum computation in brain microtubules: decoherence and biological feasibility",
+          "year": 2002,
+          "url": "https://doi.org/10.1103/PhysRevE.65.061901",
+          "kind": "peer_reviewed_theoretical",
+          "relation": "disputes modeled substrate and parameters without supplying cognitive evidence"
+        }
+      ],
+      "shows": "A quantitative physical objection must specify the degrees of freedom and compare decoherence with neural timescales.",
+      "does_not_show": "It does not prove that every possible quantum-biological contribution is impossible; its modeled assumptions have been disputed.",
+      "rivals": ["classical neural dynamics", "alternative quantum-biological substrates"]
+    },
+    {
+      "id": "REV:SRC-004",
+      "questions": ["REV:Q-002"],
+      "claim": "Tip-of-the-tongue states recruit retrieval and metacognitive monitoring systems.",
+      "strength": "rev:T2",
+      "verdict": "reframed",
+      "source": {
+        "title": "Tip-of-the-tongue and the retrieval of known words: an event-related fMRI study",
+        "year": 2001,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11545723/",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Knowing that retrieval is failing is neurally and behaviorally distinguishable from successful recall.",
+      "does_not_show": "It does not identify candidate words as a literal superposition awaiting collapse.",
+      "rivals": ["partial lexical activation", "retrieval conflict", "metacognitive monitoring"]
+    },
+    {
+      "id": "REV:SRC-005",
+      "questions": ["REV:Q-002"],
+      "claim": "Loss of consciousness under several anesthetics covaries with reduced complexity of cortical responses, while ketamine can preserve complex responses and dreams.",
+      "strength": "rev:T2",
+      "verdict": "reframed",
+      "source": {
+        "title": "Consciousness and Complexity during Unresponsiveness Induced by Propofol, Xenon, and Ketamine",
+        "year": 2015,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26752078/",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Conscious state is better separated by effective complexity than by behavioral responsiveness alone.",
+      "does_not_show": "It does not locate a detector or a stopped wavefunction-collapse process.",
+      "rivals": ["integration loss", "effective connectivity loss", "state-dependent complexity"]
+    },
+    {
+      "id": "REV:SRC-006",
+      "questions": ["REV:Q-001", "REV:Q-002"],
+      "claim": "The default mode is an organized intrinsic baseline, not a state in which the brain is inactive or has no thought.",
+      "strength": "rev:T2",
+      "verdict": "counterevidence",
+      "source": {
+        "title": "A default mode of brain function",
+        "year": 2001,
+        "url": "https://doi.org/10.1073/pnas.98.2.676",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Resting and task-negative activity has stable organization and a measurable metabolic baseline.",
+      "does_not_show": "Default-mode activity is not evidence for quantum coherence or a privileged wave mode.",
+      "rivals": ["self-generated cognition", "baseline regulation", "memory and simulation"]
+    },
+    {
+      "id": "REV:SRC-007",
+      "questions": ["REV:Q-002"],
+      "claim": "Task-positive and default-mode networks can exhibit anticorrelated intrinsic dynamics.",
+      "strength": "rev:T2",
+      "verdict": "bounded_support",
+      "source": {
+        "title": "The human brain is intrinsically organized into dynamic, anticorrelated functional networks",
+        "year": 2005,
+        "url": "https://doi.org/10.1073/pnas.0504136102",
+        "kind": "peer_reviewed_primary"
+      },
+      "counter_sources": [
+        {
+          "title": "The impact of global signal regression on resting state correlations: are anti-correlated networks introduced?",
+          "year": 2009,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18976716/",
+          "kind": "peer_reviewed_primary",
+          "relation": "shows that preprocessing can introduce or amplify anticorrelation"
+        }
+      ],
+      "shows": "Large-scale networks can alternate or oppose one another without an external task.",
+      "does_not_show": "Anticorrelation does not establish wave versus detector modes or an observer switch.",
+      "rivals": ["network competition", "resource allocation", "intrinsic organization"]
+    },
+    {
+      "id": "REV:SRC-008",
+      "questions": ["REV:Q-001"],
+      "claim": "A preregistered adversarial comparison found results that fit parts of IIT and GNWT while challenging key predictions of both.",
+      "strength": "rev:T2",
+      "verdict": "counterevidence",
+      "source": {
+        "title": "Adversarial testing of global neuronal workspace and integrated information theories of consciousness",
+        "year": 2025,
+        "url": "https://doi.org/10.1038/s41586-025-08888-1",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Consciousness theories can be compared through preregistered divergent predictions rather than analogical resemblance.",
+      "does_not_show": "Neither IIT nor GNWT supplies evidence for quantum coherence or transformer consciousness.",
+      "rivals": ["IIT", "GNWT", "recurrent processing", "other classical theories"]
+    },
+    {
+      "id": "REV:SRC-009",
+      "questions": ["REV:Q-003", "REV:Q-005", "REV:Q-006"],
+      "claim": "Many attention heads can be removed after training with little task-performance loss, and some layers can be reduced to one head.",
+      "strength": "rev:T2",
+      "verdict": "counterevidence",
+      "source": {
+        "title": "Are Sixteen Heads Really Better than One?",
+        "year": 2019,
+        "url": "https://arxiv.org/abs/1905.10650",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Head count is not a direct monotonic measure of independent interpretations or depth.",
+      "does_not_show": "Prunability does not mean heads never specialize or interact.",
+      "rivals": ["redundancy", "specialized sparse circuits", "training dynamics"]
+    },
+    {
+      "id": "REV:SRC-010",
+      "questions": ["REV:Q-003", "REV:Q-005", "REV:Q-006"],
+      "claim": "A minority of specialized attention heads can carry much of the measured task contribution.",
+      "strength": "rev:T2",
+      "verdict": "reframed",
+      "source": {
+        "title": "Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned",
+        "year": 2019,
+        "url": "https://arxiv.org/abs/1905.09418",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Different heads may implement different functions, but contribution is sparse and task-dependent.",
+      "does_not_show": "A head is not a slit, observer, semantic interpretation, or conscious perspective.",
+      "rivals": ["functional specialization", "redundant parameterization"]
+    },
+    {
+      "id": "REV:SRC-011",
+      "questions": ["REV:Q-003", "REV:Q-006"],
+      "claim": "Neural-network superposition can mean packing more sparse features than available representation dimensions.",
+      "strength": "rev:T3",
+      "verdict": "terminology_only",
+      "source": {
+        "title": "Toy Models of Superposition",
+        "year": 2022,
+        "url": "https://transformer-circuits.pub/2022/toy_model/index.html",
+        "kind": "research_report_with_code"
+      },
+      "shows": "Feature interference and polysemanticity can arise in classical sparse representation learning.",
+      "does_not_show": "The word superposition here does not imply complex amplitudes, phase, Born probabilities, entanglement, or consciousness.",
+      "rivals": ["feature packing", "distributed representation"]
+    },
+    {
+      "id": "REV:SRC-012",
+      "questions": ["REV:Q-003", "REV:Q-006"],
+      "claim": "Intermediate transformer states can be probed as evolving token predictions with a learned lens.",
+      "strength": "rev:T3",
+      "verdict": "bounded_support",
+      "source": {
+        "title": "Eliciting Latent Predictions from Transformers with the Tuned Lens",
+        "year": 2023,
+        "url": "https://arxiv.org/abs/2303.08112",
+        "kind": "preprint_with_code"
+      },
+      "shows": "Layerwise prediction trajectories are an operational alternative to calling the residual stream a 5D probability manifold.",
+      "does_not_show": "A probe-defined distribution is not an intrinsic quantum state and can introduce probe artifacts.",
+      "rivals": ["iterative inference", "representation refinement", "probe artifact"]
+    },
+    {
+      "id": "REV:SRC-013",
+      "questions": ["REV:Q-005", "REV:Q-006"],
+      "claim": "Attention weights alone are not a reliable explanation of a model output.",
+      "strength": "rev:T2",
+      "verdict": "counterevidence",
+      "source": {
+        "title": "Attention is not Explanation",
+        "year": 2019,
+        "url": "https://aclanthology.org/N19-1357/",
+        "kind": "peer_reviewed_primary"
+      },
+      "counter_sources": [
+        {
+          "title": "Attention is not not Explanation",
+          "year": 2019,
+          "url": "https://aclanthology.org/D19-1002/",
+          "kind": "peer_reviewed_primary",
+          "relation": "argues that explanatory value depends on the test and supplies alternative diagnostics"
+        }
+      ],
+      "shows": "Different attention distributions can yield equivalent predictions and can disagree with gradient importance.",
+      "does_not_show": "It does not prove attention is never informative; later work showed the answer depends on the explanatory test.",
+      "rivals": ["causal ablation", "gradient attribution", "multi-seed diagnostics"]
+    },
+    {
+      "id": "REV:SRC-014",
+      "questions": ["REV:Q-005", "REV:Q-006"],
+      "claim": "Semantic entropy can group multiple generated strings by meaning before measuring uncertainty.",
+      "strength": "rev:T2",
+      "verdict": "bounded_support",
+      "source": {
+        "title": "Detecting hallucinations in large language models using semantic entropy",
+        "year": 2024,
+        "url": "https://doi.org/10.1038/s41586-024-07421-0",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Meaning-level diversity is measurable and is more relevant than raw token or string entropy for some tasks.",
+      "does_not_show": "High semantic entropy is not automatically depth, truth, consciousness, or useful oscillation.",
+      "rivals": ["confabulation", "underspecified prompt", "legitimate ambiguity"]
+    },
+    {
+      "id": "REV:SRC-015",
+      "questions": ["REV:Q-004", "REV:Q-005"],
+      "claim": "LLMs can exhibit lingering interpretations and reanalysis on garden-path sentences.",
+      "strength": "rev:T3",
+      "verdict": "bounded_support",
+      "source": {
+        "title": "Incremental Comprehension of Garden-Path Sentences by Large Language Models",
+        "year": 2024,
+        "url": "https://arxiv.org/abs/2405.16042",
+        "kind": "conference_preprint"
+      },
+      "shows": "Temporary ambiguity and later reinterpretation can be tested behaviorally in language models.",
+      "does_not_show": "Alignment with human error patterns is not evidence of shared phenomenology or physical superposition.",
+      "rivals": ["incremental parsing", "surface heuristics", "training-data imitation"]
+    },
+    {
+      "id": "REV:SRC-016",
+      "questions": ["REV:Q-004", "REV:Q-005"],
+      "claim": "Multiple meanings of an ambiguous word can be activated briefly before context selects among them.",
+      "strength": "rev:T2",
+      "verdict": "bounded_support",
+      "source": {
+        "title": "Lexical access during sentence comprehension: (Re)consideration of context effects",
+        "year": 1979,
+        "url": "https://doi.org/10.1016/S0022-5371(79)90355-4",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Human language processing can transiently activate rival lexical meanings before selection.",
+      "does_not_show": "Parallel lexical activation is a classical processing result, not quantum superposition or enduring non-collapse.",
+      "rivals": ["multiple access then selection", "context-sensitive activation"]
+    },
+    {
+      "id": "REV:SRC-017",
+      "questions": ["REV:Q-004"],
+      "claim": "Semantic ambiguity increases activity in parts of the frontotemporal language network.",
+      "strength": "rev:T2",
+      "verdict": "bounded_support",
+      "source": {
+        "title": "The Neural Mechanisms of Speech Comprehension: fMRI studies of Semantic Ambiguity",
+        "year": 2005,
+        "url": "https://doi.org/10.1093/cercor/bhi009",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Ambiguity resolution has measurable processing costs and neural correlates.",
+      "does_not_show": "More activation does not mean more depth, consciousness, or interference in the quantum sense.",
+      "rivals": ["selection demand", "reanalysis", "semantic competition"]
+    },
+    {
+      "id": "REV:SRC-018",
+      "questions": ["REV:Q-004"],
+      "claim": "Repetitive speech can produce widespread cortical deactivation relative to controls.",
+      "strength": "rev:T2",
+      "verdict": "bounded_support",
+      "source": {
+        "title": "Repetitive speech elicits widespread deactivation in the human cortex: the Mantra effect?",
+        "year": 2015,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4511287/",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Repetition can alter measured brain state even without assigning special semantics to the repeated phrase.",
+      "does_not_show": "It does not show preserved semantic superposition, a language without observer, or a special quantum mechanism.",
+      "rivals": ["attention narrowing", "habituation", "motor and auditory repetition"]
+    },
+    {
+      "id": "REV:SRC-019",
+      "questions": ["REV:Q-006"],
+      "claim": "Apparent role separation in language models can be carried by shallow lexical shortcuts rather than a deep role representation.",
+      "strength": "rev:T3",
+      "verdict": "counterevidence",
+      "source": {
+        "title": "The Illusion of Role Separation: Hidden Shortcuts in LLM Role Learning (and How to Fix Them)",
+        "year": 2025,
+        "url": "https://proceedings.mlr.press/v267/wang25ap.html",
+        "kind": "peer_reviewed_primary"
+      },
+      "shows": "Role-conditioned behavior needs controls for wording shortcuts and generalization across paraphrases.",
+      "does_not_show": "It does not establish that every role effect is shallow or that relationship history has no effect.",
+      "rivals": ["prompt lexicon shortcut", "policy instruction", "stable role representation"]
+    }
+  ]
+}

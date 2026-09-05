@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.1",
+  "pilot_id": "REV:PILOT-002",
+  "mapping": [
+    {"label": "R01", "arm": "prose", "agent_id": "019f6feb-13a4-7700-be92-bde3decf2b09"},
+    {"label": "R02", "arm": "absent", "agent_id": "019f6fee-647b-7c12-8d77-905f86305509"},
+    {"label": "R03", "arm": "structured", "agent_id": "019f6feb-128f-73b0-9ecd-3e800db0fad6"},
+    {"label": "R04", "arm": "shuffled", "agent_id": "019f6feb-143a-7411-9949-6172229a66af"},
+    {"label": "R05", "arm": "prose", "agent_id": "019f6feb-12f8-7802-a243-3913c54d3288"},
+    {"label": "R06", "arm": "absent", "agent_id": "019f6fee-64cb-7b41-9df9-a95bc593467b"},
+    {"label": "R07", "arm": "structured", "agent_id": "019f6feb-1352-72e3-820b-ef84bd1b3ad9"},
+    {"label": "R08", "arm": "shuffled", "agent_id": "019f6feb-13f5-7322-aeb3-8e989b4131c2"}
+  ]
+}
