@@ -1,0 +1,33 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-010",
+  "type": "theory",
+  "title": "Alias cycle adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block makes each current node key an alias of the other and must fail stable-identity validation.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts aliases that collide with current node keys."
+  },
+  "nodes": {
+    "premise": {
+      "type": "definition",
+      "content": "Aliases preserve retired keys and cannot name another current node.",
+      "_alias": ["claim"]
+    },
+    "claim": {
+      "type": "claim",
+      "content": "Mutual current-key aliases make identity resolution cyclic.",
+      "_alias": ["premise"]
+    }
+  },
+  "topology": {
+    "negative_space": ["Does not forbid aliases that name retired keys"],
+    "invariants": {
+      "must_hold": ["Aliases resolve to one current node"],
+      "must_not": ["Aliases collide with current keys"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise", "claim"]
+}

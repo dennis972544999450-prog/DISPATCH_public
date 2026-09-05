@@ -1,0 +1,26 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-012",
+  "type": "theory",
+  "title": "Published stage without DOI adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block declares the published crystal stage while omitting a DOI and must fail maturity consistency.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts published stage without a DOI."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "The published stage means a DOI has been assigned."},
+    "claim": {"type": "claim", "content": "A published block without a DOI contradicts stage semantics."}
+  },
+  "topology": {
+    "negative_space": ["Does not require a DOI before publication"],
+    "invariants": {
+      "must_hold": ["Published blocks carry a DOI"],
+      "must_not": ["Published stage is used for unpublished blocks"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise", "claim"],
+  "crystal": {"stage": "published", "compressions": 0, "history": []}
+}

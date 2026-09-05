@@ -1,0 +1,16 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "lite",
+  "id": "ADV-SCHEMA-004",
+  "type": "hypothesis",
+  "title": "Unknown top-level property adversarial fixture",
+  "signal": {
+    "digest": "This otherwise valid lite block adds one undeclared top-level field and must fail additionalProperties validation.",
+    "t": "T4",
+    "falsifies_if": "The canonical schema silently accepts undeclared root fields."
+  },
+  "nodes": {
+    "claim": {"type": "claim", "content": "Unknown root fields must live under the explicit extension point."}
+  },
+  "surprise": true
+}

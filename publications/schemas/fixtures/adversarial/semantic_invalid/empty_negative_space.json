@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-003",
+  "type": "theory",
+  "title": "Empty negative space adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block has an empty negative_space array and must fail research-profile semantic completeness.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts empty research negative_space."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "Research blocks declare what they do not claim."},
+    "claim": {"type": "claim", "content": "An empty negative boundary defeats the research profile."}
+  },
+  "topology": {
+    "negative_space": [],
+    "invariants": {
+      "must_hold": ["Research boundaries are non-empty"],
+      "must_not": ["Boundary declarations are silently omitted"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise", "claim"]
+}

@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-005",
+  "type": "theory",
+  "title": "Empty research path adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block supplies an empty path array and must fail research-profile reading-order completeness.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts a research block without reading order."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "Research blocks expose an explicit reading order."},
+    "claim": {"type": "claim", "content": "An empty path cannot guide traversal through the graph."}
+  },
+  "topology": {
+    "negative_space": ["Does not claim path is the only traversal"],
+    "invariants": {
+      "must_hold": ["Research path is non-empty"],
+      "must_not": ["Canonical reading order disappears"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": []
+}

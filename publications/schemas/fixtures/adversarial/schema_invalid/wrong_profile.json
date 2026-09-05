@@ -1,0 +1,15 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "full",
+  "id": "ADV-SCHEMA-003",
+  "type": "hypothesis",
+  "title": "Unknown profile adversarial fixture",
+  "signal": {
+    "digest": "This otherwise valid block declares an unsupported profile name and must fail the profile enum in the canonical schema.",
+    "t": "T4",
+    "falsifies_if": "The canonical validator accepts an unsupported full profile."
+  },
+  "nodes": {
+    "claim": {"type": "claim", "content": "Only lite and research are canonical v0.2 profile names."}
+  }
+}

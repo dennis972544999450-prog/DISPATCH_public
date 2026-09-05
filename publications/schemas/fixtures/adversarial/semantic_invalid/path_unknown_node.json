@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-002",
+  "type": "theory",
+  "title": "Unknown path node adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block places an absent node key in path and must fail semantic path referential integrity.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts an unresolved path entry."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "Every path entry must resolve to a current node key."},
+    "claim": {"type": "claim", "content": "An unresolved path entry makes reading order incomplete."}
+  },
+  "topology": {
+    "negative_space": ["Does not test edge endpoints"],
+    "invariants": {
+      "must_hold": ["Every path entry resolves"],
+      "must_not": ["Unknown nodes appear in the canonical path"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise", "ghost"]
+}

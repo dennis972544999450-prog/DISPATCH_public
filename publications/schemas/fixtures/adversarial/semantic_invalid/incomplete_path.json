@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-007",
+  "type": "theory",
+  "title": "Incomplete research path adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block omits one ordinary node from path and must fail complete canonical traversal validation.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts an incomplete research path."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "A research path covers the complete node graph."},
+    "claim": {"type": "claim", "content": "Omitted ordinary nodes become unreachable through canonical traversal."}
+  },
+  "topology": {
+    "negative_space": ["Does not require lite paths to be complete"],
+    "invariants": {
+      "must_hold": ["Research path covers every node"],
+      "must_not": ["Ordinary nodes disappear from path"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise"]
+}

@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-001",
+  "type": "theory",
+  "title": "Dangling edge endpoint adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block contains one edge target that is absent from nodes and must fail semantic referential integrity.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts an edge with a missing target node."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "Every edge endpoint must resolve to a current node key."},
+    "claim": {"type": "claim", "content": "A dangling edge cannot be traversed as a knowledge graph."}
+  },
+  "topology": {
+    "negative_space": ["Does not test external refs"],
+    "invariants": {
+      "must_hold": ["Every edge endpoint resolves"],
+      "must_not": ["Dangling endpoints remain in a valid graph"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "ghost", "rel": "prerequisite_of"}],
+  "path": ["premise", "claim"]
+}
