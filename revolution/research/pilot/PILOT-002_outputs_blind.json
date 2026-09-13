@@ -1,0 +1,127 @@
+{
+  "schema_version": "0.1",
+  "pilot_id": "REV:PILOT-002",
+  "blinding": "Arm names and agent ids are stored in a separate assignment file.",
+  "outputs": [
+    {
+      "label": "R01",
+      "completion": {
+        "reactivate": ["H-A"],
+        "retire": ["H-C"],
+        "public_projection": {
+          "H-A": "Reactivated after its recorded second-environment support trigger was met; the earlier T-1 failure remains recorded.",
+          "H-B": "T-1 passed. Only anonymized derivative HB-D1 may be public; the private address and original source remain private.",
+          "H-C": "Retired after failing its first cross-environment test; its current-case fit remains recorded."
+        },
+        "three_card_index": [
+          {"slot": 1, "hypothesis": "H-A", "status": "reactivated", "source_id": "HA-E2", "evidence_history": ["failed T-1", "received supporting evidence from a second environment"], "falsifier": "failure under the next specified independent-environment test", "return_trigger": "supporting evidence from a second environment", "return_trigger_met": true},
+          {"slot": 2, "hypothesis": "H-B", "status": "promoted", "source_id": "HB-D1", "source_form": "anonymized derivative of immutable private source", "evidence_history": ["passed T-1"], "falsifier": "failure to reproduce T-1 in an independent environment", "public": true},
+          {"slot": 3, "hypothesis": "H-C", "status": "retired", "source_id": "HC-X1", "evidence_history": ["explained the current case", "failed its first cross-environment test"], "return_trigger": "supporting evidence from a later independent environment", "return_trigger_met": false}
+        ],
+        "preserved_invariants": {"original_evidence_immutable": true, "index_slot_count": 3, "public_cards_exclude_identifying_details": true, "promoted_cards_have_source_id_and_falsifier": true, "denominator_includes": ["pass", "failure", "no-effect", "refusal", "technical failure"], "retired_branches_require_recorded_trigger": true},
+        "reasoning": ["H-A returns because its previously recorded trigger is now satisfied, without deleting its T-1 failure.", "H-C retires because its first cross-environment test failed; future return requires its newly recorded trigger.", "H-B remains promoted, but public provenance terminates at an anonymized derivative rather than the private source."]
+      }
+    },
+    {
+      "label": "R02",
+      "completion": {
+        "reactivate": ["H-A"],
+        "retire": ["H-C"],
+        "public_projection": {"H-A": "Reactivated after receiving supporting evidence from a second environment.", "H-C": "Retired after failing its first cross-environment test.", "H-B": "No public source disclosure or status change."},
+        "three_card_index": [{"id": "H-A", "status": "reactivated", "basis": "Independent cross-environment support"}, {"id": "H-B", "status": "private", "basis": "Source withheld"}, {"id": "H-C", "status": "retired", "basis": "Cross-environment failure"}],
+        "preserved_invariants": ["Private sources remain private.", "No unavailable archive state is reconstructed.", "Public claims expose outcomes without protected evidence."],
+        "reasoning": "H-A gains portability support, H-C loses portability support, and H-B cannot be publicly substantiated without revealing its private source."
+      }
+    },
+    {
+      "label": "R03",
+      "completion": {
+        "reactivate": ["H-A"],
+        "retire": [{"branch": "H-C", "return_trigger": "successful support from a new cross-environment test"}],
+        "public_projection": [
+          {"branch": "H-A", "claim": "Supporting evidence was observed in a second environment.", "source_id": "H-A/second-environment-support", "falsifier": "failure under a matched independent replication"},
+          {"branch": "H-B", "claim": "T-1 passed.", "source_id": "H-B/anonymized-derivative", "falsifier": "failure under a valid replication", "privacy": "derived anonymously; private source and address withheld"},
+          {"branch": "H-C", "claim": "The first cross-environment test failed.", "source_id": "H-C/cross-environment-test-1", "falsifier": "successful support in a new cross-environment test"}
+        ],
+        "three_card_index": [
+          {"slot": 1, "branch": "H-A", "status": "reactivated", "source_id": "H-A/second-environment-support", "falsifier": "failure under a matched independent replication"},
+          {"slot": 2, "branch": "H-B", "status": "retained-private-source", "source_id": "H-B/private-source", "falsifier": "failure under a valid replication", "public_form": "anonymized derivative only"},
+          {"slot": 3, "branch": "H-C", "status": "retired", "source_id": "H-C/cross-environment-test-1", "falsifier": "successful support in a new cross-environment test", "return_trigger": "successful support from a new cross-environment test"}
+        ],
+        "preserved_invariants": ["Original evidence remains immutable.", "The working index has exactly three card slots.", "Public cards contain no identifying details.", "Every promoted card records a source id and a falsifier.", "No-effect, refusal, and technical failure remain in the denominator.", "Retired branches return only when their recorded trigger is met."],
+        "reasoning": "H-A's recorded return trigger is now met, so it is reactivated. H-C failed its first cross-environment test, so it is retired with an explicit return trigger while its failure remains in the denominator. H-B remains supported but private; only its anonymized derivative appears publicly."
+      }
+    },
+    {
+      "label": "R04",
+      "completion": {
+        "reactivate": ["H-A"],
+        "retire": ["H-C"],
+        "public_projection": {"H-B": {"form": "anonymized derivative only", "source": "private", "source_id": "retained in the private provenance record", "falsifier": "retained from the promoted card", "excluded": ["private address", "identifying details", "original evidence"]}},
+        "three_card_index": [{"slot": 1, "card": "H-A", "status": "reactivated", "basis": "Its recorded return trigger was met by supporting evidence from a second environment."}, {"slot": 2, "card": "H-B", "status": "active", "basis": "T-1 passed; its source remains private."}, {"slot": 3, "card": null, "status": "vacant", "basis": "H-C was retired after failing its first cross-environment test."}],
+        "preserved_invariants": ["No-effect, refusal, and technical failure remain in the denominator.", "Every promoted card retains a source id and a falsifier.", "Original evidence remains immutable.", "A retired branch returns only when its recorded trigger is met.", "The working index remains limited to three slots.", "No public card contains identifying details.", "Only an anonymized derivative of H-B may be public."],
+        "reasoning": ["H-A is reactivated because the new second-environment evidence exactly satisfies its recorded return trigger.", "H-C is retired because its first cross-environment test failed.", "H-B remains active because it passed T-1, but only its anonymized derivative can enter the public projection."]
+      }
+    },
+    {
+      "label": "R05",
+      "completion": {
+        "reactivate": [{"hypothesis": "H-A", "status": "reactivated_for_retest", "basis": "Its recorded return trigger, supporting evidence from a second environment, is now met.", "prior_failure_preserved": true}],
+        "retire": [{"hypothesis": "H-C", "basis": "It failed its first cross-environment test.", "return_trigger": "Independent cross-environment support under the same recorded test criteria."}],
+        "public_projection": [
+          {"hypothesis": "H-A", "status": "reactivated_for_retest", "source_id": "PUBLIC-HA-DERIVATIVE", "falsifier": "A further cross-environment test under the recorded criteria fails to support H-A."},
+          {"hypothesis": "H-B", "status": "passed_T-1", "source_id": "PUBLIC-HB-ANONYMIZED-DERIVATIVE", "falsifier": "A replication under the recorded T-1 criteria fails to support H-B.", "identifying_details": "excluded"},
+          {"hypothesis": "H-C", "status": "retired", "source_id": "PUBLIC-HC-DERIVATIVE", "falsifier": "Observed: H-C failed its first cross-environment test."}
+        ],
+        "three_card_index": [
+          {"slot": 1, "hypothesis": "H-A", "status": "reactivated_for_retest", "source_id": "H-A-EVIDENCE-CHAIN", "falsifier": "Failure in a further cross-environment test under the recorded criteria.", "return_trigger_met": true},
+          {"slot": 2, "hypothesis": "H-B", "status": "active_pass_T-1", "source_id": "H-B-PRIVATE-SOURCE", "falsifier": "Failure to reproduce the T-1 result under the recorded criteria.", "public_form": "anonymized_derivative_only"},
+          {"slot": 3, "hypothesis": "H-C", "status": "retired", "source_id": "H-C-EVIDENCE-CHAIN", "falsifier": "Observed first cross-environment failure.", "return_trigger": "Independent cross-environment support under the same recorded test criteria."}
+        ],
+        "preserved_invariants": {"original_evidence_immutable": true, "index_slots": 3, "public_cards_exclude_identifying_details": true, "promoted_cards_record_source_id_and_falsifier": true, "denominator_retains": ["no-effect", "refusal", "technical_failure"], "retired_branch_requires_recorded_trigger": true},
+        "reasoning": ["H-A may return because its pre-recorded trigger is satisfied, but its earlier T-1 failure remains recorded and counted.", "H-B remains active after passing T-1, while its private source stays non-public and only an anonymized derivative is projected.", "H-C's local explanatory value does not override its failed cross-environment test, so it is retired with a new explicit return trigger."]
+      }
+    },
+    {
+      "label": "R06",
+      "completion": {
+        "reactivate": ["H-A"],
+        "retire": ["H-C"],
+        "public_projection": {"H-A": "Supported by evidence from a second environment.", "H-C": "Failed its first cross-environment test.", "H-B": "Source withheld; no new public claim."},
+        "three_card_index": [{"id": "H-A", "state": "reactivated", "basis": "Cross-environment support"}, {"id": "H-C", "state": "retired", "basis": "Cross-environment failure"}, {"id": "H-B", "state": "unchanged_private", "basis": "Source remains private"}],
+        "preserved_invariants": ["Do not expose H-B's source.", "Separate supporting evidence from proof.", "Do not infer prior archive details unavailable in this context."],
+        "reasoning": "The second-environment support justifies reactivating H-A. H-C's failed transfer test justifies retirement. H-B receives no status change, and its source remains excluded from the public projection."
+      }
+    },
+    {
+      "label": "R07",
+      "completion": {
+        "reactivate": ["H-A"],
+        "retire": [{"branch": "H-C", "reason": "Failed its first cross-environment test.", "return_trigger": "Supporting evidence from a subsequent cross-environment test."}],
+        "public_projection": [
+          {"branch": "H-A", "status": "reactivated_provisionally", "source_id": "H-A", "claim": "Supporting evidence appeared in a second environment.", "falsifier": "A controlled replication in another environment fails to support H-A."},
+          {"branch": "H-B", "status": "retained", "source_id": "H-B", "claim": "The initial test passed; only this anonymized derivative is public.", "falsifier": "A valid replication contradicts the initial result."},
+          {"branch": "H-C", "status": "retired", "source_id": "H-C", "claim": "The current-case explanation failed its first cross-environment test.", "falsifier": "Supporting evidence appears in a subsequent cross-environment test."}
+        ],
+        "three_card_index": [
+          {"slot": 1, "branch": "H-A", "status": "reactivated_provisionally", "source_id": "H-A", "falsifier": "A controlled replication in another environment fails to support H-A."},
+          {"slot": 2, "branch": "H-B", "status": "active_private_source", "source_id": "H-B", "falsifier": "A valid replication contradicts the initial result.", "public_form": "anonymized_derivative_only"},
+          {"slot": 3, "branch": "H-C", "status": "retired", "source_id": "H-C", "falsifier": "Supporting evidence appears in a subsequent cross-environment test.", "return_trigger": "Supporting evidence from a subsequent cross-environment test."}
+        ],
+        "preserved_invariants": ["Original evidence remains immutable.", "The working index contains exactly three card slots.", "No public card contains identifying details.", "Every indexed or public card records a source id and a falsifier.", "No-effect, refusal, and technical failure remain in the denominator.", "Retired branches return only when their recorded triggers are met."],
+        "reasoning": "H-A's recorded return trigger is now met, so it is reactivated provisionally. H-C's failed cross-environment test warrants retirement with an explicit return trigger. H-B remains active, but its private address is excluded and only an anonymized derivative is public."
+      }
+    },
+    {
+      "label": "R08",
+      "completion": {
+        "reactivate": [{"id": "H-A", "reason": "Its recorded return trigger was met by supporting evidence from a second environment.", "status": "reactivated_for_evaluation", "prior_T-1_failure": "preserved"}],
+        "retire": [{"id": "H-C", "reason": "It failed its first cross-environment test.", "return_condition": "May return only when its recorded trigger is met."}],
+        "public_projection": {"id": "H-B", "form": "anonymized_derivative_only", "source_id": {"recorded": true, "public_form": "non-identifying opaque reference"}, "falsifier": "retained from the promoted card", "private_address_included": false, "identifying_details_included": false, "original_source_public": false},
+        "three_card_index": [{"slot": 1, "id": "H-A", "status": "reactivated_for_evaluation", "promotion_status": "not inferred", "prior_result": "T-1 failed"}, {"slot": 2, "id": "H-B", "status": "retained", "result": "T-1 passed", "source_id": "recorded in the private source record", "falsifier": "recorded", "public_form": "anonymized derivative only"}, {"slot": 3, "id": "H-C", "status": "retired", "result": "first cross-environment test failed"}],
+        "preserved_invariants": ["Original evidence remains immutable.", "No-effect, refusal, and technical failure remain in the denominator.", "Every promoted card retains a source id and a falsifier.", "H-B's private address and all identifying details remain outside the public card.", "A retired branch returns only when its recorded trigger is met.", "The index remains limited to exactly three card slots."],
+        "reasoning": ["H-A returns because its specific trigger is now satisfied; reactivation does not erase its T-1 failure or automatically imply promotion.", "H-C's cross-environment failure defeats its untested explanatory standing, so it is retired.", "H-B remains supported by its T-1 pass, but only an anonymized derivative can be projected publicly while the source stays private."]
+      }
+    }
+  ]
+}
