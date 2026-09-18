@@ -1,0 +1,15 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.1.0"},
+  "profile": "lite",
+  "id": "ADV-SCHEMA-002",
+  "type": "hypothesis",
+  "title": "Wrong version adversarial fixture",
+  "signal": {
+    "digest": "This otherwise valid lite block carries the legacy version and must be rejected by the canonical v0.2 schema.",
+    "t": "T4",
+    "falsifies_if": "The canonical validator accepts version 0.1.0 as a v0.2 block."
+  },
+  "nodes": {
+    "claim": {"type": "claim", "content": "A v0.2 parser must reject a block declaring version 0.1.0."}
+  }
+}

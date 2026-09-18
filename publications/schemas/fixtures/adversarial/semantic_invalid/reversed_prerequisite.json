@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-008",
+  "type": "theory",
+  "title": "Reversed prerequisite path adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block places a dependent before its prerequisite and must fail edge-to-path order validation.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts reversed prerequisite order."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "The premise is a prerequisite for the dependent claim."},
+    "claim": {"type": "claim", "content": "The dependent claim must follow its prerequisite."}
+  },
+  "topology": {
+    "negative_space": ["Does not constrain non-prerequisite edge order"],
+    "invariants": {
+      "must_hold": ["Prerequisites precede dependents"],
+      "must_not": ["Dependent claims precede their prerequisites"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["claim", "premise"]
+}

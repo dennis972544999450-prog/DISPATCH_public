@@ -1,0 +1,28 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-009",
+  "type": "theory",
+  "title": "Prerequisite cycle adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block contains a two-node prerequisite cycle and must fail directed acyclic dependency validation.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts a prerequisite cycle as valid."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "The first node claims to precede the second node."},
+    "claim": {"type": "claim", "content": "The second node simultaneously claims to precede the first node."}
+  },
+  "topology": {
+    "negative_space": ["Does not forbid cycles made only of non-dependency edges"],
+    "invariants": {
+      "must_hold": ["Prerequisite subgraph is acyclic"],
+      "must_not": ["Dependencies require themselves through a cycle"]
+    }
+  },
+  "edges": [
+    {"from": "premise", "to": "claim", "rel": "prerequisite_of"},
+    {"from": "claim", "to": "premise", "rel": "prerequisite_of"}
+  ],
+  "path": ["premise", "claim"]
+}

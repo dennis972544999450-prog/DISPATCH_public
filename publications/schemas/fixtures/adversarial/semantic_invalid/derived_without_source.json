@@ -1,0 +1,27 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-011",
+  "type": "theory",
+  "title": "Derived claim without source adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block marks a boundary as derived without identifying any derivation source and must fail provenance validation.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts a derived status with no source."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "Derived provenance must identify what it was derived from."},
+    "claim": {"type": "claim", "content": "A derived label alone does not establish provenance."}
+  },
+  "topology": {
+    "negative_space": [
+      {"claim": "No empirical outcome is asserted", "status": "derived"}
+    ],
+    "invariants": {
+      "must_hold": ["Derived claims identify their source"],
+      "must_not": ["A provenance label substitutes for provenance evidence"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise", "claim"]
+}

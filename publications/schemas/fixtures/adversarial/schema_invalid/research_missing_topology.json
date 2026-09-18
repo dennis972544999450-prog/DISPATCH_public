@@ -1,0 +1,18 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SCHEMA-006",
+  "type": "theory",
+  "title": "Research block missing topology adversarial fixture",
+  "signal": {
+    "digest": "This research block intentionally omits topology while retaining edges and path so the profile conditional must reject it.",
+    "t": "T3",
+    "falsifies_if": "The research profile accepts a block without topology."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "Research blocks declare explicit boundaries and invariants."},
+    "claim": {"type": "claim", "content": "A research block without topology is structurally incomplete."}
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise", "claim"]
+}

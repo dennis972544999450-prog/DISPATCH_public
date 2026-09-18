@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SCHEMA-005",
+  "type": "theory",
+  "title": "Legacy requires relation adversarial fixture",
+  "signal": {
+    "digest": "This research block uses the ambiguous v0.1 requires relation and must fail the v0.2 edge relation enum.",
+    "t": "T3",
+    "falsifies_if": "The canonical schema accepts the retired requires relation."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "A prerequisite must appear before its dependent claim."},
+    "claim": {"type": "claim", "content": "The v0.2 relation name is prerequisite_of, not requires."}
+  },
+  "topology": {
+    "negative_space": ["Does not test semantic edge direction"],
+    "invariants": {
+      "must_hold": ["Only canonical relation names are used"],
+      "must_not": ["Legacy relation names enter the graph"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "requires"}],
+  "path": ["premise", "claim"]
+}

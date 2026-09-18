@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SEM-004",
+  "type": "theory",
+  "title": "Empty research edges adversarial fixture",
+  "signal": {
+    "digest": "This schema-valid research block supplies an empty edges array and must fail research-profile graph completeness.",
+    "t": "T3",
+    "falsifies_if": "The semantic validator accepts a research graph without edges."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "Research nodes need an explicit logical relationship."},
+    "claim": {"type": "claim", "content": "Two disconnected nodes do not form a research argument."}
+  },
+  "topology": {
+    "negative_space": ["Does not require every node to have many edges"],
+    "invariants": {
+      "must_hold": ["At least one edge exists"],
+      "must_not": ["Research graphs are entirely disconnected"]
+    }
+  },
+  "edges": [],
+  "path": ["premise", "claim"]
+}

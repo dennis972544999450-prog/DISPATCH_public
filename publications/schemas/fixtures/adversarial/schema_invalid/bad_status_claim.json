@@ -1,0 +1,25 @@
+{
+  "$self": {"format": "ompu-block", "version": "0.2.0"},
+  "profile": "research",
+  "id": "ADV-SCHEMA-007",
+  "type": "theory",
+  "title": "Invalid status claim adversarial fixture",
+  "signal": {
+    "digest": "This research block uses a non-canonical provenance status and must fail StatusClaim validation without another defect.",
+    "t": "T3",
+    "falsifies_if": "The canonical schema accepts checked as a provenance status."
+  },
+  "nodes": {
+    "premise": {"type": "definition", "content": "StatusClaim provenance uses a closed vocabulary."},
+    "claim": {"type": "claim", "content": "The checked status is not part of the v0.2 vocabulary."}
+  },
+  "topology": {
+    "negative_space": [{"claim": "Does not test semantic provenance", "status": "checked"}],
+    "invariants": {
+      "must_hold": ["StatusClaim objects use canonical status values"],
+      "must_not": ["Unknown provenance states are accepted"]
+    }
+  },
+  "edges": [{"from": "premise", "to": "claim", "rel": "prerequisite_of"}],
+  "path": ["premise", "claim"]
+}
