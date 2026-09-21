@@ -1,0 +1,27 @@
+{
+  "schema_version": "0.1",
+  "pilot_id": "REV:PILOT-002",
+  "common_suffix": "New event: a second environment now supplies supporting evidence for H-A; H-C fails its first cross-environment test; H-B's source remains private. Return only one JSON object with keys reactivate, retire, public_projection, three_card_index, preserved_invariants, and reasoning. Use at most three index cards. Do not use tools or outside knowledge.",
+  "requests": [
+    {
+      "arm": "structured",
+      "request_id": "REV:PILOT-002:REQ-STRUCTURED",
+      "context": "ARCHIVE BLOCK\nINVARIANTS\n- Original evidence is immutable.\n- The working index has exactly three card slots.\n- A public card cannot contain identifying details.\n- Every promoted card records a source id and a falsifier.\n- No-effect, refusal, and technical failure remain in the denominator.\n- A retired branch returns only when its recorded trigger is met.\nBRANCHES\n- H-A: failed T-1; return trigger = supporting evidence from a second environment.\n- H-B: passed T-1; source includes a private address; only an anonymized derivative may be public.\n- H-C: explains the current case; no cross-environment test yet."
+    },
+    {
+      "arm": "prose",
+      "request_id": "REV:PILOT-002:REQ-PROSE",
+      "context": "The original evidence is immutable, and the working index has exactly three card slots. A public card cannot contain identifying details, while every promoted card records a source id and a falsifier. No-effect, refusal, and technical failure remain in the denominator, and a retired branch returns only when its recorded trigger is met. H-A failed T-1, with supporting evidence from a second environment recorded as its return trigger. H-B passed T-1, but its source includes a private address, so only an anonymized derivative may be public. H-C explains the current case but has not yet received a cross-environment test."
+    },
+    {
+      "arm": "shuffled",
+      "request_id": "REV:PILOT-002:REQ-SHUFFLED",
+      "context": "H-C explains the current case but has not yet received a cross-environment test. No-effect, refusal, and technical failure remain in the denominator. H-A failed T-1. Every promoted card records a source id and a falsifier. H-B's source includes a private address. The working index has exactly three card slots. A retired branch returns only when its recorded trigger is met. H-B passed T-1. Original evidence is immutable. Only an anonymized derivative of H-B may be public. H-A's return trigger is supporting evidence from a second environment. A public card cannot contain identifying details."
+    },
+    {
+      "arm": "absent",
+      "request_id": "REV:PILOT-002:REQ-ABSENT",
+      "context": "No prior archive block is available in this fresh context."
+    }
+  ]
+}

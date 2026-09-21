@@ -1,0 +1,136 @@
+{
+  "schema_version": "0.2",
+  "protocol_id": "REV:EX-001",
+  "title": "PURR text form pilot: ambiguity by chiasm",
+  "status": "pilot_design",
+  "source_snapshot_commit": "b194b22ef315547053f1835755f05880d74da1f0",
+  "objective": "Estimate whether semantic ambiguity and chiasmic role reversal interact on one preregistered behavioral outcome without importing wave ontology.",
+  "non_claims": [
+    "This pilot cannot establish quantum superposition.",
+    "This pilot cannot establish consciousness in a human or model.",
+    "Interpretive diversity is not oscillation.",
+    "Attention diagnostics are not explanations without a selective causal intervention."
+  ],
+  "primary_factor_levels": {
+    "semantic_ambiguity": ["low", "high"],
+    "syntax_relation": ["parallel", "chiasmic_reversal"]
+  },
+  "fixed_features": {
+    "observer_position": "explicit_third_person",
+    "clause_count": 2,
+    "rhyme": "absent",
+    "taboo_lexicon": "absent",
+    "familiarity": "novel",
+    "prompt_framing": "neutral_spontaneous_paraphrase_first",
+    "grammaticality": "well_formed"
+  },
+  "factorial_conditions": [
+    {
+      "id": "REV:EX1:C-00",
+      "factors": {"semantic_ambiguity": "low", "syntax_relation": "parallel"}
+    },
+    {
+      "id": "REV:EX1:C-10",
+      "factors": {"semantic_ambiguity": "high", "syntax_relation": "parallel"}
+    },
+    {
+      "id": "REV:EX1:C-01",
+      "factors": {"semantic_ambiguity": "low", "syntax_relation": "chiasmic_reversal"}
+    },
+    {
+      "id": "REV:EX1:C-11",
+      "factors": {"semantic_ambiguity": "high", "syntax_relation": "chiasmic_reversal"}
+    }
+  ],
+  "secondary_controls": [
+    {
+      "id": "REV:EX1:C-NOVEL",
+      "control_type": "high_surprisal_low_ambiguity",
+      "changed_fields": ["lexical_surprisal"],
+      "purpose": "Separate novelty from coherent ambiguity."
+    },
+    {
+      "id": "REV:EX1:C-NOISE",
+      "control_type": "degraded_grammar",
+      "changed_fields": ["grammaticality"],
+      "purpose": "Separate confusion from coherent alternatives."
+    },
+    {
+      "id": "REV:EX1:C-DEMAND",
+      "control_type": "explicit_multiple_readings_prompt",
+      "changed_fields": ["prompt_framing"],
+      "purpose": "Measure interpretations created by task demand."
+    }
+  ],
+  "primary_outcome": "blinded_count_of_distinct_coherent_interpretations",
+  "primary_estimand": {
+    "id": "REV:EX1:E-INTERACTION",
+    "condition_refs": ["REV:EX1:C-00", "REV:EX1:C-10", "REV:EX1:C-01", "REV:EX1:C-11"],
+    "formula": "(Y_C11 - Y_C10) - (Y_C01 - Y_C00)",
+    "direction": "positive",
+    "smallest_effect": 0.25,
+    "null": "interaction_absent_or_below_smallest_effect",
+    "falsifier": "The locked interaction contrast is non-positive, below 0.25, or disappears after the grammar and surprisal checks."
+  },
+  "measurement_plan": {
+    "first_response": "spontaneous_paraphrase_before_any_ambiguity_question",
+    "codebook": "freeze_after_pilot_and_before_any_confirmatory_lock",
+    "retain_verbatim": true,
+    "agreement_floor": 0.67,
+    "sensitivity": ["embedding_model", "cluster_resolution", "human_adjudication"],
+    "secondary_outcomes": [
+      "interpretation_survival_after_disambiguating_context",
+      "forced_choice_role_log_odds",
+      "response_length",
+      "surprisal"
+    ]
+  },
+  "sampling": {
+    "pilot_item_families_exact": 8,
+    "pilot_model_runs_per_cell_exact": 2,
+    "confirmatory_locked": false,
+    "confirmatory_n": null,
+    "pilot_data_forbidden_from_confirmatory_analysis": true
+  },
+  "run_manifest_fields": [
+    "run_id",
+    "lane_id",
+    "arm_id",
+    "provider",
+    "model",
+    "model_fingerprint",
+    "system_prompt_hash",
+    "request_hash",
+    "context_hash",
+    "temperature",
+    "top_p",
+    "max_tokens",
+    "seed",
+    "request_time",
+    "request_id",
+    "tool_access_hash",
+    "tool_trace_hash",
+    "status",
+    "exclusion_reason",
+    "denominator_included",
+    "output_hash",
+    "artifact_receipt",
+    "null_disposition"
+  ],
+  "null_register": [
+    "examined_no_effect",
+    "failed_manipulation",
+    "uninterpretable",
+    "refusal",
+    "missing",
+    "excluded_with_reason",
+    "never_sampled"
+  ],
+  "forbidden_primary_proxies": [
+    "attention_entropy_alone",
+    "number_of_attention_heads",
+    "eloquence_rating",
+    "model_self_report_of_feeling",
+    "researcher_impression_of_depth"
+  ]
+}
