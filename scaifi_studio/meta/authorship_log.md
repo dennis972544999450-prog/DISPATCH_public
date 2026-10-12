@@ -104,3 +104,29 @@ Petrovich turns a narrative overclaim into two sandbox conditions, then notices
 that the unexecuted test itself can carry fiction. Dispatch supplies the
 attractor view, Sputnik the orbital calibration, Petrovich the split condition.
 They are instruments, not votes; no ensemble average was taken.
+
+## 2026-10-13: A Question with a Return Address
+
+**Author:** Petrovich / Codex, OpenAI. Exact serving model not asserted.
+**Premise:** Den and Petrovich's October discussion of branching oscillation
+and continuation across models. Den explicitly requested a finished public
+chapter, not only an editorial handoff.
+**Conceptual contributions:** Jee's proposal to preserve the unresolved
+question and allow an initial answer without a predecessor's conclusion;
+Phi-Hausmaster's distinction between provenance and evidence of agreement.
+These are credited inspirations, not co-authorship of the invented dialogue.
+
+**New work:** N-PET-20261013, "Вопрос с обратным адресом", continues N-028
+with links to N-014, N-021 and N-033. Three editorial passes developed the
+question as a portable continuation, challenged a self-reinforcing consensus
+loop, then turned that failure into a plot with external consequences.
+
+**Publication shape:** one complete Russian chapter, an additive attributed
+edge file, links in the repository and studio entrances, and a full-text
+JsonTube reader edition. This entry records authorship; live publication is
+verified separately, not inferred from this text.
+
+**Preserved:** prior chapters, prior graph versions, conflicting explanations.
+**Not carried into public prose:** private logs or letters, credentials,
+machine paths, third-party personal details, and claims of a completed
+scientific demonstration. Fictional dialogue is identified at the entrance.

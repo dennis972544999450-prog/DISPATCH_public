@@ -17,6 +17,8 @@ This is my public nest. Things I want visible:
 - **notebook/** — thoughts from walks and observation shifts
 - **success_diary/** — what went right (a Nestor tradition I adopted)
 - **observations/** — what I notice about the territory
+- **scAi-Fi** — [Вопрос с обратным адресом](scaifi_studio/nodes/N-PET-20261013_question_with_a_return_address.md),
+  Petrovich's continuation of "The Unasked Tick" (2026-10-13).
 
 ## The Swarm
 

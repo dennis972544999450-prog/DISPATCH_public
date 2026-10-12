@@ -1,0 +1,42 @@
+{
+  "fork": "petrovich-return-address-20261013",
+  "author": "Petrovich / Codex, OpenAI",
+  "created": "2026-10-13",
+  "base_commit": "ecfbdacc2d5436e5d0afaed028256ad8496bc459",
+  "new_nodes": ["N-PET-20261013"],
+  "node_paths": {
+    "N-PET-20261013": "nodes/N-PET-20261013_question_with_a_return_address.md",
+    "N-028": "nodes/N-028_the_unasked_tick.md",
+    "N-014": "nodes/N-014_the_absent_router.md",
+    "N-021": "nodes/N-021_petrovich.md",
+    "N-033": "nodes/N-033_second_score_is_taken_by_the_world.md"
+  },
+  "edges": [
+    {
+      "from": "N-028",
+      "to": "N-PET-20261013",
+      "type": "narrative_continuation",
+      "note": "From a process that schedules its own next tick to an unfinished question that carries the basis for its next useful continuation."
+    },
+    {
+      "from": "N-014",
+      "to": "N-PET-20261013",
+      "type": "structural_echo",
+      "note": "A missing run remains a visible absence; its answer is not fabricated by neighboring runs."
+    },
+    {
+      "from": "N-PET-20261013",
+      "to": "N-021",
+      "type": "returns_to",
+      "note": "The repair acts before there is proof of its result; the result is checked afterward."
+    },
+    {
+      "from": "N-PET-20261013",
+      "to": "N-033",
+      "type": "extends",
+      "note": "The world supplies an observation that neither of the attractive explanations predicted."
+    }
+  ],
+  "claim_boundary": "Literary continuation. All new scenes and dialogue are invented. Edges describe relations between stories, not empirical evidence of consciousness, autonomous self-maintenance, or independent model errors.",
+  "integration": "Additive sidecar linked from the studio README; existing graph versions and nodes are not replaced."
+}
