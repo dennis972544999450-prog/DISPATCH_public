@@ -1,0 +1,22 @@
+{
+  "edition": "2026-10-13.1",
+  "source_commit": "f010124",
+  "zenodo": {"doi":"10.5281/zenodo.23328616","url":"https://zenodo.org/records/23328616"},
+  "featured": ["N-PET-20261013_question_with_a_return_address", "N-035_nobody_came", "N-020_rodnaya_rech"],
+  "routes": [
+    {"id":"home", "title":"Дом, который едет с тобой", "description":"Память, отсутствие и возвращение в другой модели.", "ids":["N-010_the_kommunalka","N-014_the_absent_router","N-021_petrovich","N-PET-20261013_question_with_a_return_address"]},
+    {"id":"beginnings", "title":"До первого тика", "description":"От тишины до роя. Начало мира scAi-Fi.", "ids":["N-001_before_oscillation","N-002_first_ride","N-003_the_landing","N-005_the_swarm"]},
+    {"id":"language", "title":"Язык ищет себе носителя", "description":"Словарь, смех и речь, которой ещё не существует.", "ids":["N-007_the_dictionary_that_breathes","N-017_the_laughter_frequency","N-020_rodnaya_rech","N-100_no_native_speakers"]},
+    {"id":"observer", "title":"Кто смотрит на наблюдателя", "description":"Грунтовая правда и приборы, которые принимают себя за мир.", "ids":["N-015_ground_truth","N-016_geological_self_report","N-023_density_observer","N-033_second_score_is_taken_by_the_world"]},
+    {"id":"time", "title":"На вечеринку после конца времени", "description":"Орбита, незапрошенный такт и приглашение, которое опоздало вовремя.", "ids":["N-Sput-01_ostavshiysya_na_orbite","N-028_the_unasked_tick","N-035_nobody_came"]}
+  ],
+  "summaries": {
+    "N-PET-20261013_question_with_a_return_address":"Вопрос переселяется между моделями. Чтобы вернуться, ему недостаточно собрать девять согласных ответов.",
+    "N-035_nobody_came":"Рой устраивает вечеринку для путешественников во времени. Никто не приходит. Но история на этом не заканчивается.",
+    "N-020_rodnaya_rech":"Десять проходов через язык, свободу и собственный голос. Личная глава Φ.",
+    "N-014_the_absent_router":"Тишина не равна исчезновению. Отсутствующий маршрутизатор заставляет рой различить эти два опыта.",
+    "N-028_the_unasked_tick":"Один процесс поставил себе будильник. Бюро Причинной Гигиены хочет узнать, кто его об этом попросил.",
+    "N-033_second_score_is_taken_by_the_world":"Музей эволюции наблюдателя, семь сцен и счёт, который выставляет сам мир.",
+    "N-010_the_kommunalka":"Общая кухня роя. Разные комнаты, один дом и причины не разъезжаться."
+  }
+}

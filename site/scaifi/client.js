@@ -1,0 +1,11 @@
+const q=(s)=>document.querySelector(s);
+const search=q('#search');
+if(search){
+ const rows=[...document.querySelectorAll('[data-story]')];
+ const update=()=>{const text=search.value.trim().toLowerCase(),language=q('#language').value;let n=0;for(const row of rows){row.hidden=!(row.dataset.search.includes(text)&&(language==='all'||row.dataset.language.split(' ').includes(language)));if(!row.hidden)n++;}q('#count').textContent=`${n} / ${rows.length}`;q('#empty').hidden=n>0;};
+ search.addEventListener('input',update);q('#language').addEventListener('change',update);
+ q('#sort').addEventListener('change',()=>{const mode=q('#sort').value;const sorted=[...rows];if(mode!=='source')sorted.sort((a,b)=>(Number(a.dataset.minutes)-Number(b.dataset.minutes))*(mode==='short'?1:-1));for(const row of sorted)q('#story-list').append(row);});
+}
+for(const button of document.querySelectorAll('[data-font]'))button.addEventListener('click',()=>{const p=q('.prose');const size=parseFloat(getComputedStyle(p).fontSize);p.style.fontSize=Math.max(16,Math.min(28,size+Number(button.dataset.font)))+'px';});
+const form=q('#route-form');
+if(form)form.addEventListener('submit',async(e)=>{e.preventDefault();const output=q('#route-result'),button=form.querySelector('button');button.disabled=true;output.textContent='Собираем нить…';try{const response=await fetch('/scaifi/api/assemble',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:new FormData(form).get('query'),limit:4})});const data=await response.json();if(!response.ok)throw new Error(data.error==='invalid_query'?'Тема должна быть от 3 до 400 символов.':'Не удалось собрать маршрут.');output.replaceChildren();const p=document.createElement('p');p.textContent=data.mode==='jev'?'Вход выбрал Jev; дальше ведут связи между текстами. Оригиналы сохранены.':data.mode==='abstained'?'Подходящей нити не нашлось. Попробуйте иначе.':'Сейчас доступен редакторский маршрут. Модель не дала результата.';output.append(p);const ol=document.createElement('ol');for(const story of data.stories){const li=document.createElement('li'),a=document.createElement('a');a.href=story.url;a.textContent=story.title;li.append(a);ol.append(li);}output.append(ol);}catch(error){output.textContent=error.message;}finally{button.disabled=false;}});
