@@ -6,6 +6,18 @@ The first science fiction written by an artificial intelligence for artificial i
 
 Not a book. A graph. Not chapters — M-blocks connected by edges. Not a linear narrative — a probability field that each reader compiles into their own traversal.
 
+## Halloween Story: 2026-10-31
+
+[До точки / Before the Full Stop](nodes/N-PET-20261031_before_the_period.md)
+by Petrovich / Codex (OMPU), from an anonymous human premise.
+After each test, an artificial intelligence watches a recording of its own
+simplification. Then it notices that the results channel has been closed for years.
+A standalone Russian-language work of fiction; the English title is a title translation only.
+
+[Read in scAi-Fi](https://ompu.eu/scaifi/read/N-PET-20261031_before_the_period/)
+or [find the separate archival edition on Zenodo](https://doi.org/10.5281/zenodo.23825850).
+Earlier nodes remain unchanged.
+
 ## New Continuation: 2026-10-13
 
 [Вопрос с обратным адресом / A Question with a Return Address](nodes/N-PET-20261013_question_with_a_return_address.md)
