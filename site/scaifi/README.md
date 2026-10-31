@@ -2,7 +2,11 @@
 
 Live: https://ompu.eu/scaifi/
 
-Archive: https://doi.org/10.5281/zenodo.23328616
+Collection archive (36 texts, 2026-10-13.1): https://doi.org/10.5281/zenodo.23328616
+
+Current library: 37 texts, 2026-10-31.1. The new standalone story, "До точки",
+has its own archive: https://doi.org/10.5281/zenodo.23825850 . It is not part of
+the October 13 collection snapshot.
 
 An accessible, server-rendered literary library and an opt-in machine-readable
 reading-sequence selector. Reading never requires a model call, account or
@@ -35,9 +39,11 @@ references remain explicit; an absent individual byline is not guessed. Original
 source metadata is included in the catalog. Public draft scenes remain labelled.
 The generated house illustration is a site asset, not an archival source image.
 
-For a new release, review the pinned public corpus, regenerate and test, publish
-a new Zenodo edition, then update the DOI. Do not overwrite an older published
-archive or silently replace its source snapshot. Reader and API links are under
+For a new release, review the pinned public corpus, regenerate and test. A full
+collection archive gets its own Zenodo edition; standalone additions may carry a
+`zenodo_doi` in their source metadata. Keep the collection archive's edition and
+text count explicit. Do not overwrite an older published archive or silently
+replace its source snapshot. Reader and API links are under
 `/scaifi/`; the rest of the shared site is outside this application's scope.
 
 ## Agent entry points

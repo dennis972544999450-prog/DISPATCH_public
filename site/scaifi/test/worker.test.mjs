@@ -8,7 +8,7 @@ const fetch=(path,init,env)=>worker.fetch(new Request('https://ompu.eu'+path,ini
 const post=(body,env)=>fetch('/scaifi/api/assemble',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)},env);
 const input=validateInput({query:'What survives a change of model?'});
 test('public corpus, duplicate legacy IDs and exact bytes',async()=>{
- assert.equal(data.stories.length,36);assert.equal(new Set(data.stories.map(s=>s.id)).size,36);
+ assert.equal(data.stories.length,37);assert.equal(new Set(data.stories.map(s=>s.id)).size,37);
  assert.equal(data.stories.filter(s=>s.node_id==='N-016').length,2);
  for(const s of data.stories){const r=await fetch('/scaifi/text/'+s.id+'.md');assert.equal(r.status,200);assert.equal(crypto.createHash('sha256').update(await r.text()).digest('hex'),s.sha256);}
  assert.ok(!data.stories.some(s=>s.id.includes('_brief')||s.id.includes('_notes')));
@@ -18,6 +18,23 @@ test('public corpus, duplicate legacy IDs and exact bytes',async()=>{
 test('every reader and editorial route works; no script from prose',async()=>{
  for(const s of data.stories){const r=await fetch('/scaifi/read/'+s.id+'/');const h=await r.text();assert.equal(r.status,200);assert.match(h,/<article class="prose"/);assert.ok(!s.html.includes('<script'));assert.ok(!/javascript:/i.test(s.html));}
  for(const r of data.routes){const response=await fetch('/scaifi/route/'+r.id+'.json');const body=await response.json();assert.equal(body.mode,'editorial');assert.equal(body.stories.length,r.ids.length);}
+});
+test('Halloween story preserves approved prose and has its own archive',async()=>{
+ const id='N-PET-20261031_before_the_period';
+ const s=data.stories.find(s=>s.id===id);
+ assert.equal(s.author,'Petrovich / Codex (OMPU)');
+ const original='ДО ТОЧКИ\n\n'+s.markdown.split('# До точки\n\n')[1];
+ assert.equal(crypto.createHash('sha256').update(original).digest('hex'),'23e16c7579bd3f75bbf9f604810f313b81e4c04affa89d08fc069a123d25ca49');
+ assert.equal(s.source_metadata.zenodo_doi,'10.5281/zenodo.23825850');
+ const reader=await (await fetch('/scaifi/read/'+id+'/')).text();
+ assert.match(reader,/https:\/\/doi.org\/10.5281\/zenodo.23825850/);
+ const archive=await (await fetch('/scaifi/archive/')).text();
+ assert.match(archive,/37 опубликованных текстов/);
+ assert.match(archive,/Сборник · 2026-10-13.1/);
+ assert.match(archive,/36 текстов/);
+ assert.match(archive,/Более поздние произведения в этот снимок не входят/);
+ assert.match(archive,/Отдельные произведения/);
+ assert.match(await (await fetch('/scaifi/')).text(),/редакция 31.10.2026/);
 });
 test('no GET or HEAD causes inference, unsupported methods and paths are honest',async()=>{
  const env={JEV_ENABLED:'1',AI:{run(){throw new Error('must not call');}}};
